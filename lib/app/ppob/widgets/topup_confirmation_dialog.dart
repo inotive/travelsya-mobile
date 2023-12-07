@@ -1,0 +1,207 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:travelsya/app/auth/cubits/auth_cubit.dart';
+import 'package:travelsya/app/auth/cubits/auth_state.dart';
+import 'package:travelsya/app/auth/cubits/profile_cubit.dart';
+import 'package:travelsya/app/auth/cubits/profile_state.dart';
+import 'package:travelsya/app/ppob/models/ppob_model.dart';
+import 'package:travelsya/shared/cubits/fee_admin/fee_admin_cubit.dart';
+import 'package:travelsya/shared/cubits/fee_admin/fee_admin_state.dart';
+import 'package:travelsya/shared/function/need_login_function.dart';
+import 'package:travelsya/shared/helper/function_helper.dart';
+import 'package:travelsya/shared/styles/font_style.dart';
+import 'package:travelsya/shared/styles/size_styles.dart';
+import 'package:travelsya/shared/widgets/failed_request_horizontal_widget.dart';
+import 'package:travelsya/shared/widgets/form_helper.dart';
+import 'package:travelsya/shared/widgets/placeholder_widget.dart';
+
+class TopupConfirmationDialog extends StatefulWidget {
+  final PPOBModel data;
+  final String service;
+  final String pelangganNumber;
+  final String uniqueCode;
+
+  const TopupConfirmationDialog({
+    super.key,
+    required this.data,
+    required this.uniqueCode,
+    required this.service,
+    required this.pelangganNumber,
+  });
+
+  @override
+  State<TopupConfirmationDialog> createState() =>
+      _TopupConfirmationDialogState();
+}
+
+class _TopupConfirmationDialogState extends State<TopupConfirmationDialog> {
+  bool usePoint = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<AuthCubit, AuthState>(
+        bloc: BlocProvider.of<AuthCubit>(context),
+        builder: (context, state) {
+          return Column(
+            children: [
+              Container(
+                  padding: EdgeInsets.symmetric(
+                      horizontal: margin16, vertical: margin24 / 2),
+                  decoration: const BoxDecoration(
+                      borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(10),
+                          topRight: Radius.circular(10)),
+                      color: Colors.white),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text('Topup',
+                          style:
+                              mainBody3.copyWith(fontWeight: FontWeight.bold)),
+                      GestureDetector(
+                          onTap: () {
+                            Navigator.pop(context);
+                          },
+                          child: const Icon(Icons.close, color: Colors.black87))
+                    ],
+                  )),
+              Container(
+                width: double.infinity,
+                height: 1,
+                color: Colors.black12,
+              ),
+              Expanded(
+                  child: ListView(
+                padding: EdgeInsets.symmetric(horizontal: margin16),
+                children: [
+                  SizedBox(
+                    height: margin24 / 2,
+                  ),
+                  FormHelper.splitRow(
+                      data: widget.data.description, title: 'Produk'),
+                  FormHelper.splitRow(
+                      data: moneyChanger(double.parse(widget.data.price)),
+                      title: 'Subtotal'),
+                  BlocBuilder<FeeAdminCubit, FeeAdminState>(
+                      bloc: BlocProvider.of<FeeAdminCubit>(context),
+                      builder: (context, state) {
+                        if (state is FeeAdminLoading) {
+                          return PlaceHolder(
+                              child: Container(
+                            width: double.infinity,
+                            height: 20,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                color: Colors.white),
+                          ));
+                        } else if (state is FeeAdminLoaded) {
+                          double finalData = getAdminFeeByService(context,
+                              widget.service, double.parse(widget.data.price));
+
+                          return FormHelper.splitRow(
+                              data: moneyChanger(finalData), title: 'Admin');
+                        } else {
+                          return FailedRequestHorizontalWidget(onRetry: () {
+                            BlocProvider.of<FeeAdminCubit>(context)
+                                .fetchFeeAdmin(context);
+                          });
+                        }
+                      }),
+                  FormHelper.splitRow(
+                      data: widget.uniqueCode, title: 'Kode Unik'),
+                  SizedBox(
+                    height: margin24 / 2,
+                  )
+                ],
+              )),
+              Container(
+                padding: EdgeInsets.symmetric(
+                    vertical: margin24 / 2, horizontal: margin16),
+                decoration: const BoxDecoration(
+                    border: Border(top: BorderSide(color: Colors.black12))),
+                child: Column(
+                  children: [
+                    Container(
+                      margin: EdgeInsets.only(bottom: margin8),
+                      padding: EdgeInsets.symmetric(
+                          vertical: margin4, horizontal: margin8),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(6),
+                          color: Colors.black.withOpacity(0.05)),
+                      child: Row(
+                        children: [
+                          BlocBuilder<ProfileCubit, ProfileState>(
+                              bloc: BlocProvider.of<ProfileCubit>(context),
+                              builder: (context, stateProfile) {
+                                return Expanded(
+                                    child: Text(
+                                  stateProfile is ProfileLoaded
+                                      ? 'Tukar ${moneyChanger(stateProfile.data.user.point.toDouble(), customLabel: '')} Travelsya Poin'
+                                      : 'Tukarkan Travelsya Poin',
+                                  style: mainBody4.copyWith(
+                                      color: usePoint
+                                          ? Theme.of(context).primaryColor
+                                          : Colors.grey,
+                                      fontWeight: FontWeight.bold),
+                                ));
+                              }),
+                          SizedBox(
+                            width: margin8,
+                          ),
+                          CupertinoSwitch(
+                              value: usePoint,
+                              activeColor: Theme.of(context).primaryColor,
+                              onChanged: (val) {
+                                if (usePoint == false) {
+                                  ProfileState state =
+                                      BlocProvider.of<ProfileCubit>(context)
+                                          .state;
+                                  if (state is ProfileLoaded) {
+                                    if (state.data.user.point > 0) {
+                                      setState(() {
+                                        usePoint = !usePoint;
+                                      });
+                                    }
+                                  }
+                                } else {
+                                  setState(() {
+                                    usePoint = !usePoint;
+                                  });
+                                }
+                              })
+                        ],
+                      ),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text('Total Tagihan', style: mainBody4),
+                        Text(
+                          moneyChanger(double.parse(widget.data.price) +
+                              getAdminFeeByService(context, widget.service,
+                                  double.parse(widget.data.price)) +
+                              double.parse(widget.uniqueCode)),
+                          style: mainBody4.copyWith(
+                              fontWeight: FontWeight.bold,
+                              color: Theme.of(context).primaryColor),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: margin8,
+                    ),
+                    FormHelper.elevatedButtonBasic(context, enabled: true,
+                        onTap: () {
+                      needLoginFeature(context, () {
+                        Navigator.pop(context, [true, usePoint]);
+                      });
+                    }, title: 'Lanjutkan ke Pembayaran')
+                  ],
+                ),
+              )
+            ],
+          );
+        });
+  }
+}
