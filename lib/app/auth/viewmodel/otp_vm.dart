@@ -7,7 +7,6 @@ import 'package:travelsya/app/auth/pages/reset_password_page.dart';
 import 'package:travelsya/app/auth/repository/auth_repository.dart';
 import 'package:travelsya/shared/api/api_return_value.dart';
 import 'package:travelsya/shared/function/show_snackbar.dart';
-import 'package:travelsya/shared/widgets/form_helper.dart';
 
 class OTPVM extends BaseViewModel {
   TextEditingController emailController = TextEditingController();
@@ -47,7 +46,7 @@ class OTPVM extends BaseViewModel {
   }
 
   onInit(BuildContext context) {
-    Timer.periodic(Duration(seconds: 1), (timer) {
+    Timer.periodic(const Duration(seconds: 1), (timer) {
       if (!timerResend) {
         countDown = countDown - 1;
 

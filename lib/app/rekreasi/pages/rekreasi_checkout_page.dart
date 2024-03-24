@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import 'package:travelsya/shared/styles/font_style.dart';
 import 'package:travelsya/shared/styles/theme_style.dart';
-import 'package:travelsya/shared/function/show_snackbar.dart';
 import 'package:travelsya/shared/widgets/form_helper.dart';
 
 class RekreasiCheckokutPage extends StatelessWidget {
@@ -25,7 +24,7 @@ class RekreasiCheckokutPage extends StatelessWidget {
                     onTap: () {
                       Navigator.pop(context);
                     },
-                    child: Icon(
+                    child: const Icon(
                       Icons.arrow_back,
                       color: Colors.white,
                     ),
@@ -142,9 +141,9 @@ class RekreasiCheckokutPage extends StatelessWidget {
                                                                     color:
                                                                         neutral30),
                                                             children: [
-                                                          TextSpan(
+                                                          const TextSpan(
                                                               text: 'mulai '),
-                                                          TextSpan(
+                                                          const TextSpan(
                                                               text: '1,750,000',
                                                               style: TextStyle(
                                                                   decoration:
@@ -220,7 +219,7 @@ class RekreasiCheckokutPage extends StatelessWidget {
                 ),
                 Container(
                   padding: EdgeInsets.all(5.0.w),
-                  color: Color(0xffFFEEF1),
+                  color: const Color(0xffFFEEF1),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -314,7 +313,7 @@ class RekreasiCheckokutPage extends StatelessWidget {
                                 vertical: 2.0.w, horizontal: 3.0.w),
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
-                                color: Color(0xffffeef1)),
+                                color: const Color(0xffffeef1)),
                             child: Text(
                               'Topup',
                               style: mainFont.copyWith(

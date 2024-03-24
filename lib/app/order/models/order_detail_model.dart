@@ -1,3 +1,5 @@
+import 'package:travelsya/app/hostel/models/hostel_detail_model.dart';
+import 'package:travelsya/app/hotel/models/hotel_detail_model.dart';
 import 'package:travelsya/app/ppob/models/ppob_model.dart';
 
 class OrderDetailInquiryModel {
@@ -33,9 +35,9 @@ class OrderDetailInquiryModel {
     total = double.parse(jsonMap['total'].toString());
     adminFee = double.parse(
         jsonMap['fee_admin'] == null ? '0' : jsonMap['fee_admin'].toString());
-    poinReceived = double.parse(jsonMap['received_point'] == null
+    poinReceived = double.parse(jsonMap['point_received'] == null
         ? '0'
-        : jsonMap['received_point'].toString());
+        : jsonMap['point_received'].toString());
     poinUsed = double.parse(
         jsonMap['point_used'] == null ? '0' : jsonMap['point_used'].toString());
     createdAt = jsonMap['created_at'];
@@ -79,9 +81,9 @@ class OrderDetailTopupModel {
     adminFee = double.parse(
         jsonMap['fee_admin'] == null ? '0' : jsonMap['fee_admin'].toString());
     total = double.parse(jsonMap['total'].toString());
-    pointReceived = double.parse(jsonMap['received_point'] == null
+    pointReceived = double.parse(jsonMap['point_received'] == null
         ? '0'
-        : jsonMap['received_point'].toString());
+        : jsonMap['point_received'].toString());
     pointUsed = double.parse(
         jsonMap['point_used'] == null ? '0' : jsonMap['point_used'].toString());
     createdAt = jsonMap['created_at'];
@@ -115,6 +117,7 @@ class OrderDetailHostelModel {
   late double pointUsed;
   late double pointReceived;
   String? createdAt;
+  HostelReview? review;
 
   OrderDetailHostelModel.fromJson(Map<String, dynamic> jsonMap) {
     id = jsonMap['id'];
@@ -141,12 +144,19 @@ class OrderDetailHostelModel {
     adminFee = double.parse(
         jsonMap['fee_admin'] == null ? '0' : jsonMap['fee_admin'].toString());
     total = double.parse(jsonMap['total'].toString());
-    pointReceived = double.parse(jsonMap['received_point'] == null
+    pointReceived = double.parse(jsonMap['point_received'] == null
         ? '0'
-        : jsonMap['received_point'].toString());
+        : jsonMap['point_received'].toString());
     pointUsed = double.parse(
         jsonMap['used_point'] == null ? '0' : jsonMap['used_point'].toString());
     createdAt = jsonMap['created_at'];
+    try {
+      review = jsonMap['review'] == null
+          ? null
+          : HostelReview.fromJson(jsonMap['review']);
+    } catch (e) {
+      review = null;
+    }
   }
 }
 
@@ -176,6 +186,7 @@ class OrderDetailHotelModel {
   late double pointUsed;
   late double pointReceived;
   String? createdAt;
+  HotelReview? review;
 
   OrderDetailHotelModel.fromJson(Map<String, dynamic> jsonMap) {
     id = jsonMap['id'];
@@ -201,11 +212,18 @@ class OrderDetailHotelModel {
     adminFee = double.parse(
         jsonMap['fee_admin'] == null ? '0' : jsonMap['fee_admin'].toString());
     total = double.parse(jsonMap['total'].toString());
-    pointReceived = double.parse(jsonMap['received_point'] == null
+    pointReceived = double.parse(jsonMap['point_received'] == null
         ? '0'
-        : jsonMap['received_point'].toString());
+        : jsonMap['point_received'].toString());
     pointUsed = double.parse(
         jsonMap['used_point'] == null ? '0' : jsonMap['used_point'].toString());
     createdAt = jsonMap['created_at'];
+    try {
+      review = jsonMap['review_hotel'] == null
+          ? null
+          : HotelReview.fromJson(jsonMap['review_hotel']);
+    } catch (e) {
+      review = null;
+    }
   }
 }

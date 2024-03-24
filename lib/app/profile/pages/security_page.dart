@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:travelsya/shared/styles/font_style.dart';
 import 'package:travelsya/shared/styles/theme_style.dart';
 import 'package:sizer/sizer.dart';
-import 'package:travelsya/shared/function/show_snackbar.dart';
 import 'package:travelsya/shared/widgets/form_helper.dart';
 
 class SecurityPage extends StatelessWidget {
@@ -23,7 +22,7 @@ class SecurityPage extends StatelessWidget {
                       onTap: () {
                         Navigator.pop(context);
                       },
-                      child: Icon(
+                      child: const Icon(
                         Icons.arrow_back,
                         color: Colors.white,
                       ),
@@ -106,7 +105,7 @@ class SecurityPage extends StatelessWidget {
                             widget: FormHelper.roundedTextfield(context,
                                 controller: TextEditingController(),
                                 suffixWidget:
-                                    Icon(Icons.visibility_off_outlined),
+                                    const Icon(Icons.visibility_off_outlined),
                                 hintText: 'Kata Sandi Lama')),
                         SizedBox(
                           height: 5.0.w,
@@ -116,7 +115,7 @@ class SecurityPage extends StatelessWidget {
                             widget: FormHelper.roundedTextfield(context,
                                 controller: TextEditingController(),
                                 suffixWidget:
-                                    Icon(Icons.visibility_off_outlined),
+                                    const Icon(Icons.visibility_off_outlined),
                                 hintText: 'Kata Sandi Baru'))
                       ],
                     ),

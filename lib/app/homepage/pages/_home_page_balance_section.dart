@@ -49,17 +49,25 @@ class _HomePageBalanceSection extends StatelessWidget {
                       bloc: BlocProvider.of<AuthCubit>(context),
                       builder: (contexts, state) {
                         if (state is AuthLoaded) {
-                          return Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                '0',
-                                style: mainBody5.copyWith(
-                                  color: Theme.of(context).primaryColor,
-                                ),
-                              ),
-                            ],
-                          );
+                          return BlocBuilder<ProfileCubit, ProfileState>(
+                              bloc: BlocProvider.of<ProfileCubit>(context),
+                              builder: (context, state) {
+                                if (state is ProfileLoading) {
+                                  return SizedBox(
+                                    width: 15,
+                                    height: 15,
+                                    child: CircularProgressIndicator(
+                                        color: Theme.of(context).primaryColor),
+                                  );
+                                } else {
+                                  return Text(
+                                    '0',
+                                    style: mainBody5.copyWith(
+                                        fontWeight: FontWeight.bold,
+                                        color: Theme.of(context).primaryColor),
+                                  );
+                                }
+                              });
                         } else {
                           return Text(
                             'Silahkan Login',

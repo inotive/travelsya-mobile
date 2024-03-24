@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:travelsya/app/order/models/order_list_model.dart';
-import 'package:travelsya/app/ppob/models/ppob_model.dart';
 import 'package:travelsya/shared/api/api_connection.dart';
 import 'package:travelsya/shared/api/api_return_value.dart';
 import 'package:http/http.dart' as http;
@@ -44,7 +43,9 @@ class OrderRepository {
         datamessages.forEach((key, value) {
           messages = value[0];
         });
-      } catch (e) {}
+      } catch (e) {
+        messages = null;
+      }
       returnValue = ApiReturnValue(data: messages, status: response.status);
     }
 
@@ -76,7 +77,9 @@ class OrderRepository {
         datamessages.forEach((key, value) {
           messages = value[0];
         });
-      } catch (e) {}
+      } catch (e) {
+        messages = null;
+      }
       returnValue = ApiReturnValue(data: messages, status: response.status);
     }
 

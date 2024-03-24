@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:travelsya/app/auth/cubits/profile_cubit.dart';
 import 'package:travelsya/app/auth/cubits/profile_state.dart';
 import 'package:travelsya/app/auth/model/profile_model.dart';
+import 'package:travelsya/shared/cubits/point/point_cubit.dart';
 import 'package:travelsya/shared/function/date_to_readable_function.dart';
 import 'package:travelsya/shared/helper/const_helper.dart';
 import 'package:sizer/sizer.dart';
@@ -51,12 +52,39 @@ class _PointHistorySectionState extends State<PointHistorySection> {
                           style: mainBody4,
                         ),
                       ),
+                      SizedBox(
+                        height: margin16,
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          BlocProvider.of<ProfileCubit>(context)
+                              .fetchProfile(context);
+                          BlocProvider.of<PointCubit>(context)
+                              .fetchPoint(context);
+                        },
+                        child: Container(
+                            margin: EdgeInsets.symmetric(horizontal: margin16),
+                            padding:
+                                EdgeInsets.symmetric(vertical: margin24 / 2),
+                            decoration: BoxDecoration(
+                                color: Colors.transparent,
+                                borderRadius: BorderRadius.circular(10),
+                                border: Border.all(
+                                    color: Theme.of(context).primaryColor)),
+                            alignment: Alignment.center,
+                            child: Text(
+                              'Muat Ulang Data',
+                              style: mainBody4.copyWith(
+                                  color: Theme.of(context).primaryColor),
+                            )),
+                      )
                     ],
                   )
                 : RefreshIndicator(
                     onRefresh: () async {
                       BlocProvider.of<ProfileCubit>(context)
                           .fetchProfile(context);
+                      BlocProvider.of<PointCubit>(context).fetchPoint(context);
                     },
                     color: Theme.of(context).primaryColor,
                     child: ListView(
@@ -82,7 +110,7 @@ class _PointHistorySectionState extends State<PointHistorySection> {
                                     Container(
                                       width: 40,
                                       height: 40,
-                                      decoration: BoxDecoration(
+                                      decoration: const BoxDecoration(
                                         shape: BoxShape.circle,
                                         color: Colors.black12,
                                       ),
@@ -107,6 +135,16 @@ class _PointHistorySectionState extends State<PointHistorySection> {
                                         Text(
                                           '${dateToReadable(state.data.point[index].createdAt.substring(0, 10))} ${state.data.point[index].createdAt.substring(11, 19)}',
                                           style: mainBody5.copyWith(),
+                                        ),
+                                        Text(
+                                          state.data.point[index].transaction
+                                              .noInv,
+                                          style: mainBody5.copyWith(
+                                              fontSize: 10,
+                                              color: Colors.black54),
+                                        ),
+                                        SizedBox(
+                                          height: margin4,
                                         ),
                                         Text(
                                           state.data.point[index].transaction
@@ -155,7 +193,7 @@ class _PointHistorySectionState extends State<PointHistorySection> {
                                   width: 40,
                                   height: 40,
                                   decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.only(
+                                      borderRadius: const BorderRadius.only(
                                           topRight: Radius.circular(10)),
                                       image: DecorationImage(
                                           image: AssetImage(
@@ -177,6 +215,7 @@ class _PointHistorySectionState extends State<PointHistorySection> {
               margin: EdgeInsets.symmetric(horizontal: margin16),
               child: FailedRequestWidget(onRetry: () {
                 BlocProvider.of<ProfileCubit>(context).fetchProfile(context);
+                BlocProvider.of<PointCubit>(context).fetchPoint(context);
               }),
             );
           }

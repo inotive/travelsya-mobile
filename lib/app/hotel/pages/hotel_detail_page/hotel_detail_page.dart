@@ -174,7 +174,12 @@ class HotelDetailPage extends StatelessWidget {
                   return Container(
                     margin: EdgeInsets.symmetric(horizontal: margin16),
                     child: FailedRequestWidget(onRetry: () {
-                      model.fetchRoomData(context, id: id);
+                      model.fetchRoomData(context,
+                          id: id,
+                          startDate: DateFormat('yyyy-MM-dd').format(
+                              model.searchFilter.selectedTime.startDate!),
+                          endDate: DateFormat('yyyy-MM-dd').format(
+                              model.searchFilter.selectedTime.endDate!));
                     }),
                   );
                 }

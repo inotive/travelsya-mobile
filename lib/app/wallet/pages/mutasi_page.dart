@@ -126,7 +126,7 @@ class _MutasiPageState extends State<MutasiPage> {
                               Container(
                                 width: 10.0.w,
                                 height: 10.0.w,
-                                decoration: BoxDecoration(
+                                decoration: const BoxDecoration(
                                     shape: BoxShape.circle,
                                     color: Color(0xffF4F4F4)),
                                 alignment: Alignment.center,

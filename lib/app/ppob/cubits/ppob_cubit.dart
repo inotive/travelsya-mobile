@@ -17,4 +17,15 @@ class PPOBCubit extends Cubit<PPOBState> {
       }
     });
   }
+
+  fetchPajakPPOB(BuildContext context) {
+    emit(PPOBLoading());
+    PPOBRepository.fetchPajakPPOB(context).then((value) {
+      if (value.status == RequestStatus.successRequest) {
+        emit(PajakPPOBLoaded(value.data));
+      } else {
+        emit(PPOBFailed(value));
+      }
+    });
+  }
 }

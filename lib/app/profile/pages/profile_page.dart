@@ -6,6 +6,9 @@ import 'package:travelsya/app/auth/cubits/auth_state.dart';
 import 'package:travelsya/app/auth/cubits/profile_cubit.dart';
 import 'package:travelsya/app/auth/cubits/profile_state.dart';
 import 'package:travelsya/app/profile/vm/profile_vm.dart';
+import 'package:travelsya/shared/api/api_connection.dart';
+import 'package:travelsya/shared/cubits/point/point_cubit.dart';
+import 'package:travelsya/shared/cubits/point/point_state.dart';
 import 'package:travelsya/shared/helper/const_helper.dart';
 import 'package:travelsya/shared/helper/function_helper.dart';
 import 'package:travelsya/shared/styles/font_style.dart';
@@ -45,31 +48,53 @@ class _ProfilePageState extends State<ProfilePage> {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const Icon(
-                            Icons.account_circle,
-                            size: 50,
-                            color: Colors.white,
-                          ),
-                          SizedBox(
-                            height: margin4,
-                          ),
                           BlocBuilder<AuthCubit, AuthState>(
                               bloc: BlocProvider.of<AuthCubit>(context),
                               builder: (context, state) {
-                                return RichText(
-                                    text: TextSpan(children: [
-                                  TextSpan(
-                                      text: 'Hi, ',
-                                      style: mainBody4.copyWith(
-                                          color: Colors.white)),
-                                  TextSpan(
-                                      text: state is AuthLoaded
-                                          ? state.data.name
-                                          : '',
-                                      style: mainBody4.copyWith(
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.white))
-                                ]));
+                                return Column(
+                                  children: [
+                                    state is AuthLoaded
+                                        ? state.data.image == null
+                                            ? const Icon(
+                                                Icons.account_circle,
+                                                size: 80,
+                                                color: Colors.white,
+                                              )
+                                            : Container(
+                                                width: 80,
+                                                height: 80,
+                                                decoration: BoxDecoration(
+                                                    shape: BoxShape.circle,
+                                                    color: Colors.white54,
+                                                    image: DecorationImage(
+                                                        fit: BoxFit.cover,
+                                                        image: NetworkImage(
+                                                            '$basePathUserUrl${state.data.image}'))),
+                                              )
+                                        : const Icon(
+                                            Icons.account_circle,
+                                            size: 80,
+                                            color: Colors.white,
+                                          ),
+                                    SizedBox(
+                                      height: margin4,
+                                    ),
+                                    RichText(
+                                        text: TextSpan(children: [
+                                      TextSpan(
+                                          text: 'Hi, ',
+                                          style: mainBody4.copyWith(
+                                              color: Colors.white)),
+                                      TextSpan(
+                                          text: state is AuthLoaded
+                                              ? state.data.name
+                                              : '',
+                                          style: mainBody4.copyWith(
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.white))
+                                    ])),
+                                  ],
+                                );
                               })
                         ],
                       ),
@@ -112,26 +137,59 @@ class _ProfilePageState extends State<ProfilePage> {
                                               style: mainBody5.copyWith(
                                                   color: neutral100),
                                             ),
-                                            BlocBuilder<ProfileCubit,
-                                                    ProfileState>(
-                                                bloc: BlocProvider.of<
-                                                    ProfileCubit>(context),
+                                            BlocBuilder<PointCubit, PointState>(
+                                                bloc:
+                                                    BlocProvider.of<PointCubit>(
+                                                        context),
                                                 builder:
                                                     (context, stateProfile) {
-                                                  return Text(
-                                                    stateProfile
-                                                            is ProfileLoaded
-                                                        ? moneyChanger(
+                                                  return stateProfile
+                                                          is PointLoading
+                                                      ? SizedBox(
+                                                          width: 15,
+                                                          height: 15,
+                                                          child:
+                                                              CircularProgressIndicator(
+                                                            color: Theme.of(
+                                                                    context)
+                                                                .primaryColor,
+                                                          ))
+                                                      : GestureDetector(
+                                                          onTap: () {
+                                                            if (stateProfile
+                                                                is! PointLoaded) {
+                                                              BlocProvider.of<
+                                                                          PointCubit>(
+                                                                      context)
+                                                                  .fetchPoint(
+                                                                      context);
+                                                            }
+                                                          },
+                                                          child: Text(
                                                             stateProfile
-                                                                .data.user.point
-                                                                .toDouble(),
-                                                            customLabel: '')
-                                                        : '-',
-                                                    style: mainBody4.copyWith(
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        color: neutral100),
-                                                  );
+                                                                    is PointLoaded
+                                                                ? moneyChanger(
+                                                                    stateProfile
+                                                                        .data
+                                                                        .currentPoint
+                                                                        .toDouble(),
+                                                                    customLabel:
+                                                                        '')
+                                                                : 'Coba Lagi',
+                                                            style: stateProfile
+                                                                    is ProfileLoaded
+                                                                ? mainBody4.copyWith(
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold,
+                                                                    color:
+                                                                        neutral100)
+                                                                : mainBody5.copyWith(
+                                                                    color: Theme.of(
+                                                                            context)
+                                                                        .primaryColor),
+                                                          ),
+                                                        );
                                                 })
                                           ],
                                         ))
@@ -151,7 +209,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Container(
+                                        SizedBox(
                                           width: 20,
                                           height: 20,
                                           child: Image.asset(
@@ -168,13 +226,33 @@ class _ProfilePageState extends State<ProfilePage> {
                                               style: mainBody5.copyWith(
                                                   color: neutral100),
                                             ),
-                                            Text(
-                                              '0',
-                                              style: mainBody5.copyWith(
-                                                  fontWeight: FontWeight.bold,
-                                                  color: Theme.of(context)
-                                                      .primaryColor),
-                                            )
+                                            BlocBuilder<ProfileCubit,
+                                                    ProfileState>(
+                                                bloc: BlocProvider.of<
+                                                    ProfileCubit>(context),
+                                                builder: (context, state) {
+                                                  if (state is ProfileLoading) {
+                                                    return SizedBox(
+                                                      width: 15,
+                                                      height: 15,
+                                                      child:
+                                                          CircularProgressIndicator(
+                                                              color: Theme.of(
+                                                                      context)
+                                                                  .primaryColor),
+                                                    );
+                                                  } else {
+                                                    return Text(
+                                                      '0',
+                                                      style: mainBody5.copyWith(
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          color: Theme.of(
+                                                                  context)
+                                                              .primaryColor),
+                                                    );
+                                                  }
+                                                })
                                           ],
                                         ))
                                       ],
@@ -188,64 +266,71 @@ class _ProfilePageState extends State<ProfilePage> {
                   ],
                 ),
                 Expanded(
-                    child: ListView(
-                  children: List.generate(model.dataMenu.length, (index) {
-                    return GestureDetector(
-                      onTap: () {
-                        model.onMenuTap(
-                            context, int.parse(model.dataMenu[index]['id']!));
-                      },
-                      child: Container(
-                        padding: EdgeInsets.only(left: margin16),
-                        margin: EdgeInsets.only(
-                            top: index == 0 ? margin8 : 0,
-                            bottom: index == model.dataMenu.length - 1
-                                ? margin16
-                                : 0),
-                        child: Row(
-                          children: [
-                            SizedBox(
-                              width: 20,
-                              height: 20,
-                              child: Image.asset(
-                                model.dataMenu[index]['assets']!,
-                                color: Colors.grey,
-                              ),
-                            ),
-                            SizedBox(width: margin24 / 2),
-                            Expanded(
-                              child: Container(
-                                padding: EdgeInsets.symmetric(
-                                    vertical: margin24 / 2),
-                                decoration: BoxDecoration(
-                                    border: Border(
-                                        bottom: BorderSide(
-                                            color: neutral10Stroke))),
-                                child: Row(
-                                  children: [
-                                    Expanded(
-                                        child: Text(
-                                      model.dataMenu[index]['title']!,
-                                      style:
-                                          mainBody4.copyWith(color: neutral90),
-                                    )),
-                                    SizedBox(width: margin24 / 2),
-                                    const Icon(
-                                      Icons.arrow_forward_ios_rounded,
-                                      size: 15,
-                                    ),
-                                    SizedBox(
-                                      width: margin16,
-                                    )
-                                  ],
+                    child: RefreshIndicator(
+                  onRefresh: () async {
+                    BlocProvider.of<ProfileCubit>(context)
+                        .fetchProfile(context);
+                  },
+                  color: Theme.of(context).primaryColor,
+                  child: ListView(
+                    children: List.generate(model.dataMenu.length, (index) {
+                      return GestureDetector(
+                        onTap: () {
+                          model.onMenuTap(
+                              context, int.parse(model.dataMenu[index]['id']!));
+                        },
+                        child: Container(
+                          padding: EdgeInsets.only(left: margin16),
+                          margin: EdgeInsets.only(
+                              top: index == 0 ? margin8 : 0,
+                              bottom: index == model.dataMenu.length - 1
+                                  ? margin16
+                                  : 0),
+                          child: Row(
+                            children: [
+                              SizedBox(
+                                width: 20,
+                                height: 20,
+                                child: Image.asset(
+                                  model.dataMenu[index]['assets']!,
+                                  color: Colors.grey,
                                 ),
                               ),
-                            )
-                          ],
+                              SizedBox(width: margin24 / 2),
+                              Expanded(
+                                child: Container(
+                                  padding: EdgeInsets.symmetric(
+                                      vertical: margin24 / 2),
+                                  decoration: BoxDecoration(
+                                      border: Border(
+                                          bottom: BorderSide(
+                                              color: neutral10Stroke))),
+                                  child: Row(
+                                    children: [
+                                      Expanded(
+                                          child: Text(
+                                        model.dataMenu[index]['title']!,
+                                        style: mainBody4.copyWith(
+                                            color: neutral90),
+                                      )),
+                                      SizedBox(width: margin24 / 2),
+                                      const Icon(
+                                        Icons.arrow_forward_ios_rounded,
+                                        size: 15,
+                                      ),
+                                      SizedBox(
+                                        width: margin16,
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
                         ),
-                      ),
-                    );
-                  }),
+                      );
+                    }),
+                  ),
                 ))
               ],
             ),

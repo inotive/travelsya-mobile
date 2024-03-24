@@ -20,6 +20,7 @@ class HunianReviewVM extends BaseViewModel {
     BuildContext context, {
     required bool isHotel,
     required String id,
+    required String transactionId,
     required String roomId,
   }) {
     if (reviewController.text.isEmpty) {
@@ -30,13 +31,14 @@ class HunianReviewVM extends BaseViewModel {
       if (isHotel) {
         HotelRepository.ratingHotel(context,
                 hotelId: id,
+                transactionId: transactionId,
                 roomId: roomId,
                 review: reviewController.text,
                 star: rating.toStringAsFixed(0))
             .then((value) {
           Navigator.pop(context);
           if (value.status == RequestStatus.successRequest) {
-            Navigator.pop(context);
+            Navigator.pop(context, true);
             showSnackbar(context,
                 data: 'Berhasil memberikan ulasan', colors: Colors.green);
           } else {
@@ -48,13 +50,14 @@ class HunianReviewVM extends BaseViewModel {
       } else {
         HostelRepository.ratingHostel(context,
                 hostelId: id,
+                transactionId: transactionId,
                 roomId: roomId,
                 review: reviewController.text,
                 star: rating.toStringAsFixed(0))
             .then((value) {
           Navigator.pop(context);
           if (value.status == RequestStatus.successRequest) {
-            Navigator.pop(context);
+            Navigator.pop(context, true);
             showSnackbar(context,
                 data: 'Berhasil memberikan ulasan', colors: Colors.green);
           } else {

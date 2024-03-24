@@ -1,9 +1,7 @@
 import 'dart:async';
 import 'dart:io';
-import 'package:travelsya/shared/styles/font_style.dart';
-import 'package:travelsya/shared/styles/theme_style.dart';
 import 'package:travelsya/shared/function/show_snackbar.dart';
-import 'package:travelsya/shared/widgets/form_helper.dart';
+import 'package:travelsya/shared/helper/function_helper.dart';
 import 'package:webview_flutter/webview_flutter.dart' as wv;
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -59,10 +57,11 @@ class _UserPaymentWebviewState extends State<UserPaymentWebview> {
             onWebViewCreated: (wv.WebViewController webViewController) {
               _controller.complete(webViewController);
             },
+            // ignore: prefer_collection_literals
             javascriptChannels: <wv.JavascriptChannel>[].toSet(),
             onPageFinished: (value) async {
-              print('direct to');
-              print(value);
+              devPint('direct to');
+              devPint(value);
               if (value.contains('xendit/succes') ||
                   value.contains('xendit-success') ||
                   value.contains('xendit-payment/nextSuccess')) {

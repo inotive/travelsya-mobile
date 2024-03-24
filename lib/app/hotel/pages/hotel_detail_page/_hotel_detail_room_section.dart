@@ -193,37 +193,67 @@ class _HotelDetailRoomSection extends StatelessWidget {
                                       SizedBox(
                                         width: margin24 / 2,
                                       ),
-                                      GestureDetector(
-                                        onTap: () {
-                                          needLoginFeature(context, () {
-                                            Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (_) =>
-                                                        HotelCheckoutPage(
-                                                          data: data,
-                                                          selectedRoom:
-                                                              data.room[index],
-                                                        )));
-                                          });
-                                        },
-                                        child: Container(
-                                          padding: EdgeInsets.symmetric(
-                                              vertical: margin24 / 2,
-                                              horizontal: margin16),
-                                          decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(8),
-                                            color:
-                                                Theme.of(context).primaryColor,
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.end,
+                                        children: [
+                                          (data.room[index].roomLeft > 0 &&
+                                                  data.room[index].roomLeft <=
+                                                      5)
+                                              ? Container(
+                                                  margin: EdgeInsets.only(
+                                                      bottom: margin8),
+                                                  child: Text(
+                                                    'Tersisa ${data.room[index].roomLeft} kamar',
+                                                    style: mainBody5.copyWith(
+                                                        color: Colors.red),
+                                                  ),
+                                                )
+                                              : Container(),
+                                          GestureDetector(
+                                            onTap: () {
+                                              if (data.room[index].roomLeft >
+                                                  0) {
+                                                needLoginFeature(context, () {
+                                                  Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: (_) =>
+                                                              HotelCheckoutPage(
+                                                                data: data,
+                                                                selectedRoom:
+                                                                    data.room[
+                                                                        index],
+                                                              )));
+                                                });
+                                              }
+                                            },
+                                            child: Container(
+                                              padding: EdgeInsets.symmetric(
+                                                  vertical: margin24 / 2,
+                                                  horizontal: margin16),
+                                              decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(8),
+                                                color:
+                                                    data.room[index].roomLeft <=
+                                                            0
+                                                        ? Colors.grey
+                                                        : Theme.of(context)
+                                                            .primaryColor,
+                                              ),
+                                              child: Text(
+                                                data.room[index].roomLeft <= 0
+                                                    ? 'Kamar Penuh'
+                                                    : 'Pesan',
+                                                style: mainBody4.copyWith(
+                                                    color: Colors.white,
+                                                    fontWeight:
+                                                        FontWeight.w600),
+                                              ),
+                                            ),
                                           ),
-                                          child: Text(
-                                            'Pesan',
-                                            style: mainBody4.copyWith(
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.w600),
-                                          ),
-                                        ),
+                                        ],
                                       )
                                     ],
                                   )

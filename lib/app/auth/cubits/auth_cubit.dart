@@ -2,13 +2,13 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:travelsya/shared/cubits/point/point_cubit.dart';
 import 'package:travelsya/shared/function/show_loading.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travelsya/app/auth/cubits/auth_state.dart';
 import 'package:travelsya/app/auth/cubits/profile_cubit.dart';
 import 'package:travelsya/app/auth/model/user_model.dart';
 import 'package:travelsya/app/auth/repository/auth_repository.dart';
-import 'package:travelsya/app/ppob/cubits/ppob_cubit.dart';
 import 'package:travelsya/shared/cubits/main_index_cubit.dart';
 import 'package:travelsya/shared/api/api_return_value.dart';
 import 'package:travelsya/shared/function/show_snackbar.dart';
@@ -28,13 +28,13 @@ class AuthCubit extends Cubit<AuthState> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
     if (prefs.getString('user') != null) {
-      AuthRepository.logout(
-        context,
-      );
-      prefs.remove('user');
-      emit(AuthInitial());
-      BlocProvider.of<MainIndexCubit>(context).changeIndex(0);
       if (context.mounted) {
+        AuthRepository.logout(
+          context,
+        );
+        prefs.remove('user');
+        emit(AuthInitial());
+        BlocProvider.of<MainIndexCubit>(context).changeIndex(0);
         if (isFromSessionOver) {
           showSnackbar(
             context,
@@ -57,7 +57,10 @@ class AuthCubit extends Cubit<AuthState> {
 
     emit(AuthLoaded(UserModel.fromJson(json.decode(prefs.getString('user')!))));
 
-    BlocProvider.of<ProfileCubit>(context).fetchProfile(context);
+    if (context.mounted) {
+      BlocProvider.of<ProfileCubit>(context).fetchProfile(context);
+      BlocProvider.of<PointCubit>(context).fetchPoint(context);
+    }
   }
 
   createSession(UserModel data) async {
@@ -103,6 +106,8 @@ class AuthCubit extends Cubit<AuthState> {
         emit(AuthLoaded(value.data));
         createSession(value.data);
         BlocProvider.of<ProfileCubit>(context).fetchProfile(context);
+        BlocProvider.of<PointCubit>(context).fetchPoint(context);
+
         SharedPreferences prefs = await SharedPreferences.getInstance();
         if (isRememberMe) {
           prefs.setString(
@@ -113,7 +118,9 @@ class AuthCubit extends Cubit<AuthState> {
         // ignore: use_build_context_synchronously
         showSnackbar(context,
             data: 'Berhasil melakukan Login', colors: Colors.green);
-        Navigator.pop(context);
+        if (context.mounted) {
+          Navigator.pop(context);
+        }
       } else {
         showSnackbar(context,
             data: value.data ?? 'Gagal melakukan pendaftaran',

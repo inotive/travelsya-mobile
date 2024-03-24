@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:travelsya/app/profile/vm/change_password_vm.dart';
-import 'package:travelsya/shared/styles/font_style.dart';
 import 'package:travelsya/shared/styles/size_styles.dart';
 import 'package:travelsya/shared/widgets/appbar_widget.dart';
-import 'package:travelsya/shared/widgets/form_helper.dart';
 import 'package:travelsya/shared/widgets/form_helper/elevated_button_widget.dart';
 import 'package:travelsya/shared/widgets/form_helper/rounded_texfield_widget.dart';
 import 'package:travelsya/shared/widgets/form_helper/title_with_widget.dart';

@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:travelsya/shared/function/show_loading.dart';
 import 'package:stacked/stacked.dart';
 import 'package:string_validator/string_validator.dart';
 import 'package:travelsya/app/auth/cubits/auth_cubit.dart';
-import 'package:travelsya/app/auth/repository/auth_repository.dart';
 
-import 'package:travelsya/shared/api/api_return_value.dart';
 import 'package:travelsya/shared/function/show_snackbar.dart';
-import 'package:travelsya/shared/widgets/form_helper.dart';
 
 class RegisterVM extends BaseViewModel {
   TextEditingController emailController = TextEditingController();

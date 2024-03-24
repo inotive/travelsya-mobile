@@ -1,17 +1,13 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:travelsya/app/ppob/models/ppob_general_model.dart';
 import 'package:travelsya/app/ppob/pages/pdam/pdam_provider_picker.dart';
-import 'package:travelsya/shared/function/need_login_function.dart';
+import 'package:travelsya/shared/cubits/point/point_cubit.dart';
 import 'package:travelsya/shared/function/pay_to_inquiry_function.dart';
 import 'package:travelsya/shared/function/show_loading.dart';
 import 'package:stacked/stacked.dart';
 import 'package:travelsya/app/payment/pages/payment_webview_page.dart';
 import 'package:travelsya/app/payment/repository/finance_repository.dart';
-import 'package:travelsya/app/ppob/cubits/ppob_cubit.dart';
-import 'package:travelsya/app/ppob/cubits/ppob_state.dart';
 import 'package:travelsya/app/ppob/models/ppob_model.dart';
 import 'package:travelsya/app/ppob/repository/ppob_repository.dart';
 import 'package:travelsya/shared/cubits/main_index_cubit.dart';
@@ -19,7 +15,6 @@ import 'package:travelsya/shared/helper/function_helper.dart';
 import 'package:travelsya/shared/widgets/general_inquiry_widget.dart';
 import 'package:travelsya/shared/api/api_return_value.dart';
 import 'package:travelsya/shared/function/show_snackbar.dart';
-import 'package:travelsya/shared/widgets/form_helper.dart';
 
 class PDAMVM extends BaseViewModel {
   PPOBModel? selectedPDAM;
@@ -66,6 +61,7 @@ class PDAMVM extends BaseViewModel {
           .then((value) async {
         Navigator.pop(context);
         if (value.status == RequestStatus.successRequest) {
+          BlocProvider.of<PointCubit>(context).fetchPoint(context);
           bool? result = await showModalBottomSheet(
               context: context,
               isScrollControlled: true,

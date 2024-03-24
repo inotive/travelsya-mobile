@@ -6,6 +6,50 @@ import 'package:travelsya/shared/api/api_return_value.dart';
 import 'package:http/http.dart' as http;
 
 class PPOBRepository {
+  static Future<ApiReturnValue> fetchPajakPPOB(
+    BuildContext context,
+  ) async {
+    ApiReturnValue returnValue;
+
+    String url = '$baseAPIUrl/tax';
+
+    var request = http.MultipartRequest(
+      'GET',
+      Uri.parse(url),
+    );
+
+    ApiReturnValue<dynamic>? response = await ApiReturnValue.httpRequest(
+        context,
+        request: request,
+        exceptionStatusCode: [201],
+        auth: false);
+
+    if (response!.status == RequestStatus.successRequest) {
+      List<PPOBModel> dataFinal = [];
+
+      for (var i = 0; i < response.data.length; i++) {
+        dataFinal.add(PPOBModel.fromJson(response.data[i]));
+      }
+
+      returnValue =
+          ApiReturnValue(data: dataFinal, status: RequestStatus.successRequest);
+    } else {
+      String? messages;
+      try {
+        Map<String, dynamic> datamessages = response.data['data']['response'];
+
+        datamessages.forEach((key, value) {
+          messages = value[0];
+        });
+      } catch (e) {
+        messages = null;
+      }
+      returnValue = ApiReturnValue(data: messages, status: response.status);
+    }
+
+    return returnValue;
+  }
+
   static Future<ApiReturnValue> fetchPPOBData(
     BuildContext context,
   ) async {
@@ -36,7 +80,9 @@ class PPOBRepository {
         datamessages.forEach((key, value) {
           messages = value[0];
         });
-      } catch (e) {}
+      } catch (e) {
+        messages = null;
+      }
       returnValue = ApiReturnValue(data: messages, status: response.status);
     }
 
@@ -69,7 +115,9 @@ class PPOBRepository {
         String? messages;
         try {
           messages = response.data['data'];
-        } catch (e) {}
+        } catch (e) {
+          messages = null;
+        }
         returnValue =
             ApiReturnValue(data: messages, status: RequestStatus.failedRequest);
       }
@@ -77,7 +125,9 @@ class PPOBRepository {
       String? messages;
       try {
         messages = response.data['data'];
-      } catch (e) {}
+      } catch (e) {
+        messages = null;
+      }
       returnValue = ApiReturnValue(data: messages, status: response.status);
     }
 

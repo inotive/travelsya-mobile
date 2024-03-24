@@ -26,7 +26,7 @@ class RentalOptionDialog extends StatelessWidget {
             child: Container(
           width: double.infinity,
           height: double.infinity,
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
               borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(10), topRight: Radius.circular(10)),
               color: Colors.white),
@@ -62,7 +62,7 @@ class RentalOptionDialog extends StatelessWidget {
                         ),
                         Row(
                           children: [
-                            Container(
+                            SizedBox(
                                 width: 5.0.w,
                                 height: 5.0.w,
                                 child: Image.asset('assets/icons/users.png')),
@@ -77,7 +77,7 @@ class RentalOptionDialog extends StatelessWidget {
                             SizedBox(
                               width: 3.0.w,
                             ),
-                            Container(
+                            SizedBox(
                                 width: 5.0.w,
                                 height: 5.0.w,
                                 child: Image.asset('assets/icons/users.png')),
@@ -96,7 +96,7 @@ class RentalOptionDialog extends StatelessWidget {
                     SizedBox(
                       width: 3.0.w,
                     ),
-                    Container(
+                    SizedBox(
                         width: 20.0.w,
                         height: 20.0.w,
                         child: Image.asset(
@@ -117,7 +117,7 @@ class RentalOptionDialog extends StatelessWidget {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (_) => RentalCheckoutPage()));
+                                builder: (_) => const RentalCheckoutPage()));
                       },
                       child: Container(
                         margin:

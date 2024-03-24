@@ -1,5 +1,9 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:travelsya/app/profile/pages/photo_source_picker.dart';
 import 'package:travelsya/shared/function/show_loading.dart';
 import 'package:stacked/stacked.dart';
 import 'package:string_validator/string_validator.dart';
@@ -10,6 +14,8 @@ import 'package:travelsya/shared/api/api_return_value.dart';
 import 'package:travelsya/shared/function/show_snackbar.dart';
 
 class ProfileEditVM extends BaseViewModel {
+  XFile? selectedPhoto;
+
   TextEditingController nameController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
   TextEditingController emailController = TextEditingController();
@@ -17,6 +23,26 @@ class ProfileEditVM extends BaseViewModel {
   String? nameValidation;
   String? phoneValidation;
   String? emailValidation;
+
+  onPickPhoto(BuildContext context) async {
+    int? result = await showDialog(
+        context: context,
+        builder: (context) {
+          return const PhotoSourcePickerDialog();
+        });
+
+    if (result != null) {
+      final ImagePicker picker = ImagePicker();
+
+      final XFile? image = await picker.pickImage(
+          source: result == 0 ? ImageSource.gallery : ImageSource.camera);
+
+      if (image != null) {
+        selectedPhoto = image;
+        notifyListeners();
+      }
+    }
+  }
 
   onEmailChanged(String value) {
     if (value.isEmpty) {
@@ -68,7 +94,7 @@ class ProfileEditVM extends BaseViewModel {
     }
   }
 
-  onUpdateSubmit(BuildContext context) {
+  onUpdateSubmit(BuildContext context) async {
     onEmailChanged(emailController.text);
     onPhoneChanged(phoneController.text);
     onNameChanged(nameController.text);
@@ -78,25 +104,52 @@ class ProfileEditVM extends BaseViewModel {
         nameValidation == null) {
       AuthState state = BlocProvider.of<AuthCubit>(context).state;
       if (state is AuthLoaded) {
-        showLoading(context);
-        AuthRepository.updateProfile(context,
-                email: emailController.text,
-                name: nameController.text,
-                phone: phoneController.text,
-                data: state.data)
-            .then((value) {
-          Navigator.pop(context);
-          if (value.status == RequestStatus.successRequest) {
-            BlocProvider.of<AuthCubit>(context).updateData(value.data);
-            showSnackbar(context,
-                data: 'Berhasil menyimpan data profile', colors: Colors.green);
+        bool isSuccessPhoto = false;
+        if (selectedPhoto != null) {
+          showLoading(context);
+
+          ApiReturnValue uploadResult =
+              await AuthRepository.updateProfilePicture(context,
+                  file: File(selectedPhoto!.path));
+
+          if (context.mounted) {
             Navigator.pop(context);
-          } else {
-            showSnackbar(context,
-                data: value.data ?? 'Gagal menyimpan data profile',
-                colors: Colors.orange);
+
+            if (uploadResult.status == RequestStatus.successRequest) {
+              isSuccessPhoto = true;
+            }
           }
-        });
+        } else {
+          isSuccessPhoto = true;
+        }
+
+        if (isSuccessPhoto && context.mounted) {
+          showLoading(context);
+          AuthRepository.updateProfile(context,
+                  email: emailController.text,
+                  name: nameController.text,
+                  phone: phoneController.text,
+                  data: state.data)
+              .then((value) {
+            Navigator.pop(context);
+            if (value.status == RequestStatus.successRequest) {
+              BlocProvider.of<AuthCubit>(context).updateData(value.data);
+              showSnackbar(context,
+                  data: 'Berhasil menyimpan data profile',
+                  colors: Colors.green);
+              Navigator.pop(context);
+            } else {
+              showSnackbar(context,
+                  data: value.data ?? 'Gagal menyimpan data profile',
+                  colors: Colors.orange);
+            }
+          });
+        } else {
+          if (context.mounted) {
+            showSnackbar(context,
+                data: 'Gagal menyimpan foto profile', colors: Colors.orange);
+          }
+        }
       }
     } else {
       showSnackbar(context,

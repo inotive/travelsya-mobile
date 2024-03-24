@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:travelsya/app/auth/cubits/profile_cubit.dart';
 import 'package:travelsya/app/homepage/vm/beranda_vm.dart';
+import 'package:travelsya/shared/cubits/point/point_cubit.dart';
 import 'package:travelsya/shared/helper/const_helper.dart';
 import 'package:travelsya/shared/styles/font_style.dart';
 import 'package:travelsya/shared/styles/size_styles.dart';
@@ -34,84 +37,90 @@ class _RedeemSectionState extends State<RedeemSection> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      children: [
-        Container(
-          padding: EdgeInsets.symmetric(horizontal: margin16),
-          child: Text(
-            'Redeem Poinmu Sekarang!',
-            style: mainBody4.copyWith(
-                color: Colors.black87, fontWeight: FontWeight.bold),
+    return RefreshIndicator(
+      onRefresh: () async {
+        BlocProvider.of<ProfileCubit>(context).fetchProfile(context);
+        BlocProvider.of<PointCubit>(context).fetchPoint(context);
+      },
+      child: ListView(
+        children: [
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: margin16),
+            child: Text(
+              'Redeem Poinmu Sekarang!',
+              style: mainBody4.copyWith(
+                  color: Colors.black87, fontWeight: FontWeight.bold),
+            ),
           ),
-        ),
-        Container(
-          padding: EdgeInsets.symmetric(horizontal: margin16),
-          child: Text(
-            'Poin Anda akan mencapai kadaluwarsa pada 31 Mei 2023. Ayo gunakan segera!',
-            style: mainBody5.copyWith(color: neutral70),
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: margin16),
+            child: Text(
+              'Poin Anda akan mencapai kadaluwarsa pada 31 Mei 2023. Ayo gunakan segera!',
+              style: mainBody5.copyWith(color: neutral70),
+            ),
           ),
-        ),
-        Column(
-          children: List.generate(dataMenu.length, (index) {
-            return GestureDetector(
-              onTap: () {
-                BerandaVM berandaVM = BerandaVM();
-                berandaVM.onMainMenuTap(context, dataMenu[index]['id']);
-              },
-              child: Container(
-                padding: EdgeInsets.symmetric(
-                    vertical: margin16, horizontal: margin16),
-                decoration: BoxDecoration(
-                    border: Border(
-                        bottom:
-                            BorderSide(color: neutral10Stroke, width: 0.5))),
-                child: Row(
-                  children: [
-                    Container(
-                        width: 50,
-                        height: 50,
-                        alignment: Alignment.center,
-                        decoration: const BoxDecoration(
-                            shape: BoxShape.circle, color: Color(0xfff3f3f3)),
-                        child: SizedBox(
-                            width: 30,
-                            height: 30,
-                            child: Image.asset(dataMenu[index]['assets']))),
-                    SizedBox(
-                      width: margin24 / 2,
-                    ),
-                    Expanded(
-                        child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          dataMenu[index]['title'],
-                          style: mainBody3.copyWith(
-                              color: Colors.black87,
-                              fontWeight: FontWeight.bold),
-                        ),
-                        Text(
-                          'Pesan Sekarang',
-                          style: mainBody5.copyWith(
-                              color: Theme.of(context).primaryColor),
-                        )
-                      ],
-                    )),
-                    SizedBox(
-                      width: margin16,
-                    ),
-                    Icon(
-                      Icons.arrow_forward_ios_rounded,
-                      color: neutral10Stroke,
-                      size: 20,
-                    )
-                  ],
+          Column(
+            children: List.generate(dataMenu.length, (index) {
+              return GestureDetector(
+                onTap: () {
+                  BerandaVM berandaVM = BerandaVM();
+                  berandaVM.onMainMenuTap(context, dataMenu[index]['id']);
+                },
+                child: Container(
+                  padding: EdgeInsets.symmetric(
+                      vertical: margin16, horizontal: margin16),
+                  decoration: BoxDecoration(
+                      border: Border(
+                          bottom:
+                              BorderSide(color: neutral10Stroke, width: 0.5))),
+                  child: Row(
+                    children: [
+                      Container(
+                          width: 50,
+                          height: 50,
+                          alignment: Alignment.center,
+                          decoration: const BoxDecoration(
+                              shape: BoxShape.circle, color: Color(0xfff3f3f3)),
+                          child: SizedBox(
+                              width: 30,
+                              height: 30,
+                              child: Image.asset(dataMenu[index]['assets']))),
+                      SizedBox(
+                        width: margin24 / 2,
+                      ),
+                      Expanded(
+                          child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            dataMenu[index]['title'],
+                            style: mainBody3.copyWith(
+                                color: Colors.black87,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          Text(
+                            'Pesan Sekarang',
+                            style: mainBody5.copyWith(
+                                color: Theme.of(context).primaryColor),
+                          )
+                        ],
+                      )),
+                      SizedBox(
+                        width: margin16,
+                      ),
+                      Icon(
+                        Icons.arrow_forward_ios_rounded,
+                        color: neutral10Stroke,
+                        size: 20,
+                      )
+                    ],
+                  ),
                 ),
-              ),
-            );
-          }),
-        )
-      ],
+              );
+            }),
+          )
+        ],
+      ),
     );
   }
 }

@@ -4,8 +4,6 @@ import 'package:sizer/sizer.dart';
 import 'package:travelsya/app/hostel/cubits/hostel_cubit.dart';
 import 'package:travelsya/app/hostel/cubits/hostel_state.dart';
 import 'package:travelsya/shared/styles/font_style.dart';
-import 'package:travelsya/shared/styles/theme_style.dart';
-import 'package:travelsya/shared/function/show_snackbar.dart';
 import 'package:travelsya/shared/widgets/form_helper.dart';
 
 class HostelCityPicker extends StatefulWidget {
@@ -30,7 +28,7 @@ class _HostelCityPickerState extends State<HostelCityPicker> {
             width: 100.0.w,
             height: 7.0.h,
             padding: EdgeInsets.symmetric(horizontal: 5.0.w),
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
                 borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(10),
                     topRight: Radius.circular(10)),
@@ -47,7 +45,7 @@ class _HostelCityPickerState extends State<HostelCityPicker> {
                     onTap: () {
                       Navigator.pop(context);
                     },
-                    child: Icon(Icons.close, color: Colors.black87))
+                    child: const Icon(Icons.close, color: Colors.black87))
               ],
             )),
         Container(
@@ -61,7 +59,7 @@ class _HostelCityPickerState extends State<HostelCityPicker> {
                 searchValue = value;
               });
             },
-            prefixIcon: Icon(Icons.search),
+            prefixIcon: const Icon(Icons.search),
             hintText: 'Cari kota..',
           ),
         ),
@@ -69,7 +67,7 @@ class _HostelCityPickerState extends State<HostelCityPicker> {
             bloc: widget.dataCubit,
             builder: (context, state) {
               if (state is HostelLoading) {
-                return Expanded(
+                return const Expanded(
                     child: Center(
                   child: CircularProgressIndicator(),
                 ));

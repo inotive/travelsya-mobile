@@ -81,7 +81,7 @@ class RoundedTextfield extends StatelessWidget {
           labelText: labelText,
           enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(8),
-              borderSide: BorderSide(color: Color(0xffA5A5A5))),
+              borderSide: const BorderSide(color: Color(0xffA5A5A5))),
           labelStyle: mainBody4.copyWith(color: Theme.of(context).primaryColor),
           hintText: hintText,
           focusedBorder: withBorder

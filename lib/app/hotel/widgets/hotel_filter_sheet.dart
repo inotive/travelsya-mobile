@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:intl/intl.dart';
 import 'package:sizer/sizer.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
@@ -8,8 +6,6 @@ import 'package:travelsya/app/hostel/widgets/count_picker_widget.dart';
 import 'package:travelsya/app/hotel/cubits/hotel_state.dart';
 import 'package:travelsya/shared/function/date_to_readable_function.dart';
 import 'package:travelsya/shared/styles/font_style.dart';
-import 'package:travelsya/shared/styles/theme_style.dart';
-import 'package:travelsya/shared/function/show_snackbar.dart';
 import 'package:travelsya/shared/widgets/form_helper.dart';
 import 'package:travelsya/shared/widgets/multi_date_picker.dart';
 

@@ -25,8 +25,16 @@ class HotelDetailModel {
     location = jsonMap['location'];
     avgRating = double.parse(jsonMap['avg_rating'].toString());
     ratingCount = jsonMap['rating_count'];
-    lat = jsonMap['lat'] == null ? null : double.parse(jsonMap['lat']);
-    lon = jsonMap['lon'] == null ? null : double.parse(jsonMap['lon']);
+    lat = jsonMap['lat'] == null
+        ? null
+        : jsonMap['lat'].toString() == '-'
+            ? null
+            : double.parse(jsonMap['lat']);
+    lon = jsonMap['lon'] == null
+        ? null
+        : jsonMap['lon'].toString() == '-'
+            ? null
+            : double.parse(jsonMap['lon']);
     address = jsonMap['address'];
 
     room = List.generate(jsonMap['hotel_rooms'].length, (index) {
@@ -93,9 +101,14 @@ class HotelReview {
 
   HotelReview.fromJson(Map<String, dynamic> jsonMap) {
     rate = jsonMap['rate'];
-    comment = jsonMap['comment'];
+    comment = jsonMap['comment'] ?? '-';
     username = jsonMap['user_name'];
-    userId = jsonMap['user_id'];
+    try {
+      userId = jsonMap['user_id'];
+    } catch (e) {
+      userId = jsonMap['users_id'];
+    }
+
     createdAt = jsonMap['created_at'];
   }
 }
@@ -121,6 +134,7 @@ class HotelRoom {
   late int roomSize;
   late int maxExtBed;
   late int totalRoom;
+  late int roomLeft;
   late int guest;
   List<String> images = [];
   late bool isActive;
@@ -136,6 +150,7 @@ class HotelRoom {
     roomSize = jsonMap['roomsize'];
     maxExtBed = jsonMap['maxextrabed'] ?? 0;
     totalRoom = jsonMap['totalroom'];
+    roomLeft = int.parse(jsonMap['room_left'].toString());
     guest = jsonMap['guest'];
     for (var i = 0; i < jsonMap['hotel_room_image'].length; i++) {
       if (jsonMap['hotel_room_image'][i].toString().contains('http')) {

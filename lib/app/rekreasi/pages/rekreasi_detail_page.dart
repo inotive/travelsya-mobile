@@ -26,11 +26,11 @@ class _RekreasiDetailPageState extends State<RekreasiDetailPage> {
   void _onTabPressed(int index) async {
     await tabScrollController.scrollTo(
         index: index,
-        duration: Duration(milliseconds: 300),
+        duration: const Duration(milliseconds: 300),
         curve: Curves.ease);
     await itemScrollController.scrollTo(
         index: index,
-        duration: Duration(milliseconds: 300),
+        duration: const Duration(milliseconds: 300),
         curve: Curves.ease);
     selectedIndex.value = index;
   }
@@ -55,7 +55,7 @@ class _RekreasiDetailPageState extends State<RekreasiDetailPage> {
     var positions = itemPositionsListener.itemPositions.value;
 
     /// Target [ScrollView] is not attached to any views and/or has no listeners.
-    if (positions == null || positions.isEmpty) return;
+    if (positions.isEmpty) return;
 
     /// Capture the index of the first [ItemPosition]. If the saved index is same
     /// with the current one do nothing and return.
@@ -99,7 +99,7 @@ class _RekreasiDetailPageState extends State<RekreasiDetailPage> {
                   child: Container(
                     width: double.infinity,
                     height: double.infinity,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                         color: Colors.blue,
                         image: DecorationImage(
                             image: AssetImage(ConstHelper.helperPhoto),
@@ -117,13 +117,13 @@ class _RekreasiDetailPageState extends State<RekreasiDetailPage> {
                       width: double.infinity,
                       height: double.infinity,
                       decoration: index == 0
-                          ? BoxDecoration(
+                          ? const BoxDecoration(
                               color: Colors.blue,
                               image: DecorationImage(
                                   image: AssetImage(ConstHelper.helperPhoto),
                                   fit: BoxFit.cover),
                             )
-                          : BoxDecoration(
+                          : const BoxDecoration(
                               color: Colors.blue,
                               image: DecorationImage(
                                   image: AssetImage(ConstHelper.helperPhoto),
@@ -161,7 +161,7 @@ class _RekreasiDetailPageState extends State<RekreasiDetailPage> {
                       child: Container(
                         width: 10.0.w,
                         height: 10.0.w,
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                             shape: BoxShape.circle, color: Color(0xffFFEEF1)),
                         child: Icon(
                           Icons.arrow_back,
@@ -175,7 +175,7 @@ class _RekreasiDetailPageState extends State<RekreasiDetailPage> {
                     Container(
                       width: 10.0.w,
                       height: 10.0.w,
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                           shape: BoxShape.circle, color: Color(0xffFFEEF1)),
                       child: Icon(
                         Icons.share,
@@ -221,7 +221,8 @@ class _RekreasiDetailPageState extends State<RekreasiDetailPage> {
                         Text(
                           ' (12)',
                           style: mainFont.copyWith(
-                              fontSize: 11.0.sp, color: Color(0xffa5a5a5)),
+                              fontSize: 11.0.sp,
+                              color: const Color(0xffa5a5a5)),
                         ),
                         SizedBox(
                           width: 1.0.w,
@@ -241,7 +242,7 @@ class _RekreasiDetailPageState extends State<RekreasiDetailPage> {
                     Container(
                       width: double.infinity,
                       height: 2.0.w,
-                      color: Color(0xfff4f4f4),
+                      color: const Color(0xfff4f4f4),
                     )
                   ],
                 ),
@@ -329,13 +330,13 @@ class _RekreasiDetailPageState extends State<RekreasiDetailPage> {
                             padding: EdgeInsets.symmetric(horizontal: 5.0.w),
                             decoration: BoxDecoration(
                                 color: index == idx
-                                    ? Color(0xffFFEEF1)
+                                    ? const Color(0xffFFEEF1)
                                     : Colors.transparent,
                                 borderRadius: BorderRadius.circular(16),
                                 border: Border.all(
                                     color: index == idx
                                         ? Theme.of(context).primaryColor
-                                        : Color(0xffa5a5a5))),
+                                        : const Color(0xffa5a5a5))),
                             alignment: Alignment.center,
                             child: Text(
                               getFilterData(index),
@@ -344,7 +345,7 @@ class _RekreasiDetailPageState extends State<RekreasiDetailPage> {
                                   fontWeight: FontWeight.bold,
                                   color: index == idx
                                       ? Theme.of(context).primaryColor
-                                      : Color(0xffa5a5a5)),
+                                      : const Color(0xffa5a5a5)),
                             ),
                           ),
                         );
@@ -356,7 +357,7 @@ class _RekreasiDetailPageState extends State<RekreasiDetailPage> {
           Container(
             width: double.infinity,
             height: 2.0.w,
-            color: Color(0xfff4f4f4),
+            color: const Color(0xfff4f4f4),
           ),
           Expanded(
             child: ScrollablePositionedList.builder(

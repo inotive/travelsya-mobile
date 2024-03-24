@@ -10,6 +10,7 @@ import 'package:travelsya/app/ppob/models/ppob_model.dart';
 import 'package:travelsya/app/ppob/repository/ppob_repository.dart';
 import 'package:travelsya/shared/api/api_return_value.dart';
 import 'package:travelsya/shared/cubits/main_index_cubit.dart';
+import 'package:travelsya/shared/cubits/point/point_cubit.dart';
 import 'package:travelsya/shared/function/pay_to_inquiry_function.dart';
 import 'package:travelsya/shared/function/show_loading.dart';
 import 'package:travelsya/shared/function/show_snackbar.dart';
@@ -78,6 +79,7 @@ class BPJSKesehatanVM extends BaseViewModel {
         .then((value) async {
       Navigator.pop(context);
       if (value.status == RequestStatus.successRequest) {
+        BlocProvider.of<PointCubit>(context).fetchPoint(context);
         bool? result = await showModalBottomSheet(
             context: context,
             isScrollControlled: true,

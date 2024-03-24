@@ -11,7 +11,7 @@ class PlaneDetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-      backgroundColor: Color(0xfff5f5f5),
+      backgroundColor: const Color(0xfff5f5f5),
       body: Column(
         children: [
           Container(
@@ -23,7 +23,7 @@ class PlaneDetailPage extends StatelessWidget {
                   onTap: () {
                     Navigator.pop(context);
                   },
-                  child: Icon(
+                  child: const Icon(
                     Icons.arrow_back,
                     color: Colors.white,
                   ),
@@ -88,7 +88,7 @@ class PlaneDetailPage extends StatelessWidget {
                       borderRadius: BorderRadius.circular(8), color: neutral10),
                   child: Row(
                     children: [
-                      Container(
+                      SizedBox(
                           width: 4.0.w,
                           height: 4.0.w,
                           child: Image.asset('assets/icons/users.png')),
@@ -126,8 +126,9 @@ class PlaneDetailPage extends StatelessWidget {
                   return Container(
                     padding: EdgeInsets.all(5.0.w),
                     decoration: BoxDecoration(
-                        color:
-                            index == 1 ? Color(0xffFFEEF1) : Colors.transparent,
+                        color: index == 1
+                            ? const Color(0xffFFEEF1)
+                            : Colors.transparent,
                         border: Border(
                             left:
                                 BorderSide(color: neutral30.withOpacity(0.3)))),
@@ -166,8 +167,10 @@ class PlaneDetailPage extends StatelessWidget {
                     EdgeInsets.only(bottom: 1.0.w, top: index == 0 ? 3.0.w : 0),
                 child: GestureDetector(
                   onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (_) => PlaneCheckoutPage()));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (_) => const PlaneCheckoutPage()));
                   },
                   child: Card(
                     shape: RoundedRectangleBorder(

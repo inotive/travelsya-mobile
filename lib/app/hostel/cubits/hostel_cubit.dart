@@ -19,10 +19,16 @@ class HostelCubit extends Cubit<HostelState> {
   }
 
   fetchDetailHostel(BuildContext context,
-      {required String id, required String durationType}) {
+      {required String id,
+      required String durationType,
+      required String startDate,
+      required String endDate}) {
     emit(HostelLoading());
     HostelRepository.fetchDetailHostel(context,
-            id: id, durationType: durationType)
+            startDate: startDate,
+            endDate: endDate,
+            id: id,
+            durationType: durationType)
         .then((value) {
       if (value.status == RequestStatus.successRequest) {
         emit(DetailHostelLoaded(value.data));

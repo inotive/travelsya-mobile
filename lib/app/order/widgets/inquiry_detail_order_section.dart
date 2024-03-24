@@ -1,8 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
-import 'package:flutter_map/flutter_map.dart';
-import 'package:latlong2/latlong.dart';
 import 'package:travelsya/app/order/models/order_detail_model.dart';
 import 'package:travelsya/app/order/widgets/detail_order_split_data_widget.dart';
 import 'package:travelsya/shared/function/date_to_readable_function.dart';

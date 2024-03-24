@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:string_validator/string_validator.dart';
 import 'package:travelsya/app/hostel/models/hostel_model.dart';
-import 'package:travelsya/shared/styles/font_style.dart';
-import 'package:travelsya/shared/styles/theme_style.dart';
-import 'package:sizer/sizer.dart';
 import 'package:travelsya/shared/function/show_snackbar.dart';
+import 'package:travelsya/shared/styles/font_style.dart';
+import 'package:sizer/sizer.dart';
 import 'package:travelsya/shared/widgets/form_helper.dart';
 
 class GuestInfoForm extends StatefulWidget {
@@ -105,12 +102,17 @@ class _GuestInfoFormState extends State<GuestInfoForm> {
                   }
                 }
 
-                Navigator.pop(
-                    context,
-                    GuestModel(
-                        type: 'ktp',
-                        number: ktpController.text,
-                        name: nameController.text));
+                if (validation.isEmpty) {
+                  Navigator.pop(
+                      context,
+                      GuestModel(
+                          type: 'ktp',
+                          number: ktpController.text,
+                          name: nameController.text));
+                } else {
+                  showSnackbar(context,
+                      data: validation, colors: Colors.orange);
+                }
               }, title: 'Simpan'),
               SizedBox(
                 height: 10.0.w,

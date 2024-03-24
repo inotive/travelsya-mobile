@@ -11,6 +11,7 @@ class HotelRepository {
       {required String hotelId,
       required String roomId,
       required String review,
+      required String transactionId,
       required String star}) async {
     ApiReturnValue returnValue;
 
@@ -22,6 +23,7 @@ class HotelRepository {
     request.fields['hotel_room_id'] = roomId;
     request.fields['review'] = review;
     request.fields['bintang'] = star;
+    request.fields['transaction_id'] = transactionId;
 
     ApiReturnValue<dynamic>? response = await ApiReturnValue.httpRequest(
         context,
@@ -40,7 +42,9 @@ class HotelRepository {
         datamessages.forEach((key, value) {
           messages = value[0];
         });
-      } catch (e) {}
+      } catch (e) {
+        messages = null;
+      }
       returnValue = ApiReturnValue(data: messages, status: response.status);
     }
 
@@ -102,7 +106,9 @@ class HotelRepository {
         datamessages.forEach((key, value) {
           messages = value[0];
         });
-      } catch (e) {}
+      } catch (e) {
+        messages = null;
+      }
       returnValue = ApiReturnValue(data: messages, status: response.status);
     }
 
@@ -142,7 +148,9 @@ class HotelRepository {
         datamessages.forEach((key, value) {
           messages = value[0];
         });
-      } catch (e) {}
+      } catch (e) {
+        messages = null;
+      }
       returnValue = ApiReturnValue(data: messages, status: response.status);
     }
 
@@ -185,18 +193,25 @@ class HotelRepository {
         datamessages.forEach((key, value) {
           messages = value[0];
         });
-      } catch (e) {}
+      } catch (e) {
+        messages = null;
+      }
       returnValue = ApiReturnValue(data: messages, status: response.status);
     }
 
     return returnValue;
   }
 
-  static Future<ApiReturnValue> fetchDetailHotel(BuildContext context,
-      {required String id}) async {
+  static Future<ApiReturnValue> fetchDetailHotel(
+    BuildContext context, {
+    required String id,
+    required String startDate,
+    required String endDate,
+  }) async {
     ApiReturnValue returnValue;
 
-    var request = http.MultipartRequest('GET', Uri.parse('$hotelUrl/$id'));
+    var request = http.MultipartRequest('GET',
+        Uri.parse('$hotelUrl/$id?start_date=$startDate&end_date=$endDate'));
 
     ApiReturnValue<dynamic>? response = await ApiReturnValue.httpRequest(
         context,
@@ -216,7 +231,9 @@ class HotelRepository {
         datamessages.forEach((key, value) {
           messages = value[0];
         });
-      } catch (e) {}
+      } catch (e) {
+        messages = null;
+      }
       returnValue = ApiReturnValue(data: messages, status: response.status);
     }
 
@@ -247,7 +264,9 @@ class HotelRepository {
         datamessages.forEach((key, value) {
           messages = value[0];
         });
-      } catch (e) {}
+      } catch (e) {
+        messages = null;
+      }
       returnValue = ApiReturnValue(data: messages, status: response.status);
     }
 

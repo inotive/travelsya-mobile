@@ -12,6 +12,7 @@ import 'package:travelsya/app/ppob/cubits/ppob_cubit.dart';
 import 'package:travelsya/app/splash_screen/pages/splash_screen_page.dart';
 import 'package:travelsya/shared/cubits/fee_admin/fee_admin_cubit.dart';
 import 'package:travelsya/shared/cubits/main_index_cubit.dart';
+import 'package:travelsya/shared/cubits/point/point_cubit.dart';
 import 'package:travelsya/shared/styles/theme_style.dart';
 
 class MyHttpOverrides extends HttpOverrides {
@@ -53,6 +54,9 @@ Future<void> main() async {
       BlocProvider<FeeAdminCubit>(
         create: (context) => FeeAdminCubit(),
       ),
+      BlocProvider<PointCubit>(
+        create: (context) => PointCubit(),
+      ),
     ],
     child: const MyApp(),
   ));
@@ -62,6 +66,7 @@ class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
 
   @override
+  // ignore: library_private_types_in_public_api
   _MyAppState createState() => _MyAppState();
 }
 

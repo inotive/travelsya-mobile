@@ -10,6 +10,7 @@ import 'package:travelsya/app/ppob/models/ppob_model.dart';
 import 'package:travelsya/app/ppob/widgets/topup_confirmation_dialog.dart';
 import 'package:travelsya/shared/api/api_return_value.dart';
 import 'package:travelsya/shared/cubits/main_index_cubit.dart';
+import 'package:travelsya/shared/cubits/point/point_cubit.dart';
 import 'package:travelsya/shared/function/need_login_function.dart';
 import 'package:travelsya/shared/function/show_loading.dart';
 import 'package:travelsya/shared/function/show_snackbar.dart';
@@ -22,7 +23,7 @@ class PulsaVM extends BaseViewModel {
   TextEditingController controller = TextEditingController();
   String? selectedProvider;
   bool usePoint = false;
-  int pointUsed = 0;
+  double pointUsed = 0;
   String type = 'prabayar';
 
   onInit(String preloadNumber) {
@@ -102,17 +103,17 @@ class PulsaVM extends BaseViewModel {
 
     if (selectedIndex == 0) {
       //pulsa
-      data.pulsa.forEach((element) {
+      for (var element in data.pulsa) {
         if (operatorCheckValidation(element)) {
           dataFinal.add(element);
         }
-      });
+      }
     } else {
-      data.data.forEach((element) {
+      for (var element in data.data) {
         if (operatorCheckValidation(element)) {
           dataFinal.add(element);
         }
-      });
+      }
     }
 
     return dataFinal;
@@ -123,52 +124,52 @@ class PulsaVM extends BaseViewModel {
 
     if (value.length >= 4) {
       //check telkomsel
-      telkomsel.forEach((element) {
+      for (var element in telkomsel) {
         if (value.substring(0, 4) == element) {
           returnValue = 'Telkomsel';
         }
-      });
+      }
 
       //check telkomsel
-      indosat.forEach((element) {
+      for (var element in indosat) {
         if (value.substring(0, 4) == element) {
           returnValue = 'Indosat';
         }
-      });
+      }
 
       //check telkomsel
-      telkomsel.forEach((element) {
+      for (var element in telkomsel) {
         if (value.substring(0, 4) == element) {
           returnValue = 'Telkomsel';
         }
-      });
+      }
 
       //check Three
-      three.forEach((element) {
+      for (var element in three) {
         if (value.substring(0, 4) == element) {
           returnValue = 'Three';
         }
-      });
+      }
 
       //check telkomsel
-      smartfren.forEach((element) {
+      for (var element in smartfren) {
         if (value.substring(0, 4) == element) {
           returnValue = 'Smartfren';
         }
-      });
+      }
 
       //check telkomsel
-      xl.forEach((element) {
+      for (var element in xl) {
         if (value.substring(0, 4) == element) {
           returnValue = 'XL';
         }
-      });
+      }
 
-      axis.forEach((element) {
+      for (var element in axis) {
         if (value.substring(0, 4) == element) {
           returnValue = 'Axis';
         }
-      });
+      }
     } else {
       selectedData = null;
     }
@@ -184,6 +185,7 @@ class PulsaVM extends BaseViewModel {
 
   onSubmit(BuildContext context) async {
     needLoginFeature(context, () async {
+      BlocProvider.of<PointCubit>(context).fetchPoint(context);
       List<bool>? result = await showModalBottomSheet(
           context: context,
           isScrollControlled: true,

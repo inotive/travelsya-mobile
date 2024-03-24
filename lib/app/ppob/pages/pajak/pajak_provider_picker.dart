@@ -8,9 +8,9 @@ import 'package:travelsya/shared/styles/theme_style.dart';
 import 'package:travelsya/shared/widgets/form_helper/rounded_texfield_widget.dart';
 
 class PajakProviderPicker extends StatefulWidget {
-  const PajakProviderPicker({
-    Key? key,
-  }) : super(key: key);
+  final PPOBCubit pajakCubit;
+  const PajakProviderPicker({Key? key, required this.pajakCubit})
+      : super(key: key);
 
   @override
   State<PajakProviderPicker> createState() => _PajakProviderPickerState();
@@ -60,7 +60,7 @@ class _PajakProviderPickerState extends State<PajakProviderPicker> {
           ),
         ),
         BlocBuilder<PPOBCubit, PPOBState>(
-            bloc: BlocProvider.of<PPOBCubit>(context),
+            bloc: widget.pajakCubit,
             builder: (context, state) {
               if (state is PPOBLoading) {
                 return Expanded(
@@ -69,18 +69,18 @@ class _PajakProviderPickerState extends State<PajakProviderPicker> {
                     color: Theme.of(context).primaryColor,
                   ),
                 ));
-              } else if (state is PPOBLoaded) {
+              } else if (state is PajakPPOBLoaded) {
                 return Expanded(
                     child: ListView(
-                  children: List.generate(state.data.samsat.length, (index) {
-                    bool isShow = state.data.samsat[index].description
+                  children: List.generate(state.data.length, (index) {
+                    bool isShow = state.data[index].description
                         .toLowerCase()
                         .contains(searchValue.toLowerCase());
 
                     return isShow
                         ? GestureDetector(
                             onTap: () {
-                              Navigator.pop(context, state.data.samsat[index]);
+                              Navigator.pop(context, state.data[index]);
                             },
                             child: Container(
                                 decoration: BoxDecoration(
@@ -89,8 +89,7 @@ class _PajakProviderPickerState extends State<PajakProviderPicker> {
                                         bottom: BorderSide(
                                             color: neutral10Stroke))),
                                 padding: EdgeInsets.all(margin16),
-                                child: Text(
-                                    state.data.samsat[index].description,
+                                child: Text(state.data[index].description,
                                     style: mainBody4)),
                           )
                         : Container();

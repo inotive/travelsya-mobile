@@ -20,7 +20,7 @@ class KASearchPage extends StatelessWidget {
             child: Container(
               width: 100.0.w,
               height: 30.0.h,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                   image: DecorationImage(
                       fit: BoxFit.cover,
                       image: AssetImage(
@@ -205,7 +205,7 @@ class KASearchPage extends StatelessWidget {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (_) => KADetailPage()));
+                                  builder: (_) => const KADetailPage()));
                         }, title: 'Cari Tiket')
                       ],
                     ),
@@ -227,7 +227,7 @@ class KASearchPage extends StatelessWidget {
                                 style: mainFont.copyWith(
                                     fontSize: 10.0.sp, color: neutral100),
                                 children: [
-                              TextSpan(
+                              const TextSpan(
                                 text:
                                     'Ikuti perkembangan info, peraturan resmi, dan syarat perjalanan terbaru selama pandemi COVID-19 ',
                               ),

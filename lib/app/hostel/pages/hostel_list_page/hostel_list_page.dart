@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stacked/stacked.dart';
 import 'package:travelsya/app/hostel/cubits/hostel_cubit.dart';
 import 'package:travelsya/app/hostel/cubits/hostel_state.dart';
-import 'package:travelsya/app/hostel/models/hostel_model.dart';
 import 'package:travelsya/app/hostel/pages/hostel_detail_page/hostel_detail_page.dart';
 import 'package:travelsya/app/hostel/vm/hostel_vm.dart';
 import 'package:travelsya/shared/helper/function_helper.dart';
@@ -63,29 +62,6 @@ class HostelListPage extends StatelessWidget {
                             : ListView(
                                 children:
                                     List.generate(state.data.length, (index) {
-                                  HostelPreviewModel data = state.data[index];
-
-                                  List<Map<String, dynamic>> dataSearchMap = [
-                                    {
-                                      'icon': Icons.watch_later_outlined,
-                                      'data': data.rentCategory == 'monthly'
-                                          ? 'Bulanan'
-                                          : 'Tahunan'
-                                    },
-                                    {
-                                      'icon': Icons.location_city,
-                                      'data': data.propertyType
-                                    },
-                                    {
-                                      'icon': Icons.door_back_door,
-                                      'data': data.roomType
-                                    },
-                                    {
-                                      'icon': Icons.desk,
-                                      'data': data.furnishType
-                                    },
-                                  ];
-
                                   return GestureDetector(
                                     onTap: () {
                                       Navigator.push(
@@ -179,8 +155,8 @@ class HostelListPage extends StatelessWidget {
                                                         style:
                                                             mainFont.copyWith(
                                                           fontSize: 8.0.sp,
-                                                          color:
-                                                              Color(0xffa5a5a5),
+                                                          color: const Color(
+                                                              0xffa5a5a5),
                                                         ),
                                                       ),
                                                       SizedBox(
@@ -244,7 +220,7 @@ class HostelListPage extends StatelessWidget {
                                                       '(Sudah Termasuk Pajak)',
                                                       style: mainFont.copyWith(
                                                           fontSize: 8.0.sp,
-                                                          color: Color(
+                                                          color: const Color(
                                                               0xffa5a5a5)),
                                                     ),
                                                   ),

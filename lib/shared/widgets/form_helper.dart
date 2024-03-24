@@ -167,7 +167,7 @@ class FormHelper {
           labelText: labelText,
           enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(8),
-              borderSide: BorderSide(color: Color(0xffA5A5A5))),
+              borderSide: const BorderSide(color: Color(0xffA5A5A5))),
           labelStyle: mainFont.copyWith(
               fontSize: 11.0.sp, color: Theme.of(context).primaryColor),
           hintText: hintText,
@@ -340,7 +340,8 @@ class FormHelper {
             elevation: 0,
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-            primary: isLoading ? Colors.grey : Theme.of(context).primaryColor),
+            backgroundColor:
+                isLoading ? Colors.grey : Theme.of(context).primaryColor),
         onPressed: enabled ? onTap : null,
         child: Container(
           width: double.infinity,

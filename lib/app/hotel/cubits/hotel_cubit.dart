@@ -7,9 +7,16 @@ import 'package:travelsya/shared/api/api_return_value.dart';
 class HotelCubit extends Cubit<HotelState> {
   HotelCubit() : super(HotelInitial());
 
-  fetchDetailHotel(BuildContext context, {required String id}) {
+  fetchDetailHotel(
+    BuildContext context, {
+    required String id,
+    required String startDate,
+    required String endDate,
+  }) {
     emit(HotelLoading());
-    HotelRepository.fetchDetailHotel(context, id: id).then((value) {
+    HotelRepository.fetchDetailHotel(context,
+            id: id, endDate: endDate, startDate: startDate)
+        .then((value) {
       if (value.status == RequestStatus.successRequest) {
         emit(HotelDetailLoaded(value.data));
       } else {

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:travelsya/shared/styles/font_style.dart';
 import 'package:travelsya/shared/styles/size_styles.dart';
-import 'package:travelsya/shared/widgets/form_helper.dart';
 
 class FailedRequestHorizontalWidget extends StatelessWidget {
   final Function onRetry;

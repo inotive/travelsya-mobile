@@ -40,7 +40,9 @@ class HostelDetailModel {
       jsonMapFacilities.forEach((key, value) {
         facilities.add(jsonMapFacilities[key]);
       });
-    } catch (e) {}
+    } catch (e) {
+      facilities = [];
+    }
 
     reviews = List.generate(jsonMap['hostel_reviews'].length, (index) {
       return HostelReview.fromJson(jsonMap['hostel_reviews'][index]);
@@ -76,6 +78,7 @@ class HostelRoom {
   late int extBedPrice;
   late int totalRoom;
   late String guest;
+  late int roomLeft;
   List<String> images = [];
 
   HostelRoom.fromJson(Map<String, dynamic> jsonMap) {
@@ -90,6 +93,7 @@ class HostelRoom {
     guest = jsonMap['guest'] ?? '0';
     bedType = jsonMap['bed_type'] ?? '-';
     roomSize = jsonMap['roomsize'];
+    roomLeft = int.parse(jsonMap['room_left'].toString());
     maxExtBed = jsonMap['maxextrabed'] ?? 0;
     extBedPrice = jsonMap['maxextrabed'] ?? 0;
     totalRoom = jsonMap['totalroom'];
@@ -106,7 +110,9 @@ class HostelRoom {
                     : "$baseUrl${jsonMap['hostel_room_image'][i]['image']}";
         images.add(imageUrlTemp);
       }
-    } catch (e) {}
+    } catch (e) {
+      images = [];
+    }
   }
 }
 
@@ -119,8 +125,12 @@ class HostelReview {
 
   HostelReview.fromJson(Map<String, dynamic> jsonMap) {
     rate = jsonMap['rate'];
-    comment = jsonMap['comment'];
-    userId = jsonMap['user_id'];
+    comment = jsonMap['comment'] ?? '-';
+    try {
+      userId = jsonMap['user_id'];
+    } catch (e) {
+      userId = jsonMap['users_id'];
+    }
     username = jsonMap['user_name'];
     createdAt = jsonMap['created_at'];
   }

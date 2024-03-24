@@ -30,3 +30,12 @@ class PPOBLoaded extends PPOBState {
   @override
   List<Object> get props => [data];
 }
+
+class PajakPPOBLoaded extends PPOBState {
+  final List<PPOBModel> data;
+
+  const PajakPPOBLoaded(this.data);
+
+  @override
+  List<Object> get props => [data];
+}

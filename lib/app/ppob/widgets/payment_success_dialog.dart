@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import 'package:travelsya/shared/styles/font_style.dart';
 import 'package:travelsya/shared/styles/theme_style.dart';
-import 'package:travelsya/shared/function/show_snackbar.dart';
 import 'package:travelsya/shared/widgets/form_helper.dart';
 
 class PaymentSuccessDialog extends StatelessWidget {
@@ -26,7 +25,7 @@ class PaymentSuccessDialog extends StatelessWidget {
           child: Container(
         width: double.infinity,
         height: double.infinity,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
             borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(10), topRight: Radius.circular(10)),
             color: Colors.white),

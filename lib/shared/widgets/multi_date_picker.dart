@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
-import 'package:travelsya/shared/styles/font_style.dart'; 
+import 'package:travelsya/shared/styles/font_style.dart';
 
 class MultiDatePicker extends StatefulWidget {
   final DateTime? minDate;
@@ -12,6 +12,7 @@ class MultiDatePicker extends StatefulWidget {
       : super(key: key);
 
   @override
+  // ignore: library_private_types_in_public_api
   _MultiDatePickerState createState() => _MultiDatePickerState();
 }
 

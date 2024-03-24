@@ -96,9 +96,7 @@ Future<bool> yesOrNoDialog(BuildContext context,
 
 Future<String?> modalBottomSheetWithSearch(BuildContext context,
     {required HostelCubit dataCubit, required String title}) async {
-  List<Widget> listingDataWidget = [];
   int? returnValue;
-  String searchValue = '';
 
   returnValue = await showModalBottomSheet(
       context: context,
@@ -108,7 +106,7 @@ Future<String?> modalBottomSheetWithSearch(BuildContext context,
       constraints: BoxConstraints(maxHeight: 90.0.h),
       isScrollControlled: true,
       builder: (context) {
-        return DialogSearchCity(title: title, data: []);
+        return DialogSearchCity(title: title, data: const []);
       });
   return returnValue.toString();
 }
@@ -136,7 +134,7 @@ class _DialogSearchCityState extends State<DialogSearchCity> {
             width: 100.0.w,
             height: 7.0.h,
             padding: EdgeInsets.symmetric(horizontal: margin16),
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
                 borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(10),
                     topRight: Radius.circular(10)),
@@ -153,7 +151,7 @@ class _DialogSearchCityState extends State<DialogSearchCity> {
                     onTap: () {
                       Navigator.pop(context);
                     },
-                    child: Icon(Icons.close, color: Colors.black87))
+                    child: const Icon(Icons.close, color: Colors.black87))
               ],
             )),
         Container(
@@ -168,7 +166,7 @@ class _DialogSearchCityState extends State<DialogSearchCity> {
                 searchValue = value;
               });
             },
-            prefixIcon: Icon(Icons.search),
+            prefixIcon: const Icon(Icons.search),
             hintText: 'Cari ${widget.title}..',
           ),
         ),
@@ -259,7 +257,7 @@ Future<dynamic> modalBottomSheet(BuildContext context,
                     width: 100.0.w,
                     height: 7.0.h,
                     padding: EdgeInsets.symmetric(horizontal: margin16),
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                         borderRadius: BorderRadius.only(
                             topLeft: Radius.circular(10),
                             topRight: Radius.circular(10)),
@@ -276,7 +274,8 @@ Future<dynamic> modalBottomSheet(BuildContext context,
                             onTap: () {
                               Navigator.pop(context);
                             },
-                            child: Icon(Icons.close, color: Colors.black87))
+                            child:
+                                const Icon(Icons.close, color: Colors.black87))
                       ],
                     )))
           ],

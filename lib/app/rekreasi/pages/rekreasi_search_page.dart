@@ -32,7 +32,7 @@ class _RekreasiSearchPageState extends State<RekreasiSearchPage> {
             child: Container(
               width: 100.0.w,
               height: 30.0.h,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                   image: DecorationImage(
                       fit: BoxFit.cover,
                       image: AssetImage(
@@ -108,7 +108,7 @@ class _RekreasiSearchPageState extends State<RekreasiSearchPage> {
                   SizedBox(
                     height: 5.0.w,
                   ),
-                  Container(
+                  SizedBox(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -138,19 +138,19 @@ class _RekreasiSearchPageState extends State<RekreasiSearchPage> {
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(20),
                                     color: index == 0
-                                        ? Color(0xffFFEEF1)
+                                        ? const Color(0xffFFEEF1)
                                         : Colors.transparent,
                                     border: Border.all(
                                         color: index == 0
                                             ? Theme.of(context).primaryColor
-                                            : Color(0xffA5A5A5))),
+                                            : const Color(0xffA5A5A5))),
                                 child: Text(
                                   dataFilter[index],
                                   style: mainFont.copyWith(
                                       fontSize: 10.0.sp,
                                       color: index == 0
                                           ? Theme.of(context).primaryColor
-                                          : Color(0xffA5A5A5)),
+                                          : const Color(0xffA5A5A5)),
                                 ),
                               );
                             }),
@@ -173,7 +173,7 @@ class _RekreasiSearchPageState extends State<RekreasiSearchPage> {
                                         context,
                                         MaterialPageRoute(
                                             builder: (_) =>
-                                                RekreasiDetailPage()));
+                                                const RekreasiDetailPage()));
                                   },
                                   child: Card(
                                     shape: RoundedRectangleBorder(
@@ -185,7 +185,7 @@ class _RekreasiSearchPageState extends State<RekreasiSearchPage> {
                                           child: Container(
                                             width: double.infinity,
                                             height: double.infinity,
-                                            decoration: BoxDecoration(
+                                            decoration: const BoxDecoration(
                                                 borderRadius: BorderRadius.only(
                                                     topLeft: Radius.circular(8),
                                                     topRight:
@@ -217,7 +217,8 @@ class _RekreasiSearchPageState extends State<RekreasiSearchPage> {
                                                 'Jakarta Utara',
                                                 style: mainFont.copyWith(
                                                     fontSize: 8.0.sp,
-                                                    color: Color(0xffa5a5a5)),
+                                                    color: const Color(
+                                                        0xffa5a5a5)),
                                               ),
                                               SizedBox(
                                                 height: 2.0.w,
@@ -228,8 +229,8 @@ class _RekreasiSearchPageState extends State<RekreasiSearchPage> {
                                                     'mulai dari ',
                                                     style: mainFont.copyWith(
                                                         fontSize: 8.0.sp,
-                                                        color:
-                                                            Color(0xffa5a5a5)),
+                                                        color: const Color(
+                                                            0xffa5a5a5)),
                                                   ),
                                                   Text(
                                                     '500.000',
@@ -238,8 +239,8 @@ class _RekreasiSearchPageState extends State<RekreasiSearchPage> {
                                                         decoration:
                                                             TextDecoration
                                                                 .lineThrough,
-                                                        color:
-                                                            Color(0xffa5a5a5)),
+                                                        color: const Color(
+                                                            0xffa5a5a5)),
                                                   )
                                                 ],
                                               ),
@@ -277,7 +278,8 @@ class _RekreasiSearchPageState extends State<RekreasiSearchPage> {
                                                     '(120)',
                                                     style: mainFont.copyWith(
                                                       fontSize: 8.0.sp,
-                                                      color: Color(0xffa5a5a5),
+                                                      color: const Color(
+                                                          0xffa5a5a5),
                                                     ),
                                                   )
                                                 ],

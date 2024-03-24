@@ -1,24 +1,13 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:travelsya/shared/function/show_loading.dart';
 import 'package:stacked/stacked.dart';
-import 'package:travelsya/app/auth/cubits/profile_cubit.dart';
-import 'package:travelsya/app/auth/cubits/profile_state.dart';
-import 'package:travelsya/app/payment/pages/payment_webview_page.dart';
-import 'package:travelsya/app/payment/repository/finance_repository.dart';
 import 'package:travelsya/app/ppob/cubits/ppob_cubit.dart';
 import 'package:travelsya/app/ppob/cubits/ppob_state.dart';
 import 'package:travelsya/app/ppob/vm/pulsa_vm.dart';
 import 'package:travelsya/app/ppob/widgets/ppob_product_preview_widget.dart';
-import 'package:travelsya/shared/cubits/main_index_cubit.dart';
-import 'package:travelsya/shared/function/need_login_function.dart';
-import 'package:travelsya/shared/api/api_return_value.dart';
 import 'package:travelsya/shared/helper/function_helper.dart';
 import 'package:travelsya/shared/styles/font_style.dart';
 import 'package:travelsya/shared/styles/size_styles.dart';
-import 'package:travelsya/shared/styles/theme_style.dart';
-import 'package:travelsya/shared/function/show_snackbar.dart';
 import 'package:travelsya/shared/widgets/appbar_widget.dart';
 import 'package:travelsya/shared/widgets/form_helper.dart';
 import 'package:travelsya/shared/widgets/form_helper/rounded_texfield_widget.dart';
@@ -68,6 +57,7 @@ class PulsaFormPage extends StatelessWidget {
                       ),
                       RoundedTextfield(
                           controller: model.controller,
+                          keyboardType: TextInputType.number,
                           onChanged: (value) {
                             model.operatorCheck(value);
                           },

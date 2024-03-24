@@ -2,12 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
 import 'package:sizer/sizer.dart';
 import 'package:stacked/stacked.dart';
-import 'package:travelsya/app/auth/pages/register_page.dart';
 import 'package:travelsya/app/auth/viewmodel/otp_vm.dart';
 import 'package:travelsya/shared/helper/const_helper.dart';
 import 'package:travelsya/shared/styles/font_style.dart';
-import 'package:travelsya/shared/styles/theme_style.dart';
-import 'package:travelsya/shared/function/show_snackbar.dart';
 import 'package:travelsya/shared/widgets/form_helper.dart';
 
 class OTPPage extends StatelessWidget {
@@ -23,7 +20,7 @@ class OTPPage extends StatelessWidget {
           fontSize: 13.0.sp,
           color: Theme.of(context).primaryColor,
           fontWeight: FontWeight.w600),
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         border: Border(bottom: BorderSide(color: Colors.black38)),
       ),
     );
@@ -50,7 +47,7 @@ class OTPPage extends StatelessWidget {
                     Container(
                       width: 20.0.w,
                       height: 20.0.w,
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                           shape: BoxShape.circle, color: Color(0xffF4F4F4)),
                       alignment: Alignment.center,
                       child: SizedBox(
@@ -92,7 +89,7 @@ class OTPPage extends StatelessWidget {
                       padding: EdgeInsets.all(5.0.w),
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(6),
-                          color: Color(0xffF4F4F4)),
+                          color: const Color(0xffF4F4F4)),
                       child: Pinput(
                         length: 6,
                         controller: model.emailController,

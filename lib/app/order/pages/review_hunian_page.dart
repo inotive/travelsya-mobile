@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:stacked/stacked.dart';
 import 'package:travelsya/app/order/vm/hunian_review_vm.dart';
@@ -12,9 +10,11 @@ class ReviewHunianPage extends StatelessWidget {
   final bool isHotel;
   final int hunianId;
   final int roomId;
+  final String transactionId;
 
   const ReviewHunianPage(
       {super.key,
+      required this.transactionId,
       required this.isHotel,
       required this.hunianId,
       required this.roomId});
@@ -106,6 +106,7 @@ class ReviewHunianPage extends StatelessWidget {
                     onTap: () {
                   model.onSubmit(context,
                       isHotel: isHotel,
+                      transactionId: transactionId,
                       id: hunianId.toString(),
                       roomId: roomId.toString());
                 }, title: 'Review'),

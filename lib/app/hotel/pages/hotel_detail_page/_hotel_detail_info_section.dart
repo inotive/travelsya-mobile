@@ -117,7 +117,7 @@ class _HotelDetailInfoSection extends StatelessWidget {
                   Text(
                     ' (${data.ratingCount})',
                     style: mainFont.copyWith(
-                        fontSize: 11.0.sp, color: Color(0xffa5a5a5)),
+                        fontSize: 11.0.sp, color: const Color(0xffa5a5a5)),
                   ),
                   SizedBox(
                     width: 1.0.w,
@@ -138,7 +138,7 @@ class _HotelDetailInfoSection extends StatelessWidget {
                 padding: EdgeInsets.all(3.0.w),
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8),
-                    color: Color(0xfff4f4f4)),
+                    color: const Color(0xfff4f4f4)),
                 child: Row(
                   children: [
                     Expanded(
@@ -147,7 +147,7 @@ class _HotelDetailInfoSection extends StatelessWidget {
                       children: [
                         Row(
                           children: [
-                            Container(
+                            SizedBox(
                                 width: 6.0.w,
                                 height: 6.0.w,
                                 child: Image.asset(
@@ -158,12 +158,13 @@ class _HotelDetailInfoSection extends StatelessWidget {
                             Text(
                               '${model.searchFilter.roomCount} Kamar',
                               style: mainFont.copyWith(
-                                  fontSize: 11.0.sp, color: Color(0xff333333)),
+                                  fontSize: 11.0.sp,
+                                  color: const Color(0xff333333)),
                             ),
                             SizedBox(
                               width: 3.0.w,
                             ),
-                            Container(
+                            SizedBox(
                                 width: 6.0.w,
                                 height: 6.0.w,
                                 child: Image.asset('assets/icons/users.png')),
@@ -173,7 +174,8 @@ class _HotelDetailInfoSection extends StatelessWidget {
                             Text(
                               '${model.searchFilter.guessCount} Tamu',
                               style: mainFont.copyWith(
-                                  fontSize: 11.0.sp, color: Color(0xff333333)),
+                                  fontSize: 11.0.sp,
+                                  color: const Color(0xff333333)),
                             ),
                           ],
                         ),
@@ -213,7 +215,7 @@ class _HotelDetailInfoSection extends StatelessWidget {
         Container(
           width: double.infinity,
           height: 2.0.w,
-          color: Color(0xfff4f4f4),
+          color: const Color(0xfff4f4f4),
         ),
         // Container(
         //   width: 100.0.w,

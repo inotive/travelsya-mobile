@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
-import 'package:travelsya/app/hotel/pages/hotel_detail_page/hotel_detail_page.dart';
 import 'package:travelsya/app/plane/pages/plane_detail_page.dart';
 import 'package:travelsya/shared/helper/const_helper.dart';
 import 'package:travelsya/shared/styles/font_style.dart';
 import 'package:travelsya/shared/styles/theme_style.dart';
-import 'package:travelsya/shared/function/show_snackbar.dart';
 import 'package:travelsya/shared/widgets/form_helper.dart';
 
 class PlaneSearchPage extends StatelessWidget {
@@ -23,7 +21,7 @@ class PlaneSearchPage extends StatelessWidget {
             child: Container(
               width: 100.0.w,
               height: 30.0.h,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                   image: DecorationImage(
                       fit: BoxFit.cover,
                       image: AssetImage(
@@ -208,7 +206,7 @@ class PlaneSearchPage extends StatelessWidget {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (_) => PlaneDetailPage()));
+                                  builder: (_) => const PlaneDetailPage()));
                         }, title: 'Cari Tiket')
                       ],
                     ),
@@ -297,8 +295,8 @@ class PlaneSearchPage extends StatelessWidget {
                                                     'Sekali Jalan',
                                                     style: mainFont.copyWith(
                                                         fontSize: 9.0.sp,
-                                                        color:
-                                                            Color(0xffa5a5a5)),
+                                                        color: const Color(
+                                                            0xffa5a5a5)),
                                                   ),
                                                   Row(
                                                     children: [
@@ -343,8 +341,8 @@ class PlaneSearchPage extends StatelessWidget {
                                                     '14 Feb 2023',
                                                     style: mainFont.copyWith(
                                                         fontSize: 8.0.sp,
-                                                        color:
-                                                            Color(0xffa5a5a5)),
+                                                        color: const Color(
+                                                            0xffa5a5a5)),
                                                   ),
                                                   SizedBox(
                                                     height: 2.0.w,

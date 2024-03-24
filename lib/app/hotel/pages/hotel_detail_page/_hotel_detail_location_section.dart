@@ -32,7 +32,11 @@ class _HotelDetailLocationSection extends StatelessWidget {
                               await launchUrl(Uri.parse(url),
                                   mode: LaunchMode.externalApplication);
                             } else {
-                              throw 'Could not launch $url';
+                              if (context.mounted) {
+                                showSnackbar(context,
+                                    data: 'Tidak dapat membukan maps',
+                                    colors: Colors.orange);
+                              }
                             }
                           },
                           child: Text(

@@ -4,7 +4,6 @@ import 'package:stacked/stacked.dart';
 import 'package:travelsya/app/ppob/cubits/ppob_cubit.dart';
 import 'package:travelsya/app/ppob/cubits/ppob_state.dart';
 import 'package:travelsya/app/ppob/vm/pajak_vm.dart';
-import 'package:travelsya/app/ppob/vm/tv_berbayar_vm.dart';
 import 'package:travelsya/shared/helper/const_helper.dart';
 import 'package:travelsya/shared/styles/font_style.dart';
 import 'package:travelsya/shared/styles/size_styles.dart';
@@ -23,6 +22,7 @@ class PajakMainPage extends StatelessWidget {
     return ViewModelBuilder<PajakVM>.reactive(viewModelBuilder: () {
       return PajakVM();
     }, onViewModelReady: (model) {
+      model.ppobCubit.fetchPajakPPOB(context);
       model.onInit(preloadNumber);
     }, builder: (context, model, child) {
       return SafeArea(
@@ -94,7 +94,7 @@ class PajakMainPage extends StatelessWidget {
                                           ),
                                           Text(
                                             model.selectedProvider == null
-                                                ? 'Mohon memilih Penyedia TV Berbayar'
+                                                ? 'Mohon memilih Penyedia Pajak'
                                                 : model.selectedProvider!
                                                     .description,
                                             style: model.selectedProvider ==

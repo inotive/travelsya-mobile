@@ -1,16 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:sizer/sizer.dart';
-import 'package:travelsya/app/auth/cubits/auth_cubit.dart';
-import 'package:travelsya/app/auth/cubits/auth_state.dart';
-import 'package:travelsya/app/hostel/cubits/hostel_state.dart';
 import 'package:travelsya/app/hotel/cubits/hotel_cubit.dart';
 import 'package:travelsya/app/hotel/cubits/hotel_state.dart';
-import 'package:travelsya/app/hotel/models/hotel_detail_model.dart';
 import 'package:travelsya/app/order/models/order_detail_model.dart';
 import 'package:travelsya/app/order/pages/review_hunian_page.dart';
 import 'package:travelsya/app/order/widgets/detail_order_split_data_widget.dart';
@@ -19,14 +13,14 @@ import 'package:travelsya/shared/helper/function_helper.dart';
 import 'package:travelsya/shared/styles/font_style.dart';
 import 'package:travelsya/shared/styles/size_styles.dart';
 import 'package:travelsya/shared/styles/theme_style.dart';
-import 'package:travelsya/shared/widgets/failed_request_horizontal_widget.dart';
 import 'package:travelsya/shared/widgets/form_helper.dart';
-import 'package:travelsya/shared/widgets/placeholder_widget.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class HotelDetailOrderSection extends StatefulWidget {
   final OrderDetailHotelModel data;
-  const HotelDetailOrderSection({super.key, required this.data});
+  final Function onRefresh;
+  const HotelDetailOrderSection(
+      {super.key, required this.data, required this.onRefresh});
 
   @override
   State<HotelDetailOrderSection> createState() =>
@@ -38,7 +32,8 @@ class _HotelDetailOrderSectionState extends State<HotelDetailOrderSection> {
 
   @override
   void initState() {
-    hotelCubit.fetchDetailHotel(context, id: widget.data.hotelId.toString());
+    hotelCubit.fetchDetailHotel(context,
+        id: widget.data.hotelId.toString(), startDate: '', endDate: '');
     super.initState();
   }
 
@@ -474,117 +469,81 @@ class _HotelDetailOrderSectionState extends State<HotelDetailOrderSection> {
                         SizedBox(
                           height: margin16,
                         ),
-                        BlocBuilder<HotelCubit, HotelState>(
-                            bloc: hotelCubit,
-                            builder: (context, state) {
-                              if (state is HotelLoading) {
-                                return PlaceHolder(
-                                    child: Container(
-                                  width: double.infinity,
-                                  height: 50,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(10),
-                                      color: Colors.white),
-                                ));
-                              } else if (state is HotelDetailLoaded) {
-                                HotelReview? isAlreadyReview;
-                                AuthState stateProfile =
-                                    BlocProvider.of<AuthCubit>(context).state;
+                        widget.data.review == null
+                            ? FormHelper.borderButton(context, onTap: () async {
+                                bool? result = await Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (_) => ReviewHunianPage(
+                                              isHotel: true,
+                                              transactionId:
+                                                  widget.data.id.toString(),
+                                              hunianId: widget.data.hotelId,
+                                              roomId: widget.data.hotelRoomId,
+                                            )));
 
-                                if (stateProfile is AuthLoaded) {
-                                  for (var i = 0;
-                                      i < state.data.reviews.length;
-                                      i++) {
-                                    if (state.data.reviews[i].userId ==
-                                        stateProfile.data.id) {
-                                      isAlreadyReview = state.data.reviews[i];
-                                    }
-                                  }
+                                if (result != null) {
+                                  widget.onRefresh();
                                 }
-
-                                if (isAlreadyReview == null) {
-                                  return FormHelper.borderButton(context,
-                                      onTap: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (_) => ReviewHunianPage(
-                                                  isHotel: true,
-                                                  hunianId: widget.data.hotelId,
-                                                  roomId:
-                                                      widget.data.hotelRoomId,
-                                                )));
-                                  }, title: 'Berikan Review');
-                                } else {
-                                  return SizedBox(
-                                    width: double.infinity,
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          'Review Anda',
-                                          style: mainBody4.copyWith(
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                        Card(
-                                          shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(10)),
-                                          child: Container(
-                                            padding: EdgeInsets.all(margin16),
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
+                              }, title: 'Berikan Review')
+                            : SizedBox(
+                                width: double.infinity,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'Review Anda',
+                                      style: mainBody4.copyWith(
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    Card(
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(10)),
+                                      child: Container(
+                                        padding: EdgeInsets.all(margin16),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
                                               children: [
                                                 Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
-                                                  children: [
-                                                    Row(
-                                                      children: List.generate(5,
-                                                          (index) {
-                                                        return Icon(
-                                                          Icons.star,
-                                                          color: index >=
-                                                                  isAlreadyReview!
-                                                                      .rate
-                                                              ? Colors.grey
-                                                              : Colors.amber,
-                                                        );
-                                                      }),
-                                                    ),
-                                                    Text(
-                                                      '${isAlreadyReview.createdAt!.substring(0, 10)} ${isAlreadyReview.createdAt!.substring(11, 16)}',
-                                                      style: mainBody5,
-                                                    )
-                                                  ],
-                                                ),
-                                                SizedBox(
-                                                  height: margin4,
+                                                  children:
+                                                      List.generate(5, (index) {
+                                                    return Icon(
+                                                      Icons.star,
+                                                      color: index >=
+                                                              widget.data
+                                                                  .review!.rate
+                                                          ? Colors.grey
+                                                          : Colors.amber,
+                                                    );
+                                                  }),
                                                 ),
                                                 Text(
-                                                  isAlreadyReview.comment,
-                                                  style: mainBody4,
+                                                  '${widget.data.review!.createdAt!.substring(0, 10)} ${widget.data.review!.createdAt!.substring(11, 16)}',
+                                                  style: mainBody5,
                                                 )
                                               ],
                                             ),
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                  );
-                                }
-                              } else {
-                                return FailedRequestHorizontalWidget(
-                                  onRetry: () {
-                                    hotelCubit.fetchDetailHotel(context,
-                                        id: widget.data.hotelId.toString());
-                                  },
-                                );
-                              }
-                            })
+                                            SizedBox(
+                                              height: margin4,
+                                            ),
+                                            Text(
+                                              widget.data.review!.comment,
+                                              style: mainBody4,
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              )
                       ],
                     )
                   : Container(),

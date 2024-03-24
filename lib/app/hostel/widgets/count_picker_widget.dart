@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import 'package:travelsya/shared/styles/font_style.dart';
-import 'package:travelsya/shared/styles/theme_style.dart';
-import 'package:travelsya/shared/function/show_snackbar.dart';
 import 'package:travelsya/shared/widgets/form_helper.dart';
 
 class CountPickerWidget extends StatefulWidget {
@@ -73,7 +71,7 @@ class _CountPickerWidgetState extends State<CountPickerWidget> {
                               ? Colors.grey
                               : Theme.of(context).primaryColor),
                       alignment: Alignment.center,
-                      child: Icon(
+                      child: const Icon(
                         Icons.remove,
                         color: Colors.white,
                       ),
@@ -99,7 +97,7 @@ class _CountPickerWidgetState extends State<CountPickerWidget> {
                             borderRadius: BorderRadius.circular(8),
                             color: Theme.of(context).primaryColor),
                         alignment: Alignment.center,
-                        child: Icon(
+                        child: const Icon(
                           Icons.add,
                           color: Colors.white,
                         ),

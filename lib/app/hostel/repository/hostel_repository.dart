@@ -13,6 +13,7 @@ class HostelRepository {
       {required String hostelId,
       required String roomId,
       required String review,
+      required String transactionId,
       required String star}) async {
     ApiReturnValue returnValue;
 
@@ -24,6 +25,7 @@ class HostelRepository {
     request.fields['hostel_room_id'] = roomId;
     request.fields['review'] = review;
     request.fields['bintang'] = star;
+    request.fields['transaction_id'] = transactionId;
 
     ApiReturnValue<dynamic>? response = await ApiReturnValue.httpRequest(
         context,
@@ -42,7 +44,9 @@ class HostelRepository {
         datamessages.forEach((key, value) {
           messages = value[0];
         });
-      } catch (e) {}
+      } catch (e) {
+        messages = null;
+      }
       returnValue = ApiReturnValue(data: messages, status: response.status);
     }
 
@@ -80,13 +84,7 @@ class HostelRepository {
     endDate = DateFormat('yyyy-MM-dd').format(currentDate);
 
     request.fields['location'] = filter.selectedCity;
-    // request.fields['type_duration'] =
-    //     filter.selectedDuration.toLowerCase() == 'bulanan'
-    //         ? 'monthly'
-    //         : filter.selectedDuration.toLowerCase() == 'harian'
-    //             ? 'daily'
-    //             : 'yearly';
-
+    request.fields['duration'] = filter.totalDuration.toString();
     request.fields['type_duration'] =
         filter.selectedDuration.toLowerCase() == 'bulanan'
             ? 'monthly'
@@ -124,7 +122,9 @@ class HostelRepository {
         datamessages.forEach((key, value) {
           messages = value[0];
         });
-      } catch (e) {}
+      } catch (e) {
+        messages = null;
+      }
       returnValue = ApiReturnValue(data: messages, status: response.status);
     }
 
@@ -155,7 +155,9 @@ class HostelRepository {
         datamessages.forEach((key, value) {
           messages = value[0];
         });
-      } catch (e) {}
+      } catch (e) {
+        messages = null;
+      }
       returnValue = ApiReturnValue(data: messages, status: response.status);
     }
 
@@ -197,7 +199,9 @@ class HostelRepository {
         datamessages.forEach((key, value) {
           messages = value[0];
         });
-      } catch (e) {}
+      } catch (e) {
+        messages = null;
+      }
       returnValue = ApiReturnValue(data: messages, status: response.status);
     }
 
@@ -240,7 +244,9 @@ class HostelRepository {
         datamessages.forEach((key, value) {
           messages = value[0];
         });
-      } catch (e) {}
+      } catch (e) {
+        messages = null;
+      }
       returnValue = ApiReturnValue(data: messages, status: response.status);
     }
 
@@ -248,11 +254,16 @@ class HostelRepository {
   }
 
   static Future<ApiReturnValue> fetchDetailHostel(BuildContext context,
-      {required String id, required String durationType}) async {
+      {required String id,
+      required String durationType,
+      required String startDate,
+      required String endDate}) async {
     ApiReturnValue returnValue;
 
     var request = http.MultipartRequest(
-        'GET', Uri.parse('$hostelUrl/$id?duration_type=$durationType'));
+        'GET',
+        Uri.parse(
+            '$hostelUrl/$id?duration_type=$durationType&start_date=$startDate&end_date=$endDate'));
 
     ApiReturnValue<dynamic>? response = await ApiReturnValue.httpRequest(
         context,
@@ -272,7 +283,9 @@ class HostelRepository {
         datamessages.forEach((key, value) {
           messages = value[0];
         });
-      } catch (e) {}
+      } catch (e) {
+        messages = null;
+      }
       returnValue = ApiReturnValue(data: messages, status: response.status);
     }
 

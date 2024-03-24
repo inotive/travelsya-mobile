@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:sizer/sizer.dart';
 import 'package:travelsya/app/hostel/models/hostel_model.dart';
 import 'package:travelsya/app/hostel/pages/hostel_detail_page/hostel_detail_page.dart';
 import 'package:travelsya/shared/helper/function_helper.dart';
 import 'package:travelsya/shared/styles/font_style.dart';
-import 'package:travelsya/shared/styles/size_styles.dart';
-import 'package:travelsya/shared/styles/theme_style.dart';
 
 class HostelPreviewWidget extends StatelessWidget {
   final HostelPreviewModel data;
@@ -15,13 +11,6 @@ class HostelPreviewWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<Map<String, dynamic>> dataSearchMap = [
-      {'icon': Icons.watch_later_outlined, 'data': data.rentCategory},
-      {'icon': Icons.location_city, 'data': data.propertyType},
-      {'icon': Icons.door_back_door, 'data': data.roomType},
-      {'icon': Icons.desk, 'data': data.furnishType},
-    ];
-
     return GestureDetector(
       onTap: () {
         Navigator.push(
@@ -81,7 +70,7 @@ class HostelPreviewWidget extends StatelessWidget {
                       Text(
                         'mulai dari ',
                         style: mainFont.copyWith(
-                            fontSize: 8.0.sp, color: Color(0xffa5a5a5)),
+                            fontSize: 8.0.sp, color: const Color(0xffa5a5a5)),
                       ),
                       Text(
                         moneyChanger(data.sellingPrice, customLabel: ''),
@@ -111,7 +100,7 @@ class HostelPreviewWidget extends StatelessWidget {
                         '(${data.ratingCount})',
                         style: mainFont.copyWith(
                           fontSize: 8.0.sp,
-                          color: Color(0xffa5a5a5),
+                          color: const Color(0xffa5a5a5),
                         ),
                       )
                     ],

@@ -183,12 +183,10 @@ class HostelDetailPage extends StatelessWidget {
                   return Container(
                     margin: EdgeInsets.symmetric(horizontal: margin16),
                     child: FailedRequestWidget(onRetry: () {
-                      model.fetchRoomData(context,
-                          id: id,
-                          durationType:
-                              model.searchFilter.selectedDuration == 'Bulanan'
-                                  ? 'monthly'
-                                  : 'yearly');
+                      model.onLoadDetailHostel(
+                        context,
+                        id,
+                      );
                     }),
                   );
                 }

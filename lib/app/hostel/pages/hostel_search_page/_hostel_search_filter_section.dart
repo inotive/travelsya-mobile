@@ -37,22 +37,19 @@ class _HostelSearchFilterSection extends StatelessWidget {
                       ),
                       state.selectedCity.isEmpty
                           ? const SizedBox()
-                          : AspectRatio(
-                              aspectRatio: 1,
-                              child: GestureDetector(
-                                onTap: () {
-                                  model.onLocationPickerRemove(context);
-                                },
-                                child: Container(
-                                  width: double.infinity,
-                                  height: double.infinity,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(8),
-                                      color: Colors.red),
-                                  child: const Icon(
-                                    Icons.close,
-                                    color: Colors.white,
-                                  ),
+                          : GestureDetector(
+                              onTap: () {
+                                model.onLocationPickerRemove(context);
+                              },
+                              child: Container(
+                                width: 40,
+                                height: 40,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(8),
+                                    color: Colors.red),
+                                child: const Icon(
+                                  Icons.close,
+                                  color: Colors.white,
                                 ),
                               ),
                             )

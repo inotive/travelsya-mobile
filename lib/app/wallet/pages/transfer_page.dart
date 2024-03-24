@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import 'package:travelsya/shared/styles/font_style.dart';
 import 'package:travelsya/shared/styles/theme_style.dart';
-import 'package:travelsya/shared/function/show_snackbar.dart';
 import 'package:travelsya/shared/widgets/form_helper.dart';
 
 class TransferPage extends StatelessWidget {
@@ -52,7 +51,7 @@ class TransferPage extends StatelessWidget {
                   child: FormHelper.roundedTextfield(context,
                       controller: TextEditingController(),
                       hintText: 'Cari nama rekening',
-                      suffixWidget: Icon(Icons.search)),
+                      suffixWidget: const Icon(Icons.search)),
                 ),
               ],
             ),

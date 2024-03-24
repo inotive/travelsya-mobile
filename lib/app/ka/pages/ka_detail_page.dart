@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:travelsya/app/ka/pages/ka_checkout_page.dart';
-import 'package:travelsya/app/plane/pages/plane_checkout_page.dart';
 import 'package:travelsya/shared/styles/font_style.dart';
 import 'package:travelsya/shared/styles/theme_style.dart';
 import 'package:sizer/sizer.dart';
@@ -12,7 +11,7 @@ class KADetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-      backgroundColor: Color(0xfff5f5f5),
+      backgroundColor: const Color(0xfff5f5f5),
       body: Column(
         children: [
           Container(
@@ -24,7 +23,7 @@ class KADetailPage extends StatelessWidget {
                   onTap: () {
                     Navigator.pop(context);
                   },
-                  child: Icon(
+                  child: const Icon(
                     Icons.arrow_back,
                     color: Colors.white,
                   ),
@@ -89,7 +88,7 @@ class KADetailPage extends StatelessWidget {
                       borderRadius: BorderRadius.circular(8), color: neutral10),
                   child: Row(
                     children: [
-                      Container(
+                      SizedBox(
                           width: 4.0.w,
                           height: 4.0.w,
                           child: Image.asset('assets/icons/users.png')),
@@ -127,8 +126,10 @@ class KADetailPage extends StatelessWidget {
                     EdgeInsets.only(bottom: 1.0.w, top: index == 0 ? 3.0.w : 0),
                 child: GestureDetector(
                   onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (_) => KACheckoutPage()));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (_) => const KACheckoutPage()));
                   },
                   child: Card(
                     shape: RoundedRectangleBorder(

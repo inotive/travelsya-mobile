@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
-import 'package:sizer/sizer.dart';
 import 'package:stacked/stacked.dart';
 import 'package:travelsya/app/hostel/cubits/hostel_cubit.dart';
 import 'package:travelsya/app/hostel/cubits/hostel_filter_cubit.dart';
 import 'package:travelsya/app/hostel/cubits/hostel_state.dart';
-import 'package:travelsya/app/hostel/pages/hostel_detail_page/hostel_detail_page.dart';
 import 'package:travelsya/app/hostel/vm/hostel_search_vm.dart';
 import 'package:travelsya/app/hostel/widgets/hostel_preview_widget.dart';
 import 'package:travelsya/shared/function/date_to_readable_function.dart';

@@ -142,7 +142,7 @@ class _HostelOrderPageState extends State<HostelOrderPage> {
                                   width: double.infinity,
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(8),
-                                      color: Color(0xfff4f4f4)),
+                                      color: const Color(0xfff4f4f4)),
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
@@ -150,7 +150,7 @@ class _HostelOrderPageState extends State<HostelOrderPage> {
                                         'Check In',
                                         style: mainFont.copyWith(
                                             fontSize: 8.0.sp,
-                                            color: Color(0xffa5a5a5)),
+                                            color: const Color(0xffa5a5a5)),
                                       ),
                                       Text(
                                         dateToReadable(DateFormat('yyyy-MM-dd')
@@ -181,14 +181,14 @@ class _HostelOrderPageState extends State<HostelOrderPage> {
                                   width: double.infinity,
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(8),
-                                      color: Color(0xfff4f4f4)),
+                                      color: const Color(0xfff4f4f4)),
                                   child: Column(
                                     children: [
                                       Text(
                                         'Check Out',
                                         style: mainFont.copyWith(
                                             fontSize: 8.0.sp,
-                                            color: Color(0xffa5a5a5)),
+                                            color: const Color(0xffa5a5a5)),
                                       ),
                                       // Text(
                                       //   dateToReadable(DateFormat('yyyy-MM-dd')
@@ -344,7 +344,7 @@ class _HostelOrderPageState extends State<HostelOrderPage> {
                       ),
                       Row(
                         children: [
-                          Container(
+                          SizedBox(
                             width: 6.0.w,
                             height: 6.0.w,
                             child: Image.asset('assets/icons/users.png'),
@@ -443,7 +443,7 @@ class _HostelOrderPageState extends State<HostelOrderPage> {
                                                 color: Colors.orange,
                                               ),
                                               alignment: Alignment.center,
-                                              child: Icon(
+                                              child: const Icon(
                                                 Icons.edit,
                                                 color: Colors.white,
                                               ),
@@ -467,7 +467,7 @@ class _HostelOrderPageState extends State<HostelOrderPage> {
                                                 color: Colors.red,
                                               ),
                                               alignment: Alignment.center,
-                                              child: Icon(
+                                              child: const Icon(
                                                 Icons.delete,
                                                 color: Colors.white,
                                               ),
@@ -534,7 +534,7 @@ class _HostelOrderPageState extends State<HostelOrderPage> {
                                         padding: EdgeInsets.all(5.0.w),
                                         child: Row(
                                           children: [
-                                            Container(
+                                            SizedBox(
                                               width: 6.0.w,
                                               height: 6.0.w,
                                               child: Image.asset(
@@ -713,7 +713,7 @@ class _HostelOrderPageState extends State<HostelOrderPage> {
                       ],
                       "start": DateFormat('yyyy-MM-dd').format(tanggalFinal),
                       "end": DateFormat('yyyy-MM-dd')
-                          .format(tanggalFinal.add(Duration(days: 1
+                          .format(tanggalFinal.add(const Duration(days: 1
                               // days: widget.data.category == 'Harian'
                               //     ? 1
                               //     : widget.data.category == 'Bulanan'
@@ -728,7 +728,8 @@ class _HostelOrderPageState extends State<HostelOrderPage> {
 
                         Navigator.pushAndRemoveUntil(
                             context,
-                            MaterialPageRoute(builder: (_) => HomeMainPage()),
+                            MaterialPageRoute(
+                                builder: (_) => const HomeMainPage()),
                             (route) => false);
 
                         Navigator.push(

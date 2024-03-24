@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:travelsya/app/bus/pages/bus_checkout_page.dart';
-import 'package:travelsya/app/ka/pages/ka_checkout_page.dart';
-import 'package:travelsya/app/plane/pages/plane_checkout_page.dart';
-import 'package:travelsya/shared/styles/font_style.dart';
 import 'package:travelsya/shared/styles/font_style.dart';
 import 'package:travelsya/shared/styles/theme_style.dart';
 import 'package:sizer/sizer.dart';
@@ -14,7 +11,7 @@ class BusDetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-      backgroundColor: Color(0xfff5f5f5),
+      backgroundColor: const Color(0xfff5f5f5),
       body: Column(
         children: [
           Container(
@@ -91,7 +88,7 @@ class BusDetailPage extends StatelessWidget {
                       borderRadius: BorderRadius.circular(8), color: neutral10),
                   child: Row(
                     children: [
-                      Container(
+                      SizedBox(
                           width: 4.0.w,
                           height: 4.0.w,
                           child: Image.asset('assets/icons/users.png')),
@@ -199,8 +196,10 @@ class BusDetailPage extends StatelessWidget {
               children: List.generate(5, (index) {
                 return GestureDetector(
                   onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (_) => BusCheckoutPage()));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (_) => const BusCheckoutPage()));
                   },
                   child: Container(
                     margin: EdgeInsets.only(top: index == 0 ? 5.0.w : 3.0.w),
@@ -267,7 +266,7 @@ class BusDetailPage extends StatelessWidget {
                         SizedBox(
                           height: 3.0.w,
                         ),
-                        Container(
+                        SizedBox(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [

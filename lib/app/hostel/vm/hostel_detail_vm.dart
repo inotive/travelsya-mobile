@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
@@ -10,12 +8,7 @@ import 'package:travelsya/app/hostel/cubits/hostel_cubit.dart';
 import 'package:travelsya/app/hostel/cubits/hostel_filter_cubit.dart';
 import 'package:travelsya/app/hostel/cubits/hostel_state.dart';
 import 'package:travelsya/app/hostel/models/hostel_detail_model.dart';
-import 'package:travelsya/app/hotel/cubits/hotel_cubit.dart';
-import 'package:travelsya/app/hotel/cubits/hotel_filter_cubit.dart';
-import 'package:travelsya/app/hotel/cubits/hotel_state.dart';
-import 'package:travelsya/app/hotel/widgets/hotel_filter_sheet.dart';
 import 'package:travelsya/shared/styles/font_style.dart';
-import 'package:travelsya/shared/styles/theme_style.dart';
 
 class HostelDetailVM extends BaseViewModel {
   final ItemScrollController itemScrollController = ItemScrollController();
@@ -111,13 +104,13 @@ class HostelDetailVM extends BaseViewModel {
                   padding: EdgeInsets.symmetric(horizontal: 5.0.w),
                   decoration: BoxDecoration(
                       color: index == selectedIndex
-                          ? Color(0xffFFEEF1)
+                          ? const Color(0xffFFEEF1)
                           : Colors.transparent,
                       borderRadius: BorderRadius.circular(16),
                       border: Border.all(
                           color: index == selectedIndex
                               ? Theme.of(context).primaryColor
-                              : Color(0xffa5a5a5))),
+                              : const Color(0xffa5a5a5))),
                   alignment: Alignment.center,
                   child: Text(
                     getFilterData(index),
@@ -126,7 +119,7 @@ class HostelDetailVM extends BaseViewModel {
                         fontWeight: FontWeight.bold,
                         color: index == selectedIndex
                             ? Theme.of(context).primaryColor
-                            : Color(0xffa5a5a5)),
+                            : const Color(0xffa5a5a5)),
                   ),
                 ));
           }),
@@ -152,13 +145,13 @@ class HostelDetailVM extends BaseViewModel {
             padding: EdgeInsets.symmetric(horizontal: 5.0.w),
             decoration: BoxDecoration(
                 color: index == selectedIndex
-                    ? Color(0xffFFEEF1)
+                    ? const Color(0xffFFEEF1)
                     : Colors.transparent,
                 borderRadius: BorderRadius.circular(16),
                 border: Border.all(
                     color: index == selectedIndex
                         ? Theme.of(context).primaryColor
-                        : Color(0xffa5a5a5))),
+                        : const Color(0xffa5a5a5))),
             alignment: Alignment.center,
             child: Text(
               getFilterData(index),
@@ -167,7 +160,7 @@ class HostelDetailVM extends BaseViewModel {
                   fontWeight: FontWeight.bold,
                   color: index == selectedIndex
                       ? Theme.of(context).primaryColor
-                      : Color(0xffa5a5a5)),
+                      : const Color(0xffa5a5a5)),
             ),
           ),
         );
@@ -191,10 +184,15 @@ class HostelDetailVM extends BaseViewModel {
   }
 
   fetchRoomData(BuildContext context,
-      {required String id, required String durationType}) {
+      {required String id,
+      required String durationType,
+      required DateTime startDate,
+      required String endDate}) {
     hostelCubit.fetchDetailHostel(
       context,
       durationType: durationType,
+      endDate: endDate,
+      startDate: DateFormat('yyyy-MM-dd').format(startDate),
       id: id,
     );
   }
@@ -227,6 +225,34 @@ class HostelDetailVM extends BaseViewModel {
     // }
   }
 
+  onLoadDetailHostel(BuildContext context, String id) {
+    String endDate = '';
+
+    DateTime currentDate = searchFilter.startDate;
+
+    if (searchFilter.selectedDuration == 'Bulanan') {
+      int finalMonth = currentDate.month;
+      finalMonth = finalMonth + searchFilter.totalDuration;
+      currentDate = DateTime((currentDate.year + (finalMonth ~/ 12)),
+          finalMonth % 12, currentDate.day);
+    } else if (searchFilter.selectedDuration == 'Harian') {
+      currentDate = currentDate.add(Duration(days: searchFilter.totalDuration));
+    } else {
+      int finalYear = currentDate.year;
+      finalYear = finalYear + searchFilter.totalDuration;
+      currentDate = DateTime(finalYear, currentDate.month, currentDate.day);
+    }
+
+    endDate = DateFormat('yyyy-MM-dd').format(currentDate);
+
+    fetchRoomData(context,
+        id: id,
+        startDate: searchFilter.startDate,
+        endDate: endDate,
+        durationType:
+            searchFilter.selectedDuration == 'Bulanan' ? 'monthly' : 'yearly');
+  }
+
   onInit(
     BuildContext context, {
     required String id,
@@ -238,11 +264,7 @@ class HostelDetailVM extends BaseViewModel {
     }
 
     itemPositionsListener.itemPositions.addListener(onInnerViewScrolled);
-
-    fetchRoomData(context,
-        id: id,
-        durationType:
-            searchFilter.selectedDuration == 'Bulanan' ? 'monthly' : 'yearly');
+    onLoadDetailHostel(context, id);
   }
 
   String getFilterData(int index) {

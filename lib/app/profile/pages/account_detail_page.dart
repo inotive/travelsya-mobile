@@ -8,7 +8,6 @@ import 'package:travelsya/app/auth/repository/auth_repository.dart';
 import 'package:travelsya/shared/api/api_return_value.dart';
 import 'package:travelsya/shared/function/show_snackbar.dart';
 import 'package:travelsya/shared/styles/font_style.dart';
-import 'package:travelsya/shared/function/show_snackbar.dart';
 import 'package:travelsya/shared/widgets/form_helper.dart';
 
 class AccountDetailPage extends StatefulWidget {
@@ -26,7 +25,7 @@ class _AccountDetailPageState extends State<AccountDetailPage> {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-            backgroundColor: Color(0xfff5f5f5),
+            backgroundColor: const Color(0xfff5f5f5),
             body: Column(children: [
               Container(
                 padding: EdgeInsets.all(5.0.w),
@@ -37,7 +36,7 @@ class _AccountDetailPageState extends State<AccountDetailPage> {
                       onTap: () {
                         Navigator.pop(context);
                       },
-                      child: Icon(
+                      child: const Icon(
                         Icons.arrow_back,
                         color: Colors.white,
                       ),

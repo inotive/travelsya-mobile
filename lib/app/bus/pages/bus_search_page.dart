@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import 'package:travelsya/app/bus/pages/bus_detail_page.dart';
-import 'package:travelsya/app/hotel/pages/hotel_detail_page/hotel_detail_page.dart';
-import 'package:travelsya/app/ka/pages/ka_detail_page.dart';
-import 'package:travelsya/app/plane/pages/plane_detail_page.dart';
 import 'package:travelsya/shared/styles/font_style.dart';
 import 'package:travelsya/shared/styles/theme_style.dart';
-import 'package:travelsya/shared/function/show_snackbar.dart';
 import 'package:travelsya/shared/widgets/form_helper.dart';
 
 class BusSearchPage extends StatelessWidget {
@@ -189,7 +185,7 @@ class BusSearchPage extends StatelessWidget {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (_) => BusDetailPage()));
+                                  builder: (_) => const BusDetailPage()));
                         }, title: 'Cari Tiket')
                       ],
                     ),
@@ -211,7 +207,7 @@ class BusSearchPage extends StatelessWidget {
                                 style: mainFont.copyWith(
                                     fontSize: 10.0.sp, color: neutral100),
                                 children: [
-                              TextSpan(
+                              const TextSpan(
                                 text:
                                     'Ikuti perkembangan info, peraturan resmi, dan syarat perjalanan terbaru selama pandemi COVID-19 ',
                               ),

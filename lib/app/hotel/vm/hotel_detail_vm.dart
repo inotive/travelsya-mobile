@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
@@ -12,7 +10,6 @@ import 'package:travelsya/app/hotel/cubits/hotel_state.dart';
 import 'package:travelsya/app/hotel/models/hotel_detail_model.dart';
 import 'package:travelsya/app/hotel/widgets/hotel_filter_sheet.dart';
 import 'package:travelsya/shared/styles/font_style.dart';
-import 'package:travelsya/shared/styles/theme_style.dart';
 
 class HotelDetailVM extends BaseViewModel {
   final ItemScrollController itemScrollController = ItemScrollController();
@@ -92,13 +89,13 @@ class HotelDetailVM extends BaseViewModel {
                   padding: EdgeInsets.symmetric(horizontal: 5.0.w),
                   decoration: BoxDecoration(
                       color: index == selectedIndex
-                          ? Color(0xffFFEEF1)
+                          ? const Color(0xffFFEEF1)
                           : Colors.transparent,
                       borderRadius: BorderRadius.circular(16),
                       border: Border.all(
                           color: index == selectedIndex
                               ? Theme.of(context).primaryColor
-                              : Color(0xffa5a5a5))),
+                              : const Color(0xffa5a5a5))),
                   alignment: Alignment.center,
                   child: Text(
                     getFilterData(index),
@@ -107,7 +104,7 @@ class HotelDetailVM extends BaseViewModel {
                         fontWeight: FontWeight.bold,
                         color: index == selectedIndex
                             ? Theme.of(context).primaryColor
-                            : Color(0xffa5a5a5)),
+                            : const Color(0xffa5a5a5)),
                   ),
                 ));
           }),
@@ -133,13 +130,13 @@ class HotelDetailVM extends BaseViewModel {
             padding: EdgeInsets.symmetric(horizontal: 5.0.w),
             decoration: BoxDecoration(
                 color: index == selectedIndex
-                    ? Color(0xffFFEEF1)
+                    ? const Color(0xffFFEEF1)
                     : Colors.transparent,
                 borderRadius: BorderRadius.circular(16),
                 border: Border.all(
                     color: index == selectedIndex
                         ? Theme.of(context).primaryColor
-                        : Color(0xffa5a5a5))),
+                        : const Color(0xffa5a5a5))),
             alignment: Alignment.center,
             child: Text(
               getFilterData(index),
@@ -148,7 +145,7 @@ class HotelDetailVM extends BaseViewModel {
                   fontWeight: FontWeight.bold,
                   color: index == selectedIndex
                       ? Theme.of(context).primaryColor
-                      : Color(0xffa5a5a5)),
+                      : const Color(0xffa5a5a5)),
             ),
           ),
         );
@@ -187,8 +184,12 @@ class HotelDetailVM extends BaseViewModel {
     }
   }
 
-  fetchRoomData(BuildContext context, {required String id}) {
-    hotelCubit.fetchDetailHotel(context, id: id);
+  fetchRoomData(BuildContext context,
+      {required String id,
+      required String startDate,
+      required String endDate}) {
+    hotelCubit.fetchDetailHotel(context,
+        id: id, startDate: startDate, endDate: endDate);
   }
 
   onFilterChanged(BuildContext context, {required String id}) async {
@@ -211,9 +212,16 @@ class HotelDetailVM extends BaseViewModel {
 
       // ignore: use_build_context_synchronously
       BlocProvider.of<HotelFilterCubit>(context).emit(HotelLoading());
-      BlocProvider.of<HotelFilterCubit>(context).emit(searchFilter);
+      if (context.mounted) {
+        BlocProvider.of<HotelFilterCubit>(context).emit(searchFilter);
 
-      fetchRoomData(context, id: id);
+        fetchRoomData(context,
+            id: id,
+            startDate: DateFormat('yyyy-MM-dd')
+                .format(searchFilter.selectedTime.startDate!),
+            endDate: DateFormat('yyyy-MM-dd')
+                .format(searchFilter.selectedTime.endDate!));
+      }
 
       notifyListeners();
     }
@@ -228,7 +236,12 @@ class HotelDetailVM extends BaseViewModel {
 
     itemPositionsListener.itemPositions.addListener(onInnerViewScrolled);
 
-    fetchRoomData(context, id: id);
+    fetchRoomData(context,
+        id: id,
+        startDate: DateFormat('yyyy-MM-dd')
+            .format(searchFilter.selectedTime.startDate!),
+        endDate: DateFormat('yyyy-MM-dd')
+            .format(searchFilter.selectedTime.endDate!));
   }
 
   String getFilterData(int index) {

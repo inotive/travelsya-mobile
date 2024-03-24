@@ -1,3 +1,5 @@
+import 'dart:io';
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:travelsya/app/auth/model/profile_model.dart';
 import 'package:travelsya/app/auth/model/user_model.dart';
@@ -32,7 +34,9 @@ class AuthRepository {
         datamessages.forEach((key, value) {
           messages = value[0];
         });
-      } catch (e) {}
+      } catch (e) {
+        messages = null;
+      }
       returnValue = ApiReturnValue(data: messages, status: response.status);
     }
 
@@ -65,7 +69,9 @@ class AuthRepository {
         datamessages.forEach((key, value) {
           messages = value[0];
         });
-      } catch (e) {}
+      } catch (e) {
+        messages = null;
+      }
       returnValue = ApiReturnValue(data: messages, status: response.status);
     }
 
@@ -105,7 +111,9 @@ class AuthRepository {
         datamessages.forEach((key, value) {
           messages = value[0];
         });
-      } catch (e) {}
+      } catch (e) {
+        messages = null;
+      }
       returnValue = ApiReturnValue(data: messages, status: response.status);
     }
 
@@ -141,7 +149,9 @@ class AuthRepository {
         String? messages;
         try {
           messages = response.data['data']['message'];
-        } catch (e) {}
+        } catch (e) {
+          messages = null;
+        }
 
         returnValue =
             ApiReturnValue(data: messages, status: RequestStatus.failedRequest);
@@ -153,8 +163,55 @@ class AuthRepository {
       String? messages;
       try {
         messages = response.data['data']['message'];
-      } catch (e) {}
+      } catch (e) {
+        messages = null;
+      }
       returnValue = ApiReturnValue(data: messages, status: response.status);
+    }
+
+    return returnValue;
+  }
+
+  static Future<ApiReturnValue> updateProfilePicture(
+    BuildContext context, {
+    required File file,
+  }) async {
+    ApiReturnValue returnValue;
+
+    String url = '$baseAPIUrl/user/update-photo';
+
+    var request = http.MultipartRequest('POST', Uri.parse(url));
+
+    request.files.add(await http.MultipartFile.fromPath('image', file.path));
+
+    if (context.mounted) {
+      ApiReturnValue<dynamic>? response =
+          await ApiReturnValue.httpRequest(context,
+              request: request,
+              exceptionStatusCode: [
+                201,
+              ],
+              auth: true);
+
+      if (response!.status == RequestStatus.successRequest) {
+        returnValue =
+            ApiReturnValue(data: null, status: RequestStatus.successRequest);
+      } else {
+        String? messages;
+        try {
+          Map<String, dynamic> datamessages = response.data['data']['response'];
+
+          datamessages.forEach((key, value) {
+            messages = value[0];
+          });
+        } catch (e) {
+          messages = null;
+        }
+        returnValue = ApiReturnValue(data: messages, status: response.status);
+      }
+    } else {
+      returnValue =
+          ApiReturnValue(data: null, status: RequestStatus.failedRequest);
     }
 
     return returnValue;
@@ -196,7 +253,9 @@ class AuthRepository {
         datamessages.forEach((key, value) {
           messages = value[0];
         });
-      } catch (e) {}
+      } catch (e) {
+        messages = null;
+      }
       returnValue = ApiReturnValue(data: messages, status: response.status);
     }
 
@@ -232,7 +291,9 @@ class AuthRepository {
         datamessages.forEach((key, value) {
           messages = value[0];
         });
-      } catch (e) {}
+      } catch (e) {
+        messages = null;
+      }
       returnValue = ApiReturnValue(data: messages, status: response.status);
     }
 
@@ -267,7 +328,9 @@ class AuthRepository {
         datamessages.forEach((key, value) {
           messages = value[0];
         });
-      } catch (e) {}
+      } catch (e) {
+        messages = null;
+      }
       returnValue = ApiReturnValue(data: messages, status: response.status);
     }
 
@@ -302,7 +365,9 @@ class AuthRepository {
         datamessages.forEach((key, value) {
           messages = value[0];
         });
-      } catch (e) {}
+      } catch (e) {
+        messages = null;
+      }
       returnValue = ApiReturnValue(data: messages, status: response.status);
     }
 
@@ -346,7 +411,9 @@ class AuthRepository {
         datamessages.forEach((key, value) {
           messages = value[0];
         });
-      } catch (e) {}
+      } catch (e) {
+        messages = null;
+      }
       returnValue = ApiReturnValue(data: messages, status: response.status);
     }
 

@@ -3,10 +3,10 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stacked/stacked.dart';
+import 'package:travelsya/app/auth/cubits/profile_cubit.dart';
 import 'package:travelsya/app/hostel/pages/hostel_search_page/hostel_search_page.dart';
 import 'package:travelsya/app/hotel/pages/hotel_search/hotel_search_page.dart';
 import 'package:travelsya/app/ppob/cubits/ppob_cubit.dart';
-import 'package:travelsya/app/ppob/cubits/ppob_state.dart';
 import 'package:travelsya/app/ppob/pages/bpjs/bpjs_kesehatan_main_page.dart';
 import 'package:travelsya/app/ppob/pages/ewallet/ewallet_main_page.dart';
 import 'package:travelsya/app/ppob/pages/pajak/pajak_main_page.dart';
@@ -63,6 +63,7 @@ class BerandaVM extends BaseViewModel {
   onInit(BuildContext context) {
     BlocProvider.of<PPOBCubit>(context).fetchPPOBData(context);
     BlocProvider.of<FeeAdminCubit>(context).fetchFeeAdmin(context);
+    BlocProvider.of<ProfileCubit>(context).fetchProfile(context);
   }
 
   onCSTap(BuildContext context) async {
@@ -86,7 +87,7 @@ class BerandaVM extends BaseViewModel {
   onMainMenuTap(BuildContext context, int id) {
     if (id == 1) {
       Navigator.push(
-          context, MaterialPageRoute(builder: (_) => HotelSearchPage()));
+          context, MaterialPageRoute(builder: (_) => const HotelSearchPage()));
     } else if (id == 2) {
       // Navigator.push(
       //     context, MaterialPageRoute(builder: (_) => PlaneSearchPage()));
@@ -104,7 +105,7 @@ class BerandaVM extends BaseViewModel {
       //     context, MaterialPageRoute(builder: (_) => RentalSearchPage()));
     } else if (id == 7) {
       Navigator.push(
-          context, MaterialPageRoute(builder: (_) => HostelSearchPage()));
+          context, MaterialPageRoute(builder: (_) => const HostelSearchPage()));
     } else if (id == 9) {
       Navigator.push(
           context, MaterialPageRoute(builder: (_) => const PLNMainPage()));
@@ -119,7 +120,7 @@ class BerandaVM extends BaseViewModel {
           context, MaterialPageRoute(builder: (_) => const EwalletMainPage()));
     } else if (id == 14) {
       Navigator.push(
-          context, MaterialPageRoute(builder: (_) => PulsaFormPage()));
+          context, MaterialPageRoute(builder: (_) => const PulsaFormPage()));
     } else if (id == 15) {
       Navigator.push(context,
           MaterialPageRoute(builder: (_) => const TVBerbayarMainPage()));
@@ -129,9 +130,9 @@ class BerandaVM extends BaseViewModel {
     } else {}
   }
 
-  onProfileMenuTap(BuildContext context) {
+  onProfileMenuTap(BuildContext context, {required Function onLoggedFunction}) {
     needLoginFeature(context, () {
-      print('go to profile page');
+      onLoggedFunction();
     });
   }
 

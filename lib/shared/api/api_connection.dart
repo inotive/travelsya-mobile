@@ -1,4 +1,5 @@
 String baseUrl = 'https://servicevps.travelsya.com/';
+String basePathUserUrl = 'https://travelsya.com/storage/public/users/';
 String baseAPIUrl = '${baseUrl}api';
 
 String loginUrl = '$baseAPIUrl/login';
@@ -13,6 +14,7 @@ String hotelRoomUrl = '$baseAPIUrl/hotel/room';
 String hotelReviewUrl = '$baseAPIUrl/hotel/rating';
 
 String feeAdminUrl = '$baseAPIUrl/fee-admin';
+String pointUrl = '$baseAPIUrl/user/total-point-available';
 
 //hostel
 String hostelUrl = '$baseAPIUrl/hostel';

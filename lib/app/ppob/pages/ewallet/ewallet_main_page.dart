@@ -1,9 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stacked/stacked.dart';
-import 'package:travelsya/app/auth/cubits/profile_cubit.dart';
-import 'package:travelsya/app/auth/cubits/profile_state.dart';
 import 'package:travelsya/app/ppob/cubits/ppob_cubit.dart';
 import 'package:travelsya/app/ppob/cubits/ppob_state.dart';
 import 'package:travelsya/app/ppob/vm/ewallet_vm.dart';
@@ -145,6 +142,7 @@ class EwalletMainPage extends StatelessWidget {
                               child: TitleWithWidget(
                                 title: 'Nomor E-Wallet',
                                 child: RoundedTextfield(
+                                    keyboardType: TextInputType.number,
                                     controller: model.controller,
                                     hintText: 'Masukkan Nomor E-Wallet'),
                               ),

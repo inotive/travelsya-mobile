@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:travelsya/app/bus/pages/bus_checkout_page.dart';
-import 'package:travelsya/app/ka/pages/ka_checkout_page.dart';
-import 'package:travelsya/app/plane/pages/plane_checkout_page.dart';
 import 'package:travelsya/app/rental/widgets/rental_option_dialog.dart';
 import 'package:travelsya/shared/styles/font_style.dart';
 import 'package:travelsya/shared/styles/theme_style.dart';
@@ -21,7 +18,7 @@ class _RentalDetailPageState extends State<RentalDetailPage> {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-      backgroundColor: Color(0xfff5f5f5),
+      backgroundColor: const Color(0xfff5f5f5),
       body: Column(
         children: [
           Container(
@@ -33,7 +30,7 @@ class _RentalDetailPageState extends State<RentalDetailPage> {
                   onTap: () {
                     Navigator.pop(context);
                   },
-                  child: Icon(
+                  child: const Icon(
                     Icons.arrow_back,
                     color: Colors.white,
                   ),
@@ -66,7 +63,7 @@ class _RentalDetailPageState extends State<RentalDetailPage> {
                       borderRadius: BorderRadius.circular(8), color: neutral10),
                   child: Row(
                     children: [
-                      Container(
+                      SizedBox(
                           width: 4.0.w,
                           height: 4.0.w,
                           child: Icon(Icons.date_range,
@@ -108,19 +105,20 @@ class _RentalDetailPageState extends State<RentalDetailPage> {
                       EdgeInsets.symmetric(vertical: 1.0.w, horizontal: 5.0.w),
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
-                      color:
-                          index == 0 ? Color(0xffFFEEF1) : Colors.transparent,
+                      color: index == 0
+                          ? const Color(0xffFFEEF1)
+                          : Colors.transparent,
                       border: Border.all(
                           color: index == 0
                               ? Theme.of(context).primaryColor
-                              : Color(0xffA5A5A5))),
+                              : const Color(0xffA5A5A5))),
                   child: Text(
                     filterData[index],
                     style: mainFont.copyWith(
                         fontSize: 10.0.sp,
                         color: index == 0
                             ? Theme.of(context).primaryColor
-                            : Color(0xffA5A5A5)),
+                            : const Color(0xffA5A5A5)),
                   ),
                 );
               }))),
@@ -135,7 +133,7 @@ class _RentalDetailPageState extends State<RentalDetailPage> {
                       showModalBottomSheet(
                           context: context,
                           isScrollControlled: true,
-                          shape: RoundedRectangleBorder(
+                          shape: const RoundedRectangleBorder(
                               borderRadius: BorderRadius.only(
                                   topLeft: Radius.circular(10),
                                   topRight: Radius.circular(10))),
@@ -143,7 +141,7 @@ class _RentalDetailPageState extends State<RentalDetailPage> {
                           constraints: BoxConstraints(
                               minHeight: 70.0.h, maxHeight: 70.0.h),
                           builder: (context) {
-                            return RentalOptionDialog();
+                            return const RentalOptionDialog();
                           });
                     },
                     child: Container(
@@ -171,7 +169,7 @@ class _RentalDetailPageState extends State<RentalDetailPage> {
                               ),
                               Row(
                                 children: [
-                                  Container(
+                                  SizedBox(
                                       width: 5.0.w,
                                       height: 5.0.w,
                                       child: Image.asset(
@@ -187,7 +185,7 @@ class _RentalDetailPageState extends State<RentalDetailPage> {
                                   SizedBox(
                                     width: 3.0.w,
                                   ),
-                                  Container(
+                                  SizedBox(
                                       width: 5.0.w,
                                       height: 5.0.w,
                                       child: Image.asset(
@@ -231,7 +229,7 @@ class _RentalDetailPageState extends State<RentalDetailPage> {
                           SizedBox(
                             width: 3.0.w,
                           ),
-                          Container(
+                          SizedBox(
                             width: 20.0.w,
                             height: 20.0.w,
                             child: Image.asset(

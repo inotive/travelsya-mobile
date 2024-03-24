@@ -5,6 +5,8 @@ import 'package:travelsya/app/auth/cubits/profile_cubit.dart';
 import 'package:travelsya/app/auth/cubits/profile_state.dart';
 import 'package:travelsya/app/point/pages/point_history_section.dart';
 import 'package:travelsya/app/point/pages/redeem_section.dart';
+import 'package:travelsya/shared/cubits/point/point_cubit.dart';
+import 'package:travelsya/shared/cubits/point/point_state.dart';
 import 'package:travelsya/shared/helper/const_helper.dart';
 import 'package:travelsya/shared/helper/function_helper.dart';
 import 'package:travelsya/shared/styles/font_style.dart';
@@ -67,151 +69,224 @@ class _PointMainPageState extends State<PointMainPage> {
                         items: List.generate(1, (index) {
                           return Builder(
                             builder: (BuildContext context) {
-                              return BlocBuilder<ProfileCubit, ProfileState>(
-                                  builder: (context, stateProfile) {
-                                return Container(
-                                  margin: EdgeInsets.only(
-                                      left: index == 0 ? 0 : margin4),
-                                  child: Card(
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(10)),
-                                    child: Container(
-                                      padding: EdgeInsets.all(margin16),
-                                      child: SingleChildScrollView(
-                                        child: Column(
-                                          children: [
-                                            Row(
+                              return Container(
+                                margin: EdgeInsets.only(
+                                    left: index == 0 ? 0 : margin4),
+                                child: Card(
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10)),
+                                  child: Container(
+                                    padding: EdgeInsets.all(margin16),
+                                    child: SingleChildScrollView(
+                                      child: Column(
+                                        children: [
+                                          Row(
+                                            children: [
+                                              Expanded(
+                                                  child: state is ProfileLoading
+                                                      ? Center(
+                                                          child: SizedBox(
+                                                            width: 25,
+                                                            height: 25,
+                                                            child: CircularProgressIndicator(
+                                                                color: Theme.of(
+                                                                        context)
+                                                                    .primaryColor),
+                                                          ),
+                                                        )
+                                                      : state is ProfileFailed
+                                                          ? GestureDetector(
+                                                              onTap: () {
+                                                                BlocProvider.of<
+                                                                            ProfileCubit>(
+                                                                        context)
+                                                                    .fetchProfile(
+                                                                        context);
+                                                              },
+                                                              child: Center(
+                                                                  child: Text(
+                                                                'Coba Lagi',
+                                                                style: mainBody4.copyWith(
+                                                                    color: Theme.of(
+                                                                            context)
+                                                                        .primaryColor),
+                                                              )))
+                                                          : Column(
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .start,
+                                                              children: [
+                                                                Text(
+                                                                  state is ProfileLoaded
+                                                                      ? state
+                                                                          .data
+                                                                          .user
+                                                                          .name
+                                                                      : '',
+                                                                  style: mainBody5.copyWith(
+                                                                      color: Colors
+                                                                          .black87,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold),
+                                                                ),
+                                                                Text(
+                                                                  state is ProfileLoaded
+                                                                      ? 'Phone Number: ${state.data.user.phone ?? '-'}'
+                                                                      : '',
+                                                                  style: mainBody5
+                                                                      .copyWith(
+                                                                    color: Colors
+                                                                        .black54,
+                                                                  ),
+                                                                )
+                                                              ],
+                                                            )),
+                                              // SizedBox(
+                                              //   width: margin24/2,
+                                              // ),
+                                              // Container(
+                                              //   padding:
+                                              //       EdgeInsets.symmetric(
+                                              //           vertical: 1.0.w,
+                                              //           horizontal: margin24/2),
+                                              //   decoration: BoxDecoration(
+                                              //       borderRadius:
+                                              //           BorderRadius
+                                              //               .circular(8),
+                                              //       gradient: LinearGradient(
+                                              //           colors: [
+                                              //             Color(0xffEAA73F),
+                                              //             Color(0xffEEC585)
+                                              //           ],
+                                              //           begin: Alignment
+                                              //               .bottomLeft,
+                                              //           end: Alignment
+                                              //               .topRight)),
+                                              //   child: Text(
+                                              //     'bronze',
+                                              //     style: mainFont.copyWith(
+                                              //         fontSize: 9.0.sp,
+                                              //         fontWeight:
+                                              //             FontWeight.bold,
+                                              //         color: Colors.white),
+                                              //   ),
+                                              // )
+                                            ],
+                                          ),
+                                          Container(
+                                            margin: EdgeInsets.symmetric(
+                                                vertical: margin24 / 2),
+                                            width: double.infinity,
+                                            height: 1,
+                                            color: Colors.black12,
+                                          ),
+                                          IntrinsicHeight(
+                                            child: Row(
                                               children: [
+                                                SizedBox(
+                                                    width: 20,
+                                                    height: 20,
+                                                    child: Image.asset(
+                                                        ConstHelper.coinIcon)),
+                                                SizedBox(width: margin24 / 2),
                                                 Expanded(
                                                     child: Column(
                                                   crossAxisAlignment:
                                                       CrossAxisAlignment.start,
                                                   children: [
                                                     Text(
-                                                      stateProfile
-                                                              is ProfileLoaded
-                                                          ? stateProfile
-                                                              .data.user.name
-                                                          : '',
+                                                      'Points Anda',
                                                       style: mainBody5.copyWith(
-                                                          color: Colors.black87,
-                                                          fontWeight:
-                                                              FontWeight.bold),
+                                                          color:
+                                                              Colors.black87),
                                                     ),
-                                                    Text(
-                                                      stateProfile
-                                                              is ProfileLoaded
-                                                          ? 'Phone Number: ${stateProfile.data.user.phone ?? '-'}'
-                                                          : '',
-                                                      style: mainBody5.copyWith(
-                                                        color: Colors.black54,
-                                                      ),
-                                                    )
+                                                    BlocBuilder<PointCubit,
+                                                            PointState>(
+                                                        bloc: BlocProvider.of<
+                                                                PointCubit>(
+                                                            context),
+                                                        builder: (context,
+                                                            statePoint) {
+                                                          if (statePoint
+                                                              is PointLoaded) {
+                                                            return GestureDetector(
+                                                              onTap: () {
+                                                                BlocProvider.of<
+                                                                            ProfileCubit>(
+                                                                        context)
+                                                                    .fetchProfile(
+                                                                        context);
+                                                              },
+                                                              child: Text(
+                                                                moneyChanger(
+                                                                    statePoint
+                                                                        .data
+                                                                        .currentPoint,
+                                                                    customLabel:
+                                                                        ''),
+                                                                style: mainBody4.copyWith(
+                                                                    color: Colors
+                                                                        .black87,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold),
+                                                              ),
+                                                            );
+                                                          } else if (statePoint
+                                                              is PointLoading) {
+                                                            return SizedBox(
+                                                              width: 15,
+                                                              height: 15,
+                                                              child: CircularProgressIndicator(
+                                                                  color: Theme.of(
+                                                                          context)
+                                                                      .primaryColor),
+                                                            );
+                                                          } else {
+                                                            return GestureDetector(
+                                                              onTap: () {
+                                                                BlocProvider.of<
+                                                                            PointCubit>(
+                                                                        context)
+                                                                    .fetchPoint(
+                                                                        context);
+                                                              },
+                                                              child: Text(
+                                                                'Coba Lagi',
+                                                                style: mainBody4.copyWith(
+                                                                    color: Colors
+                                                                        .black87,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold),
+                                                              ),
+                                                            );
+                                                          }
+                                                        })
                                                   ],
                                                 )),
-                                                // SizedBox(
-                                                //   width: margin24/2,
-                                                // ),
-                                                // Container(
-                                                //   padding:
-                                                //       EdgeInsets.symmetric(
-                                                //           vertical: 1.0.w,
-                                                //           horizontal: margin24/2),
-                                                //   decoration: BoxDecoration(
-                                                //       borderRadius:
-                                                //           BorderRadius
-                                                //               .circular(8),
-                                                //       gradient: LinearGradient(
-                                                //           colors: [
-                                                //             Color(0xffEAA73F),
-                                                //             Color(0xffEEC585)
-                                                //           ],
-                                                //           begin: Alignment
-                                                //               .bottomLeft,
-                                                //           end: Alignment
-                                                //               .topRight)),
-                                                //   child: Text(
-                                                //     'bronze',
-                                                //     style: mainFont.copyWith(
-                                                //         fontSize: 9.0.sp,
-                                                //         fontWeight:
-                                                //             FontWeight.bold,
-                                                //         color: Colors.white),
-                                                //   ),
-                                                // )
+                                                SizedBox(
+                                                  width: margin8,
+                                                ),
+                                                Container(
+                                                  alignment:
+                                                      Alignment.bottomCenter,
+                                                  child: Text(
+                                                    '1 point senilai 1 IDR',
+                                                    style: mainBody5.copyWith(
+                                                        color: neutral80),
+                                                  ),
+                                                )
                                               ],
                                             ),
-                                            Container(
-                                              margin: EdgeInsets.symmetric(
-                                                  vertical: margin24 / 2),
-                                              width: double.infinity,
-                                              height: 1,
-                                              color: Colors.black12,
-                                            ),
-                                            IntrinsicHeight(
-                                              child: Row(
-                                                children: [
-                                                  SizedBox(
-                                                      width: 20,
-                                                      height: 20,
-                                                      child: Image.asset(
-                                                          ConstHelper
-                                                              .coinIcon)),
-                                                  SizedBox(width: margin24 / 2),
-                                                  Expanded(
-                                                      child: Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      Text(
-                                                        'Points Anda',
-                                                        style:
-                                                            mainBody5.copyWith(
-                                                                color: Colors
-                                                                    .black87),
-                                                      ),
-                                                      Text(
-                                                        state is ProfileLoaded
-                                                            ? moneyChanger(
-                                                                state.data.user
-                                                                    .point
-                                                                    .toDouble(),
-                                                                customLabel: '')
-                                                            : '',
-                                                        style:
-                                                            mainBody4.copyWith(
-                                                                color: Colors
-                                                                    .black87,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold),
-                                                      ),
-                                                    ],
-                                                  )),
-                                                  SizedBox(
-                                                    width: margin8,
-                                                  ),
-                                                  Container(
-                                                    alignment:
-                                                        Alignment.bottomCenter,
-                                                    child: Text(
-                                                      '1 point senilai 1 IDR',
-                                                      style: mainBody5.copyWith(
-                                                          color: neutral80),
-                                                    ),
-                                                  )
-                                                ],
-                                              ),
-                                            )
-                                          ],
-                                        ),
+                                          )
+                                        ],
                                       ),
                                     ),
                                   ),
-                                );
-                              });
+                                ),
+                              );
                             },
                           );
                         }).toList(),
@@ -279,12 +354,12 @@ class _PointMainPageState extends State<PointMainPage> {
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(20),
                                     color: index == selectedIndex
-                                        ? Color(0xffFFEEF1)
+                                        ? const Color(0xffFFEEF1)
                                         : Colors.transparent,
                                     border: Border.all(
                                         color: index == selectedIndex
                                             ? Theme.of(context).primaryColor
-                                            : Color(0xffA5A5A5))),
+                                            : const Color(0xffA5A5A5))),
                                 child: Text(
                                   filterData[index],
                                   style: mainBody4.copyWith(

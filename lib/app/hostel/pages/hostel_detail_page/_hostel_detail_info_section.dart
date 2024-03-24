@@ -116,7 +116,7 @@ class _HostelDetailInfoSection extends StatelessWidget {
                   Text(
                     ' (${data.ratingCount})',
                     style: mainFont.copyWith(
-                        fontSize: 11.0.sp, color: Color(0xffa5a5a5)),
+                        fontSize: 11.0.sp, color: const Color(0xffa5a5a5)),
                   ),
                   SizedBox(
                     width: 1.0.w,
@@ -139,7 +139,7 @@ class _HostelDetailInfoSection extends StatelessWidget {
         Container(
           width: double.infinity,
           height: 2.0.w,
-          color: Color(0xfff4f4f4),
+          color: const Color(0xfff4f4f4),
         ),
         // Container(
         //   width: 100.0.w,

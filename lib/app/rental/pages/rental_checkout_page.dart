@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import 'package:travelsya/shared/styles/font_style.dart';
 import 'package:travelsya/shared/styles/theme_style.dart';
-import 'package:travelsya/shared/function/show_snackbar.dart';
 import 'package:travelsya/shared/widgets/form_helper.dart';
 
 class RentalCheckoutPage extends StatelessWidget {
@@ -24,7 +23,7 @@ class RentalCheckoutPage extends StatelessWidget {
                     onTap: () {
                       Navigator.pop(context);
                     },
-                    child: Icon(
+                    child: const Icon(
                       Icons.arrow_back,
                       color: Colors.white,
                     ),
@@ -128,7 +127,7 @@ class RentalCheckoutPage extends StatelessWidget {
                                         ),
                                         Row(
                                           children: [
-                                            Container(
+                                            SizedBox(
                                                 width: 5.0.w,
                                                 height: 5.0.w,
                                                 child: Image.asset(
@@ -145,7 +144,7 @@ class RentalCheckoutPage extends StatelessWidget {
                                             SizedBox(
                                               width: 3.0.w,
                                             ),
-                                            Container(
+                                            SizedBox(
                                                 width: 5.0.w,
                                                 height: 5.0.w,
                                                 child: Image.asset(
@@ -187,7 +186,7 @@ class RentalCheckoutPage extends StatelessWidget {
                                     SizedBox(
                                       width: 3.0.w,
                                     ),
-                                    Container(
+                                    SizedBox(
                                         width: 20.0.w,
                                         height: 20.0.w,
                                         child: Image.asset(
@@ -551,7 +550,7 @@ class RentalCheckoutPage extends StatelessWidget {
                                 vertical: 2.0.w, horizontal: 3.0.w),
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
-                                color: Color(0xffffeef1)),
+                                color: const Color(0xffffeef1)),
                             child: Text(
                               'Topup',
                               style: mainFont.copyWith(

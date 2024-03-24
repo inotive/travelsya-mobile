@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import 'package:travelsya/shared/styles/font_style.dart';
 import 'package:travelsya/shared/styles/theme_style.dart';
-import 'package:travelsya/shared/function/show_snackbar.dart';
 import 'package:travelsya/shared/widgets/form_helper.dart';
 
 class PlaneCheckoutPage extends StatelessWidget {
@@ -24,7 +23,7 @@ class PlaneCheckoutPage extends StatelessWidget {
                     onTap: () {
                       Navigator.pop(context);
                     },
-                    child: Icon(
+                    child: const Icon(
                       Icons.arrow_back,
                       color: Colors.white,
                     ),
@@ -89,7 +88,7 @@ class PlaneCheckoutPage extends StatelessWidget {
                             color: neutral10),
                         child: Row(
                           children: [
-                            Container(
+                            SizedBox(
                                 width: 4.0.w,
                                 height: 4.0.w,
                                 child: Image.asset('assets/icons/users.png')),
@@ -110,7 +109,7 @@ class PlaneCheckoutPage extends StatelessWidget {
                 ),
                 Container(
                   padding: EdgeInsets.all(5.0.w),
-                  color: Color(0xffFFF6F6),
+                  color: const Color(0xffFFF6F6),
                   child: Column(
                     children: List.generate(2, (index) {
                       return Container(
@@ -417,7 +416,7 @@ class PlaneCheckoutPage extends StatelessWidget {
                       ),
                       Row(
                         children: [
-                          Container(
+                          SizedBox(
                               width: 6.0.w,
                               height: 6.0.w,
                               child: Image.asset('assets/icons/users.png')),

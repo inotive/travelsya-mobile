@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import 'package:travelsya/app/hostel/models/hostel_detail_model.dart';
-import 'package:travelsya/app/hostel/models/hostel_model.dart';
 import 'package:travelsya/shared/styles/font_style.dart';
-import 'package:travelsya/shared/styles/theme_style.dart';
 
 class HostelDetailInfoSection extends StatelessWidget {
   final HostelDetailModel data;
@@ -50,13 +48,14 @@ class HostelDetailInfoSection extends StatelessWidget {
                           width: double.infinity,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(8),
-                              color: Color(0xfff4f4f4)),
+                              color: const Color(0xfff4f4f4)),
                           child: Column(
                             children: [
                               Text(
                                 'Check In',
                                 style: mainFont.copyWith(
-                                    fontSize: 8.0.sp, color: Color(0xffa5a5a5)),
+                                    fontSize: 8.0.sp,
+                                    color: const Color(0xffa5a5a5)),
                               ),
                               Text(
                                 data.checkIn,
@@ -73,7 +72,7 @@ class HostelDetailInfoSection extends StatelessWidget {
                         margin: EdgeInsets.symmetric(horizontal: 3.0.w),
                         height: double.infinity,
                         width: 1,
-                        color: Color(0xffa5a5a5),
+                        color: const Color(0xffa5a5a5),
                       ),
                       Flexible(
                         flex: 1,
@@ -82,13 +81,14 @@ class HostelDetailInfoSection extends StatelessWidget {
                           width: double.infinity,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(8),
-                              color: Color(0xfff4f4f4)),
+                              color: const Color(0xfff4f4f4)),
                           child: Column(
                             children: [
                               Text(
                                 'Check Out',
                                 style: mainFont.copyWith(
-                                    fontSize: 8.0.sp, color: Color(0xffa5a5a5)),
+                                    fontSize: 8.0.sp,
+                                    color: const Color(0xffa5a5a5)),
                               ),
                               Text(
                                 data.checkOut,

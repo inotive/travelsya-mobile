@@ -3,6 +3,7 @@ import 'package:travelsya/app/payment/models/finance_model.dart';
 import 'package:travelsya/app/ppob/models/ppob_model.dart';
 import 'package:travelsya/shared/api/api_connection.dart';
 import 'package:travelsya/shared/api/api_return_value.dart';
+// ignore: unused_import
 import 'package:http/http.dart' as http;
 
 class FinanceRepository {
@@ -42,7 +43,9 @@ class FinanceRepository {
         datamessages.forEach((key, value) {
           messages = value[0];
         });
-      } catch (e) {}
+      } catch (e) {
+        messages = null;
+      }
       returnValue = ApiReturnValue(data: messages, status: response.status);
     }
 
@@ -86,7 +89,9 @@ class FinanceRepository {
         datamessages.forEach((key, value) {
           messages = value[0];
         });
-      } catch (e) {}
+      } catch (e) {
+        messages = null;
+      }
       returnValue = ApiReturnValue(data: messages, status: response.status);
     }
 
@@ -129,7 +134,9 @@ class FinanceRepository {
         datamessages.forEach((key, value) {
           messages = value[0];
         });
-      } catch (e) {}
+      } catch (e) {
+        messages = null;
+      }
       returnValue = ApiReturnValue(data: messages, status: response.status);
     }
 
@@ -159,7 +166,9 @@ class FinanceRepository {
       String? messages;
       try {
         messages = response.data['meta']['message'];
-      } catch (e) {}
+      } catch (e) {
+        messages = null;
+      }
       returnValue = ApiReturnValue(data: messages, status: response.status);
     }
 
@@ -189,7 +198,9 @@ class FinanceRepository {
       String? messages;
       try {
         messages = response.data['meta']['message'];
-      } catch (e) {}
+      } catch (e) {
+        messages = null;
+      }
       returnValue = ApiReturnValue(data: messages, status: response.status);
     }
 

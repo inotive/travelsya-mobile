@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import 'package:travelsya/app/hostel/models/hostel_detail_model.dart';
 import 'package:travelsya/app/hostel/models/hostel_model.dart';
-import 'package:travelsya/app/hotel/pages/hotel_checkout/hotel_checkout_page.dart';
 import 'package:travelsya/shared/api/api_connection.dart';
-import 'package:travelsya/shared/helper/const_helper.dart';
 import 'package:travelsya/shared/helper/function_helper.dart';
 import 'package:travelsya/shared/styles/font_style.dart';
 import 'package:travelsya/shared/styles/theme_style.dart';
@@ -73,8 +71,8 @@ class _HotelRoomTypeSectionState extends State<HotelRoomTypeSection> {
               margin: EdgeInsets.only(bottom: 3.0.w, left: 5.0.w, right: 5.0.w),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
-                  border:
-                      Border.all(color: Color(0xffa5a5a5).withOpacity(0.3))),
+                  border: Border.all(
+                      color: const Color(0xffa5a5a5).withOpacity(0.3))),
               child: Column(
                 children: [
                   AspectRatio(
@@ -103,7 +101,7 @@ class _HotelRoomTypeSectionState extends State<HotelRoomTypeSection> {
                               style: mainFont.copyWith(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 11.0.sp,
-                                  color: Color(0xff333333)),
+                                  color: const Color(0xff333333)),
                             ),
                             Text(
                               'Tidak bisa refund dan reschedule',
@@ -125,7 +123,7 @@ class _HotelRoomTypeSectionState extends State<HotelRoomTypeSection> {
                                   margin: EdgeInsets.only(bottom: 1.0.w),
                                   child: Row(
                                     children: [
-                                      Container(
+                                      SizedBox(
                                         width: 6.0.w,
                                         height: 6.0.w,
                                         child: Image.asset(
@@ -163,7 +161,7 @@ class _HotelRoomTypeSectionState extends State<HotelRoomTypeSection> {
                                                   fontSize: 10.0.sp,
                                                   color: neutral30),
                                               children: [
-                                            TextSpan(text: 'mulai '),
+                                            const TextSpan(text: 'mulai '),
                                             // TextSpan(
                                             //     text: '1,750,000',
                                             //     style: TextStyle(
@@ -228,7 +226,7 @@ class _HotelRoomTypeSectionState extends State<HotelRoomTypeSection> {
         Container(
           width: double.infinity,
           height: 2.0.w,
-          color: Color(0xfff4f4f4),
+          color: const Color(0xfff4f4f4),
         ),
       ],
     );

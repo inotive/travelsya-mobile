@@ -85,8 +85,8 @@ class RekreasiPackageSection extends StatelessWidget {
                                             fontSize: 10.0.sp,
                                             color: neutral30),
                                         children: [
-                                      TextSpan(text: 'mulai '),
-                                      TextSpan(
+                                      const TextSpan(text: 'mulai '),
+                                      const TextSpan(
                                           text: '1,750,000',
                                           style: TextStyle(
                                               decoration:
@@ -118,7 +118,8 @@ class RekreasiPackageSection extends StatelessWidget {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (_) => RekreasiCheckokutPage()));
+                                      builder: (_) =>
+                                          const RekreasiCheckokutPage()));
                             },
                             child: Container(
                               padding: EdgeInsets.symmetric(
@@ -149,7 +150,7 @@ class RekreasiPackageSection extends StatelessWidget {
         Container(
           width: double.infinity,
           height: 2.0.w,
-          color: Color(0xfff4f4f4),
+          color: const Color(0xfff4f4f4),
         ),
       ],
     );

@@ -10,7 +10,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travelsya/app/auth/cubits/auth_cubit.dart';
 import 'package:travelsya/app/auth/cubits/auth_state.dart';
 import 'package:travelsya/shared/function/show_snackbar.dart';
-import 'package:travelsya/shared/widgets/form_helper.dart';
+import 'package:travelsya/shared/helper/function_helper.dart';
 
 class ApiReturnValue<T> {
   T data;
@@ -38,19 +38,19 @@ class ApiReturnValue<T> {
 
     headersMap['Content-Type'] = 'application/json';
 
-    print(" PUT Request to:");
-    print(url);
-    print('Header : $headersMap');
-    print('Body : $jsonMap ');
+    devPint(" PUT Request to:");
+    devPint(url);
+    devPint('Header : $headersMap');
+    devPint('Body : $jsonMap ');
 
-    print('----------------------------------------------------');
+    devPint('----------------------------------------------------');
 
     // try {
     final response = await http.put(Uri.parse(url),
         body: json.encode(jsonMap), headers: headersMap);
     var data = json.decode(response.body);
-    print(response.statusCode);
-    print(data);
+    devPint(response.statusCode);
+    devPint(data);
 
     if (response.statusCode != 200) {
       if (response.statusCode == 401) {
@@ -105,19 +105,19 @@ class ApiReturnValue<T> {
       }
     }
 
-    print("${request.method} Request to:");
-    print(request.url);
-    print('Header : ${request.headers}');
-    print('Body : ${request.fields} ');
+    devPint("${request.method} Request to:");
+    devPint(request.url);
+    devPint('Header : ${request.headers}');
+    devPint('Body : ${request.fields} ');
 
-    print('----------------------------------------------------');
+    devPint('----------------------------------------------------');
 
     try {
       final streamSend = await request.send();
       final response = await http.Response.fromStream(streamSend);
       var data = json.decode(response.body);
-      print(response.statusCode);
-      print(data);
+      devPint(response.statusCode);
+      devPint(data);
 
       if (response.statusCode != 200) {
         if (response.statusCode == 401) {
@@ -145,7 +145,7 @@ class ApiReturnValue<T> {
       returnValue =
           ApiReturnValue(data: null, status: RequestStatus.internetIssue);
     } catch (e) {
-      print(e);
+      devPint(e);
       returnValue =
           ApiReturnValue(status: RequestStatus.serverError, data: null);
     }
@@ -170,19 +170,19 @@ class ApiReturnValue<T> {
       }
     }
 
-    print(request.method + " Request to:");
-    print(request.url);
-    print('Header : ${request.headers}');
-    print('Body : ${request.fields} ');
+    devPint("${request.method} Request to:");
+    devPint(request.url);
+    devPint('Header : ${request.headers}');
+    devPint('Body : ${request.fields} ');
 
-    print('----------------------------------------------------');
+    devPint('----------------------------------------------------');
 
     try {
       final streamSend = await request.send();
       final response = await http.Response.fromStream(streamSend);
       var data = json.decode(response.body);
-      print(response.statusCode);
-      print(data);
+      devPint(response.statusCode);
+      devPint(data);
 
       if (response.statusCode != 200) {
         if (response.statusCode == 401) {
@@ -214,7 +214,7 @@ class ApiReturnValue<T> {
       returnValue =
           ApiReturnValue(data: null, status: RequestStatus.internetIssue);
     } catch (e) {
-      print(e);
+      devPint(e);
       returnValue =
           ApiReturnValue(status: RequestStatus.serverError, data: null);
     }
@@ -249,19 +249,19 @@ class ApiReturnValue<T> {
       }
     }
 
-    print("POST Request to:");
-    print(url);
-    print('Header : $headerMap');
+    devPint("POST Request to:");
+    devPint(url);
+    devPint('Header : $headerMap');
     log('Body : $dataBody ');
 
-    print('----------------------------------------------------');
+    devPint('----------------------------------------------------');
 
     try {
       final response = await http.post(Uri.parse(url),
           body: json.encode(dataBody), headers: headerMap);
       var data = json.decode(response.body);
-      print(response.statusCode);
-      print(data);
+      devPint(response.statusCode);
+      devPint(data);
 
       if (response.statusCode != 200) {
         if (response.statusCode == 401 &&
@@ -291,7 +291,7 @@ class ApiReturnValue<T> {
       returnValue =
           ApiReturnValue(data: null, status: RequestStatus.internetIssue);
     } catch (e) {
-      print(e);
+      devPint(e);
       returnValue =
           ApiReturnValue(status: RequestStatus.serverError, data: null);
     }
@@ -318,17 +318,17 @@ class ApiReturnValue<T> {
       }
     }
 
-    print("DELETE Request to:");
-    print(url);
-    print('Header : $headerMap');
+    devPint("DELETE Request to:");
+    devPint(url);
+    devPint('Header : $headerMap');
 
-    print('----------------------------------------------------');
+    devPint('----------------------------------------------------');
 
     try {
       final response = await http.delete(Uri.parse(url), headers: headerMap);
       var data = json.decode(response.body);
-      print(response.statusCode);
-      print(data);
+      devPint(response.statusCode);
+      devPint(data);
 
       if (response.statusCode != 200) {
         if (response.statusCode == 401) {
@@ -356,7 +356,7 @@ class ApiReturnValue<T> {
       returnValue =
           ApiReturnValue(data: null, status: RequestStatus.internetIssue);
     } catch (e) {
-      print(e);
+      devPint(e);
       returnValue =
           ApiReturnValue(status: RequestStatus.serverError, data: null);
     }

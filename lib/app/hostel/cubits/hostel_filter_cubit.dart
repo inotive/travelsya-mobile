@@ -1,17 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
-import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 import 'package:travelsya/app/hostel/cubits/hostel_cubit.dart';
 import 'package:travelsya/app/hostel/cubits/hostel_state.dart';
-import 'package:travelsya/app/hostel/widgets/count_picker_widget.dart';
 import 'package:travelsya/app/hostel/widgets/duration_picker_widget.dart';
 import 'package:travelsya/app/hostel/widgets/hostel_city_picker.dart';
-import 'package:travelsya/app/hotel/cubits/hotel_cubit.dart';
-import 'package:travelsya/app/hotel/cubits/hotel_state.dart';
-import 'package:travelsya/app/hotel/widgets/hotel_city_picker.dart';
 import 'package:travelsya/shared/widgets/date_picker_single.dart';
-import 'package:travelsya/shared/widgets/multi_date_picker.dart';
 import 'package:travelsya/shared/widgets/yes_or_no_dialog.dart';
 
 class HostelFilterCubit extends Cubit<HostelState> {

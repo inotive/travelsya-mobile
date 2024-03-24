@@ -8,20 +8,28 @@ import 'package:travelsya/shared/cubits/fee_admin/fee_admin_model.dart';
 import 'package:travelsya/shared/cubits/fee_admin/fee_admin_state.dart';
 import 'package:travelsya/shared/styles/font_style.dart';
 
+devPint(Object e) {
+  // ignore: avoid_print
+  print(e);
+}
+
 Widget getTransactionLabel(String data) {
   return Text(
-      data.toLowerCase() == 'pending' || data.toLowerCase() == 'process'
+      data.toLowerCase() == 'pending'
           ? 'Menunggu Pembayaran'
-          : data.toLowerCase() == 'paid'
-              ? 'Lunas'
-              : data.toLowerCase() == 'expired'
-                  ? 'Expired'
-                  : data,
+          : data.toLowerCase() == 'process'
+              ? 'Diproses'
+              : data.toLowerCase() == 'paid'
+                  ? 'Lunas'
+                  : data.toLowerCase() == 'expired'
+                      ? 'Expired'
+                      : data,
       style: mainFont.copyWith(
         fontSize: 12,
-        color:
-            data.toLowerCase() == 'pending' || data.toLowerCase() == 'process'
-                ? Colors.orange
+        color: data.toLowerCase() == 'pending'
+            ? Colors.orange
+            : data.toLowerCase() == 'process'
+                ? Colors.blue
                 : data.toLowerCase() == 'paid'
                     ? Colors.green
                     : Colors.red,

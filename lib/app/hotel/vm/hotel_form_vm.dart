@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:travelsya/app/auth/cubits/profile_cubit.dart';
-import 'package:travelsya/app/auth/cubits/profile_state.dart';
 import 'package:travelsya/app/hotel/cubits/hotel_cubit.dart';
 import 'package:travelsya/shared/cubits/fee_admin/fee_admin_cubit.dart';
 import 'package:travelsya/shared/cubits/fee_admin/fee_admin_model.dart';
 import 'package:travelsya/shared/cubits/fee_admin/fee_admin_state.dart';
+import 'package:travelsya/shared/cubits/point/point_cubit.dart';
+import 'package:travelsya/shared/cubits/point/point_state.dart';
 import 'package:travelsya/shared/function/show_loading.dart';
 import 'package:intl/intl.dart';
 import 'package:stacked/stacked.dart';
@@ -21,7 +21,6 @@ import 'package:travelsya/shared/cubits/main_index_cubit.dart';
 import 'package:travelsya/shared/api/api_return_value.dart';
 import 'package:travelsya/shared/helper/function_helper.dart';
 import 'package:travelsya/shared/function/show_snackbar.dart';
-import 'package:travelsya/shared/widgets/form_helper.dart';
 
 class HotelFormVM extends BaseViewModel {
   int identityType = 0;
@@ -34,7 +33,7 @@ class HotelFormVM extends BaseViewModel {
   String uniqueCode = randomNumber();
 
   bool usePoint = false;
-  int pointUsed = 0;
+  double pointUsed = 0;
 
   FeeAdmin? feeAdminData(List<FeeAdmin> data) {
     for (var i = 0; i < data.length; i++) {
@@ -70,11 +69,11 @@ class HotelFormVM extends BaseViewModel {
 
   onChangePointUsed(BuildContext context) {
     if (usePoint == false) {
-      ProfileState state = BlocProvider.of<ProfileCubit>(context).state;
-      if (state is ProfileLoaded) {
-        if (state.data.user.point > 0) {
+      PointState state = BlocProvider.of<PointCubit>(context).state;
+      if (state is PointLoaded) {
+        if (state.data.pointAvailable > 0) {
           usePoint = !usePoint;
-          pointUsed = state.data.user.point;
+          pointUsed = state.data.pointAvailable;
           notifyListeners();
         }
       }
@@ -94,6 +93,7 @@ class HotelFormVM extends BaseViewModel {
 
   onInit(BuildContext context, {required String roomId}) {
     AuthState stateUser = BlocProvider.of<AuthCubit>(context).state;
+    BlocProvider.of<PointCubit>(context).fetchPoint(context);
     if (stateUser is AuthLoaded) {
       nameController.text = stateUser.data.name;
       phoneController.text = stateUser.data.phone ?? '';
@@ -171,7 +171,7 @@ class HotelFormVM extends BaseViewModel {
 
           Navigator.pushAndRemoveUntil(
               context,
-              MaterialPageRoute(builder: (_) => HomeMainPage()),
+              MaterialPageRoute(builder: (_) => const HomeMainPage()),
               (route) => false);
 
           Navigator.push(

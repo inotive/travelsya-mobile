@@ -13,7 +13,7 @@ class PhotoViewListPage extends StatefulWidget {
 class _PhotoViewListPageState extends State<PhotoViewListPage> {
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
         child: PhotoViewGallery.builder(
       scrollPhysics: const BouncingScrollPhysics(),
       builder: (BuildContext context, int index) {

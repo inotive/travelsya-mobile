@@ -2,15 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:travelsya/app/ppob/models/ppob_general_model.dart';
 import 'package:travelsya/app/ppob/pages/pajak/pajak_provider_picker.dart';
-import 'package:travelsya/app/ppob/pages/pdam/pdam_provider_picker.dart';
-import 'package:travelsya/app/ppob/pages/tv_berbayar/tv_berbayar_provider_picker.dart';
+import 'package:travelsya/shared/cubits/point/point_cubit.dart';
 import 'package:travelsya/shared/function/pay_to_inquiry_function.dart';
 import 'package:travelsya/shared/function/show_loading.dart';
 import 'package:stacked/stacked.dart';
 import 'package:travelsya/app/payment/pages/payment_webview_page.dart';
 import 'package:travelsya/app/payment/repository/finance_repository.dart';
 import 'package:travelsya/app/ppob/cubits/ppob_cubit.dart';
-import 'package:travelsya/app/ppob/cubits/ppob_state.dart';
 import 'package:travelsya/app/ppob/models/ppob_model.dart';
 import 'package:travelsya/app/ppob/repository/ppob_repository.dart';
 import 'package:travelsya/shared/cubits/main_index_cubit.dart';
@@ -23,6 +21,8 @@ class PajakVM extends BaseViewModel {
   PPOBModel? selectedProvider;
   TextEditingController controller = TextEditingController();
   String uniqueCode = randomNumber();
+
+  PPOBCubit ppobCubit = PPOBCubit();
 
   doPayment(BuildContext context,
       {required bool usePoint, required String nominal}) {
@@ -64,6 +64,7 @@ class PajakVM extends BaseViewModel {
           .then((value) async {
         Navigator.pop(context);
         if (value.status == RequestStatus.successRequest) {
+          BlocProvider.of<PointCubit>(context).fetchPoint(context);
           bool? result = await showModalBottomSheet(
               context: context,
               isScrollControlled: true,
@@ -109,7 +110,9 @@ class PajakVM extends BaseViewModel {
             BoxConstraints(maxHeight: MediaQuery.of(context).size.height * 0.9),
         backgroundColor: Colors.white,
         builder: (context) {
-          return const PajakProviderPicker();
+          return PajakProviderPicker(
+            pajakCubit: ppobCubit,
+          );
         });
 
     if (result != null) {
