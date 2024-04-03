@@ -2,6 +2,8 @@ String baseUrl = 'https://servicevps.travelsya.com/';
 String basePathUserUrl = 'https://travelsya.com/storage/public/users/';
 String baseAPIUrl = '${baseUrl}api';
 
+String adsUrl = '$baseAPIUrl/ads';
+
 String loginUrl = '$baseAPIUrl/login';
 String registerUrl = '$baseAPIUrl/register';
 String updateProfileUrl = '$baseAPIUrl/user/update';

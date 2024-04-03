@@ -22,7 +22,6 @@ class PulsaVM extends BaseViewModel {
   PPOBModel? selectedData;
   TextEditingController controller = TextEditingController();
   String? selectedProvider;
-  bool usePoint = false;
   double pointUsed = 0;
   String type = 'prabayar';
 
@@ -35,23 +34,6 @@ class PulsaVM extends BaseViewModel {
   changeType(String value) {
     type = value;
     notifyListeners();
-  }
-
-  onChangePointUsed(BuildContext context) {
-    if (usePoint == false) {
-      ProfileState state = BlocProvider.of<ProfileCubit>(context).state;
-      if (state is ProfileLoaded) {
-        if (state.data.user.point > 0) {
-          usePoint = !usePoint;
-          pointUsed = state.data.user.point;
-          notifyListeners();
-        }
-      }
-    } else {
-      usePoint = !usePoint;
-      pointUsed = 0;
-      notifyListeners();
-    }
   }
 
   var telkomsel = [
@@ -207,7 +189,7 @@ class PulsaVM extends BaseViewModel {
         showLoading(context);
         FinanceRepository.topUp(context,
                 uniqueCode: uniqueCode,
-                isPointUsed: usePoint,
+                isPointUsed: result[1],
                 phone: controller.text,
                 data: selectedData!)
             .then((value) async {

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stacked/stacked.dart';
 import 'package:travelsya/app/auth/cubits/profile_cubit.dart';
+import 'package:travelsya/app/homepage/cubits/ads_cubit.dart';
 import 'package:travelsya/app/hostel/pages/hostel_search_page/hostel_search_page.dart';
 import 'package:travelsya/app/hotel/pages/hotel_search/hotel_search_page.dart';
 import 'package:travelsya/app/ppob/cubits/ppob_cubit.dart';
@@ -21,6 +22,8 @@ import 'package:travelsya/shared/function/show_snackbar.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class BerandaVM extends BaseViewModel {
+  AdsCubit adsCubit = AdsCubit();
+
   List<String> listIklan = [
     'assets/ads/iklan_1.png',
     'assets/ads/iklan_2.png',
@@ -64,6 +67,7 @@ class BerandaVM extends BaseViewModel {
     BlocProvider.of<PPOBCubit>(context).fetchPPOBData(context);
     BlocProvider.of<FeeAdminCubit>(context).fetchFeeAdmin(context);
     BlocProvider.of<ProfileCubit>(context).fetchProfile(context);
+    adsCubit.fetchAdsData(context);
   }
 
   onCSTap(BuildContext context) async {

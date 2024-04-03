@@ -42,16 +42,34 @@ class HotelDetailModel {
     });
 
     //facilities
-    for (var i = 0; i < jsonMap['hotel_facilities'].length; i++) {
+
+    List<dynamic> dataRawFacilities = [];
+
+    try {
+      dataRawFacilities = jsonMap['hotel_facilities'];
+    } catch (e) {
+      try {
+        Map<String, dynamic> dataRawFacilitiesMap = jsonMap['hotel_facilities'];
+        dataRawFacilities =
+            List.generate(dataRawFacilitiesMap.keys.toList().length, (index) {
+          return dataRawFacilitiesMap[
+              dataRawFacilitiesMap.keys.toList()[index]];
+        });
+      } catch (e) {
+        dataRawFacilities = [];
+      }
+    }
+
+    for (var i = 0; i < dataRawFacilities.length; i++) {
       bool isDuplicate = false;
       for (var j = 0; j < facilities.length; j++) {
-        if (facilities[j].name == jsonMap['hotel_facilities'][i]['name']) {
+        if (facilities[j].name == dataRawFacilities[i]['name']) {
           isDuplicate = true;
         }
       }
 
       if (!isDuplicate) {
-        facilities.add(HotelFacilites.fromJson(jsonMap['hotel_facilities'][i]));
+        facilities.add(HotelFacilites.fromJson(dataRawFacilities[i]));
       }
     }
 

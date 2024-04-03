@@ -27,25 +27,7 @@ class EwalletVM extends BaseViewModel {
   String uniqueCode = randomNumber();
   TextEditingController controller = TextEditingController();
 
-  bool usePoint = false;
   double pointUsed = 0;
-
-  onChangePointUsed(BuildContext context) {
-    if (usePoint == false) {
-      ProfileState state = BlocProvider.of<ProfileCubit>(context).state;
-      if (state is ProfileLoaded) {
-        if (state.data.user.point > 0) {
-          usePoint = !usePoint;
-          pointUsed = state.data.user.point;
-          notifyListeners();
-        }
-      }
-    } else {
-      usePoint = !usePoint;
-      pointUsed = 0;
-      notifyListeners();
-    }
-  }
 
   onInit(String preloadNumber) {
     controller.text = preloadNumber;
@@ -115,7 +97,7 @@ class EwalletVM extends BaseViewModel {
           if (result != null && context.mounted) {
             PPOBInquiryGeneralModel dataResult = value.data;
             doPayment(context,
-                usePoint: false,
+                usePoint: result,
                 nominal: dataResult.tagihan.toStringAsFixed(0));
           }
         } else {
