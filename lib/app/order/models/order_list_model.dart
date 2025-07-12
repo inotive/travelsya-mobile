@@ -39,6 +39,14 @@ class OrderList {
     status = jsonMap['status'];
     total = double.parse(jsonMap['total'].toString());
     createdAt = jsonMap['created_at'];
-    detailTransaction = jsonMap['detail_transactions'];
+    try {
+      detailTransaction = jsonMap['detail_transactions'];
+    } catch (e) {
+      try {
+        detailTransaction = jsonMap['detail_transactions'][0];
+      } catch (e) {
+        detailTransaction = null;
+      }
+    }
   }
 }

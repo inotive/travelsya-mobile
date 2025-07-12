@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
 import 'package:travelsya/shared/styles/font_style.dart';
+import 'package:travelsya/shared/styles/size_styles.dart';
 import 'package:travelsya/shared/widgets/form_helper.dart';
+import 'package:travelsya/shared/widgets/form_helper/elevated_button_widget.dart';
 
 class HostelDurationPickerWidget extends StatefulWidget {
   final int currentData;
@@ -30,20 +31,20 @@ class _HostelDurationPickerWidgetState
       backgroundColor: Colors.transparent,
       body: Center(
         child: Container(
-          width: 70.0.w,
-          padding: EdgeInsets.symmetric(horizontal: 5.0.w),
+          width: MediaQuery.of(context).size.width * 0.7,
+          padding: EdgeInsets.symmetric(horizontal: margin16),
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10), color: Colors.white),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               Container(
-                padding:
-                    EdgeInsets.symmetric(horizontal: 5.0.w, vertical: 3.0.w),
+                padding: EdgeInsets.symmetric(
+                    horizontal: margin16, vertical: margin24 / 2),
                 child: Text(
                   'Durasi Sewa',
                   style: mainFont.copyWith(
-                      fontSize: 11.0.sp,
+                      fontSize: 13,
                       color: Colors.black87,
                       fontWeight: FontWeight.bold),
                 ),
@@ -54,7 +55,7 @@ class _HostelDurationPickerWidgetState
                 color: Colors.black12,
               ),
               SizedBox(
-                height: 5.0.w,
+                height: margin16,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -68,8 +69,8 @@ class _HostelDurationPickerWidgetState
                       }
                     },
                     child: Container(
-                      width: 10.0.w,
-                      height: 10.0.w,
+                      width: 40,
+                      height: 40,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8),
                           color: data == 1
@@ -83,11 +84,11 @@ class _HostelDurationPickerWidgetState
                     ),
                   ),
                   Container(
-                      margin: EdgeInsets.symmetric(horizontal: 5.0.w),
+                      margin: EdgeInsets.symmetric(horizontal: margin16),
                       child: Text(
                         data.toString(),
                         style: mainFont.copyWith(
-                            fontSize: 13.0.sp, color: Colors.black87),
+                            fontSize: 15, color: Colors.black87),
                       )),
                   GestureDetector(
                       onTap: () {
@@ -96,8 +97,8 @@ class _HostelDurationPickerWidgetState
                         });
                       },
                       child: Container(
-                        width: 10.0.w,
-                        height: 10.0.w,
+                        width: 40,
+                        height: 40,
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(8),
                             color: Theme.of(context).primaryColor),
@@ -110,7 +111,7 @@ class _HostelDurationPickerWidgetState
                 ],
               ),
               SizedBox(
-                height: 5.0.w,
+                height: margin16,
               ),
               Row(
                 children: [
@@ -121,19 +122,21 @@ class _HostelDurationPickerWidgetState
                     }, title: 'Batal'),
                   ),
                   SizedBox(
-                    width: 3.0.w,
+                    width: margin24 / 2,
                   ),
                   Flexible(
                     flex: 1,
-                    child: FormHelper.elevatedButtonBasic(context,
-                        enabled: true, onTap: () {
-                      Navigator.pop(context, data);
-                    }, title: 'Simpan'),
+                    child: ElevatedButtonWidget(
+                        enabled: true,
+                        onTap: () {
+                          Navigator.pop(context, data);
+                        },
+                        title: 'Simpan'),
                   )
                 ],
               ),
               SizedBox(
-                height: 5.0.w,
+                height: margin16,
               )
             ],
           ),

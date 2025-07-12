@@ -9,7 +9,7 @@ import 'package:travelsya/shared/styles/size_styles.dart';
 import 'package:travelsya/shared/styles/theme_style.dart';
 
 class RedeemSection extends StatefulWidget {
-  const RedeemSection({Key? key}) : super(key: key);
+  const RedeemSection({super.key});
 
   @override
   State<RedeemSection> createState() => _RedeemSectionState();
@@ -43,6 +43,7 @@ class _RedeemSectionState extends State<RedeemSection> {
         BlocProvider.of<PointCubit>(context).fetchPoint(context);
       },
       child: ListView(
+        padding: EdgeInsets.zero,
         children: [
           Container(
             padding: EdgeInsets.symmetric(horizontal: margin16),

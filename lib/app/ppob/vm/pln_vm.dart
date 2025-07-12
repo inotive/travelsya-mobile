@@ -11,7 +11,6 @@ import 'package:travelsya/app/payment/repository/finance_repository.dart';
 import 'package:travelsya/app/ppob/cubits/ppob_cubit.dart';
 import 'package:travelsya/app/ppob/cubits/ppob_state.dart';
 import 'package:travelsya/app/ppob/models/ppob_model.dart';
-import 'package:sizer/sizer.dart';
 import 'package:travelsya/app/ppob/repository/ppob_repository.dart';
 import 'package:travelsya/shared/cubits/main_index_cubit.dart';
 import 'package:travelsya/shared/api/api_return_value.dart';
@@ -123,7 +122,8 @@ class PLNVM extends BaseViewModel {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10.0),
               ),
-              constraints: BoxConstraints(maxHeight: 60.0.h),
+              constraints: BoxConstraints(
+                  maxHeight: MediaQuery.of(context).size.height * 0.6),
               backgroundColor: Colors.white,
               builder: (context) {
                 return PLNInquiryTokenSheet(
@@ -153,7 +153,8 @@ class PLNVM extends BaseViewModel {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10.0),
                 ),
-                constraints: BoxConstraints(maxHeight: 60.0.h),
+                constraints: BoxConstraints(
+                    maxHeight: MediaQuery.of(context).size.height * 0.6),
                 backgroundColor: Colors.white,
                 builder: (context) {
                   return PLNInquiryPostpaidSheet(
@@ -224,7 +225,9 @@ class PLNVM extends BaseViewModel {
             borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(10), topRight: Radius.circular(10))),
         backgroundColor: Colors.transparent,
-        constraints: BoxConstraints(minHeight: 60.0.h, maxHeight: 60.0.h),
+        constraints: BoxConstraints(
+            minHeight: MediaQuery.of(context).size.height * 0.6,
+            maxHeight: MediaQuery.of(context).size.height * 0.6),
         builder: (context) {
           return const PLNTypeBottomsheet();
         });

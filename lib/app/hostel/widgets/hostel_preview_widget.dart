@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
 import 'package:travelsya/app/hostel/models/hostel_model.dart';
 import 'package:travelsya/app/hostel/pages/hostel_detail_page/hostel_detail_page.dart';
 import 'package:travelsya/shared/helper/function_helper.dart';
 import 'package:travelsya/shared/styles/font_style.dart';
+import 'package:travelsya/shared/styles/size_styles.dart';
 
 class HostelPreviewWidget extends StatelessWidget {
   final HostelPreviewModel data;
@@ -44,7 +44,7 @@ class HostelPreviewWidget extends StatelessWidget {
               ),
             ),
             Container(
-              padding: EdgeInsets.all(3.0.w),
+              padding: EdgeInsets.all(margin24 / 2),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -53,29 +53,29 @@ class HostelPreviewWidget extends StatelessWidget {
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                     style: mainFont.copyWith(
-                        fontSize: 11.0.sp,
+                        fontSize: 13,
                         color: Colors.black87,
                         fontWeight: FontWeight.bold),
                   ),
                   Text(
                     data.location ?? '-',
                     style: mainFont.copyWith(
-                        fontSize: 8.0.sp, color: const Color(0xffa5a5a5)),
+                        fontSize: 11, color: const Color(0xffa5a5a5)),
                   ),
                   SizedBox(
-                    height: 2.0.w,
+                    height: margin8,
                   ),
                   Row(
                     children: [
                       Text(
                         'mulai dari ',
                         style: mainFont.copyWith(
-                            fontSize: 8.0.sp, color: const Color(0xffa5a5a5)),
+                            fontSize: 11, color: const Color(0xffa5a5a5)),
                       ),
                       Text(
                         moneyChanger(data.sellingPrice, customLabel: ''),
                         style: mainFont.copyWith(
-                            fontSize: 8.0.sp,
+                            fontSize: 11,
                             color: Theme.of(context).primaryColor),
                       )
                     ],
@@ -87,19 +87,19 @@ class HostelPreviewWidget extends StatelessWidget {
                         color: Theme.of(context).primaryColor,
                       ),
                       SizedBox(
-                        width: 1.0.w,
+                        width: margin4,
                       ),
                       Text(
                         data.ratingAvg.toStringAsFixed(1),
                         style: mainFont.copyWith(
-                            fontSize: 11.0.sp,
+                            fontSize: 13,
                             color: Colors.black87,
                             fontWeight: FontWeight.bold),
                       ),
                       Text(
                         '(${data.ratingCount})',
                         style: mainFont.copyWith(
-                          fontSize: 8.0.sp,
+                          fontSize: 11,
                           color: const Color(0xffa5a5a5),
                         ),
                       )

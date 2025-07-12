@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sizer/sizer.dart';
 import 'package:travelsya/app/hostel/cubits/hostel_cubit.dart';
 import 'package:travelsya/app/hostel/cubits/hostel_state.dart';
 import 'package:travelsya/shared/styles/font_style.dart';
-import 'package:travelsya/shared/widgets/form_helper.dart';
+import 'package:travelsya/shared/styles/size_styles.dart';
+import 'package:travelsya/shared/widgets/form_helper/rounded_texfield_widget.dart';
 
 class HostelCityPicker extends StatefulWidget {
   final HostelCubit dataCubit;
 
-  const HostelCityPicker({Key? key, required this.dataCubit}) : super(key: key);
+  const HostelCityPicker({super.key, required this.dataCubit});
 
   @override
   State<HostelCityPicker> createState() => _HostelCityPickerState();
@@ -25,9 +25,9 @@ class _HostelCityPickerState extends State<HostelCityPicker> {
       mainAxisSize: MainAxisSize.min,
       children: [
         Container(
-            width: 100.0.w,
-            height: 7.0.h,
-            padding: EdgeInsets.symmetric(horizontal: 5.0.w),
+            width: double.infinity,
+            height: 30,
+            padding: EdgeInsets.symmetric(horizontal: margin16),
             decoration: const BoxDecoration(
                 borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(10),
@@ -38,7 +38,7 @@ class _HostelCityPickerState extends State<HostelCityPicker> {
               children: [
                 Text('Cari Kota',
                     style: mainFont.copyWith(
-                        fontSize: 12.0.sp,
+                        fontSize: 14,
                         color: Colors.black87,
                         fontWeight: FontWeight.bold)),
                 GestureDetector(
@@ -50,9 +50,9 @@ class _HostelCityPickerState extends State<HostelCityPicker> {
             )),
         Container(
           color: Colors.white,
-          margin: EdgeInsets.symmetric(vertical: 3.0.w, horizontal: 5.0.w),
-          child: FormHelper.roundedTextfield(
-            context,
+          margin: EdgeInsets.symmetric(
+              vertical: margin24 / 2, horizontal: margin16),
+          child: RoundedTextfield(
             controller: controller,
             onChanged: (value) {
               setState(() {
@@ -88,16 +88,16 @@ class _HostelCityPickerState extends State<HostelCityPicker> {
                                 },
                                 child: Container(
                                     color: Colors.white,
-                                    padding: EdgeInsets.all(5.0.w),
-                                    width: 100.0.w,
+                                    padding: EdgeInsets.all(margin16),
+                                    width: double.infinity,
                                     child: Text(state.data[index],
                                         style: mainFont.copyWith(
-                                            fontSize: 11.0.sp,
+                                            fontSize: 13,
                                             color: Colors.black87))),
                               ),
                               Container(
-                                  width: 100.0.w,
-                                  height: 0.3.w,
+                                  width: double.infinity,
+                                  height: 3,
                                   color: Colors.black12)
                             ],
                           )

@@ -1,17 +1,33 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:pinput/pinput.dart';
 import 'package:travelsya/shared/function/show_loading.dart';
 import 'package:stacked/stacked.dart';
 import 'package:travelsya/app/auth/pages/reset_password_page.dart';
 import 'package:travelsya/app/auth/repository/auth_repository.dart';
 import 'package:travelsya/shared/api/api_return_value.dart';
 import 'package:travelsya/shared/function/show_snackbar.dart';
+import 'package:travelsya/shared/styles/font_style.dart';
 
 class OTPVM extends BaseViewModel {
-  TextEditingController emailController = TextEditingController();
+  TextEditingController codeController = TextEditingController();
   bool timerResend = false;
   int countDown = 60;
+
+  PinTheme getThemeDefaultTheme(BuildContext context) {
+    return PinTheme(
+      width: 40,
+      height: 40,
+      textStyle: mainFont.copyWith(
+          fontSize: 15,
+          color: Theme.of(context).primaryColor,
+          fontWeight: FontWeight.w600),
+      decoration: const BoxDecoration(
+        border: Border(bottom: BorderSide(color: Colors.black38)),
+      ),
+    );
+  }
 
   onSubmit(BuildContext context, String code) {
     showLoading(context);

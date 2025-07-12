@@ -3,12 +3,13 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sizer/sizer.dart';
 import 'package:travelsya/app/auth/cubits/auth_cubit.dart';
 import 'package:travelsya/app/auth/cubits/profile_cubit.dart';
+import 'package:travelsya/app/bus/cubits/bus_filter_cubit.dart';
 import 'package:travelsya/app/hostel/cubits/hostel_filter_cubit.dart';
 import 'package:travelsya/app/hotel/cubits/hotel_filter_cubit.dart';
 import 'package:travelsya/app/ppob/cubits/ppob_cubit.dart';
+import 'package:travelsya/app/rental_mobil/cubits/rental_mobil_filter_cubit.dart';
 import 'package:travelsya/app/splash_screen/pages/splash_screen_page.dart';
 import 'package:travelsya/shared/cubits/fee_admin/fee_admin_cubit.dart';
 import 'package:travelsya/shared/cubits/main_index_cubit.dart';
@@ -57,13 +58,19 @@ Future<void> main() async {
       BlocProvider<PointCubit>(
         create: (context) => PointCubit(),
       ),
+      BlocProvider<RentalMobilFilterCubit>(
+        create: (context) => RentalMobilFilterCubit(),
+      ),
+      BlocProvider<BusFilterCubit>(
+        create: (context) => BusFilterCubit(),
+      ),
     ],
     child: const MyApp(),
   ));
 }
 
 class MyApp extends StatefulWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   @override
   // ignore: library_private_types_in_public_api
@@ -73,13 +80,11 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return Sizer(builder: (context, orientation, deviceType) {
-      return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Travelsya',
-        theme: mainTheme,
-        home: const SplashScreenPage(),
-      );
-    });
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Travelsya',
+      theme: mainTheme,
+      home: const SplashScreenPage(),
+    );
   }
 }

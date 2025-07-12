@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
 import 'package:travelsya/app/hostel/cubits/hostel_cubit.dart';
 import 'package:travelsya/shared/styles/font_style.dart';
 import 'package:travelsya/shared/styles/size_styles.dart';
-import 'package:travelsya/shared/widgets/form_helper.dart';
+import 'package:travelsya/shared/widgets/form_helper/rounded_texfield_widget.dart';
 
 Future<bool> yesOrNoDialog(BuildContext context,
     {required String title,
@@ -56,7 +55,7 @@ Future<bool> yesOrNoDialog(BuildContext context,
                               child: Text(
                                 customNo ?? 'Tidak',
                                 style: mainFont.copyWith(
-                                    fontSize: customSizeNo ?? 12.0.sp,
+                                    fontSize: customSizeNo ?? 14,
                                     color: Theme.of(context).primaryColor,
                                     fontWeight: FontWeight.bold),
                               ),
@@ -80,7 +79,7 @@ Future<bool> yesOrNoDialog(BuildContext context,
                               child: Text(
                                 customYes ?? 'Ya',
                                 style: mainFont.copyWith(
-                                    fontSize: customSizeYes ?? 12.0.sp,
+                                    fontSize: customSizeYes ?? 14,
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold),
                               ),
@@ -103,7 +102,8 @@ Future<String?> modalBottomSheetWithSearch(BuildContext context,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10.0),
       ),
-      constraints: BoxConstraints(maxHeight: 90.0.h),
+      constraints:
+          BoxConstraints(maxHeight: MediaQuery.of(context).size.height * 0.9),
       isScrollControlled: true,
       builder: (context) {
         return DialogSearchCity(title: title, data: const []);
@@ -114,8 +114,7 @@ Future<String?> modalBottomSheetWithSearch(BuildContext context,
 class DialogSearchCity extends StatefulWidget {
   final String title;
   final List<String> data;
-  const DialogSearchCity({Key? key, required this.data, required this.title})
-      : super(key: key);
+  const DialogSearchCity({super.key, required this.data, required this.title});
 
   @override
   State<DialogSearchCity> createState() => _DialogSearchCityState();
@@ -131,8 +130,8 @@ class _DialogSearchCityState extends State<DialogSearchCity> {
       mainAxisSize: MainAxisSize.min,
       children: [
         Container(
-            width: 100.0.w,
-            height: 7.0.h,
+            width: double.infinity,
+            height: 30,
             padding: EdgeInsets.symmetric(horizontal: margin16),
             decoration: const BoxDecoration(
                 borderRadius: BorderRadius.only(
@@ -144,7 +143,7 @@ class _DialogSearchCityState extends State<DialogSearchCity> {
               children: [
                 Text(widget.title,
                     style: mainFont.copyWith(
-                        fontSize: 12.0.sp,
+                        fontSize: 14,
                         color: Colors.black87,
                         fontWeight: FontWeight.bold)),
                 GestureDetector(
@@ -158,8 +157,7 @@ class _DialogSearchCityState extends State<DialogSearchCity> {
           color: Colors.white,
           margin: EdgeInsets.symmetric(
               vertical: margin24 / 2, horizontal: margin16),
-          child: FormHelper.roundedTextfield(
-            context,
+          child: RoundedTextfield(
             controller: controller,
             onChanged: (value) {
               setState(() {
@@ -187,13 +185,15 @@ class _DialogSearchCityState extends State<DialogSearchCity> {
                         child: Container(
                             color: Colors.white,
                             padding: EdgeInsets.all(margin16),
-                            width: 100.0.w,
+                            width: double.infinity,
                             child: Text(widget.data[index],
                                 style: mainFont.copyWith(
-                                    fontSize: 11.0.sp, color: Colors.black87))),
+                                    fontSize: 13, color: Colors.black87))),
                       ),
                       Container(
-                          width: 100.0.w, height: 0.3.w, color: Colors.black12)
+                          width: double.infinity,
+                          height: 3,
+                          color: Colors.black12)
                     ],
                   )
                 : Container();
@@ -221,63 +221,52 @@ Future<dynamic> modalBottomSheet(BuildContext context,
           child: Container(
               color: Colors.white,
               padding: EdgeInsets.all(margin16),
-              width: 100.0.w,
+              width: double.infinity,
               child: Text(data[i],
-                  style: mainFont.copyWith(
-                      fontSize: 11.0.sp, color: Colors.black87))),
+                  style:
+                      mainFont.copyWith(fontSize: 13, color: Colors.black87))),
         ),
-        Container(width: 100.0.w, height: 0.3.w, color: Colors.black12)
+        Container(width: double.infinity, height: 1, color: Colors.black12)
       ],
     ));
   }
 
   returnValue = await showModalBottomSheet(
       context: context,
+      backgroundColor: Colors.white,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10.0),
       ),
       builder: (context) {
-        return Stack(
+        return Column(
           children: [
-            SingleChildScrollView(
-              child: Container(
-                  width: 100.0.w,
-                  height: 50.0.h,
-                  padding: EdgeInsets.only(
-                    top: 7.0.h,
-                  ),
-                  child: customWidget ??
-                      ListView(
-                        children: listingDataWidget,
-                      )),
-            ),
-            Positioned(
-                top: 0,
-                child: Container(
-                    width: 100.0.w,
-                    height: 7.0.h,
-                    padding: EdgeInsets.symmetric(horizontal: margin16),
-                    decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(10),
-                            topRight: Radius.circular(10)),
-                        color: Colors.white),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(title,
-                            style: mainFont.copyWith(
-                                fontSize: 12.0.sp,
-                                color: Colors.black87,
-                                fontWeight: FontWeight.bold)),
-                        GestureDetector(
-                            onTap: () {
-                              Navigator.pop(context);
-                            },
-                            child:
-                                const Icon(Icons.close, color: Colors.black87))
-                      ],
-                    )))
+            Container(
+                padding: EdgeInsets.only(
+                    left: margin16,
+                    right: margin16,
+                    top: margin16,
+                    bottom: margin8),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(title,
+                        style: mainFont.copyWith(
+                            fontSize: 14,
+                            color: Colors.black87,
+                            fontWeight: FontWeight.bold)),
+                    GestureDetector(
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
+                        child: const Icon(Icons.close, color: Colors.black87))
+                  ],
+                )),
+            Expanded(
+                child: customWidget ??
+                    ListView(
+                      padding: EdgeInsets.zero,
+                      children: listingDataWidget,
+                    )),
           ],
         );
       });

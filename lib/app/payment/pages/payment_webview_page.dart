@@ -1,39 +1,33 @@
-import 'dart:async';
-import 'dart:io';
+import 'package:flutter/material.dart';
 import 'package:travelsya/shared/function/show_snackbar.dart';
 import 'package:travelsya/shared/helper/function_helper.dart';
-import 'package:webview_flutter/webview_flutter.dart' as wv;
-import 'package:flutter/material.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 import 'package:http/http.dart' as http;
 
 class UserPaymentWebview extends StatefulWidget {
   final String url;
 
   const UserPaymentWebview({
-    Key? key,
+    super.key,
     required this.url,
-  }) : super(key: key);
+  });
 
   @override
   State<UserPaymentWebview> createState() => _UserPaymentWebviewState();
 }
 
 class _UserPaymentWebviewState extends State<UserPaymentWebview> {
-  final Completer<wv.WebViewController> _controller =
-      Completer<wv.WebViewController>();
-
   @override
   void initState() {
     super.initState();
-    if (Platform.isAndroid) wv.WebView.platform = wv.AndroidWebView();
   }
 
   DateTime? currentBackPressTime;
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async {
+    return PopScope(
+      onPopInvokedWithResult: (data, data2) async {
         DateTime now = DateTime.now();
         if (currentBackPressTime == null ||
             now.difference(currentBackPressTime!) >
@@ -42,36 +36,39 @@ class _UserPaymentWebviewState extends State<UserPaymentWebview> {
           showSnackbar(context,
               data: 'Tekan sekali lagi untuk keluar dari halaman pembayaran',
               colors: Colors.black);
-
-          return Future.value(false);
         }
-        return Future.value(true);
       },
       child: SafeArea(
         child: Scaffold(
             body: Column(children: [
           Expanded(
-              child: wv.WebView(
-            initialUrl: widget.url,
-            javascriptMode: wv.JavascriptMode.unrestricted,
-            onWebViewCreated: (wv.WebViewController webViewController) {
-              _controller.complete(webViewController);
-            },
-            // ignore: prefer_collection_literals
-            javascriptChannels: <wv.JavascriptChannel>[].toSet(),
-            onPageFinished: (value) async {
-              devPint('direct to');
-              devPint(value);
-              if (value.contains('xendit/succes') ||
-                  value.contains('xendit-success') ||
-                  value.contains('xendit-payment/nextSuccess')) {
-                http.get(Uri.parse(value));
-                showSnackbar(context,
-                    data: 'Pembayaran Berhasil', colors: Colors.green);
+              child: WebViewWidget(
+            controller: WebViewController()
+              ..setJavaScriptMode(JavaScriptMode.unrestricted)
+              ..setNavigationDelegate(
+                NavigationDelegate(
+                  onProgress: (int progress) {
+                    // Update loading bar.
+                  },
+                  onPageStarted: (String url) {},
+                  onPageFinished: (String value) {
+                    devPint('direct to');
+                    devPint(value);
+                    if (value.contains('xendit/succes') ||
+                        value.contains('xendit-success') ||
+                        value.contains('xendit-payment/nextSuccess')) {
+                      http.get(Uri.parse(value));
+                      showSnackbar(context,
+                          data: 'Pembayaran Berhasil', colors: Colors.green);
 
-                Navigator.pop(context, true);
-              }
-            },
+                      Navigator.pop(context, true);
+                    }
+                  },
+                  onHttpError: (HttpResponseError error) {},
+                  onWebResourceError: (WebResourceError error) {},
+                ),
+              )
+              ..loadRequest(Uri.parse(widget.url)),
           ))
         ])),
       ),

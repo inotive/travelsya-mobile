@@ -4,13 +4,13 @@ import 'package:travelsya/app/auth/viewmodel/register_vm.dart';
 import 'package:travelsya/shared/styles/font_style.dart';
 import 'package:travelsya/shared/styles/size_styles.dart';
 import 'package:travelsya/shared/styles/theme_style.dart';
-import 'package:travelsya/shared/widgets/form_helper.dart';
 import 'package:travelsya/shared/widgets/form_helper/elevated_button_widget.dart';
 import 'package:travelsya/shared/widgets/form_helper/rounded_texfield_widget.dart';
 import 'package:travelsya/shared/widgets/form_helper/title_with_widget.dart';
+import 'package:travelsya/shared/widgets/statusbar_widget.dart';
 
 class RegisterPage extends StatelessWidget {
-  const RegisterPage({Key? key}) : super(key: key);
+  const RegisterPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,11 +20,14 @@ class RegisterPage extends StatelessWidget {
         },
         onViewModelReady: (model) {},
         builder: (context, model, child) {
-          return SafeArea(
+          return StatusbarWidget(
               child: Scaffold(
             backgroundColor: Colors.white,
             body: Column(
               children: [
+                SizedBox(
+                  height: MediaQuery.of(context).padding.top,
+                ),
                 GestureDetector(
                   onTap: () {
                     Navigator.pop(context);
@@ -77,10 +80,10 @@ class RegisterPage extends StatelessWidget {
                                     },
                                     controller: model.emailController)),
                             SizedBox(height: margin16),
-                            FormHelper.titleWithWidget(
+                            TitleWithWidget(
                                 title: 'Nama Lengkap',
                                 validation: model.nameValidation,
-                                widget: RoundedTextfield(
+                                child: RoundedTextfield(
                                     hintText: 'Masukkan nama lengkap Anda',
                                     onChanged: (value) {
                                       model.onNameChanged(value);
@@ -118,10 +121,10 @@ class RegisterPage extends StatelessWidget {
                             SizedBox(
                               height: margin16,
                             ),
-                            FormHelper.titleWithWidget(
+                            TitleWithWidget(
                                 title: 'Konfirmasi Kata Sandi',
                                 validation: model.confirmValidation,
-                                widget: RoundedTextfield(
+                                child: RoundedTextfield(
                                     hintText: 'Masukkan ulang kata sandi Anda',
                                     suffixWidget: GestureDetector(
                                         onTap: () {

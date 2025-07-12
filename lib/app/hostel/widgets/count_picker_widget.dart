@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
 import 'package:travelsya/shared/styles/font_style.dart';
+import 'package:travelsya/shared/styles/size_styles.dart';
 import 'package:travelsya/shared/widgets/form_helper.dart';
+import 'package:travelsya/shared/widgets/form_helper/elevated_button_widget.dart';
 
 class CountPickerWidget extends StatefulWidget {
   final int? initialValue;
   final String title;
-  const CountPickerWidget({Key? key, this.initialValue, required this.title})
-      : super(key: key);
+  const CountPickerWidget({super.key, this.initialValue, required this.title});
 
   @override
   State<CountPickerWidget> createState() => _CountPickerWidgetState();
@@ -30,8 +30,8 @@ class _CountPickerWidgetState extends State<CountPickerWidget> {
       backgroundColor: Colors.transparent,
       body: Center(
         child: Container(
-          width: 80.0.w,
-          padding: EdgeInsets.all(5.0.w),
+          width: MediaQuery.of(context).size.width * 0.8,
+          padding: EdgeInsets.all(margin16),
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10), color: Colors.white),
           child: Column(
@@ -41,12 +41,12 @@ class _CountPickerWidgetState extends State<CountPickerWidget> {
               Text(
                 widget.title,
                 style: mainFont.copyWith(
-                    fontSize: 13.0.sp,
+                    fontSize: 15,
                     color: Colors.black87,
                     fontWeight: FontWeight.bold),
               ),
               Container(
-                margin: EdgeInsets.symmetric(vertical: 3.0.w),
+                margin: EdgeInsets.symmetric(vertical: margin24 / 2),
                 height: 1,
                 width: double.infinity,
                 color: Colors.black12,
@@ -63,8 +63,8 @@ class _CountPickerWidgetState extends State<CountPickerWidget> {
                       }
                     },
                     child: Container(
-                      width: 10.0.w,
-                      height: 10.0.w,
+                      width: 40,
+                      height: 40,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8),
                           color: selectedValue == 1
@@ -78,11 +78,11 @@ class _CountPickerWidgetState extends State<CountPickerWidget> {
                     ),
                   ),
                   Container(
-                      margin: EdgeInsets.symmetric(horizontal: 5.0.w),
+                      margin: EdgeInsets.symmetric(horizontal: margin16),
                       child: Text(
                         selectedValue.toString(),
                         style: mainFont.copyWith(
-                            fontSize: 13.0.sp, color: Colors.black87),
+                            fontSize: 15, color: Colors.black87),
                       )),
                   GestureDetector(
                       onTap: () {
@@ -91,8 +91,8 @@ class _CountPickerWidgetState extends State<CountPickerWidget> {
                         });
                       },
                       child: Container(
-                        width: 10.0.w,
-                        height: 10.0.w,
+                        width: 40,
+                        height: 40,
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(8),
                             color: Theme.of(context).primaryColor),
@@ -105,7 +105,7 @@ class _CountPickerWidgetState extends State<CountPickerWidget> {
                 ],
               ),
               SizedBox(
-                height: 5.0.w,
+                height: margin16,
               ),
               Row(
                 children: [
@@ -116,14 +116,16 @@ class _CountPickerWidgetState extends State<CountPickerWidget> {
                     }, title: 'Batal'),
                   ),
                   SizedBox(
-                    width: 3.0.w,
+                    width: margin24 / 2,
                   ),
                   Flexible(
                     flex: 1,
-                    child: FormHelper.elevatedButtonBasic(context,
-                        enabled: true, onTap: () {
-                      Navigator.pop(context, selectedValue);
-                    }, title: 'Simpan'),
+                    child: ElevatedButtonWidget(
+                        enabled: true,
+                        onTap: () {
+                          Navigator.pop(context, selectedValue);
+                        },
+                        title: 'Simpan'),
                   )
                 ],
               )

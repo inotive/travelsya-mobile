@@ -23,8 +23,21 @@ class _HomePageAdsSection extends StatelessWidget {
             bloc: model.adsCubit,
             builder: (context, state) {
               if (state is AdsLoading) {
-                return Container();
+                return Center(
+                  child: CircularProgressIndicator(
+                    color: Theme.of(context).primaryColor,
+                  ),
+                );
               } else if (state is AdsLoaded) {
+                if (state.data.isEmpty) {
+                  return Center(
+                    child: Text(
+                      'Iklan Tidak Ditemukan',
+                      style: mainBody4.copyWith(color: Colors.black54),
+                    ),
+                  );
+                }
+
                 return SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   child: Row(

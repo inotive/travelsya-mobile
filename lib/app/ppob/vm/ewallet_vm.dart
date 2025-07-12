@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sizer/sizer.dart';
-import 'package:travelsya/app/auth/cubits/profile_cubit.dart';
-import 'package:travelsya/app/auth/cubits/profile_state.dart';
 import 'package:travelsya/app/ppob/models/ppob_general_model.dart';
 import 'package:travelsya/app/ppob/pages/ewallet/ewallet_provider_picker.dart';
 import 'package:travelsya/app/ppob/widgets/topup_confirmation_dialog.dart';
@@ -173,7 +170,8 @@ class EwalletVM extends BaseViewModel {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10.0),
             ),
-            constraints: BoxConstraints(maxHeight: 60.0.h),
+            constraints: BoxConstraints(
+                maxHeight: MediaQuery.of(context).size.height * 0.6),
             backgroundColor: Colors.white,
             builder: (context) {
               return TopupConfirmationDialog(

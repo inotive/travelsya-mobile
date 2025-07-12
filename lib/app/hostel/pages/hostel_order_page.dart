@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:travelsya/shared/function/show_loading.dart';
 import 'package:intl/intl.dart';
-import 'package:sizer/sizer.dart';
 import 'package:travelsya/app/auth/cubits/profile_cubit.dart';
 import 'package:travelsya/app/auth/cubits/profile_state.dart';
 import 'package:travelsya/app/home_main/pages/home_main_page.dart';
@@ -17,10 +16,12 @@ import 'package:travelsya/shared/cubits/main_index_cubit.dart';
 import 'package:travelsya/shared/api/api_return_value.dart';
 import 'package:travelsya/shared/helper/function_helper.dart';
 import 'package:travelsya/shared/styles/font_style.dart';
+import 'package:travelsya/shared/styles/size_styles.dart';
 import 'package:travelsya/shared/styles/theme_style.dart';
 import 'package:travelsya/shared/widgets/date_picker_single.dart';
 import 'package:travelsya/shared/function/show_snackbar.dart';
 import 'package:travelsya/shared/widgets/form_helper.dart';
+import 'package:travelsya/shared/widgets/form_helper/elevated_button_widget.dart';
 
 class HostelOrderPage extends StatefulWidget {
   final HostelDetailModel data;
@@ -28,12 +29,11 @@ class HostelOrderPage extends StatefulWidget {
   final DateTime tanggal;
   final int totalKamar;
   const HostelOrderPage(
-      {Key? key,
+      {super.key,
       required this.dataRoom,
       required this.tanggal,
       required this.totalKamar,
-      required this.data})
-      : super(key: key);
+      required this.data});
 
   @override
   State<HostelOrderPage> createState() => _HostelOrderPageState();
@@ -60,7 +60,7 @@ class _HostelOrderPageState extends State<HostelOrderPage> {
         body: Column(
           children: [
             Container(
-              padding: EdgeInsets.all(5.0.w),
+              padding: EdgeInsets.all(margin16),
               color: Theme.of(context).primaryColor,
               child: Row(
                 children: [
@@ -74,12 +74,12 @@ class _HostelOrderPageState extends State<HostelOrderPage> {
                     ),
                   ),
                   SizedBox(
-                    width: 3.0.w,
+                    width: margin24 / 2,
                   ),
                   Text(
                     'Ringkasan Pesanan',
                     style: mainFont.copyWith(
-                        fontSize: 13.0.sp,
+                        fontSize: 15,
                         color: Colors.white,
                         fontWeight: FontWeight.w700),
                   )
@@ -90,7 +90,7 @@ class _HostelOrderPageState extends State<HostelOrderPage> {
                 child: ListView(
               children: [
                 Container(
-                  padding: EdgeInsets.all(5.0.w),
+                  padding: EdgeInsets.all(margin16),
                   child: Column(
                     children: [
                       Row(
@@ -111,21 +111,21 @@ class _HostelOrderPageState extends State<HostelOrderPage> {
                               Text(
                                 widget.data.name,
                                 style: mainFont.copyWith(
-                                    fontSize: 13.0.sp,
+                                    fontSize: 15,
                                     fontWeight: FontWeight.bold,
                                     color: neutral100),
                               ),
                               Text(
                                 '${widget.totalKamar} x ${widget.dataRoom.bedType}',
                                 style: mainFont.copyWith(
-                                    fontSize: 9.0.sp, color: neutral100),
+                                    fontSize: 11, color: neutral100),
                               )
                             ],
                           ))
                         ],
                       ),
                       Container(
-                        margin: EdgeInsets.symmetric(vertical: 3.0.w),
+                        margin: EdgeInsets.symmetric(vertical: margin24 / 2),
                         width: double.infinity,
                         height: 1,
                         color: neutral30.withOpacity(0.3),
@@ -137,8 +137,8 @@ class _HostelOrderPageState extends State<HostelOrderPage> {
                               Flexible(
                                 flex: 1,
                                 child: Container(
-                                  padding:
-                                      EdgeInsets.symmetric(vertical: 3.0.w),
+                                  padding: EdgeInsets.symmetric(
+                                      vertical: margin24 / 2),
                                   width: double.infinity,
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(8),
@@ -149,35 +149,34 @@ class _HostelOrderPageState extends State<HostelOrderPage> {
                                       Text(
                                         'Check In',
                                         style: mainFont.copyWith(
-                                            fontSize: 8.0.sp,
+                                            fontSize: 11,
                                             color: const Color(0xffa5a5a5)),
                                       ),
                                       Text(
                                         dateToReadable(DateFormat('yyyy-MM-dd')
                                             .format(tanggalFinal)),
                                         style: mainFont.copyWith(
-                                            fontSize: 10.0.sp,
+                                            fontSize: 13,
                                             color: Colors.black87,
                                             fontWeight: FontWeight.bold),
                                       ),
                                       Text(
                                         widget.data.checkIn,
                                         style: mainFont.copyWith(
-                                            fontSize: 9.0.sp,
-                                            color: neutral100),
+                                            fontSize: 11, color: neutral100),
                                       ),
                                     ],
                                   ),
                                 ),
                               ),
                               SizedBox(
-                                width: 3.0.w,
+                                width: margin24 / 2,
                               ),
                               Flexible(
                                 flex: 1,
                                 child: Container(
-                                  padding:
-                                      EdgeInsets.symmetric(vertical: 3.0.w),
+                                  padding: EdgeInsets.symmetric(
+                                      vertical: margin24 / 2),
                                   width: double.infinity,
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(8),
@@ -187,7 +186,7 @@ class _HostelOrderPageState extends State<HostelOrderPage> {
                                       Text(
                                         'Check Out',
                                         style: mainFont.copyWith(
-                                            fontSize: 8.0.sp,
+                                            fontSize: 10,
                                             color: const Color(0xffa5a5a5)),
                                       ),
                                       // Text(
@@ -208,8 +207,7 @@ class _HostelOrderPageState extends State<HostelOrderPage> {
                                       Text(
                                         widget.data.checkOut,
                                         style: mainFont.copyWith(
-                                            fontSize: 9.0.sp,
-                                            color: neutral100),
+                                            fontSize: 11, color: neutral100),
                                       ),
                                     ],
                                   ),
@@ -219,9 +217,7 @@ class _HostelOrderPageState extends State<HostelOrderPage> {
                           ),
                         ),
                       ),
-                      SizedBox(
-                        height: 3.0.w,
-                      ),
+                      SizedBox(height: margin24 / 2),
                       FormHelper.borderButton(context, onTap: () async {
                         DateTime? result = await showDialog(
                             context: context,
@@ -324,54 +320,54 @@ class _HostelOrderPageState extends State<HostelOrderPage> {
                 // ),
                 Container(
                   width: double.infinity,
-                  height: 2.0.w,
+                  height: margin8,
                   color: neutral10,
                 ),
                 Container(
-                  padding: EdgeInsets.all(5.0.w),
+                  padding: EdgeInsets.all(margin16),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         'Detail Tamu',
                         style: mainFont.copyWith(
-                            fontSize: 13.0.sp,
+                            fontSize: 15,
                             color: neutral100,
                             fontWeight: FontWeight.bold),
                       ),
                       SizedBox(
-                        height: 5.0.w,
+                        height: margin16,
                       ),
                       Row(
                         children: [
                           SizedBox(
-                            width: 6.0.w,
-                            height: 6.0.w,
+                            width: 20,
+                            height: 20,
                             child: Image.asset('assets/icons/users.png'),
                           ),
                           SizedBox(
-                            width: 2.0.w,
+                            width: margin8,
                           ),
                           Text(
                             '${dataGuest.length}/${widget.totalKamar} Detail tamu terisi',
                             style: mainFont.copyWith(
-                                fontSize: 9.0.sp,
+                                fontSize: 11,
                                 color: Theme.of(context).primaryColor),
                           ),
                           SizedBox(
-                            width: 1.0.w,
+                            width: margin4,
                           ),
                           Icon(
                             Icons.info_outline,
                             color: Theme.of(context).primaryColor,
-                            size: 4.0.w,
+                            size: 16,
                           ),
                         ],
                       ),
                       dataGuest.isEmpty
                           ? Container()
                           : Container(
-                              margin: EdgeInsets.only(top: 3.0.w),
+                              margin: EdgeInsets.only(top: margin24 / 2),
                               child: Column(
                                 children:
                                     List.generate(dataGuest.length, (index) {
@@ -380,7 +376,7 @@ class _HostelOrderPageState extends State<HostelOrderPage> {
                                         borderRadius:
                                             BorderRadius.circular(10)),
                                     child: Container(
-                                      padding: EdgeInsets.all(5.0.w),
+                                      padding: EdgeInsets.all(margin16),
                                       child: Row(
                                         children: [
                                           Expanded(
@@ -393,7 +389,7 @@ class _HostelOrderPageState extends State<HostelOrderPage> {
                                                     .type
                                                     .toUpperCase(),
                                                 style: mainFont.copyWith(
-                                                    fontSize: 12.0.sp,
+                                                    fontSize: 14,
                                                     color: Colors.black87,
                                                     fontWeight:
                                                         FontWeight.bold),
@@ -401,21 +397,21 @@ class _HostelOrderPageState extends State<HostelOrderPage> {
                                               Text(
                                                 dataGuest[index].name,
                                                 style: mainFont.copyWith(
-                                                  fontSize: 11.0.sp,
+                                                  fontSize: 13,
                                                   color: Colors.black87,
                                                 ),
                                               ),
                                               Text(
                                                 dataGuest[index].number,
                                                 style: mainFont.copyWith(
-                                                  fontSize: 11.0.sp,
+                                                  fontSize: 13,
                                                   color: Colors.black54,
                                                 ),
                                               )
                                             ],
                                           )),
                                           SizedBox(
-                                            width: 3.0.w,
+                                            width: margin24 / 2,
                                           ),
                                           GestureDetector(
                                             onTap: () async {
@@ -435,8 +431,8 @@ class _HostelOrderPageState extends State<HostelOrderPage> {
                                               }
                                             },
                                             child: Container(
-                                              width: 12.0.w,
-                                              height: 12.0.w,
+                                              width: 48,
+                                              height: 48,
                                               decoration: BoxDecoration(
                                                 borderRadius:
                                                     BorderRadius.circular(10),
@@ -450,7 +446,7 @@ class _HostelOrderPageState extends State<HostelOrderPage> {
                                             ),
                                           ),
                                           SizedBox(
-                                            width: 3.0.w,
+                                            width: margin24 / 2,
                                           ),
                                           GestureDetector(
                                             onTap: () {
@@ -459,8 +455,8 @@ class _HostelOrderPageState extends State<HostelOrderPage> {
                                               });
                                             },
                                             child: Container(
-                                              width: 12.0.w,
-                                              height: 12.0.w,
+                                              width: 48,
+                                              height: 48,
                                               decoration: BoxDecoration(
                                                 borderRadius:
                                                     BorderRadius.circular(10),
@@ -483,7 +479,7 @@ class _HostelOrderPageState extends State<HostelOrderPage> {
                       widget.totalKamar == dataGuest.length
                           ? Container()
                           : Container(
-                              margin: EdgeInsets.only(top: 5.0.w),
+                              margin: EdgeInsets.only(top: margin16),
                               child: FormHelper.borderButton(context,
                                   onTap: () async {
                                 GuestModel? data = await Navigator.push(
@@ -502,21 +498,21 @@ class _HostelOrderPageState extends State<HostelOrderPage> {
                 ),
                 Container(
                   width: double.infinity,
-                  height: 2.0.w,
+                  height: margin8,
                   color: neutral10,
                 ),
                 Container(
-                    padding: EdgeInsets.symmetric(horizontal: 5.0.w),
+                    padding: EdgeInsets.symmetric(horizontal: margin16),
                     child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           SizedBox(
-                            height: 5.0.w,
+                            height: margin16,
                           ),
                           Text(
                             'Poin Travelsya',
                             style: mainFont.copyWith(
-                                fontSize: 13.0.sp,
+                                fontSize: 15,
                                 color: neutral100,
                                 fontWeight: FontWeight.bold),
                           ),
@@ -525,23 +521,23 @@ class _HostelOrderPageState extends State<HostelOrderPage> {
                               builder: (context, state) {
                                 if (state is ProfileLoaded) {
                                   return Container(
-                                    margin: EdgeInsets.only(top: 3.0.w),
+                                    margin: EdgeInsets.only(top: margin24 / 2),
                                     child: Card(
                                       shape: RoundedRectangleBorder(
                                           borderRadius:
                                               BorderRadius.circular(10)),
                                       child: Container(
-                                        padding: EdgeInsets.all(5.0.w),
+                                        padding: EdgeInsets.all(margin16),
                                         child: Row(
                                           children: [
                                             SizedBox(
-                                              width: 6.0.w,
-                                              height: 6.0.w,
+                                              width: 20,
+                                              height: 20,
                                               child: Image.asset(
                                                   ConstHelper.coinIcon),
                                             ),
                                             SizedBox(
-                                              width: 3.0.w,
+                                              width: margin24 / 2,
                                             ),
                                             Expanded(
                                                 child: Column(
@@ -551,7 +547,7 @@ class _HostelOrderPageState extends State<HostelOrderPage> {
                                                 Text(
                                                   'Points Anda',
                                                   style: mainFont.copyWith(
-                                                      fontSize: 8.0.sp,
+                                                      fontSize: 11,
                                                       color: neutral100),
                                                 ),
                                                 BlocBuilder<ProfileCubit,
@@ -573,8 +569,7 @@ class _HostelOrderPageState extends State<HostelOrderPage> {
                                                             : '',
                                                         style:
                                                             mainFont.copyWith(
-                                                                fontSize:
-                                                                    12.0.sp,
+                                                                fontSize: 14,
                                                                 fontWeight:
                                                                     FontWeight
                                                                         .bold,
@@ -585,7 +580,7 @@ class _HostelOrderPageState extends State<HostelOrderPage> {
                                               ],
                                             )),
                                             SizedBox(
-                                              width: 3.0.w,
+                                              width: margin24 / 2,
                                             ),
                                             GestureDetector(
                                               onTap: () {
@@ -604,7 +599,7 @@ class _HostelOrderPageState extends State<HostelOrderPage> {
                                                     ? 'Batal Gunakan Poin'
                                                     : 'Gunakan Poin',
                                                 style: mainFont.copyWith(
-                                                    fontSize: 9.0.sp,
+                                                    fontSize: 11,
                                                     color: totalPoint != 0
                                                         ? Colors.orange
                                                         : state.data.user
@@ -626,16 +621,16 @@ class _HostelOrderPageState extends State<HostelOrderPage> {
                                 return Container();
                               }),
                           SizedBox(
-                            height: 5.0.w,
+                            height: margin16,
                           ),
                         ])),
                 SizedBox(
-                  height: 10.0.w,
+                  height: margin32,
                 )
               ],
             )),
             Container(
-              padding: EdgeInsets.all(5.0.w),
+              padding: EdgeInsets.all(margin16),
               decoration: BoxDecoration(
                   border: Border(
                       top: BorderSide(color: neutral30.withOpacity(0.3)))),
@@ -643,20 +638,20 @@ class _HostelOrderPageState extends State<HostelOrderPage> {
                 children: [
                   totalPoint > 0
                       ? Container(
-                          margin: EdgeInsets.only(bottom: 1.0.w),
+                          margin: EdgeInsets.only(bottom: margin4),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
                                 'Poin Digunakan',
                                 style: mainFont.copyWith(
-                                    fontSize: 10.0.sp, color: neutral100),
+                                    fontSize: 12, color: neutral100),
                               ),
                               Text(
                                 moneyChanger(totalPoint.toDouble(),
                                     customLabel: ''),
                                 style: mainFont.copyWith(
-                                    fontSize: 12.0.sp,
+                                    fontSize: 14,
                                     color: Theme.of(context).primaryColor,
                                     fontWeight: FontWeight.bold),
                               )
@@ -669,8 +664,8 @@ class _HostelOrderPageState extends State<HostelOrderPage> {
                     children: [
                       Text(
                         'Total Biaya',
-                        style: mainFont.copyWith(
-                            fontSize: 10.0.sp, color: neutral100),
+                        style:
+                            mainFont.copyWith(fontSize: 12, color: neutral100),
                       ),
                       Text(
                         moneyChanger(
@@ -678,73 +673,77 @@ class _HostelOrderPageState extends State<HostelOrderPage> {
                                 widget.totalKamar,
                             customLabel: 'IDR '),
                         style: mainFont.copyWith(
-                            fontSize: 12.0.sp,
+                            fontSize: 14,
                             color: neutral100,
                             fontWeight: FontWeight.bold),
                       )
                     ],
                   ),
                   SizedBox(
-                    height: 3.0.w,
+                    height: margin24 / 2,
                   ),
-                  FormHelper.elevatedButtonBasic(context,
+                  ElevatedButtonWidget(
                       enabled: widget.totalKamar == dataGuest.length,
                       onTap: () {
-                    showLoading(context);
-                    FinanceRepository.paymentRequestHostel(context, data: {
-                      "service": "hostel",
-                      "payment": "xendit",
-                      "hostel_room_id": widget.dataRoom.id.toString(),
-                      "price": widget.dataRoom.price.toString(),
-                      "namehostel": widget.data.name,
-                      "guest": List.generate(dataGuest.length, (index) {
-                        return {
-                          "type_id": "KTP",
-                          "identity": dataGuest[index].number,
-                          "name": dataGuest[index].name
-                        };
-                      }),
-                      "fees": [
-                        {"type": "admin", "value": 1000},
-                        {
-                          "type": "point",
-                          "value": totalPoint > 0 ? (totalPoint * -1) : 0
-                        }
-                      ],
-                      "start": DateFormat('yyyy-MM-dd').format(tanggalFinal),
-                      "end": DateFormat('yyyy-MM-dd')
-                          .format(tanggalFinal.add(const Duration(days: 1
-                              // days: widget.data.category == 'Harian'
-                              //     ? 1
-                              //     : widget.data.category == 'Bulanan'
-                              //         ? 30
-                              //         : 365
+                        showLoading(context);
+                        FinanceRepository.paymentRequestHostel(context, data: {
+                          "service": "hostel",
+                          "payment": "xendit",
+                          "hostel_room_id": widget.dataRoom.id.toString(),
+                          "price": widget.dataRoom.price.toString(),
+                          "namehostel": widget.data.name,
+                          "guest": List.generate(dataGuest.length, (index) {
+                            return {
+                              "type_id": "KTP",
+                              "identity": dataGuest[index].number,
+                              "name": dataGuest[index].name
+                            };
+                          }),
+                          "fees": [
+                            {"type": "admin", "value": 1000},
+                            {
+                              "type": "point",
+                              "value": totalPoint > 0 ? (totalPoint * -1) : 0
+                            }
+                          ],
+                          "start":
+                              DateFormat('yyyy-MM-dd').format(tanggalFinal),
+                          "end": DateFormat('yyyy-MM-dd')
+                              .format(tanggalFinal.add(const Duration(days: 1
+                                  // days: widget.data.category == 'Harian'
+                                  //     ? 1
+                                  //     : widget.data.category == 'Bulanan'
+                                  //         ? 30
+                                  //         : 365
 
-                              )))
-                    }).then((value) async {
-                      Navigator.pop(context);
-                      if (value.status == RequestStatus.successRequest) {
-                        BlocProvider.of<MainIndexCubit>(context).changeIndex(1);
+                                  )))
+                        }).then((value) async {
+                          Navigator.pop(context);
+                          if (value.status == RequestStatus.successRequest) {
+                            BlocProvider.of<MainIndexCubit>(context)
+                                .changeIndex(1);
 
-                        Navigator.pushAndRemoveUntil(
-                            context,
-                            MaterialPageRoute(
-                                builder: (_) => const HomeMainPage()),
-                            (route) => false);
+                            Navigator.pushAndRemoveUntil(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (_) => const HomeMainPage()),
+                                (route) => false);
 
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (_) => UserPaymentWebview(
-                                      url: value.data,
-                                    )));
-                      } else {
-                        showSnackbar(context,
-                            data: value.data ?? 'Gagal membuat link pembayaran',
-                            colors: Colors.orange);
-                      }
-                    });
-                  }, title: 'Lanjutkan ke Pembayaran')
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (_) => UserPaymentWebview(
+                                          url: value.data,
+                                        )));
+                          } else {
+                            showSnackbar(context,
+                                data: value.data ??
+                                    'Gagal membuat link pembayaran',
+                                colors: Colors.orange);
+                          }
+                        });
+                      },
+                      title: 'Lanjutkan ke Pembayaran')
                 ],
               ),
             )

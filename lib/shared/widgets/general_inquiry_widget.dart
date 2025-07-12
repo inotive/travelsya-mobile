@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sizer/sizer.dart';
 import 'package:travelsya/app/auth/cubits/auth_cubit.dart';
 import 'package:travelsya/app/auth/cubits/auth_state.dart';
 import 'package:travelsya/app/auth/cubits/profile_cubit.dart';
@@ -19,6 +18,7 @@ import 'package:travelsya/shared/styles/size_styles.dart';
 import 'package:travelsya/shared/styles/theme_style.dart';
 import 'package:travelsya/shared/widgets/failed_request_horizontal_widget.dart';
 import 'package:travelsya/shared/widgets/form_helper.dart';
+import 'package:travelsya/shared/widgets/form_helper/elevated_button_widget.dart';
 import 'package:travelsya/shared/widgets/form_helper/split_row_widget.dart';
 import 'package:travelsya/shared/widgets/placeholder_widget.dart';
 
@@ -69,10 +69,10 @@ class _GeneralInquiryWidgetState extends State<GeneralInquiryWidget> {
               ),
               Expanded(
                   child: ListView(
-                padding: EdgeInsets.symmetric(horizontal: 5.0.w),
+                padding: EdgeInsets.symmetric(horizontal: margin16),
                 children: [
                   SizedBox(
-                    height: 3.0.w,
+                    height: margin24 / 2,
                   ),
                   Text(
                     'Informasi Pelanggan',
@@ -287,12 +287,14 @@ class _GeneralInquiryWidgetState extends State<GeneralInquiryWidget> {
                     SizedBox(
                       height: margin8,
                     ),
-                    FormHelper.elevatedButtonBasic(context, enabled: true,
+                    ElevatedButtonWidget(
+                        enabled: true,
                         onTap: () {
-                      needLoginFeature(context, () {
-                        Navigator.pop(context, usePoint);
-                      });
-                    }, title: 'Lanjutkan ke Pembayaran')
+                          needLoginFeature(context, () {
+                            Navigator.pop(context, usePoint);
+                          });
+                        },
+                        title: 'Lanjutkan ke Pembayaran')
                   ],
                 ),
               )

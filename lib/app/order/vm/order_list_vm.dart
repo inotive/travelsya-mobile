@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sizer/sizer.dart';
 import 'package:stacked/stacked.dart';
 import 'package:travelsya/app/hostel/pages/hostel_search_page/hostel_search_page.dart';
 import 'package:travelsya/app/hotel/pages/hotel_search/hotel_search_page.dart';
@@ -16,6 +15,7 @@ import 'package:travelsya/app/ppob/pages/pdam/pdam_main_page.dart';
 import 'package:travelsya/app/ppob/pages/pln/pln_main_page.dart';
 import 'package:travelsya/app/ppob/pages/pulsa/pulsa_form_page.dart';
 import 'package:travelsya/app/ppob/pages/tv_berbayar/tv_berbayar_main_page.dart';
+import 'package:travelsya/shared/helper/const_helper.dart';
 import 'package:travelsya/shared/styles/font_style.dart';
 import 'package:travelsya/shared/styles/size_styles.dart';
 
@@ -46,6 +46,14 @@ class OrderListVM extends BaseViewModel {
       return 'assets/icons/purse 1.png';
     } else if (service == 'LISTRIK-TOKEN') {
       return 'assets/icons/light-bulb.png';
+    } else if (service == 'RECREATION') {
+      return 'assets/icons/Icon Rekreasi.png';
+    } else if (service == 'CAR-RENT') {
+      return 'assets/icons/sport-car 1.png';
+    } else if (service == 'HEALTH-BEAUTY') {
+      return 'assets/icons/Group (6).png';
+    } else if (service == 'BUS-TRAVEL') {
+      return ConstHelper.busIcon;
     }
 
     return 'assets/icons/invoice 1.png';
@@ -364,8 +372,9 @@ class OrderListVM extends BaseViewModel {
           }
         },
         child: Container(
-          margin: EdgeInsets.only(left: 3.0.w),
-          padding: EdgeInsets.symmetric(vertical: 2.0.w, horizontal: 5.0.w),
+          margin: EdgeInsets.only(left: margin24 / 2),
+          padding:
+              EdgeInsets.symmetric(vertical: margin8, horizontal: margin16),
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
               color: Theme.of(context).primaryColor),

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:latlong2/latlong.dart';
-import 'package:sizer/sizer.dart';
 import 'package:stacked/stacked.dart';
 import 'package:travelsya/app/hotel/cubits/hotel_cubit.dart';
 import 'package:travelsya/app/hotel/cubits/hotel_state.dart';
@@ -94,19 +93,19 @@ class HotelDetailPage extends StatelessWidget {
                           children: [
                             AnimatedContainer(
                               duration: const Duration(milliseconds: 400),
-                              height: model.showAppbar ? 22.0.w : 0,
-                              width: 100.0.w,
+                              height: model.showAppbar ? 88 : 0,
+                              width: double.infinity,
                               color: Colors.white,
                               child: !model.showAppbar
                                   ? Container()
                                   : Column(
                                       children: [
                                         SizedBox(
-                                          height: 2.0.w,
+                                          height: margin4,
                                         ),
                                         Container(
                                           padding: EdgeInsets.symmetric(
-                                              horizontal: 5.0.w),
+                                              horizontal: margin16),
                                           child: Row(
                                             children: [
                                               GestureDetector(
@@ -120,19 +119,19 @@ class HotelDetailPage extends StatelessWidget {
                                                 ),
                                               ),
                                               SizedBox(
-                                                width: 3.0.w,
+                                                width: margin24 / 2,
                                               ),
                                               Expanded(
                                                   child: Text(
                                                 data.name,
                                                 style: mainFont.copyWith(
-                                                    fontSize: 13.0.sp,
+                                                    fontSize: 15,
                                                     color: Colors.black87,
                                                     fontWeight:
                                                         FontWeight.bold),
                                               )),
                                               SizedBox(
-                                                width: 3.0.w,
+                                                width: margin24 / 2,
                                               ),
                                               GestureDetector(
                                                 onTap: () {
@@ -151,10 +150,10 @@ class HotelDetailPage extends StatelessWidget {
                                           ),
                                         ),
                                         SizedBox(
-                                          height: 3.0.w,
+                                          height: margin24 / 2,
                                         ),
                                         SizedBox(
-                                            height: 8.0.w,
+                                            height: 25,
                                             child: model.tabWidget()),
                                       ],
                                     ),

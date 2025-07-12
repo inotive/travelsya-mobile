@@ -10,8 +10,8 @@ import 'package:travelsya/shared/widgets/form_helper/rounded_texfield_widget.dar
 
 class EWalletProviderPicker extends StatefulWidget {
   const EWalletProviderPicker({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   State<EWalletProviderPicker> createState() => _EWalletProviderPickerState();

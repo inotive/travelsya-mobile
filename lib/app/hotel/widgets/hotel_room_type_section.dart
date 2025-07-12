@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
 import 'package:travelsya/app/hostel/models/hostel_detail_model.dart';
 import 'package:travelsya/app/hostel/models/hostel_model.dart';
 import 'package:travelsya/shared/api/api_connection.dart';
 import 'package:travelsya/shared/helper/function_helper.dart';
 import 'package:travelsya/shared/styles/font_style.dart';
+import 'package:travelsya/shared/styles/size_styles.dart';
 import 'package:travelsya/shared/styles/theme_style.dart';
 
 class HotelRoomTypeSection extends StatefulWidget {
@@ -12,11 +12,10 @@ class HotelRoomTypeSection extends StatefulWidget {
   final HostelModel dataHostel;
   final Function(int) onTap;
   const HotelRoomTypeSection(
-      {Key? key,
+      {super.key,
       required this.data,
       required this.dataHostel,
-      required this.onTap})
-      : super(key: key);
+      required this.onTap});
 
   @override
   State<HotelRoomTypeSection> createState() => _HotelRoomTypeSectionState();
@@ -42,18 +41,19 @@ class _HotelRoomTypeSectionState extends State<HotelRoomTypeSection> {
     return Column(
       children: [
         Container(
-          padding: EdgeInsets.only(top: 5.0.w, left: 5.0.w, right: 5.0.w),
+          padding:
+              EdgeInsets.only(top: margin16, left: margin16, right: margin16),
           width: double.infinity,
           child: Text(
             'Tipe Kamar',
             style: mainFont.copyWith(
-                fontSize: 12.0.sp,
+                fontSize: 14,
                 color: Colors.black87,
                 fontWeight: FontWeight.bold),
           ),
         ),
         SizedBox(
-          height: 5.0.w,
+          height: margin16,
         ),
         Column(
           children: List.generate(widget.data.length, (index) {
@@ -68,7 +68,8 @@ class _HotelRoomTypeSectionState extends State<HotelRoomTypeSection> {
               },
             ];
             return Container(
-              margin: EdgeInsets.only(bottom: 3.0.w, left: 5.0.w, right: 5.0.w),
+              margin: EdgeInsets.only(
+                  bottom: margin24 / 2, left: margin16, right: margin16),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
                   border: Border.all(
@@ -92,7 +93,7 @@ class _HotelRoomTypeSectionState extends State<HotelRoomTypeSection> {
                     ),
                   ),
                   Container(
-                      padding: EdgeInsets.all(3.0.w),
+                      padding: EdgeInsets.all(margin24 / 2),
                       child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -100,7 +101,7 @@ class _HotelRoomTypeSectionState extends State<HotelRoomTypeSection> {
                               widget.data[index].name,
                               style: mainFont.copyWith(
                                   fontWeight: FontWeight.bold,
-                                  fontSize: 11.0.sp,
+                                  fontSize: 13,
                                   color: const Color(0xff333333)),
                             ),
                             Text(
@@ -108,10 +109,11 @@ class _HotelRoomTypeSectionState extends State<HotelRoomTypeSection> {
                               style: mainFont.copyWith(
                                   fontWeight: FontWeight.w400,
                                   color: neutral30,
-                                  fontSize: 9.0.sp),
+                                  fontSize: 11),
                             ),
                             Container(
-                              margin: EdgeInsets.symmetric(vertical: 3.0.w),
+                              margin:
+                                  EdgeInsets.symmetric(vertical: margin24 / 2),
                               width: double.infinity,
                               height: 1,
                               color: neutral30.withOpacity(0.3),
@@ -120,23 +122,23 @@ class _HotelRoomTypeSectionState extends State<HotelRoomTypeSection> {
                               children:
                                   List.generate(dataFacility.length, (index) {
                                 return Container(
-                                  margin: EdgeInsets.only(bottom: 1.0.w),
+                                  margin: EdgeInsets.only(bottom: margin4),
                                   child: Row(
                                     children: [
                                       SizedBox(
-                                        width: 6.0.w,
-                                        height: 6.0.w,
+                                        width: 20,
+                                        height: 20,
                                         child: Image.asset(
                                             dataFacility[index]['assets']!),
                                       ),
                                       SizedBox(
-                                        width: 2.0.w,
+                                        width: margin8,
                                       ),
                                       Expanded(
                                           child: Text(
                                         dataFacility[index]['title']!,
                                         style: mainFont.copyWith(
-                                            fontSize: 10.0.sp,
+                                            fontSize: 12,
                                             color: neutral100,
                                             fontWeight: FontWeight.w400),
                                       ))
@@ -146,7 +148,7 @@ class _HotelRoomTypeSectionState extends State<HotelRoomTypeSection> {
                               }),
                             ),
                             SizedBox(
-                              height: 3.0.w,
+                              height: margin24 / 2,
                             ),
                             Row(
                               children: [
@@ -158,7 +160,7 @@ class _HotelRoomTypeSectionState extends State<HotelRoomTypeSection> {
                                       child: RichText(
                                           text: TextSpan(
                                               style: mainFont.copyWith(
-                                                  fontSize: 10.0.sp,
+                                                  fontSize: 12,
                                                   color: neutral30),
                                               children: [
                                             const TextSpan(text: 'mulai '),
@@ -173,7 +175,7 @@ class _HotelRoomTypeSectionState extends State<HotelRoomTypeSection> {
                                                         .toDouble(),
                                                     customLabel: 'IDR '),
                                                 style: TextStyle(
-                                                    fontSize: 12.0.sp,
+                                                    fontSize: 14,
                                                     fontWeight: FontWeight.bold,
                                                     color: Theme.of(context)
                                                         .primaryColor)),
@@ -184,13 +186,13 @@ class _HotelRoomTypeSectionState extends State<HotelRoomTypeSection> {
                                       child: Text(
                                         '/kamar/${getCategoryRead(widget.dataHostel.category ?? '')} (termasuk pajak)',
                                         style: mainFont.copyWith(
-                                            fontSize: 9.0.sp, color: neutral30),
+                                            fontSize: 11, color: neutral30),
                                       ),
                                     )
                                   ],
                                 )),
                                 SizedBox(
-                                  width: 3.0.w,
+                                  width: margin24 / 2,
                                 ),
                                 GestureDetector(
                                   onTap: () {
@@ -198,7 +200,8 @@ class _HotelRoomTypeSectionState extends State<HotelRoomTypeSection> {
                                   },
                                   child: Container(
                                     padding: EdgeInsets.symmetric(
-                                        vertical: 3.0.w, horizontal: 5.0.w),
+                                        vertical: margin24 / 2,
+                                        horizontal: margin16),
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(8),
                                       color: Theme.of(context).primaryColor,
@@ -206,7 +209,7 @@ class _HotelRoomTypeSectionState extends State<HotelRoomTypeSection> {
                                     child: Text(
                                       'Pesan',
                                       style: mainFont.copyWith(
-                                          fontSize: 11.0.sp,
+                                          fontSize: 13,
                                           color: Colors.white,
                                           fontWeight: FontWeight.w600),
                                     ),
@@ -221,11 +224,11 @@ class _HotelRoomTypeSectionState extends State<HotelRoomTypeSection> {
           }),
         ),
         SizedBox(
-          height: 2.0.w,
+          height: margin8,
         ),
         Container(
           width: double.infinity,
-          height: 2.0.w,
+          height: 8,
           color: const Color(0xfff4f4f4),
         ),
       ],

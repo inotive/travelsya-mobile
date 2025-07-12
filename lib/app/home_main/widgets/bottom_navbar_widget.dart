@@ -10,13 +10,12 @@ class BottomNavbarWidget extends StatelessWidget {
   final String iconsAsset;
   final bool isActive;
   const BottomNavbarWidget(
-      {Key? key,
+      {super.key,
       required this.title,
       required this.iconsAsset,
       required this.isActive,
       required this.onTap,
-      this.showIcon = true})
-      : super(key: key);
+      this.showIcon = true});
 
   @override
   Widget build(BuildContext context) {

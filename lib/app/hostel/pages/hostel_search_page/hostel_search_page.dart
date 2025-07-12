@@ -10,6 +10,7 @@ import 'package:travelsya/app/hostel/widgets/hostel_preview_widget.dart';
 import 'package:travelsya/shared/function/date_to_readable_function.dart';
 import 'package:travelsya/shared/styles/size_styles.dart';
 import 'package:travelsya/shared/widgets/failed_request_widget.dart';
+import 'package:travelsya/shared/widgets/form_helper/elevated_button_widget.dart';
 import 'package:travelsya/shared/widgets/form_helper/title_with_widget.dart';
 import 'package:travelsya/shared/widgets/placeholder_widget.dart';
 import 'package:travelsya/shared/styles/font_style.dart';
@@ -20,7 +21,7 @@ part '_hostel_search_filter_section.dart';
 part '_hostel_search_popular_section.dart';
 
 class HostelSearchPage extends StatelessWidget {
-  const HostelSearchPage({Key? key}) : super(key: key);
+  const HostelSearchPage({super.key});
 
   @override
   Widget build(BuildContext context) {

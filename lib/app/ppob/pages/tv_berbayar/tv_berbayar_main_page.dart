@@ -9,14 +9,14 @@ import 'package:travelsya/shared/styles/font_style.dart';
 import 'package:travelsya/shared/styles/size_styles.dart';
 import 'package:travelsya/shared/widgets/appbar_widget.dart';
 import 'package:travelsya/shared/widgets/failed_request_widget.dart';
-import 'package:travelsya/shared/widgets/form_helper.dart';
+import 'package:travelsya/shared/widgets/form_helper/elevated_button_widget.dart';
 import 'package:travelsya/shared/widgets/form_helper/rounded_texfield_widget.dart';
 import 'package:travelsya/shared/widgets/form_helper/title_with_widget.dart';
+import 'package:travelsya/shared/widgets/statusbar_widget.dart';
 
 class TVBerbayarMainPage extends StatelessWidget {
   final String preloadNumber;
-  const TVBerbayarMainPage({Key? key, this.preloadNumber = ''})
-      : super(key: key);
+  const TVBerbayarMainPage({super.key, this.preloadNumber = ''});
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +25,7 @@ class TVBerbayarMainPage extends StatelessWidget {
     }, onViewModelReady: (model) {
       model.onInit(preloadNumber);
     }, builder: (context, model, child) {
-      return SafeArea(
+      return StatusbarWidget(
           child: Scaffold(
               backgroundColor: Colors.white,
               appBar: appbarWidget(context, title: 'TV Berbayar'),
@@ -135,11 +135,12 @@ class TVBerbayarMainPage extends StatelessWidget {
                             SizedBox(
                               height: margin32,
                             ),
-                            FormHelper.elevatedButtonBasic(context,
+                            ElevatedButtonWidget(
                                 enabled: model.selectedProvider != null,
                                 onTap: () {
-                              model.onSubmit(context);
-                            }, title: 'Cek Tagihan')
+                                  model.onSubmit(context);
+                                },
+                                title: 'Cek Tagihan')
                           ],
                         );
                       }

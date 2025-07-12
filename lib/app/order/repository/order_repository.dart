@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:travelsya/app/order/models/order_list_model.dart';
 import 'package:travelsya/shared/api/api_connection.dart';
@@ -67,8 +69,18 @@ class OrderRepository {
         auth: true);
 
     if (response!.status == RequestStatus.successRequest) {
-      returnValue = ApiReturnValue(
-          data: response.data['data'][0], status: RequestStatus.successRequest);
+      Map<String, dynamic>? dataFinal;
+
+      try {
+        List<dynamic> dataRaw = response.data['data'];
+
+        dataFinal = dataRaw[0];
+      } catch (e) {
+        dataFinal = response.data['data'];
+      }
+
+      returnValue =
+          ApiReturnValue(data: dataFinal, status: RequestStatus.successRequest);
     } else {
       String? messages;
       try {

@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sizer/sizer.dart';
 import 'package:stacked/stacked.dart';
-import 'package:travelsya/app/auth/cubits/profile_cubit.dart';
-import 'package:travelsya/app/auth/cubits/profile_state.dart';
 import 'package:travelsya/app/payment/pages/payment_webview_page.dart';
 import 'package:travelsya/app/payment/repository/finance_repository.dart';
 import 'package:travelsya/app/ppob/models/ppob_model.dart';
@@ -174,7 +171,8 @@ class PulsaVM extends BaseViewModel {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10.0),
           ),
-          constraints: BoxConstraints(maxHeight: 60.0.h),
+          constraints: BoxConstraints(
+              maxHeight: MediaQuery.of(context).size.height * 0.6),
           backgroundColor: Colors.white,
           builder: (context) {
             return TopupConfirmationDialog(

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-Color primaryColor = const Color(0xfff00027);
+Color primaryColor = const Color(0xffC02425);
 Color primarySufaceColor = const Color(0xffF3FFF9);
 
 Color primaryBorderColor = const Color(0xffA4DDC3);
@@ -28,4 +28,6 @@ Color neutral100 = const Color(0xff0A0A0A);
 ThemeData mainTheme = ThemeData(
     primaryColor: primaryColor,
     scaffoldBackgroundColor: neutral10,
+    cardColor: Colors.white,
+    cardTheme: const CardTheme(color: Colors.white),
     dividerColor: Colors.transparent);

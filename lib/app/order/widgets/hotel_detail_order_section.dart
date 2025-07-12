@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
-import 'package:sizer/sizer.dart';
 import 'package:travelsya/app/hotel/cubits/hotel_cubit.dart';
 import 'package:travelsya/app/hotel/cubits/hotel_state.dart';
 import 'package:travelsya/app/order/models/order_detail_model.dart';
@@ -249,7 +248,7 @@ class _HotelDetailOrderSectionState extends State<HotelDetailOrderSection> {
                                         child: Text(
                                           'Buka di Map',
                                           style: mainFont.copyWith(
-                                              fontSize: 11.0.sp,
+                                              fontSize: 13,
                                               color: Theme.of(context)
                                                   .primaryColor,
                                               fontWeight: FontWeight.bold),
@@ -269,13 +268,13 @@ class _HotelDetailOrderSectionState extends State<HotelDetailOrderSection> {
                                 height: double.infinity,
                                 child: FlutterMap(
                                     options: MapOptions(
-                                      center: (state.data.lat != null &&
+                                      initialCenter: (state.data.lat != null &&
                                               state.data.lon != null)
                                           ? LatLng(
                                               state.data.lat!, state.data.lon!)
-                                          : LatLng(-6.906725572061223,
+                                          : const LatLng(-6.906725572061223,
                                               107.59823247747369),
-                                      zoom: 7,
+                                      initialZoom: 7,
                                     ),
                                     children: (state.data.lat != null &&
                                             state.data.lon != null)
@@ -294,14 +293,12 @@ class _HotelDetailOrderSectionState extends State<HotelDetailOrderSection> {
                                                     point: LatLng(
                                                         state.data.lat!,
                                                         state.data.lon!),
-                                                    builder: (context) {
-                                                      return Icon(
-                                                        Icons.location_on,
-                                                        color: Theme.of(context)
-                                                            .primaryColor,
-                                                        size: 40,
-                                                      );
-                                                    })
+                                                    child: Icon(
+                                                      Icons.location_on,
+                                                      color: Theme.of(context)
+                                                          .primaryColor,
+                                                      size: 40,
+                                                    ))
                                               ],
                                             )
                                           ]

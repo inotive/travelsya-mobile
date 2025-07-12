@@ -26,6 +26,7 @@ import 'package:travelsya/shared/widgets/form_helper/rounded_texfield_widget.dar
 import 'package:travelsya/shared/widgets/form_helper/title_with_widget.dart';
 import 'package:travelsya/shared/widgets/photo_view_list_page.dart';
 import 'package:travelsya/shared/widgets/placeholder_widget.dart';
+import 'package:travelsya/shared/widgets/statusbar_widget.dart';
 
 part '_hotel_checkout_info_section.dart';
 part '_hotel_checkout_form_section.dart';
@@ -36,8 +37,7 @@ class HotelCheckoutPage extends StatelessWidget {
   final HotelDetailModel data;
   final HotelRoom selectedRoom;
   const HotelCheckoutPage(
-      {Key? key, required this.data, required this.selectedRoom})
-      : super(key: key);
+      {super.key, required this.data, required this.selectedRoom});
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +46,7 @@ class HotelCheckoutPage extends StatelessWidget {
     }, onViewModelReady: (model) {
       model.onInit(context, roomId: selectedRoom.id.toString());
     }, builder: (context, model, child) {
-      return SafeArea(
+      return StatusbarWidget(
         child: Scaffold(
           appBar: appbarWidget(context, title: 'Ringkasan Pesanan'),
           backgroundColor: Colors.white,

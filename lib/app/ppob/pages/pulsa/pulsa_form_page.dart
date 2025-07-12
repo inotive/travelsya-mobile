@@ -10,11 +10,12 @@ import 'package:travelsya/shared/styles/font_style.dart';
 import 'package:travelsya/shared/styles/size_styles.dart';
 import 'package:travelsya/shared/widgets/appbar_widget.dart';
 import 'package:travelsya/shared/widgets/form_helper.dart';
+import 'package:travelsya/shared/widgets/form_helper/elevated_button_widget.dart';
 import 'package:travelsya/shared/widgets/form_helper/rounded_texfield_widget.dart';
 
 class PulsaFormPage extends StatelessWidget {
   final String preloadNumber;
-  const PulsaFormPage({Key? key, this.preloadNumber = ''}) : super(key: key);
+  const PulsaFormPage({super.key, this.preloadNumber = ''});
 
   @override
   Widget build(BuildContext context) {
@@ -182,10 +183,12 @@ class PulsaFormPage extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      FormHelper.elevatedButtonBasic(context,
-                          enabled: model.selectedData != null, onTap: () {
-                        model.onSubmit(context);
-                      }, title: 'Bayar Sekarang')
+                      ElevatedButtonWidget(
+                          enabled: model.selectedData != null,
+                          onTap: () {
+                            model.onSubmit(context);
+                          },
+                          title: 'Bayar Sekarang')
                     ],
                   ),
                 )

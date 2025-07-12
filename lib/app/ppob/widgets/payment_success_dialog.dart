@@ -1,25 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
 import 'package:travelsya/shared/styles/font_style.dart';
+import 'package:travelsya/shared/styles/size_styles.dart';
 import 'package:travelsya/shared/styles/theme_style.dart';
-import 'package:travelsya/shared/widgets/form_helper.dart';
+import 'package:travelsya/shared/widgets/form_helper/elevated_button_widget.dart';
 
 class PaymentSuccessDialog extends StatelessWidget {
-  const PaymentSuccessDialog({Key? key}) : super(key: key);
+  const PaymentSuccessDialog({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Column(children: [
       Center(
         child: Container(
-          width: 30.0.w,
-          height: 2.0.w,
+          width: 100,
+          height: 8,
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10), color: Colors.white),
         ),
       ),
       SizedBox(
-        height: 2.0.w,
+        height: margin8,
       ),
       Expanded(
           child: Container(
@@ -33,33 +33,31 @@ class PaymentSuccessDialog extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             SizedBox(
-              width: 20.0.w,
-              height: 20.0.w,
+              width: 60,
+              height: 60,
               child: Image.asset('assets/icons/validating-ticket 1.png'),
             ),
             SizedBox(
-              height: 3.0.w,
+              height: margin24 / 2,
             ),
             Text(
               'Pembayaran Sukses',
               style: mainFont.copyWith(
-                  fontSize: 12.0.sp,
-                  color: neutral100,
-                  fontWeight: FontWeight.bold),
+                  fontSize: 13, color: neutral100, fontWeight: FontWeight.bold),
             ),
             SizedBox(
-              height: 1.0.w,
+              height: margin4,
             ),
             Text(
               'Pembayaran Anda telah berhasil',
-              style: mainFont.copyWith(fontSize: 8.0.sp, color: neutral30),
+              style: mainFont.copyWith(fontSize: 11, color: neutral30),
             ),
             SizedBox(
-              height: 5.0.w,
+              height: margin16,
             ),
             Container(
-              margin: EdgeInsets.symmetric(horizontal: 5.0.w),
-              child: FormHelper.elevatedButtonBasic(context,
+              margin: EdgeInsets.symmetric(horizontal: margin16),
+              child: ElevatedButtonWidget(
                   enabled: true, onTap: () {}, title: 'Kembali'),
             )
           ],

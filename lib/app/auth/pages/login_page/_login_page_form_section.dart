@@ -86,7 +86,7 @@ class _LoginPageFormSection extends StatelessWidget {
                         ),
                         Text(
                           'Ingat Saya',
-                          style: mainBody4,
+                          style: mainBody5,
                         )
                       ],
                     ),

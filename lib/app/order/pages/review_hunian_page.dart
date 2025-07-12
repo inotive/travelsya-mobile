@@ -4,7 +4,9 @@ import 'package:stacked/stacked.dart';
 import 'package:travelsya/app/order/vm/hunian_review_vm.dart';
 import 'package:travelsya/shared/styles/font_style.dart';
 import 'package:travelsya/shared/styles/size_styles.dart';
-import 'package:travelsya/shared/widgets/form_helper.dart';
+import 'package:travelsya/shared/widgets/form_helper/elevated_button_widget.dart';
+import 'package:travelsya/shared/widgets/form_helper/rounded_texfield_widget.dart';
+import 'package:travelsya/shared/widgets/form_helper/title_with_widget.dart';
 
 class ReviewHunianPage extends StatelessWidget {
   final bool isHotel;
@@ -93,23 +95,25 @@ class ReviewHunianPage extends StatelessWidget {
                 SizedBox(
                   height: margin32,
                 ),
-                FormHelper.titleWithWidget(
+                TitleWithWidget(
                     title: 'Review',
-                    widget: FormHelper.roundedTextfield(context,
+                    child: RoundedTextfield(
                         maxLines: 5,
                         hintText: 'Review Anda..',
                         controller: model.reviewController)),
                 SizedBox(
                   height: margin16,
                 ),
-                FormHelper.elevatedButtonBasic(context, enabled: true,
+                ElevatedButtonWidget(
+                    enabled: true,
                     onTap: () {
-                  model.onSubmit(context,
-                      isHotel: isHotel,
-                      transactionId: transactionId,
-                      id: hunianId.toString(),
-                      roomId: roomId.toString());
-                }, title: 'Review'),
+                      model.onSubmit(context,
+                          isHotel: isHotel,
+                          transactionId: transactionId,
+                          id: hunianId.toString(),
+                          roomId: roomId.toString());
+                    },
+                    title: 'Review'),
                 SizedBox(
                   height: margin72,
                 )

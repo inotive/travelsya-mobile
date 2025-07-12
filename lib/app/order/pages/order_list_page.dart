@@ -11,12 +11,12 @@ import 'package:travelsya/shared/helper/function_helper.dart';
 import 'package:travelsya/shared/styles/font_style.dart';
 import 'package:travelsya/shared/styles/size_styles.dart';
 import 'package:travelsya/shared/styles/theme_style.dart';
-import 'package:sizer/sizer.dart';
 import 'package:travelsya/shared/widgets/appbar_widget.dart';
 import 'package:travelsya/shared/widgets/failed_request_widget.dart';
+import 'package:travelsya/shared/widgets/statusbar_widget.dart';
 
 class OrderListPage extends StatefulWidget {
-  const OrderListPage({Key? key}) : super(key: key);
+  const OrderListPage({super.key});
 
   @override
   State<OrderListPage> createState() => _OrderListPageState();
@@ -32,14 +32,14 @@ class _OrderListPageState extends State<OrderListPage> {
     }, onViewModelReady: (model) {
       model.onInit(context);
     }, builder: (context, model, child) {
-      return SafeArea(
+      return StatusbarWidget(
           child: Scaffold(
         appBar: appbarBasicWidget(context, title: 'Pesanan Anda'),
         backgroundColor: Colors.white,
         body: Column(
           children: [
             Container(
-              padding: EdgeInsets.symmetric(vertical: 3.0.w),
+              padding: EdgeInsets.symmetric(vertical: margin24 / 2),
               width: double.infinity,
               decoration: BoxDecoration(
                   border: Border(
@@ -54,10 +54,12 @@ class _OrderListPageState extends State<OrderListPage> {
                       },
                       child: Container(
                         margin: EdgeInsets.only(
-                            left: index == 0 ? 3.0.w : 1.0.w,
-                            right: index == filterData.length - 1 ? 3.0.w : 0),
+                            left: index == 0 ? margin24 / 2 : margin4,
+                            right: index == filterData.length - 1
+                                ? margin24 / 2
+                                : 0),
                         padding: EdgeInsets.symmetric(
-                            vertical: 1.0.w, horizontal: 5.0.w),
+                            vertical: margin4, horizontal: margin16),
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20),
                             color: index == model.selectedFilter
@@ -70,7 +72,7 @@ class _OrderListPageState extends State<OrderListPage> {
                         child: Text(
                           filterData[index],
                           style: mainFont.copyWith(
-                              fontSize: 10.0.sp,
+                              fontSize: 12,
                               fontWeight: FontWeight.bold,
                               color: index == model.selectedFilter
                                   ? Theme.of(context).primaryColor
@@ -134,8 +136,8 @@ class _OrderListPageState extends State<OrderListPage> {
                                 },
                                 color: Theme.of(context).primaryColor,
                                 child: ListView(
-                                  padding:
-                                      EdgeInsets.symmetric(horizontal: 5.0.w),
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: margin16),
                                   children: List.generate(
                                       model.dataAfterFilter(state.data).length,
                                       (index) {
@@ -153,15 +155,15 @@ class _OrderListPageState extends State<OrderListPage> {
                                       },
                                       child: Container(
                                         margin: EdgeInsets.only(
-                                            top: index == 0 ? 2.0.w : 0,
+                                            top: index == 0 ? margin8 : 0,
                                             bottom: index ==
                                                     model
                                                             .dataAfterFilter(
                                                                 state.data)
                                                             .length -
                                                         1
-                                                ? 10.0.w
-                                                : 3.0.w),
+                                                ? margin40
+                                                : margin24 / 2),
                                         decoration: BoxDecoration(
                                             borderRadius:
                                                 BorderRadius.circular(10),
@@ -171,8 +173,8 @@ class _OrderListPageState extends State<OrderListPage> {
                                           children: [
                                             Container(
                                               padding: EdgeInsets.symmetric(
-                                                  vertical: 3.0.w,
-                                                  horizontal: 5.0.w),
+                                                  vertical: margin24 / 2,
+                                                  horizontal: margin16),
                                               decoration: const BoxDecoration(
                                                   border: Border(
                                                       bottom: BorderSide(
@@ -200,8 +202,8 @@ class _OrderListPageState extends State<OrderListPage> {
                                                   top: 0,
                                                   right: 0,
                                                   child: SizedBox(
-                                                    width: 12.0.w,
-                                                    height: 12.0.w,
+                                                    width: 50,
+                                                    height: 50,
                                                     child: Image.asset(
                                                       'assets/icons/Group 23.png',
                                                       fit: BoxFit.cover,
@@ -210,8 +212,8 @@ class _OrderListPageState extends State<OrderListPage> {
                                                 ),
                                                 Container(
                                                   padding: EdgeInsets.symmetric(
-                                                      vertical: 5.0.w,
-                                                      horizontal: 5.0.w),
+                                                      vertical: margin16,
+                                                      horizontal: margin16),
                                                   child: Row(children: [
                                                     SizedBox(
                                                       width: 30,
@@ -222,14 +224,14 @@ class _OrderListPageState extends State<OrderListPage> {
                                                               .toUpperCase())),
                                                     ),
                                                     SizedBox(
-                                                      width: 3.0.w,
+                                                      width: margin24 / 2,
                                                     ),
                                                     Expanded(
                                                         child: model
                                                             .getDetailWidget(
                                                                 context, data)),
                                                     SizedBox(
-                                                      width: 3.0.w,
+                                                      width: margin24 / 2,
                                                     ),
                                                     const Icon(
                                                       Icons
@@ -243,8 +245,8 @@ class _OrderListPageState extends State<OrderListPage> {
                                             ),
                                             Container(
                                               padding: EdgeInsets.symmetric(
-                                                  vertical: 3.0.w,
-                                                  horizontal: 5.0.w),
+                                                  vertical: margin24 / 2,
+                                                  horizontal: margin16),
                                               decoration: const BoxDecoration(
                                                   border: Border(
                                                       top: BorderSide(

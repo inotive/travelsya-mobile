@@ -1,40 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
-import 'package:sizer/sizer.dart';
 import 'package:stacked/stacked.dart';
 import 'package:travelsya/app/auth/viewmodel/otp_vm.dart';
 import 'package:travelsya/shared/helper/const_helper.dart';
 import 'package:travelsya/shared/styles/font_style.dart';
-import 'package:travelsya/shared/widgets/form_helper.dart';
+import 'package:travelsya/shared/styles/size_styles.dart';
+import 'package:travelsya/shared/widgets/form_helper/elevated_button_widget.dart';
+import 'package:travelsya/shared/widgets/statusbar_widget.dart';
 
 class OTPPage extends StatelessWidget {
   final String email;
-  const OTPPage({Key? key, required this.email}) : super(key: key);
+  const OTPPage({super.key, required this.email});
 
   @override
   Widget build(BuildContext context) {
-    final defaultPinTheme = PinTheme(
-      width: 12.0.w,
-      height: 12.0.w,
-      textStyle: mainFont.copyWith(
-          fontSize: 13.0.sp,
-          color: Theme.of(context).primaryColor,
-          fontWeight: FontWeight.w600),
-      decoration: const BoxDecoration(
-        border: Border(bottom: BorderSide(color: Colors.black38)),
-      ),
-    );
-
     return ViewModelBuilder<OTPVM>.reactive(viewModelBuilder: () {
       return OTPVM();
     }, onViewModelReady: (model) {
       model.onInit(context);
     }, builder: (context, model, child) {
-      return SafeArea(
+      return StatusbarWidget(
           child: Scaffold(
         backgroundColor: Colors.white,
         body: Column(
           children: [
+            SizedBox(
+              height: MediaQuery.of(context).padding.top,
+            ),
             Expanded(
               child: SingleChildScrollView(
                 child: Column(
@@ -42,68 +34,67 @@ class OTPPage extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     SizedBox(
-                      height: 10.0.w,
+                      height: margin32,
                     ),
                     Container(
-                      width: 20.0.w,
-                      height: 20.0.w,
+                      width: 65,
+                      height: 65,
                       decoration: const BoxDecoration(
                           shape: BoxShape.circle, color: Color(0xffF4F4F4)),
                       alignment: Alignment.center,
                       child: SizedBox(
-                        width: 10.0.w,
-                        height: 10.0.w,
+                        width: 32,
+                        height: 32,
                         child: Image.asset(ConstHelper.padlockIcon),
                       ),
                     ),
                     SizedBox(
-                      height: 10.0.w,
+                      height: margin32,
                     ),
                     Text(
                       'Verifikasi Akun',
                       style: mainFont.copyWith(
-                          fontSize: 15.0.sp,
+                          fontSize: 17,
                           color: Colors.black87,
                           fontWeight: FontWeight.bold),
                     ),
                     SizedBox(
-                      height: 5.0.w,
+                      height: margin16,
                     ),
                     Text(
                       'Masukkan kode OTP yang telah dikirim ke',
                       style: mainFont.copyWith(
-                          fontSize: 11.0.sp, color: Colors.black87),
+                          fontSize: 13, color: Colors.black87),
                     ),
                     Text(
                       email,
                       style: mainFont.copyWith(
                           fontWeight: FontWeight.bold,
-                          fontSize: 11.0.sp,
+                          fontSize: 13,
                           color: Colors.black87),
                     ),
                     SizedBox(
-                      height: 10.0.w,
+                      height: margin32,
                     ),
                     Container(
-                      width: 80.0.w,
-                      padding: EdgeInsets.all(5.0.w),
+                      padding: EdgeInsets.all(margin16),
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(6),
                           color: const Color(0xffF4F4F4)),
                       child: Pinput(
                         length: 6,
-                        controller: model.emailController,
-                        defaultPinTheme: defaultPinTheme,
-                        focusedPinTheme: defaultPinTheme.copyDecorationWith(
-                          border:
-                              Border.all(color: Theme.of(context).primaryColor),
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        submittedPinTheme: defaultPinTheme.copyDecorationWith(
-                          border:
-                              Border.all(color: Theme.of(context).primaryColor),
-                          borderRadius: BorderRadius.circular(8),
-                        ),
+                        controller: model.codeController,
+                        defaultPinTheme: model.getThemeDefaultTheme(context),
+                        focusedPinTheme: model
+                            .getThemeDefaultTheme(context)
+                            .copyDecorationWith(
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                        submittedPinTheme: model
+                            .getThemeDefaultTheme(context)
+                            .copyDecorationWith(
+                              borderRadius: BorderRadius.circular(8),
+                            ),
                         pinputAutovalidateMode: PinputAutovalidateMode.onSubmit,
                         showCursor: true,
                         onCompleted: (pin) {
@@ -112,12 +103,12 @@ class OTPPage extends StatelessWidget {
                       ),
                     ),
                     SizedBox(
-                      height: 10.0.w,
+                      height: margin32,
                     ),
                     Text(
                       'Tidak terima Kode OTP?',
                       style: mainFont.copyWith(
-                          fontSize: 11.0.sp, color: Colors.black87),
+                          fontSize: 13, color: Colors.black87),
                     ),
                     model.timerResend
                         ? GestureDetector(
@@ -128,29 +119,30 @@ class OTPPage extends StatelessWidget {
                               'Kirim Ulang',
                               style: mainFont.copyWith(
                                   fontWeight: FontWeight.bold,
-                                  fontSize: 11.0.sp,
+                                  fontSize: 13,
                                   color: Theme.of(context).primaryColor),
                             ),
                           )
                         : Text(
                             'Kirim Ulang (00:${model.countDown.toString().padLeft(2, '0')})',
                             style: mainFont.copyWith(
-                                fontSize: 11.0.sp, color: Colors.grey),
+                                fontSize: 13, color: Colors.grey),
                           ),
                     SizedBox(
-                      height: 10.0.w,
+                      height: margin32,
                     ),
                   ],
                 ),
               ),
             ),
             Container(
-                padding: EdgeInsets.all(5.0.w),
-                child: SizedBox(
-                  width: 90.0.w,
-                  child: FormHelper.elevatedButtonBasic(context,
-                      enabled: true, onTap: () {}, title: 'Verifikasi Akun'),
-                ))
+                padding: EdgeInsets.all(margin16),
+                child: ElevatedButtonWidget(
+                    enabled: true,
+                    onTap: () {
+                      model.onSubmit(context, model.codeController.text);
+                    },
+                    title: 'Verifikasi Akun'))
           ],
         ),
       ));

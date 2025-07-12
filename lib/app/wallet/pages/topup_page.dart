@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
 import 'package:travelsya/shared/styles/font_style.dart';
+import 'package:travelsya/shared/styles/size_styles.dart';
 import 'package:travelsya/shared/styles/theme_style.dart';
 import 'package:travelsya/shared/widgets/form_helper.dart';
+import 'package:travelsya/shared/widgets/form_helper/elevated_button_widget.dart';
 
 class TopupPage extends StatelessWidget {
-  const TopupPage({Key? key}) : super(key: key);
+  const TopupPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +15,7 @@ class TopupPage extends StatelessWidget {
       body: Column(
         children: [
           Container(
-            padding: EdgeInsets.all(5.0.w),
+            padding: EdgeInsets.all(margin16),
             decoration: BoxDecoration(
                 border: Border(
                     bottom: BorderSide(color: neutral30.withOpacity(0.3)))),
@@ -30,12 +31,12 @@ class TopupPage extends StatelessWidget {
                   ),
                 ),
                 SizedBox(
-                  width: 3.0.w,
+                  width: margin24 / 2,
                 ),
                 Text(
                   'Topup E-Wallet',
                   style: mainFont.copyWith(
-                      fontSize: 13.0.sp,
+                      fontSize: 15,
                       color: neutral100,
                       fontWeight: FontWeight.bold),
                 )
@@ -46,25 +47,25 @@ class TopupPage extends StatelessWidget {
               child: ListView(
             children: [
               Container(
-                padding: EdgeInsets.all(5.0.w),
+                padding: EdgeInsets.all(margin16),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       'Pilih Nominal',
                       style: mainFont.copyWith(
-                          fontSize: 12.0.sp,
+                          fontSize: 14,
                           color: neutral100,
                           fontWeight: FontWeight.bold),
                     ),
                     SizedBox(
-                      height: 3.0.w,
+                      height: margin24 / 2,
                     ),
                     SizedBox(
                       width: double.infinity,
                       child: Wrap(
                         alignment: WrapAlignment.spaceBetween,
-                        runSpacing: 3.0.w,
+                        runSpacing: margin24 / 2,
                         children: List.generate(10, (index) {
                           return Stack(
                             children: [
@@ -81,8 +82,8 @@ class TopupPage extends StatelessWidget {
                                       color: Colors.white),
                                   alignment: Alignment.topRight,
                                   child: SizedBox(
-                                    width: 15.0.w,
-                                    height: 15.0.w,
+                                    width: 45,
+                                    height: 45,
                                     child: Image.asset(
                                       'assets/icons/Group 23.png',
                                       fit: BoxFit.cover,
@@ -93,7 +94,7 @@ class TopupPage extends StatelessWidget {
                               FractionallySizedBox(
                                 widthFactor: 0.32,
                                 child: Container(
-                                  padding: EdgeInsets.all(3.0.w),
+                                  padding: EdgeInsets.all(margin24 / 2),
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(10),
                                       border: Border.all(
@@ -105,14 +106,14 @@ class TopupPage extends StatelessWidget {
                                       Text(
                                         '5,000',
                                         style: mainFont.copyWith(
-                                            fontSize: 12.0.sp,
+                                            fontSize: 14,
                                             color: neutral100,
                                             fontWeight: FontWeight.bold),
                                       ),
                                       Text(
                                         'Bayar 6,000',
                                         style: mainFont.copyWith(
-                                          fontSize: 9.0.sp,
+                                          fontSize: 11,
                                           color: neutral30,
                                         ),
                                       ),
@@ -129,27 +130,27 @@ class TopupPage extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                height: 5.0.w,
+                height: margin16,
               ),
               Container(
                 width: double.infinity,
-                height: 2.0.w,
+                height: margin8,
                 color: neutral10,
               ),
               Container(
-                padding: EdgeInsets.all(5.0.w),
+                padding: EdgeInsets.all(margin16),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       'Metode Pembayaran',
                       style: mainFont.copyWith(
-                          fontSize: 13.0.sp,
+                          fontSize: 15,
                           color: neutral100,
                           fontWeight: FontWeight.bold),
                     ),
                     SizedBox(
-                      height: 5.0.w,
+                      height: margin16,
                     ),
                     Row(
                       children: [
@@ -162,21 +163,21 @@ class TopupPage extends StatelessWidget {
                                 customDetailWidget: Text(
                                   'Balance : Rp32,456',
                                   style: mainFont.copyWith(
-                                      fontSize: 10.0.sp, color: neutral100),
+                                      fontSize: 12, color: neutral100),
                                 ))),
                         SizedBox(
-                          width: 3.0.w,
+                          width: margin24 / 2,
                         ),
                         Container(
                           padding: EdgeInsets.symmetric(
-                              vertical: 2.0.w, horizontal: 3.0.w),
+                              vertical: margin8, horizontal: margin24 / 2),
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
                               color: const Color(0xffffeef1)),
                           child: Text(
                             'Topup',
                             style: mainFont.copyWith(
-                                fontSize: 10.0.sp,
+                                fontSize: 12,
                                 color: Theme.of(context).primaryColor,
                                 fontWeight: FontWeight.bold),
                           ),
@@ -184,7 +185,7 @@ class TopupPage extends StatelessWidget {
                       ],
                     ),
                     SizedBox(
-                      height: 3.0.w,
+                      height: margin24 / 2,
                     ),
                     FormHelper.optionsCircle(context,
                         title: 'Metode Pembayaran Lain',
@@ -196,11 +197,11 @@ class TopupPage extends StatelessWidget {
             ],
           )),
           Container(
-            padding: EdgeInsets.all(5.0.w),
+            padding: EdgeInsets.all(margin16),
             decoration: BoxDecoration(
                 border:
                     Border(top: BorderSide(color: neutral30.withOpacity(0.3)))),
-            child: FormHelper.elevatedButtonBasic(context,
+            child: ElevatedButtonWidget(
                 enabled: true, onTap: () {}, title: 'Topup IDR 11,000'),
           )
         ],

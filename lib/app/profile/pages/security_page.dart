@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:travelsya/shared/styles/font_style.dart';
+import 'package:travelsya/shared/styles/size_styles.dart';
 import 'package:travelsya/shared/styles/theme_style.dart';
-import 'package:sizer/sizer.dart';
-import 'package:travelsya/shared/widgets/form_helper.dart';
+import 'package:travelsya/shared/widgets/form_helper/elevated_button_widget.dart';
+import 'package:travelsya/shared/widgets/form_helper/rounded_texfield_widget.dart';
+import 'package:travelsya/shared/widgets/form_helper/title_with_widget.dart';
 
 class SecurityPage extends StatelessWidget {
-  const SecurityPage({Key? key}) : super(key: key);
+  const SecurityPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +16,7 @@ class SecurityPage extends StatelessWidget {
             backgroundColor: Colors.white,
             body: Column(children: [
               Container(
-                padding: EdgeInsets.all(5.0.w),
+                padding: EdgeInsets.all(margin16),
                 color: Theme.of(context).primaryColor,
                 child: Row(
                   children: [
@@ -28,13 +30,13 @@ class SecurityPage extends StatelessWidget {
                       ),
                     ),
                     SizedBox(
-                      width: 3.0.w,
+                      width: margin24 / 2,
                     ),
                     Expanded(
                         child: Text(
                       'Keamanan',
                       style: mainFont.copyWith(
-                          fontSize: 13.0.sp,
+                          fontSize: 15,
                           color: Colors.white,
                           fontWeight: FontWeight.bold),
                     ))
@@ -45,19 +47,19 @@ class SecurityPage extends StatelessWidget {
                   child: ListView(
                 children: [
                   Container(
-                    padding: EdgeInsets.all(5.0.w),
+                    padding: EdgeInsets.all(margin16),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
                           'Biometrik',
                           style: mainFont.copyWith(
-                              fontSize: 13.0.sp,
+                              fontSize: 15,
                               color: neutral100,
                               fontWeight: FontWeight.bold),
                         ),
                         SizedBox(
-                          height: 3.0.w,
+                          height: margin24 / 2,
                         ),
                         Row(
                           children: [
@@ -65,10 +67,10 @@ class SecurityPage extends StatelessWidget {
                                 child: Text(
                               'Login lebih cepat dan aman dengan sidik jari atau pengenalan wajah',
                               style: mainFont.copyWith(
-                                  fontSize: 10.0.sp, color: neutral100),
+                                  fontSize: 12, color: neutral100),
                             )),
                             SizedBox(
-                              width: 3.0.w,
+                              width: margin24 / 2,
                             ),
                             Switch(
                               value: true,
@@ -81,38 +83,38 @@ class SecurityPage extends StatelessWidget {
                     ),
                   ),
                   Container(
-                    height: 2.0.w,
+                    height: 8,
                     width: double.infinity,
                     color: neutral10,
                   ),
                   Container(
-                    padding: EdgeInsets.all(5.0.w),
+                    padding: EdgeInsets.all(margin16),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
                           'Ubah Kata Sandi',
                           style: mainFont.copyWith(
-                              fontSize: 13.0.sp,
+                              fontSize: 15,
                               color: neutral100,
                               fontWeight: FontWeight.bold),
                         ),
                         SizedBox(
-                          height: 3.0.w,
+                          height: margin24 / 2,
                         ),
-                        FormHelper.titleWithWidget(
+                        TitleWithWidget(
                             title: 'Kata Sandi Lama',
-                            widget: FormHelper.roundedTextfield(context,
+                            child: RoundedTextfield(
                                 controller: TextEditingController(),
                                 suffixWidget:
                                     const Icon(Icons.visibility_off_outlined),
                                 hintText: 'Kata Sandi Lama')),
                         SizedBox(
-                          height: 5.0.w,
+                          height: margin16,
                         ),
-                        FormHelper.titleWithWidget(
+                        TitleWithWidget(
                             title: 'Kata Sandi Baru',
-                            widget: FormHelper.roundedTextfield(context,
+                            child: RoundedTextfield(
                                 controller: TextEditingController(),
                                 suffixWidget:
                                     const Icon(Icons.visibility_off_outlined),
@@ -121,13 +123,13 @@ class SecurityPage extends StatelessWidget {
                     ),
                   ),
                   SizedBox(
-                    height: 5.0.w,
+                    height: margin16,
                   ),
                 ],
               )),
               Container(
-                padding: EdgeInsets.all(5.0.w),
-                child: FormHelper.elevatedButtonBasic(context,
+                padding: EdgeInsets.all(margin16),
+                child: ElevatedButtonWidget(
                     enabled: true, onTap: () {}, title: 'Update Kata Sandi'),
               )
             ])));

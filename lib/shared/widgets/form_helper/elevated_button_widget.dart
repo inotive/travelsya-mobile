@@ -26,6 +26,7 @@ class ElevatedButtonWidget extends StatelessWidget {
             elevation: 0,
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+            foregroundColor: Colors.white,
             backgroundColor:
                 isLoading ? Colors.grey : Theme.of(context).primaryColor),
         onPressed: enabled ? onTap : null,
@@ -36,7 +37,7 @@ class ElevatedButtonWidget extends StatelessWidget {
           child: Center(
             heightFactor: 1,
             child: Text(title,
-                style: mainBody3.copyWith(
+                style: mainBody4.copyWith(
                     fontSize: customTextSize ?? 14,
                     fontWeight: FontWeight.bold)),
           ),

@@ -117,10 +117,12 @@ class _HotelSearchFilterSection extends StatelessWidget {
                 SizedBox(
                   height: margin16,
                 ),
-                FormHelper.elevatedButtonBasic(context, enabled: true,
+                ElevatedButtonWidget(
+                    enabled: true,
                     onTap: () {
-                  model.onSearchHotel(context);
-                }, title: 'Cari Hotel')
+                      model.onSearchHotel(context);
+                    },
+                    title: 'Cari Hotel')
               ],
             ),
           );

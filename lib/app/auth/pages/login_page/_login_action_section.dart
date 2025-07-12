@@ -19,7 +19,7 @@ class _LoginActionSection extends StatelessWidget {
                   model.onRegisterTap(context);
                 },
                 child: Text('Daftar',
-                    style: mainBody4.copyWith(
+                    style: mainBody5.copyWith(
                         fontWeight: FontWeight.bold,
                         color: Theme.of(context).primaryColor)),
               ),
@@ -30,10 +30,12 @@ class _LoginActionSection extends StatelessWidget {
           ),
           Container(
             margin: EdgeInsets.symmetric(horizontal: margin16),
-            child: FormHelper.elevatedButtonBasic(context, enabled: true,
+            child: ElevatedButtonWidget(
+                enabled: true,
                 onTap: () {
-              model.onLogin(context);
-            }, title: 'Masuk'),
+                  model.onLogin(context);
+                },
+                title: 'Masuk'),
           )
         ],
       ),

@@ -1,320 +1,431 @@
 import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:stacked/stacked.dart';
+import 'package:travelsya/app/rekreasi/cubits/recreation_cubit.dart';
+import 'package:travelsya/app/rekreasi/cubits/recreation_state.dart';
+import 'package:travelsya/app/rekreasi/models/recreation_model.dart';
 import 'package:travelsya/app/rekreasi/pages/rekreasi_detail_page.dart';
-import 'package:travelsya/shared/helper/const_helper.dart';
+import 'package:travelsya/app/rekreasi/pages/rekreasi_search_result_page.dart';
+import 'package:travelsya/app/rekreasi/viewmodel/recreation_main_vm.dart';
+import 'package:travelsya/shared/helper/function_helper.dart';
 import 'package:travelsya/shared/styles/font_style.dart';
+import 'package:travelsya/shared/styles/size_styles.dart';
 import 'package:travelsya/shared/widgets/form_helper.dart';
+import 'package:travelsya/shared/widgets/form_helper/elevated_button_widget.dart';
+import 'package:travelsya/shared/widgets/no_data_widget.dart';
 
-class RekreasiSearchPage extends StatefulWidget {
-  const RekreasiSearchPage({Key? key}) : super(key: key);
-
-  @override
-  State<RekreasiSearchPage> createState() => _RekreasiSearchPageState();
-}
-
-class _RekreasiSearchPageState extends State<RekreasiSearchPage> {
-  List<String> dataFilter = [
-    'Atraksi',
-    'Spa & Kecantikan',
-    'Event',
-    'Arena Bermain'
-  ];
+class RekreasiSearchPage extends StatelessWidget {
+  const RekreasiSearchPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Stack(
-        children: [
-          Container(
-            width: double.infinity,
-            height: double.infinity,
-            alignment: Alignment.topCenter,
-            child: Container(
-              width: 100.0.w,
-              height: 30.0.h,
-              decoration: const BoxDecoration(
-                  image: DecorationImage(
-                      fit: BoxFit.cover,
-                      image: AssetImage(
-                          'assets/images/edvin-johansson-rlwE8f8anOc-unsplash 1 (1).png'))),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'Rekreasi',
-                    style: mainFont.copyWith(
-                        fontSize: 15.0.sp,
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold),
+    return ViewModelBuilder<RecreationMainVM>.reactive(viewModelBuilder: () {
+      return RecreationMainVM();
+    }, onViewModelReady: (model) {
+      model.onLoadCategory(context);
+    }, builder: (context, model, child) {
+      return Scaffold(
+        body: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            Stack(
+              children: [
+                Container(
+                  width: double.infinity,
+                  height: 200,
+                  decoration: const BoxDecoration(
+                      image: DecorationImage(
+                          fit: BoxFit.cover,
+                          image: AssetImage(
+                              'assets/images/edvin-johansson-rlwE8f8anOc-unsplash 1 (1).png'))),
+                  child: Container(
+                    width: double.infinity,
+                    height: double.infinity,
+                    color: Colors.black45,
                   ),
-                  Text(
-                    'Cari aktivitas dan atraksi menyenangkan',
-                    style: mainFont.copyWith(
-                      fontSize: 11.0.sp,
-                      color: Colors.white,
-                    ),
-                  ),
-                  SizedBox(
-                    height: 2.0.h,
-                  )
-                ],
-              ),
-            ),
-          ),
-          Positioned(
-            left: 3.0.w,
-            top: 9.0.w,
-            child: GestureDetector(
-              onTap: () {
-                Navigator.pop(context);
-              },
-              child: Container(
-                width: 10.0.w,
-                height: 10.0.w,
-                decoration: const BoxDecoration(
-                    shape: BoxShape.circle, color: Colors.white),
-                child: Icon(
-                  Icons.arrow_back,
-                  color: Theme.of(context).primaryColor,
                 ),
+                Positioned(
+                  left: margin16,
+                  top: MediaQuery.of(context).padding.top + margin24,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
+                        child: Container(
+                          width: 37,
+                          height: 37,
+                          decoration: const BoxDecoration(
+                              shape: BoxShape.circle, color: Colors.white),
+                          alignment: Alignment.center,
+                          child: SizedBox(
+                            width: 16,
+                            height: 16,
+                            child: Image.asset('assets/new/back.png'),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: margin48,
+                      ),
+                      Text(
+                        'Rekreasi',
+                        style: mainBody3.copyWith(
+                            color: Colors.white, fontWeight: FontWeight.bold),
+                      ),
+                    ],
+                  ),
+                ),
+                Positioned(
+                  bottom: 0,
+                  left: 0,
+                  right: 0,
+                  child: Container(
+                    width: double.infinity,
+                    height: 20,
+                    decoration: const BoxDecoration(
+                        borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(20),
+                            topRight: Radius.circular(20)),
+                        color: Colors.white),
+                  ),
+                )
+              ],
+            ),
+            SizedBox(
+              height: margin16,
+            ),
+            Container(
+              margin: EdgeInsets.symmetric(horizontal: margin16),
+              child: GestureDetector(
+                onTap: () async {
+                  model.onChangeSelectedCity(context);
+                },
+                child: FormHelper.dropdownForm(context,
+                    data: model.selectedCity ?? 'Semua Lokasi',
+                    hintText: 'Kota Reservasi'),
               ),
             ),
-          ),
-          Positioned(
-            bottom: 0,
-            child: Container(
-              width: 100.0.w,
-              height: 75.0.h,
-              decoration: const BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(24),
-                      topRight: Radius.circular(24))),
-              child: ListView(
+            SizedBox(
+              height: margin16,
+            ),
+            Container(
+                margin: EdgeInsets.symmetric(horizontal: margin16),
+                child: ElevatedButtonWidget(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (_) => RekreasiSearchResultPage(
+                                  city: model.selectedCity,
+                                )));
+                  },
+                  title: 'Cari Sekarang',
+                )),
+            SizedBox(
+              height: margin16,
+            ),
+            SizedBox(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(
-                    height: 5.0.w,
-                  ),
                   Container(
-                    padding: EdgeInsets.symmetric(horizontal: 5.0.w),
-                    child: Column(
-                      children: [
-                        FormHelper.dropdownForm(context,
-                            hintText: 'Cari Aktivitas',
-                            customIcons: Icons.search),
-                      ],
+                    padding: EdgeInsets.symmetric(horizontal: margin16),
+                    child: Text(
+                      'Apa yang ingin kamu lakukan?',
+                      style: mainBody3.copyWith(
+                          color: Colors.black87, fontWeight: FontWeight.bold),
                     ),
                   ),
                   SizedBox(
-                    height: 5.0.w,
+                    height: margin24 / 2,
                   ),
-                  SizedBox(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          padding: EdgeInsets.symmetric(horizontal: 5.0.w),
-                          child: Text(
-                            'Apa yang ingin kamu lakukan?',
-                            style: mainFont.copyWith(
-                                fontSize: 13.0.sp,
-                                color: Colors.black87,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 3.0.w,
-                        ),
-                        SingleChildScrollView(
-                          scrollDirection: Axis.horizontal,
-                          child: Row(
-                            children: List.generate(dataFilter.length, (index) {
-                              return Container(
-                                margin: EdgeInsets.only(
-                                    left: index == 0 ? 5.0.w : 1.0.w,
-                                    right: index == 9 ? 5.0.w : 0),
-                                padding: EdgeInsets.symmetric(
-                                    vertical: 1.0.w, horizontal: 5.0.w),
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(20),
-                                    color: index == 0
-                                        ? const Color(0xffFFEEF1)
-                                        : Colors.transparent,
-                                    border: Border.all(
-                                        color: index == 0
-                                            ? Theme.of(context).primaryColor
-                                            : const Color(0xffA5A5A5))),
-                                child: Text(
-                                  dataFilter[index],
-                                  style: mainFont.copyWith(
-                                      fontSize: 10.0.sp,
-                                      color: index == 0
-                                          ? Theme.of(context).primaryColor
-                                          : const Color(0xffA5A5A5)),
-                                ),
-                              );
-                            }),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 5.0.w,
-                        ),
-                        Container(
-                          padding: EdgeInsets.symmetric(horizontal: 5.0.w),
-                          width: double.infinity,
-                          child: Wrap(
-                            alignment: WrapAlignment.spaceBetween,
-                            children: List.generate(4, (index) {
-                              return FractionallySizedBox(
-                                widthFactor: 0.49,
-                                child: GestureDetector(
-                                  onTap: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (_) =>
-                                                const RekreasiDetailPage()));
-                                  },
-                                  child: Card(
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(8)),
-                                    child: Column(
-                                      children: [
-                                        AspectRatio(
-                                          aspectRatio: 167 / 100,
-                                          child: Container(
-                                            width: double.infinity,
-                                            height: double.infinity,
-                                            decoration: const BoxDecoration(
-                                                borderRadius: BorderRadius.only(
-                                                    topLeft: Radius.circular(8),
-                                                    topRight:
-                                                        Radius.circular(8)),
-                                                image: DecorationImage(
-                                                    fit: BoxFit.cover,
-                                                    image: AssetImage(
-                                                        ConstHelper
-                                                            .helperPhoto))),
+                  BlocBuilder<RecreationCubit, RecreationState>(
+                      bloc: model.recreationCategoryCubit,
+                      builder: (context, stateCategory) {
+                        if (stateCategory is RecreationLoading) {
+                          return Container(
+                            margin: EdgeInsets.only(left: margin16),
+                            width: 25,
+                            height: 25,
+                            child: CircularProgressIndicator(
+                              color: Theme.of(context).primaryColor,
+                            ),
+                          );
+                        } else if (stateCategory is RecreationCategoryLoaded) {
+                          return Column(
+                            children: [
+                              SizedBox(
+                                width: double.infinity,
+                                child: SingleChildScrollView(
+                                  scrollDirection: Axis.horizontal,
+                                  child: Row(
+                                    children: List.generate(
+                                        stateCategory.data.length, (index) {
+                                      return GestureDetector(
+                                        onTap: () {
+                                          model.onChangeIndexCategory(context,
+                                              stateCategory.data[index].id);
+                                        },
+                                        child: Container(
+                                          margin: EdgeInsets.only(
+                                              left: index == 0
+                                                  ? margin16
+                                                  : margin4,
+                                              right: index ==
+                                                      stateCategory
+                                                              .data.length -
+                                                          1
+                                                  ? margin16
+                                                  : 0),
+                                          padding: EdgeInsets.symmetric(
+                                              vertical: margin4,
+                                              horizontal: margin16),
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(20),
+                                              color: stateCategory
+                                                          .data[index].id ==
+                                                      model.selectedCategory
+                                                  ? const Color(0xffFFEEF1)
+                                                  : Colors.transparent,
+                                              border: Border.all(
+                                                  color: stateCategory
+                                                              .data[index].id ==
+                                                          model.selectedCategory
+                                                      ? Theme.of(context)
+                                                          .primaryColor
+                                                      : const Color(
+                                                          0xffA5A5A5))),
+                                          child: Text(
+                                            stateCategory.data[index].name,
+                                            style: mainBody4.copyWith(
+                                                color: stateCategory
+                                                            .data[index].id ==
+                                                        model.selectedCategory
+                                                    ? Theme.of(context)
+                                                        .primaryColor
+                                                    : const Color(0xffA5A5A5)),
                                           ),
                                         ),
-                                        Container(
-                                          padding: EdgeInsets.all(3.0.w),
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                'Martha Tilaar Salon & Day Spa',
-                                                maxLines: 2,
-                                                overflow: TextOverflow.ellipsis,
-                                                style: mainFont.copyWith(
-                                                    fontSize: 11.0.sp,
-                                                    color: Colors.black87,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              ),
-                                              Text(
-                                                'Jakarta Utara',
-                                                style: mainFont.copyWith(
-                                                    fontSize: 8.0.sp,
-                                                    color: const Color(
-                                                        0xffa5a5a5)),
-                                              ),
-                                              SizedBox(
-                                                height: 2.0.w,
-                                              ),
-                                              Row(
-                                                children: [
-                                                  Text(
-                                                    'mulai dari ',
-                                                    style: mainFont.copyWith(
-                                                        fontSize: 8.0.sp,
-                                                        color: const Color(
-                                                            0xffa5a5a5)),
-                                                  ),
-                                                  Text(
-                                                    '500.000',
-                                                    style: mainFont.copyWith(
-                                                        fontSize: 8.0.sp,
-                                                        decoration:
-                                                            TextDecoration
-                                                                .lineThrough,
-                                                        color: const Color(
-                                                            0xffa5a5a5)),
-                                                  )
-                                                ],
-                                              ),
-                                              Text(
-                                                'IDR 400,500',
-                                                style: mainFont.copyWith(
-                                                    fontSize: 12.0.sp,
-                                                    color: Theme.of(context)
-                                                        .primaryColor,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              ),
-                                              SizedBox(
-                                                height: 2.0.w,
-                                              ),
-                                              Row(
-                                                children: [
-                                                  Icon(
-                                                    Icons.star,
-                                                    color: Theme.of(context)
-                                                        .primaryColor,
-                                                  ),
-                                                  SizedBox(
-                                                    width: 1.0.w,
-                                                  ),
-                                                  Text(
-                                                    '4,8 ',
-                                                    style: mainFont.copyWith(
-                                                        fontSize: 11.0.sp,
-                                                        color: Colors.black87,
-                                                        fontWeight:
-                                                            FontWeight.bold),
-                                                  ),
-                                                  Text(
-                                                    '(120)',
-                                                    style: mainFont.copyWith(
-                                                      fontSize: 8.0.sp,
-                                                      color: const Color(
-                                                          0xffa5a5a5),
-                                                    ),
-                                                  )
-                                                ],
-                                              )
-                                            ],
-                                          ),
-                                        ),
-                                      ],
-                                    ),
+                                      );
+                                    }),
                                   ),
                                 ),
-                              );
-                            }),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 5.0.w,
-                        ),
-                        Container(
-                          padding: EdgeInsets.symmetric(horizontal: 5.0.w),
-                          child: FormHelper.borderButton(context,
-                              onTap: () {}, title: 'Lihat Semua'),
-                        )
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 10.0.w,
-                  )
+                              ),
+                              SizedBox(
+                                height: margin16,
+                              ),
+                              BlocBuilder<RecreationCubit, RecreationState>(
+                                  bloc: model.recreationPreviewCubit,
+                                  builder: (context, state) {
+                                    if (state is RecreationLoading) {
+                                      return Container(
+                                        margin: EdgeInsets.only(top: margin24),
+                                        alignment: Alignment.center,
+                                        child: CircularProgressIndicator(
+                                          color: Theme.of(context).primaryColor,
+                                        ),
+                                      );
+                                    } else if (state
+                                        is RecreationPreviewListLoaded) {
+                                      if (state.data.isEmpty) {
+                                        return const NoDataWidget();
+                                      }
+
+                                      return Column(
+                                        children: [
+                                          Container(
+                                            padding: EdgeInsets.symmetric(
+                                                horizontal: margin16),
+                                            width: double.infinity,
+                                            child: Wrap(
+                                              alignment:
+                                                  WrapAlignment.spaceBetween,
+                                              children: List.generate(
+                                                  state.data.length, (index) {
+                                                RecreationPreviewModel data =
+                                                    state.data[index];
+                                                return FractionallySizedBox(
+                                                  widthFactor: 0.49,
+                                                  child: GestureDetector(
+                                                    onTap: () {
+                                                      Navigator.push(
+                                                          context,
+                                                          MaterialPageRoute(
+                                                              builder: (_) =>
+                                                                  const RekreasiDetailPage(
+                                                                    id: '1',
+                                                                  )));
+                                                    },
+                                                    child: Card(
+                                                      shape:
+                                                          RoundedRectangleBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          8)),
+                                                      child: Column(
+                                                        children: [
+                                                          AspectRatio(
+                                                            aspectRatio:
+                                                                167 / 100,
+                                                            child: Container(
+                                                              width: double
+                                                                  .infinity,
+                                                              height: double
+                                                                  .infinity,
+                                                              decoration: BoxDecoration(
+                                                                  borderRadius: const BorderRadius
+                                                                      .only(
+                                                                      topLeft: Radius
+                                                                          .circular(
+                                                                              8),
+                                                                      topRight:
+                                                                          Radius.circular(
+                                                                              8)),
+                                                                  image: DecorationImage(
+                                                                      fit: BoxFit
+                                                                          .cover,
+                                                                      image: NetworkImage(
+                                                                          data.image))),
+                                                            ),
+                                                          ),
+                                                          Container(
+                                                            padding:
+                                                                EdgeInsets.all(
+                                                                    margin24 /
+                                                                        2),
+                                                            child: Column(
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .start,
+                                                              children: [
+                                                                Text(
+                                                                  data.name,
+                                                                  maxLines: 2,
+                                                                  overflow:
+                                                                      TextOverflow
+                                                                          .ellipsis,
+                                                                  style: mainBody4.copyWith(
+                                                                      color: Colors
+                                                                          .black87,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold),
+                                                                ),
+                                                                Text(
+                                                                  data.location,
+                                                                  style: mainBody5
+                                                                      .copyWith(
+                                                                          color:
+                                                                              const Color(0xffa5a5a5)),
+                                                                ),
+                                                                SizedBox(
+                                                                  height:
+                                                                      margin8,
+                                                                ),
+                                                                Row(
+                                                                  children: [
+                                                                    Text(
+                                                                      'mulai dari ',
+                                                                      style: mainBody5.copyWith(
+                                                                          color:
+                                                                              const Color(0xffa5a5a5)),
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                                Text(
+                                                                  moneyChanger(
+                                                                      data.price),
+                                                                  style: mainBody4.copyWith(
+                                                                      color: Theme.of(
+                                                                              context)
+                                                                          .primaryColor,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold),
+                                                                ),
+                                                                SizedBox(
+                                                                    height:
+                                                                        margin8),
+                                                                Row(
+                                                                  children: [
+                                                                    Icon(
+                                                                      Icons
+                                                                          .star,
+                                                                      color: Theme.of(
+                                                                              context)
+                                                                          .primaryColor,
+                                                                    ),
+                                                                    SizedBox(
+                                                                      width:
+                                                                          margin4,
+                                                                    ),
+                                                                    Text(
+                                                                      '${data.avgRating} ',
+                                                                      style: mainBody4.copyWith(
+                                                                          color: Colors
+                                                                              .black87,
+                                                                          fontWeight:
+                                                                              FontWeight.bold),
+                                                                    ),
+                                                                    Text(
+                                                                      '(${data.ratingCount})',
+                                                                      style: mainBody5
+                                                                          .copyWith(
+                                                                        color: const Color(
+                                                                            0xffa5a5a5),
+                                                                      ),
+                                                                    )
+                                                                  ],
+                                                                )
+                                                              ],
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ),
+                                                );
+                                              }),
+                                            ),
+                                          ),
+                                          // SizedBox(
+                                          //   height: margin16,
+                                          // ),
+                                          // Container(
+                                          //   padding: EdgeInsets.symmetric(
+                                          //       horizontal: margin16),
+                                          //   child: FormHelper.borderButton(
+                                          //       context,
+                                          //       onTap: () {},
+                                          //       title: 'Lihat Semua'),
+                                          // )
+                                        ],
+                                      );
+                                    } else {
+                                      return Container();
+                                    }
+                                  }),
+                            ],
+                          );
+                        } else {
+                          return Container();
+                        }
+                      }),
                 ],
               ),
             ),
-          )
-        ],
-      ),
-    );
+            SizedBox(
+              height: margin32,
+            )
+          ],
+        ),
+      );
+    });
   }
 }

@@ -2,6 +2,210 @@ import 'package:travelsya/app/hostel/models/hostel_detail_model.dart';
 import 'package:travelsya/app/hotel/models/hotel_detail_model.dart';
 import 'package:travelsya/app/ppob/models/ppob_model.dart';
 
+class BusDetailOrderModel {
+  late int id;
+  late String noInv;
+  late int travelId;
+  late int busId;
+  late String travelName;
+  late String busName;
+  String? bookingId;
+  List<dynamic> guesIdentity = [];
+
+  String? paymentLink;
+  String? paymentMethod;
+  String? paymentChannel;
+  late String status;
+  late double adminFee;
+  late double total;
+  late double poinUsed;
+  late double poinReceived;
+  String? createdAt;
+  List<dynamic> reviewData = [];
+
+  BusDetailOrderModel.fromJson(Map<String, dynamic> jsonMap) {
+    id = int.parse(jsonMap['transaction_id'].toString());
+    noInv = jsonMap['no_inv'];
+    travelId = int.parse(jsonMap['bus_travel_id'].toString());
+    busId = int.parse(jsonMap['bus_travel_has_bus_id'].toString());
+    travelName = jsonMap['bus_name'];
+    busName = jsonMap['bus_travel_has_bus_name'];
+    bookingId = jsonMap['booking_id'];
+    guesIdentity = jsonMap['guest_identity'];
+
+    paymentLink = jsonMap['link'];
+    paymentMethod = jsonMap['payment_method'];
+    paymentChannel = jsonMap['payment_channel'];
+    status = jsonMap['status'];
+    total = jsonMap['total'] == null
+        ? 0
+        : double.parse(jsonMap['total'].toString());
+    adminFee = double.parse(
+        jsonMap['fee_admin'] == null ? '0' : jsonMap['fee_admin'].toString());
+    poinReceived = double.parse(jsonMap['point_received'] == null
+        ? '0'
+        : jsonMap['point_received'].toString());
+    poinUsed = double.parse(
+        jsonMap['point_used'] == null ? '0' : jsonMap['point_used'].toString());
+
+    createdAt = jsonMap['created_at'];
+    reviewData = jsonMap['review'];
+  }
+}
+
+class ClinicOrderDetailModel {
+  late int id;
+  late String noInv;
+  late int clinicId;
+  late int packageId;
+  late String clinicName;
+  late String packageName;
+  String? bookingId;
+  List<dynamic> guesIdentity = [];
+  late String expiredAt;
+  String? paymentLink;
+  String? paymentMethod;
+  String? paymentChannel;
+  late String status;
+  late double adminFee;
+  late double total;
+  late double poinUsed;
+  late double poinReceived;
+  String? createdAt;
+  List<dynamic> reviewData = [];
+
+  ClinicOrderDetailModel.fromJson(Map<String, dynamic> jsonMap) {
+    id = int.parse(jsonMap['id']);
+    noInv = jsonMap['no_inv'];
+    clinicId = int.parse(jsonMap['clinic_id']);
+    packageId = int.parse(jsonMap['package_id']);
+    clinicName = jsonMap['clinic_name'] ?? '';
+    packageName = jsonMap['package_name'];
+    bookingId = jsonMap['booking_id'];
+    guesIdentity = jsonMap['guest_identity'];
+    expiredAt = jsonMap['expire_on'];
+    paymentLink = jsonMap['link'];
+    paymentMethod = jsonMap['payment_method'];
+    paymentChannel = jsonMap['payment_channel'];
+    status = jsonMap['status'];
+    total = jsonMap['total'] == null
+        ? 0
+        : double.parse(jsonMap['total'].toString());
+    adminFee = double.parse(
+        jsonMap['fee_admin'] == null ? '0' : jsonMap['fee_admin'].toString());
+    poinReceived = double.parse(jsonMap['point_received'] == null
+        ? '0'
+        : jsonMap['point_received'].toString());
+    poinUsed = double.parse(
+        jsonMap['point_used'] == null ? '0' : jsonMap['point_used'].toString());
+
+    createdAt = jsonMap['created_at'];
+    reviewData = jsonMap['review'];
+  }
+}
+
+class CarRentOrderDetailModel {
+  late String id;
+  late String noInv;
+  late String carRentalId;
+  late String carId;
+  late String rentalName;
+  late String carName;
+  String? bookingId;
+  List<dynamic> guesIdentity = [];
+  late String expiredAt;
+  String? paymentLink;
+  String? paymentMethod;
+  String? paymentChannel;
+  late String status;
+  late double adminFee;
+  late double total;
+  late double poinUsed;
+  late double poinReceived;
+  String? createdAt;
+  List<dynamic> reviewData = [];
+
+  CarRentOrderDetailModel.fromJson(Map<String, dynamic> jsonMap) {
+    id = jsonMap['id'].toString();
+    noInv = jsonMap['no_inv'];
+    carRentalId = jsonMap['car_rental_id'].toString();
+    carId = jsonMap['car_rental_has_car_id'].toString();
+    rentalName = jsonMap['car_rental_name'];
+    carName = jsonMap['car_name'];
+    bookingId = jsonMap['booking_id'];
+    guesIdentity = jsonMap['guest_identity'];
+    expiredAt = jsonMap['expire_on'];
+    paymentLink = jsonMap['link'];
+    paymentMethod = jsonMap['payment_method'];
+    paymentChannel = jsonMap['payment_channel'];
+    status = jsonMap['status'];
+    total = jsonMap['total'] == null
+        ? 0
+        : double.parse(jsonMap['total'].toString());
+    adminFee = double.parse(
+        jsonMap['fee_admin'] == null ? '0' : jsonMap['fee_admin'].toString());
+    poinReceived = double.parse(jsonMap['point_received'] == null
+        ? '0'
+        : jsonMap['point_received'].toString());
+    poinUsed = double.parse(
+        jsonMap['point_used'] == null ? '0' : jsonMap['point_used'].toString());
+
+    createdAt = jsonMap['created_at'];
+    reviewData = jsonMap['review'];
+  }
+}
+
+class RecreationOrderDetailModel {
+  late int id;
+  late String noInv;
+  late int recreationId;
+  late int packageId;
+  late String recreationName;
+  late String packageName;
+  String? bookingId;
+  List<dynamic> guesIdentity = [];
+  late String expiredAt;
+  String? paymentLink;
+  String? paymentMethod;
+  String? paymentChannel;
+  late String status;
+  late double adminFee;
+  late double total;
+  late double poinUsed;
+  late double poinReceived;
+  String? createdAt;
+  List<dynamic> reviewData = [];
+
+  RecreationOrderDetailModel.fromJson(Map<String, dynamic> jsonMap) {
+    id = int.parse(jsonMap['id'].toString());
+    noInv = jsonMap['no_inv'];
+    recreationId = int.parse(jsonMap['recreation_id'].toString());
+    packageId = int.parse(jsonMap['package_id'].toString());
+    recreationName = jsonMap['recreation_name'];
+    packageName = jsonMap['package_name'];
+    bookingId = jsonMap['booking_id'];
+    guesIdentity = jsonMap['guest_identity'];
+    expiredAt = jsonMap['expire_on'];
+    paymentLink = jsonMap['link'];
+    paymentMethod = jsonMap['payment_method'];
+    paymentChannel = jsonMap['payment_channel'];
+    status = jsonMap['status'];
+    total = jsonMap['total'] == null
+        ? 0
+        : double.parse(jsonMap['total'].toString());
+    adminFee = double.parse(
+        jsonMap['fee_admin'] == null ? '0' : jsonMap['fee_admin'].toString());
+    poinReceived = double.parse(jsonMap['point_received'] == null
+        ? '0'
+        : jsonMap['point_received'].toString());
+    poinUsed = double.parse(
+        jsonMap['point_used'] == null ? '0' : jsonMap['point_used'].toString());
+
+    createdAt = jsonMap['created_at'];
+    reviewData = jsonMap['review'];
+  }
+}
+
 class OrderDetailInquiryModel {
   late int id;
   late String noInv;

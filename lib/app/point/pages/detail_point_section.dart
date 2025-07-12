@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
 import 'package:travelsya/shared/helper/const_helper.dart';
 import 'package:travelsya/shared/styles/font_style.dart';
+import 'package:travelsya/shared/styles/size_styles.dart';
 import 'package:travelsya/shared/styles/theme_style.dart';
 
 class DetailPointSection extends StatefulWidget {
-  const DetailPointSection({Key? key}) : super(key: key);
+  const DetailPointSection({super.key});
 
   @override
   State<DetailPointSection> createState() => _DetailPointSectionState();
@@ -44,12 +44,13 @@ class _DetailPointSectionState extends State<DetailPointSection> {
     return Column(
       children: [
         Container(
-          padding: EdgeInsets.symmetric(horizontal: 5.0.w, vertical: 3.0.w),
+          padding: EdgeInsets.symmetric(
+              horizontal: margin16, vertical: margin24 / 2),
           width: double.infinity,
           child: Text(
             'Level : Bronze',
             style: mainFont.copyWith(
-                fontSize: 12.0.sp,
+                fontSize: 14,
                 color: Colors.black87,
                 fontWeight: FontWeight.bold),
           ),
@@ -61,7 +62,7 @@ class _DetailPointSectionState extends State<DetailPointSection> {
                 children: List.generate(dataBenefints.length, (index) {
                   return Container(
                     padding: EdgeInsets.symmetric(
-                        vertical: 4.0.w, horizontal: 5.0.w),
+                        vertical: margin16, horizontal: margin16),
                     decoration: BoxDecoration(
                         border: Border(
                             bottom: BorderSide(
@@ -70,31 +71,31 @@ class _DetailPointSectionState extends State<DetailPointSection> {
                     child: Row(
                       children: [
                         SizedBox(
-                            width: 10.0.w,
-                            height: 10.0.w,
+                            width: 40,
+                            height: 40,
                             child: Image.asset(
                               dataBenefints[index]['assets'],
                               color: index == 0 ? null : neutral30,
                             )),
                         SizedBox(
-                          width: 3.0.w,
+                          width: margin24 / 2,
                         ),
                         Expanded(
                           child: Text(
                             dataBenefints[index]['data'],
                             style: mainFont.copyWith(
-                                fontSize: 9.0.sp,
+                                fontSize: 11,
                                 color: index == 0 ? Colors.black87 : neutral30,
                                 fontWeight: FontWeight.bold),
                           ),
                         ),
                         SizedBox(
-                          width: 3.0.w,
+                          width: margin24 / 2,
                         ),
                         Icon(
                           Icons.arrow_forward_ios_rounded,
                           color: neutral30,
-                          size: 4.0.w,
+                          size: 12,
                         )
                       ],
                     ),

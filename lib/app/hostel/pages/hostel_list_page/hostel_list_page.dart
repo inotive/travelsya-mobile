@@ -11,12 +11,11 @@ import 'package:travelsya/shared/widgets/appbar_widget.dart';
 import 'package:travelsya/shared/widgets/failed_request_widget.dart';
 import 'package:travelsya/shared/widgets/placeholder_widget.dart';
 import 'package:travelsya/shared/styles/font_style.dart';
-import 'package:sizer/sizer.dart';
 
 class HostelListPage extends StatelessWidget {
   const HostelListPage({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -36,13 +35,13 @@ class HostelListPage extends StatelessWidget {
                   if (state is HostelLoading) {
                     return Expanded(
                         child: ListView(
-                      padding: EdgeInsets.symmetric(horizontal: 5.0.w),
+                      padding: EdgeInsets.symmetric(horizontal: margin16),
                       children: List.generate(10, (index) {
                         return PlaceHolder(
                           child: Container(
-                            margin: EdgeInsets.only(top: 3.0.w),
-                            width: 90.0.w,
-                            height: 40.0.w,
+                            margin: EdgeInsets.only(top: margin32 / 3),
+                            width: double.infinity,
+                            height: 150,
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
                                 color: Colors.white),
@@ -56,7 +55,7 @@ class HostelListPage extends StatelessWidget {
                             ? Center(
                                 child: Text(
                                   'Data Tidak Ditemukan',
-                                  style: mainFont.copyWith(fontSize: 12.0.sp),
+                                  style: mainFont.copyWith(fontSize: 14),
                                 ),
                               )
                             : ListView(
@@ -73,13 +72,15 @@ class HostelListPage extends StatelessWidget {
                                     },
                                     child: Container(
                                       margin: EdgeInsets.only(
-                                          top: index == 0 ? 5.0.w : 3.0.w,
+                                          top: index == 0
+                                              ? margin16
+                                              : margin24 / 2,
                                           bottom: index == state.data.length - 1
-                                              ? 10.0.w
+                                              ? margin32
                                               : 0),
                                       child: Container(
                                         margin: EdgeInsets.symmetric(
-                                            horizontal: 5.0.w),
+                                            horizontal: margin16),
                                         decoration: BoxDecoration(
                                             borderRadius:
                                                 BorderRadius.circular(12),
@@ -88,7 +89,7 @@ class HostelListPage extends StatelessWidget {
                                         child: Column(
                                           children: [
                                             Container(
-                                              height: 45.0.w,
+                                              height: 120,
                                               width: double.infinity,
                                               decoration: BoxDecoration(
                                                   color: Colors.black12,
@@ -114,7 +115,8 @@ class HostelListPage extends StatelessWidget {
                                                                   12))),
                                             ),
                                             Container(
-                                              padding: EdgeInsets.all(3.0.w),
+                                              padding:
+                                                  EdgeInsets.all(margin24 / 2),
                                               width: double.infinity,
                                               child: Column(
                                                 crossAxisAlignment:
@@ -123,13 +125,13 @@ class HostelListPage extends StatelessWidget {
                                                   Text(
                                                     state.data[index].name,
                                                     style: mainFont.copyWith(
-                                                        fontSize: 11.0.sp,
+                                                        fontSize: 13,
                                                         color: Colors.black87,
                                                         fontWeight:
                                                             FontWeight.bold),
                                                   ),
                                                   SizedBox(
-                                                    height: 1.0.w,
+                                                    height: margin4,
                                                   ),
                                                   Row(
                                                     children: [
@@ -142,8 +144,7 @@ class HostelListPage extends StatelessWidget {
                                                         '${state.data[index].ratingAvg.toStringAsFixed(1)} ',
                                                         style:
                                                             mainFont.copyWith(
-                                                                fontSize:
-                                                                    11.0.sp,
+                                                                fontSize: 13,
                                                                 color: Colors
                                                                     .black87,
                                                                 fontWeight:
@@ -154,20 +155,20 @@ class HostelListPage extends StatelessWidget {
                                                         '(${state.data[index].ratingCount})',
                                                         style:
                                                             mainFont.copyWith(
-                                                          fontSize: 8.0.sp,
+                                                          fontSize: 10,
                                                           color: const Color(
                                                               0xffa5a5a5),
                                                         ),
                                                       ),
                                                       SizedBox(
-                                                        width: 2.0.w,
+                                                        width: margin8,
                                                       ),
                                                       Text(
                                                         state.data[index]
                                                                 .location ??
                                                             '-',
                                                         style: mainFont.copyWith(
-                                                            fontSize: 10.0.sp,
+                                                            fontSize: 12,
                                                             color: const Color(
                                                                 0xffa5a5a5)),
                                                       )
@@ -175,7 +176,7 @@ class HostelListPage extends StatelessWidget {
                                                   ),
 
                                                   SizedBox(
-                                                    height: 3.0.w,
+                                                    height: margin24 / 2,
                                                   ),
                                                   // Row(
                                                   //   mainAxisAlignment: MainAxisAlignment.end,
@@ -205,7 +206,7 @@ class HostelListPage extends StatelessWidget {
                                                               .sellingPrice,
                                                           customLabel: 'IDR '),
                                                       style: mainFont.copyWith(
-                                                          fontSize: 12.0.sp,
+                                                          fontSize: 14,
                                                           color:
                                                               Theme.of(context)
                                                                   .primaryColor,
@@ -219,7 +220,7 @@ class HostelListPage extends StatelessWidget {
                                                     child: Text(
                                                       '(Sudah Termasuk Pajak)',
                                                       style: mainFont.copyWith(
-                                                          fontSize: 8.0.sp,
+                                                          fontSize: 10,
                                                           color: const Color(
                                                               0xffa5a5a5)),
                                                     ),

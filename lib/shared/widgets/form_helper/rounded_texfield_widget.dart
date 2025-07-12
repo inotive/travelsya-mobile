@@ -103,7 +103,7 @@ class RoundedTextfield extends StatelessWidget {
                 horizontal: margin24 / 2,
               ),
           errorMaxLines: 10,
-          hintStyle: mainBody4.copyWith(color: neutral60),
+          hintStyle: mainBody5.copyWith(color: neutral60),
           prefixIcon: prefixIcon,
           suffixIcon: suffixWidget,
           border: OutlineInputBorder(

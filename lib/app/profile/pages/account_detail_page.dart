@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:travelsya/shared/function/show_loading.dart';
-import 'package:sizer/sizer.dart';
 import 'package:travelsya/app/auth/cubits/auth_cubit.dart';
 import 'package:travelsya/app/auth/cubits/auth_state.dart';
 import 'package:travelsya/app/auth/repository/auth_repository.dart';
 import 'package:travelsya/shared/api/api_return_value.dart';
 import 'package:travelsya/shared/function/show_snackbar.dart';
 import 'package:travelsya/shared/styles/font_style.dart';
-import 'package:travelsya/shared/widgets/form_helper.dart';
+import 'package:travelsya/shared/styles/size_styles.dart';
+import 'package:travelsya/shared/widgets/form_helper/elevated_button_widget.dart';
+import 'package:travelsya/shared/widgets/form_helper/rounded_texfield_widget.dart';
 
 class AccountDetailPage extends StatefulWidget {
   const AccountDetailPage({super.key});
@@ -28,7 +29,7 @@ class _AccountDetailPageState extends State<AccountDetailPage> {
             backgroundColor: const Color(0xfff5f5f5),
             body: Column(children: [
               Container(
-                padding: EdgeInsets.all(5.0.w),
+                padding: EdgeInsets.all(margin16),
                 color: Theme.of(context).primaryColor,
                 child: Row(
                   children: [
@@ -42,12 +43,12 @@ class _AccountDetailPageState extends State<AccountDetailPage> {
                       ),
                     ),
                     SizedBox(
-                      width: 3.0.w,
+                      width: margin24 / 2,
                     ),
                     Text(
                       'Hapus Akun',
                       style: mainFont.copyWith(
-                          fontSize: 13.0.sp,
+                          fontSize: 15,
                           color: Colors.white,
                           fontWeight: FontWeight.w700),
                     )
@@ -57,27 +58,27 @@ class _AccountDetailPageState extends State<AccountDetailPage> {
               Expanded(
                   child: Center(
                 child: ListView(
-                  padding: EdgeInsets.symmetric(horizontal: 5.0.w),
+                  padding: EdgeInsets.symmetric(horizontal: margin16),
                   shrinkWrap: true,
                   children: [
                     SizedBox(
-                      height: 10.0.w,
+                      height: margin32,
                     ),
-                    Center(
+                    const Center(
                       child: Icon(
                         Icons.warning_rounded,
                         color: Colors.orange,
-                        size: 30.0.w,
+                        size: 100,
                       ),
                     ),
                     SizedBox(
-                      height: 3.0.w,
+                      height: margin24 / 2,
                     ),
                     Text(
                       'Hapus Akun',
                       textAlign: TextAlign.center,
                       style: mainFont.copyWith(
-                          fontSize: 14.0.sp,
+                          fontSize: 16,
                           color: Colors.black87,
                           fontWeight: FontWeight.bold),
                     ),
@@ -85,14 +86,14 @@ class _AccountDetailPageState extends State<AccountDetailPage> {
                       'Mohon memasukkan password Anda untuk mengkonfirmasi penghapusan akun, Waktu yang dibutuhkan adalah 2x24 Jam hingga akun Anda kami hapus',
                       textAlign: TextAlign.center,
                       style: mainFont.copyWith(
-                        fontSize: 9.0.sp,
+                        fontSize: 11,
                         color: Colors.black87,
                       ),
                     ),
                     SizedBox(
-                      height: 5.0.w,
+                      height: margin16,
                     ),
-                    FormHelper.roundedTextfield(context,
+                    RoundedTextfield(
                         controller: passController,
                         obscureText: !showPassword,
                         suffixWidget: GestureDetector(
@@ -109,38 +110,41 @@ class _AccountDetailPageState extends State<AccountDetailPage> {
                                     ? Theme.of(context).primaryColor
                                     : Colors.grey)),
                         hintText: 'Password Akun Anda'),
-                    SizedBox(
-                      height: 8.0.w,
+                    const SizedBox(
+                      height: 20,
                     ),
-                    FormHelper.elevatedButtonBasic(context, enabled: true,
+                    ElevatedButtonWidget(
+                        enabled: true,
                         onTap: () {
-                      AuthState state =
-                          BlocProvider.of<AuthCubit>(context).state;
-                      if (state is AuthLoaded) {
-                        showLoading(context);
-                        AuthRepository.login(context,
-                                email: state.data.email,
-                                password: passController.text)
-                            .then((value) {
-                          Navigator.pop(context);
-                          if (value.status == RequestStatus.successRequest) {
-                            showSnackbar(context,
-                                data: 'Pengajuan penghapusan akun berhasil',
-                                colors: Colors.green);
-                            BlocProvider.of<AuthCubit>(context).logout(
-                              context,
-                            );
-                            Navigator.pop(context);
-                          } else {
-                            showSnackbar(context,
-                                data: 'Password tidak cocok',
-                                colors: Colors.orange);
+                          AuthState state =
+                              BlocProvider.of<AuthCubit>(context).state;
+                          if (state is AuthLoaded) {
+                            showLoading(context);
+                            AuthRepository.login(context,
+                                    email: state.data.email,
+                                    password: passController.text)
+                                .then((value) {
+                              Navigator.pop(context);
+                              if (value.status ==
+                                  RequestStatus.successRequest) {
+                                showSnackbar(context,
+                                    data: 'Pengajuan penghapusan akun berhasil',
+                                    colors: Colors.green);
+                                BlocProvider.of<AuthCubit>(context).logout(
+                                  context,
+                                );
+                                Navigator.pop(context);
+                              } else {
+                                showSnackbar(context,
+                                    data: 'Password tidak cocok',
+                                    colors: Colors.orange);
+                              }
+                            });
                           }
-                        });
-                      }
-                    }, title: 'Konfirmasi Hapus Akun'),
+                        },
+                        title: 'Konfirmasi Hapus Akun'),
                     SizedBox(
-                      height: 10.0.w,
+                      height: margin32,
                     ),
                   ],
                 ),

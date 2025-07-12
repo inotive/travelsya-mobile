@@ -7,9 +7,10 @@ import 'package:travelsya/shared/helper/const_helper.dart';
 import 'package:travelsya/shared/cubits/main_index_cubit.dart';
 import 'package:travelsya/shared/cubits/main_index_state.dart';
 import 'package:travelsya/shared/styles/size_styles.dart';
+import 'package:travelsya/shared/widgets/statusbar_widget.dart';
 
 class HomeMainPage extends StatefulWidget {
-  const HomeMainPage({Key? key}) : super(key: key);
+  const HomeMainPage({super.key});
 
   @override
   State<HomeMainPage> createState() => _HomeMainPageState();
@@ -24,7 +25,8 @@ class _HomeMainPageState extends State<HomeMainPage> {
         },
         onViewModelReady: (model) {},
         builder: (context, model, child) {
-          return SafeArea(
+          return StatusbarWidget(
+            customBrightness: Brightness.light,
             child: Scaffold(
               body: Stack(
                 children: [

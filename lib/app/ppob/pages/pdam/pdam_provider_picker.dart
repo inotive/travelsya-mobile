@@ -9,8 +9,8 @@ import 'package:travelsya/shared/widgets/form_helper/rounded_texfield_widget.dar
 
 class PDAMProviderPicker extends StatefulWidget {
   const PDAMProviderPicker({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   State<PDAMProviderPicker> createState() => _PDAMProviderPickerState();

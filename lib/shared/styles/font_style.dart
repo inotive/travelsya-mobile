@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
-TextStyle mainFont = GoogleFonts.poppins();
-TextStyle secondaryFont = GoogleFonts.inter();
+// TextStyle mainFont = GoogleFonts.poppins();
+// TextStyle secondaryFont = GoogleFonts.inter();
+
+TextStyle mainFont = const TextStyle();
+TextStyle secondaryFont = const TextStyle();
 
 TextStyle mainHeading1 = mainFont.copyWith(
   fontSize: 84,

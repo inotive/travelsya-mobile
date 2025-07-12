@@ -7,7 +7,7 @@ import 'package:travelsya/shared/styles/size_styles.dart';
 import 'package:travelsya/shared/styles/theme_style.dart';
 
 class PLNTypeBottomsheet extends StatefulWidget {
-  const PLNTypeBottomsheet({Key? key}) : super(key: key);
+  const PLNTypeBottomsheet({super.key});
 
   @override
   State<PLNTypeBottomsheet> createState() => _PLNTypeBottomsheetState();

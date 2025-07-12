@@ -38,7 +38,7 @@ class _HostelDetailLocationSection extends StatelessWidget {
                           child: Text(
                             'Buka di Map',
                             style: mainFont.copyWith(
-                                fontSize: 11.0.sp,
+                                fontSize: 13,
                                 color: Theme.of(context).primaryColor,
                                 fontWeight: FontWeight.bold),
                           ),
@@ -60,9 +60,9 @@ class _HostelDetailLocationSection extends StatelessWidget {
                     height: double.infinity,
                     child: FlutterMap(
                         options: MapOptions(
-                          center: LatLng(double.parse(data.latitude!),
+                          initialCenter: LatLng(double.parse(data.latitude!),
                               double.parse(data.longitude!)),
-                          zoom: 7,
+                          initialZoom: 7,
                         ),
                         children: [
                           TileLayer(
@@ -74,17 +74,16 @@ class _HostelDetailLocationSection extends StatelessWidget {
                           MarkerLayer(
                             markers: [
                               Marker(
-                                  width: 50,
-                                  height: 70,
-                                  point: LatLng(double.parse(data.latitude!),
-                                      double.parse(data.longitude!)),
-                                  builder: (context) {
-                                    return Icon(
-                                      Icons.location_on,
-                                      color: Theme.of(context).primaryColor,
-                                      size: 40,
-                                    );
-                                  })
+                                width: 50,
+                                height: 70,
+                                point: LatLng(double.parse(data.latitude!),
+                                    double.parse(data.longitude!)),
+                                child: Icon(
+                                  Icons.location_on,
+                                  color: Theme.of(context).primaryColor,
+                                  size: 40,
+                                ),
+                              )
                             ],
                           )
                         ])),
@@ -129,9 +128,9 @@ class _HostelDetailLocationSection extends StatelessWidget {
                         }
                       },
                       child: Container(
-                        margin: EdgeInsets.only(left: 3.0.w),
-                        width: 12.0.w,
-                        height: 12.0.w,
+                        margin: EdgeInsets.only(left: margin24 / 2),
+                        width: 48,
+                        height: 48,
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(8),
                             color: Theme.of(context).primaryColor),

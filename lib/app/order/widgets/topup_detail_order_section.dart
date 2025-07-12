@@ -6,7 +6,7 @@ import 'package:travelsya/shared/helper/function_helper.dart';
 import 'package:travelsya/shared/styles/font_style.dart';
 import 'package:travelsya/shared/styles/size_styles.dart';
 import 'package:travelsya/shared/styles/theme_style.dart';
-import 'package:travelsya/shared/widgets/form_helper.dart';
+import 'package:travelsya/shared/widgets/form_helper/elevated_button_widget.dart';
 
 class TopupDetailOrderSection extends StatelessWidget {
   final OrderDetailTopupModel data;
@@ -208,7 +208,7 @@ class TopupDetailOrderSection extends StatelessWidget {
                         SizedBox(
                           height: margin16,
                         ),
-                        FormHelper.elevatedButtonBasic(context,
+                        ElevatedButtonWidget(
                             enabled: true, onTap: () {}, title: 'Pesan Lagi'),
                       ],
                     )

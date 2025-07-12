@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
-import 'package:sizer/sizer.dart';
 import 'package:travelsya/app/hostel/cubits/hostel_cubit.dart';
 import 'package:travelsya/app/hostel/cubits/hostel_state.dart';
 import 'package:travelsya/app/order/models/order_detail_model.dart';
@@ -253,7 +252,7 @@ class _HostelDetailOrderSectionState extends State<HostelDetailOrderSection> {
                                         child: Text(
                                           'Buka di Map',
                                           style: mainFont.copyWith(
-                                              fontSize: 11.0.sp,
+                                              fontSize: 13,
                                               color: Theme.of(context)
                                                   .primaryColor,
                                               fontWeight: FontWeight.bold),
@@ -273,16 +272,17 @@ class _HostelDetailOrderSectionState extends State<HostelDetailOrderSection> {
                                 height: double.infinity,
                                 child: FlutterMap(
                                     options: MapOptions(
-                                      center: (state.data.latitude != null &&
-                                              state.data.longitude != null)
-                                          ? LatLng(
-                                              double.parse(
-                                                  state.data.latitude!),
-                                              double.parse(
-                                                  state.data.longitude!))
-                                          : LatLng(-6.906725572061223,
-                                              107.59823247747369),
-                                      zoom: 7,
+                                      initialCenter:
+                                          (state.data.latitude != null &&
+                                                  state.data.longitude != null)
+                                              ? LatLng(
+                                                  double.parse(
+                                                      state.data.latitude!),
+                                                  double.parse(
+                                                      state.data.longitude!))
+                                              : const LatLng(-6.906725572061223,
+                                                  107.59823247747369),
+                                      initialZoom: 7,
                                     ),
                                     children: (state.data.latitude != null &&
                                             state.data.longitude != null)
@@ -303,14 +303,12 @@ class _HostelDetailOrderSectionState extends State<HostelDetailOrderSection> {
                                                             .data.latitude!),
                                                         double.parse(state
                                                             .data.longitude!)),
-                                                    builder: (context) {
-                                                      return Icon(
-                                                        Icons.location_on,
-                                                        color: Theme.of(context)
-                                                            .primaryColor,
-                                                        size: 40,
-                                                      );
-                                                    })
+                                                    child: Icon(
+                                                      Icons.location_on,
+                                                      color: Theme.of(context)
+                                                          .primaryColor,
+                                                      size: 40,
+                                                    ))
                                               ],
                                             )
                                           ]

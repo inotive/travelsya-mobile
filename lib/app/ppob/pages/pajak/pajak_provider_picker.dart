@@ -9,8 +9,7 @@ import 'package:travelsya/shared/widgets/form_helper/rounded_texfield_widget.dar
 
 class PajakProviderPicker extends StatefulWidget {
   final PPOBCubit pajakCubit;
-  const PajakProviderPicker({Key? key, required this.pajakCubit})
-      : super(key: key);
+  const PajakProviderPicker({super.key, required this.pajakCubit});
 
   @override
   State<PajakProviderPicker> createState() => _PajakProviderPickerState();
@@ -37,7 +36,7 @@ class _PajakProviderPickerState extends State<PajakProviderPicker> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text('Cari Penyedia Pajak',
-                    style: mainBody3.copyWith(fontWeight: FontWeight.bold)),
+                    style: mainBody4.copyWith(fontWeight: FontWeight.bold)),
                 GestureDetector(
                     onTap: () {
                       Navigator.pop(context);

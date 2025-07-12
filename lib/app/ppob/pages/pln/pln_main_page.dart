@@ -11,7 +11,7 @@ import 'package:travelsya/shared/styles/font_style.dart';
 import 'package:travelsya/shared/styles/size_styles.dart';
 import 'package:travelsya/shared/widgets/appbar_widget.dart';
 import 'package:travelsya/shared/widgets/failed_request_widget.dart';
-import 'package:travelsya/shared/widgets/form_helper.dart';
+import 'package:travelsya/shared/widgets/form_helper/elevated_button_widget.dart';
 import 'package:travelsya/shared/widgets/form_helper/rounded_texfield_widget.dart';
 import 'package:travelsya/shared/widgets/form_helper/title_with_widget.dart';
 
@@ -188,10 +188,12 @@ class PLNMainPage extends StatelessWidget {
                       )),
                       Container(
                           padding: EdgeInsets.all(margin16),
-                          child: FormHelper.elevatedButtonBasic(context,
-                              enabled: model.plnValidation == null, onTap: () {
-                            model.onSubmit(context);
-                          }, title: 'Lanjutkan'))
+                          child: ElevatedButtonWidget(
+                              enabled: model.plnValidation == null,
+                              onTap: () {
+                                model.onSubmit(context);
+                              },
+                              title: 'Lanjutkan'))
                     ],
                   );
                 }

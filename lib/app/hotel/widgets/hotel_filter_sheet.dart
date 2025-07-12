@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:sizer/sizer.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 import 'package:travelsya/app/hostel/widgets/count_picker_widget.dart';
 import 'package:travelsya/app/hotel/cubits/hotel_state.dart';
 import 'package:travelsya/shared/function/date_to_readable_function.dart';
 import 'package:travelsya/shared/styles/font_style.dart';
+import 'package:travelsya/shared/styles/size_styles.dart';
 import 'package:travelsya/shared/widgets/form_helper.dart';
+import 'package:travelsya/shared/widgets/form_helper/elevated_button_widget.dart';
 import 'package:travelsya/shared/widgets/multi_date_picker.dart';
 
 class HotelFilterSheet extends StatefulWidget {
@@ -39,14 +40,14 @@ class _HotelFilterSheetState extends State<HotelFilterSheet> {
       body: Column(
         children: [
           Container(
-            padding: EdgeInsets.all(5.0.w),
+            padding: EdgeInsets.all(margin16),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
                   'Filter',
                   style: mainFont.copyWith(
-                      fontSize: 12.0.sp,
+                      fontSize: 14,
                       color: Colors.black87,
                       fontWeight: FontWeight.bold),
                 ),
@@ -69,10 +70,10 @@ class _HotelFilterSheetState extends State<HotelFilterSheet> {
           ),
           Expanded(
               child: ListView(
-            padding: EdgeInsets.symmetric(horizontal: 5.0.w),
+            padding: EdgeInsets.symmetric(horizontal: margin16),
             children: [
               SizedBox(
-                height: 5.0.w,
+                height: margin16,
               ),
               GestureDetector(
                 onTap: () async {
@@ -96,7 +97,7 @@ class _HotelFilterSheetState extends State<HotelFilterSheet> {
                     hintText: 'Tanggal Mengingap'),
               ),
               SizedBox(
-                height: 5.0.w,
+                height: margin16,
               ),
               Row(
                 children: [
@@ -128,7 +129,7 @@ class _HotelFilterSheetState extends State<HotelFilterSheet> {
                     ),
                   ),
                   SizedBox(
-                    width: 3.0.w,
+                    width: margin24 / 2,
                   ),
                   Flexible(
                     flex: 1,
@@ -168,17 +169,19 @@ class _HotelFilterSheetState extends State<HotelFilterSheet> {
             ],
           )),
           Container(
-            padding: EdgeInsets.all(5.0.w),
-            child: FormHelper.elevatedButtonBasic(context, enabled: true,
+            padding: EdgeInsets.all(margin16),
+            child: ElevatedButtonWidget(
+                enabled: true,
                 onTap: () {
-              Navigator.pop(
-                  context,
-                  HotelSearchFilter(
-                      guessCount: guessCount,
-                      roomCount: roomCount,
-                      selectedTime: selectedTime,
-                      selectedLocation: ''));
-            }, title: 'Simpan'),
+                  Navigator.pop(
+                      context,
+                      HotelSearchFilter(
+                          guessCount: guessCount,
+                          roomCount: roomCount,
+                          selectedTime: selectedTime,
+                          selectedLocation: ''));
+                },
+                title: 'Simpan'),
           )
         ],
       ),

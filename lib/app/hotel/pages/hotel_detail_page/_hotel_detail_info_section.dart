@@ -99,7 +99,7 @@ class _HotelDetailInfoSection extends StatelessWidget {
                 style: mainBody2.copyWith(fontWeight: FontWeight.bold),
               ),
               SizedBox(
-                height: 2.0.w,
+                height: margin8,
               ),
               Row(
                 children: [
@@ -110,32 +110,32 @@ class _HotelDetailInfoSection extends StatelessWidget {
                   Text(
                     data.avgRating.toStringAsFixed(1),
                     style: mainFont.copyWith(
-                        fontSize: 13.0.sp,
+                        fontSize: 15,
                         color: Colors.black87,
                         fontWeight: FontWeight.bold),
                   ),
                   Text(
                     ' (${data.ratingCount})',
                     style: mainFont.copyWith(
-                        fontSize: 11.0.sp, color: const Color(0xffa5a5a5)),
+                        fontSize: 13, color: const Color(0xffa5a5a5)),
                   ),
                   SizedBox(
-                    width: 1.0.w,
+                    width: margin4,
                   ),
                   Text(
                     data.location,
                     style: mainFont.copyWith(
-                        fontSize: 12.0.sp,
+                        fontSize: 14,
                         color: Theme.of(context).primaryColor,
                         decoration: TextDecoration.underline),
                   )
                 ],
               ),
               SizedBox(
-                height: 3.0.w,
+                height: margin24 / 2,
               ),
               Container(
-                padding: EdgeInsets.all(3.0.w),
+                padding: EdgeInsets.all(margin24 / 2),
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8),
                     color: const Color(0xfff4f4f4)),
@@ -148,44 +148,42 @@ class _HotelDetailInfoSection extends StatelessWidget {
                         Row(
                           children: [
                             SizedBox(
-                                width: 6.0.w,
-                                height: 6.0.w,
+                                width: 20,
+                                height: 20,
                                 child: Image.asset(
                                     'assets/icons/Vector copy.png')),
                             SizedBox(
-                              width: 2.0.w,
+                              width: margin8,
                             ),
                             Text(
                               '${model.searchFilter.roomCount} Kamar',
                               style: mainFont.copyWith(
-                                  fontSize: 11.0.sp,
-                                  color: const Color(0xff333333)),
+                                  fontSize: 13, color: const Color(0xff333333)),
                             ),
                             SizedBox(
-                              width: 3.0.w,
+                              width: margin24 / 2,
                             ),
                             SizedBox(
-                                width: 6.0.w,
-                                height: 6.0.w,
+                                width: 20,
+                                height: 20,
                                 child: Image.asset('assets/icons/users.png')),
                             SizedBox(
-                              width: 2.0.w,
+                              width: margin8,
                             ),
                             Text(
                               '${model.searchFilter.guessCount} Tamu',
                               style: mainFont.copyWith(
-                                  fontSize: 11.0.sp,
-                                  color: const Color(0xff333333)),
+                                  fontSize: 13, color: const Color(0xff333333)),
                             ),
                           ],
                         ),
                         SizedBox(
-                          height: 1.0.w,
+                          height: margin4,
                         ),
                         Text(
                           '${dateToReadable(DateFormat('yyyy-MM-dd').format(model.searchFilter.selectedTime.startDate!))} - ${dateToReadable(DateFormat('yyyy-MM-dd').format(model.searchFilter.selectedTime.endDate!))} (${model.searchFilter.selectedTime.endDate!.difference(model.searchFilter.selectedTime.startDate!).inDays} Hari)',
                           style: mainFont.copyWith(
-                              fontSize: 9.0.sp,
+                              fontSize: 11,
                               fontStyle: FontStyle.italic,
                               color: const Color(0xff333333)),
                         )
@@ -198,7 +196,7 @@ class _HotelDetailInfoSection extends StatelessWidget {
                       child: Text(
                         'Ubah',
                         style: mainFont.copyWith(
-                            fontSize: 11.0.sp,
+                            fontSize: 13,
                             color: Theme.of(context).primaryColor,
                             fontWeight: FontWeight.bold),
                       ),
@@ -207,14 +205,14 @@ class _HotelDetailInfoSection extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                height: 5.0.w,
+                height: margin16,
               ),
             ],
           ),
         ),
         Container(
           width: double.infinity,
-          height: 2.0.w,
+          height: 8,
           color: const Color(0xfff4f4f4),
         ),
         // Container(

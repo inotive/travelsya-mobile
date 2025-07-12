@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stacked/stacked.dart';
 import 'package:travelsya/app/auth/cubits/profile_cubit.dart';
+import 'package:travelsya/app/bus/pages/bus_search_page.dart';
+import 'package:travelsya/app/health/pages/health_search_page.dart';
 import 'package:travelsya/app/homepage/cubits/ads_cubit.dart';
 import 'package:travelsya/app/hostel/pages/hostel_search_page/hostel_search_page.dart';
 import 'package:travelsya/app/hotel/pages/hotel_search/hotel_search_page.dart';
@@ -15,6 +17,8 @@ import 'package:travelsya/app/ppob/pages/pdam/pdam_main_page.dart';
 import 'package:travelsya/app/ppob/pages/pln/pln_main_page.dart';
 import 'package:travelsya/app/ppob/pages/pulsa/pulsa_form_page.dart';
 import 'package:travelsya/app/ppob/pages/tv_berbayar/tv_berbayar_main_page.dart';
+import 'package:travelsya/app/rekreasi/pages/rekreasi_search_page.dart';
+import 'package:travelsya/app/rental_mobil/pages/rental_mobil_search_page.dart';
 import 'package:travelsya/shared/cubits/fee_admin/fee_admin_cubit.dart';
 import 'package:travelsya/shared/function/need_login_function.dart';
 import 'package:travelsya/shared/helper/const_helper.dart';
@@ -50,13 +54,7 @@ class BerandaVM extends BaseViewModel {
   ];
 
   bool isDisableMenu(int id) {
-    if (id == 2 ||
-        id == 3 ||
-        id == 4 ||
-        id == 5 ||
-        id == 6 ||
-        id == 8 ||
-        id == 12) {
+    if (id == 2 || id == 3 || id == 12) {
       return true;
     } else {
       return false;
@@ -99,17 +97,20 @@ class BerandaVM extends BaseViewModel {
       // Navigator.push(
       //     context, MaterialPageRoute(builder: (_) => KASearchPage()));
     } else if (id == 4) {
-      // Navigator.push(
-      //     context, MaterialPageRoute(builder: (_) => BusSearchPage()));
+      Navigator.push(
+          context, MaterialPageRoute(builder: (_) => const BusSearchPage()));
     } else if (id == 5) {
-      // Navigator.push(
-      //     context, MaterialPageRoute(builder: (_) => RekreasiSearchPage()));
+      Navigator.push(context,
+          MaterialPageRoute(builder: (_) => const RekreasiSearchPage()));
     } else if (id == 6) {
-      // Navigator.push(
-      //     context, MaterialPageRoute(builder: (_) => RentalSearchPage()));
+      Navigator.push(
+          context, MaterialPageRoute(builder: (_) => const RentalSearchPage()));
     } else if (id == 7) {
       Navigator.push(
           context, MaterialPageRoute(builder: (_) => const HostelSearchPage()));
+    } else if (id == 8) {
+      Navigator.push(
+          context, MaterialPageRoute(builder: (_) => const HealthSearchPage()));
     } else if (id == 9) {
       Navigator.push(
           context, MaterialPageRoute(builder: (_) => const PLNMainPage()));

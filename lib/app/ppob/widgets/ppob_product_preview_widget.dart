@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
 import 'package:travelsya/shared/styles/font_style.dart';
 import 'package:travelsya/shared/styles/size_styles.dart';
 import 'package:travelsya/shared/styles/theme_style.dart';
@@ -11,13 +10,12 @@ class PPOBProductPreviewWidget extends StatelessWidget {
   final Function onTap;
   final double? customFractionWidth;
   const PPOBProductPreviewWidget(
-      {Key? key,
+      {super.key,
       required this.isActive,
       required this.title,
       this.customFractionWidth,
       required this.desc,
-      required this.onTap})
-      : super(key: key);
+      required this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -41,8 +39,8 @@ class PPOBProductPreviewWidget extends StatelessWidget {
               ),
               alignment: Alignment.topRight,
               child: SizedBox(
-                width: 15.0.w,
-                height: 15.0.w,
+                width: 45,
+                height: 45,
                 child: Image.asset(
                   'assets/icons/Group 23.png',
                   fit: BoxFit.cover,

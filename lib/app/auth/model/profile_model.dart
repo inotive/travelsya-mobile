@@ -3,8 +3,8 @@ import 'package:travelsya/app/order/models/order_list_model.dart';
 
 class HistoryPoint {
   late int id;
-  late int userId;
-  late int transactionId;
+  late String userId;
+  late String transactionId;
   late String flow;
   late String date;
   late String createdAt;
@@ -13,10 +13,10 @@ class HistoryPoint {
 
   HistoryPoint.frmoJson(Map<String, dynamic> jsonMap) {
     id = jsonMap['id'];
-    userId = jsonMap['user_id'];
-    transactionId = jsonMap['transaction_id'];
+    userId = jsonMap['user_id'].toString();
+    transactionId = jsonMap['transaction_id'].toString();
     flow = jsonMap['flow'];
-    point = jsonMap['point'];
+    point = int.parse(jsonMap['point'].toString());
     date = jsonMap['date'];
     createdAt = jsonMap['created_at'];
     transaction = OrderList.fromJsonPoint(jsonMap['transaction']);

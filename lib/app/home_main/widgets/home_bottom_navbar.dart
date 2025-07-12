@@ -6,8 +6,7 @@ class HomeBottomNavbar extends StatelessWidget {
   final Function(int) onTap;
   final int selectedIndex;
   const HomeBottomNavbar(
-      {Key? key, required this.onTap, required this.selectedIndex})
-      : super(key: key);
+      {super.key, required this.onTap, required this.selectedIndex});
 
   @override
   Widget build(BuildContext context) {

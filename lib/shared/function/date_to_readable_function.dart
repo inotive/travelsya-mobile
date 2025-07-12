@@ -1,3 +1,40 @@
+import 'package:intl/intl.dart';
+
+String getDay(String date) {
+  String rawData =
+      DateFormat('EEEE').format(DateFormat('yyyy-MM-dd').parse(date));
+
+  String finalData = '';
+
+  switch (rawData.toLowerCase()) {
+    case 'monday':
+      finalData = 'Senin';
+      break;
+    case 'tuesday':
+      finalData = 'Selasa';
+      break;
+    case 'wednesday':
+      finalData = 'Rabu';
+      break;
+    case 'thursday':
+      finalData = 'Kamis';
+      break;
+    case 'friday':
+      finalData = "Jum'at";
+      break;
+    case 'saturday':
+      finalData = 'Sabtu';
+      break;
+    case 'sunday':
+      finalData = 'Minggu';
+      break;
+
+    default:
+  }
+
+  return finalData;
+}
+
 String dateToReadable(String date) {
   String finalString = '';
 

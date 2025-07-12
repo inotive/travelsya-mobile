@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sizer/sizer.dart';
 import 'package:travelsya/app/hostel/cubits/hostel_cubit.dart';
 import 'package:travelsya/app/hostel/cubits/hostel_state.dart';
 import 'package:travelsya/app/hostel/widgets/duration_picker_widget.dart';
@@ -123,7 +122,8 @@ class HostelFilterCubit extends Cubit<HostelState> {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10.0),
           ),
-          constraints: BoxConstraints(maxHeight: 90.0.h),
+          constraints: BoxConstraints(
+              maxHeight: MediaQuery.of(context).size.height * 0.7),
           isScrollControlled: true,
           builder: (context) {
             return HostelCityPicker(

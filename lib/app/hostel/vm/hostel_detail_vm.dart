@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
-import 'package:sizer/sizer.dart';
 import 'package:stacked/stacked.dart';
 import 'package:travelsya/app/hostel/cubits/hostel_cubit.dart';
 import 'package:travelsya/app/hostel/cubits/hostel_filter_cubit.dart';
 import 'package:travelsya/app/hostel/cubits/hostel_state.dart';
 import 'package:travelsya/app/hostel/models/hostel_detail_model.dart';
 import 'package:travelsya/shared/styles/font_style.dart';
+import 'package:travelsya/shared/styles/size_styles.dart';
 
 class HostelDetailVM extends BaseViewModel {
   final ItemScrollController itemScrollController = ItemScrollController();
@@ -97,11 +97,11 @@ class HostelDetailVM extends BaseViewModel {
                   onTabPressed(index);
                 },
                 child: Container(
-                  height: 8.0.w,
+                  height: 30,
                   margin: EdgeInsets.only(
-                      left: index == 0 ? 5.0.w : 1.0.w,
-                      right: index == 4 ? 5.0.w : 0),
-                  padding: EdgeInsets.symmetric(horizontal: 5.0.w),
+                      left: index == 0 ? margin16 : margin4,
+                      right: index == 4 ? margin16 : 0),
+                  padding: EdgeInsets.symmetric(horizontal: margin16),
                   decoration: BoxDecoration(
                       color: index == selectedIndex
                           ? const Color(0xffFFEEF1)
@@ -115,7 +115,7 @@ class HostelDetailVM extends BaseViewModel {
                   child: Text(
                     getFilterData(index),
                     style: mainFont.copyWith(
-                        fontSize: 11.0.sp,
+                        fontSize: 13,
                         fontWeight: FontWeight.bold,
                         color: index == selectedIndex
                             ? Theme.of(context).primaryColor
@@ -138,11 +138,11 @@ class HostelDetailVM extends BaseViewModel {
             onTabPressed(index);
           },
           child: Container(
-            height: 8.0.w,
+            height: 30,
             margin: EdgeInsets.only(
-                left: index == 0 ? 5.0.w : 1.0.w,
-                right: index == 4 ? 5.0.w : 0),
-            padding: EdgeInsets.symmetric(horizontal: 5.0.w),
+                left: index == 0 ? margin16 : margin4,
+                right: index == 4 ? margin16 : 0),
+            padding: EdgeInsets.symmetric(horizontal: margin16),
             decoration: BoxDecoration(
                 color: index == selectedIndex
                     ? const Color(0xffFFEEF1)
@@ -156,7 +156,7 @@ class HostelDetailVM extends BaseViewModel {
             child: Text(
               getFilterData(index),
               style: mainFont.copyWith(
-                  fontSize: 11.0.sp,
+                  fontSize: 13,
                   fontWeight: FontWeight.bold,
                   color: index == selectedIndex
                       ? Theme.of(context).primaryColor

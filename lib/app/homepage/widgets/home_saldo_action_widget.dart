@@ -7,11 +7,10 @@ class HomeSaldoActionWidget extends StatelessWidget {
   final Function onTap;
   final String iconAsset;
   const HomeSaldoActionWidget(
-      {Key? key,
+      {super.key,
       required this.iconAsset,
       required this.title,
-      required this.onTap})
-      : super(key: key);
+      required this.onTap});
 
   @override
   Widget build(BuildContext context) {

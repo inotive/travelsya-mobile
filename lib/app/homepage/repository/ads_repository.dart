@@ -18,15 +18,17 @@ class AdsRepository {
     ApiReturnValue<dynamic>? response = await ApiReturnValue.httpRequest(
         context,
         request: request,
-        exceptionStatusCode: [201],
+        exceptionStatusCode: [201, 400],
         auth: false);
 
     if (response!.status == RequestStatus.successRequest) {
       List<AdsModel> dataFinal = [];
 
-      for (var i = 0; i < response.data['data'].length; i++) {
-        if (AdsModel.fromJson(response.data['data'][i]).isActive == 1) {
-          dataFinal.add(AdsModel.fromJson(response.data['data'][i]));
+      if (response.data == null) {
+        for (var i = 0; i < response.data['data'].length; i++) {
+          if (AdsModel.fromJson(response.data['data'][i]).isActive == 1) {
+            dataFinal.add(AdsModel.fromJson(response.data['data'][i]));
+          }
         }
       }
 

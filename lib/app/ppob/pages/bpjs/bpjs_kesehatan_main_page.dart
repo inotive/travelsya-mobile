@@ -12,6 +12,7 @@ import 'package:travelsya/shared/widgets/failed_request_widget.dart';
 import 'package:travelsya/shared/widgets/form_helper/elevated_button_widget.dart';
 import 'package:travelsya/shared/widgets/form_helper/rounded_texfield_widget.dart';
 import 'package:travelsya/shared/widgets/form_helper/title_with_widget.dart';
+import 'package:travelsya/shared/widgets/statusbar_widget.dart';
 
 class BPJSKesehatanMainPage extends StatelessWidget {
   final String preloadNumber;
@@ -24,7 +25,7 @@ class BPJSKesehatanMainPage extends StatelessWidget {
     }, onViewModelReady: (model) {
       model.onInit(preloadNumber);
     }, builder: (context, model, child) {
-      return SafeArea(
+      return StatusbarWidget(
           child: Scaffold(
         backgroundColor: Colors.white,
         appBar: appbarWidget(context, title: 'BPJS Kesehatan'),

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:travelsya/shared/helper/const_helper.dart';
 import 'package:travelsya/shared/styles/font_style.dart';
+import 'package:travelsya/shared/styles/size_styles.dart';
 import 'package:travelsya/shared/styles/theme_style.dart';
-import 'package:sizer/sizer.dart';
 
 class MutasiPage extends StatefulWidget {
-  const MutasiPage({Key? key}) : super(key: key);
+  const MutasiPage({super.key});
 
   @override
   State<MutasiPage> createState() => _MutasiPageState();
@@ -59,7 +59,7 @@ class _MutasiPageState extends State<MutasiPage> {
         child: Scaffold(
             body: Column(children: [
       Container(
-        padding: EdgeInsets.all(5.0.w),
+        padding: EdgeInsets.all(margin16),
         decoration: BoxDecoration(
             border:
                 Border(bottom: BorderSide(color: neutral30.withOpacity(0.3)))),
@@ -74,38 +74,34 @@ class _MutasiPageState extends State<MutasiPage> {
                 color: Theme.of(context).primaryColor,
               ),
             ),
-            SizedBox(
-              width: 3.0.w,
-            ),
+            SizedBox(width: margin24 / 2),
             Text(
               'Riwayat Transaksi',
               style: mainFont.copyWith(
-                  fontSize: 13.0.sp,
-                  color: neutral100,
-                  fontWeight: FontWeight.bold),
+                  fontSize: 15, color: neutral100, fontWeight: FontWeight.bold),
             )
           ],
         ),
       ),
       Expanded(
           child: ListView(
-        padding: EdgeInsets.symmetric(horizontal: 5.0.w),
+        padding: EdgeInsets.symmetric(horizontal: margin16),
         children: List.generate(dataHistory.length, (index) {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(
-                height: 5.0.w,
+                height: margin16,
               ),
               Text(
                 dataHistory[index]['group_date'],
                 style: mainFont.copyWith(
-                    fontSize: 12.0.sp,
+                    fontSize: 13,
                     color: neutral30,
                     fontWeight: FontWeight.bold),
               ),
               SizedBox(
-                height: 3.0.w,
+                height: margin24 / 2,
               ),
               Column(
                 children:
@@ -113,9 +109,9 @@ class _MutasiPageState extends State<MutasiPage> {
                   return Stack(
                     children: [
                       Container(
-                        margin: EdgeInsets.only(bottom: 3.0.w),
+                        margin: EdgeInsets.only(bottom: margin24 / 2),
                         padding: EdgeInsets.symmetric(
-                            horizontal: 5.0.w, vertical: 4.0.w),
+                            horizontal: margin16, vertical: margin16),
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
                             border: Border.all(
@@ -124,21 +120,21 @@ class _MutasiPageState extends State<MutasiPage> {
                           child: Row(
                             children: [
                               Container(
-                                width: 10.0.w,
-                                height: 10.0.w,
+                                width: 32,
+                                height: 32,
                                 decoration: const BoxDecoration(
                                     shape: BoxShape.circle,
                                     color: Color(0xffF4F4F4)),
                                 alignment: Alignment.center,
                                 child: SizedBox(
-                                  width: 6.0.w,
-                                  height: 6.0.w,
+                                  width: 20,
+                                  height: 20,
                                   child: Image.asset(dataHistory[index]['data']
                                       [index2]['assets']),
                                 ),
                               ),
                               SizedBox(
-                                width: 3.0.w,
+                                width: margin24 / 2,
                               ),
                               Expanded(
                                   child: Column(
@@ -147,19 +143,19 @@ class _MutasiPageState extends State<MutasiPage> {
                                   Text(
                                     dataHistory[index]['data'][index2]['title'],
                                     style: mainFont.copyWith(
-                                        fontSize: 10.0.sp,
+                                        fontSize: 12,
                                         color: Colors.black87,
                                         fontWeight: FontWeight.bold),
                                   ),
                                   Text(
                                     dataHistory[index]['data'][index2]['desc'],
                                     style: mainFont.copyWith(
-                                        fontSize: 8.0.sp, color: neutral30),
+                                        fontSize: 11, color: neutral30),
                                   )
                                 ],
                               )),
                               SizedBox(
-                                width: 3.0.w,
+                                width: margin24 / 2,
                               ),
                               Container(
                                   alignment: Alignment.topRight,
@@ -172,7 +168,7 @@ class _MutasiPageState extends State<MutasiPage> {
                                         dataHistory[index]['data'][index2]
                                             ['value'],
                                     style: mainFont.copyWith(
-                                        fontSize: 10.0.sp,
+                                        fontSize: 12,
                                         color: dataHistory[index]['data']
                                                     [index2]['type'] ==
                                                 1
@@ -188,8 +184,8 @@ class _MutasiPageState extends State<MutasiPage> {
                         top: 0,
                         right: 0,
                         child: SizedBox(
-                          width: 8.0.w,
-                          height: 8.0.w,
+                          width: 30,
+                          height: 30,
                           child: Image.asset(
                             dataHistory[index]['data'][index2]['type'] == 1
                                 ? ConstHelper.redElips

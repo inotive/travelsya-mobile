@@ -6,7 +6,6 @@ import 'package:travelsya/app/auth/model/profile_model.dart';
 import 'package:travelsya/shared/cubits/point/point_cubit.dart';
 import 'package:travelsya/shared/function/date_to_readable_function.dart';
 import 'package:travelsya/shared/helper/const_helper.dart';
-import 'package:sizer/sizer.dart';
 import 'package:travelsya/shared/helper/function_helper.dart';
 import 'package:travelsya/shared/styles/font_style.dart';
 import 'package:travelsya/shared/styles/size_styles.dart';
@@ -14,7 +13,7 @@ import 'package:travelsya/shared/styles/theme_style.dart';
 import 'package:travelsya/shared/widgets/failed_request_widget.dart';
 
 class PointHistorySection extends StatefulWidget {
-  const PointHistorySection({Key? key}) : super(key: key);
+  const PointHistorySection({super.key});
 
   @override
   State<PointHistorySection> createState() => _PointHistorySectionState();
@@ -88,7 +87,7 @@ class _PointHistorySectionState extends State<PointHistorySection> {
                     },
                     color: Theme.of(context).primaryColor,
                     child: ListView(
-                      padding: EdgeInsets.symmetric(horizontal: 5.0.w),
+                      padding: EdgeInsets.symmetric(horizontal: margin16),
                       children: List.generate(state.data.point.length, (index) {
                         HistoryPoint data = state.data.point[index];
 
@@ -160,13 +159,13 @@ class _PointHistorySectionState extends State<PointHistorySection> {
                                     Row(
                                       children: [
                                         SizedBox(
-                                          width: 6.0.w,
-                                          height: 6.0.w,
+                                          width: 20,
+                                          height: 20,
                                           child:
                                               Image.asset(ConstHelper.coinIcon),
                                         ),
                                         SizedBox(
-                                          width: 1.0.w,
+                                          width: margin4,
                                         ),
                                         Text(
                                           (data.flow == 'credit' ? '-' : '+') +
@@ -175,7 +174,7 @@ class _PointHistorySectionState extends State<PointHistorySection> {
                                                       data.point.toString()),
                                                   customLabel: '')),
                                           style: mainFont.copyWith(
-                                              fontSize: 11.0.sp,
+                                              fontSize: 13,
                                               color: data.flow == 'credit'
                                                   ? Colors.red
                                                   : Colors.green,

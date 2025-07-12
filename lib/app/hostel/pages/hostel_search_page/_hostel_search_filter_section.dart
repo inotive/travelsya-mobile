@@ -59,10 +59,10 @@ class _HostelSearchFilterSection extends StatelessWidget {
                 SizedBox(
                   height: margin16,
                 ),
-                FormHelper.titleWithWidget(
+                TitleWithWidget(
                     title: 'Durasi Sewa',
                     customMargin: margin4,
-                    widget: Row(
+                    child: Row(
                       children: [
                         SizedBox(
                             width: 100,
@@ -179,10 +179,12 @@ class _HostelSearchFilterSection extends StatelessWidget {
                 SizedBox(
                   height: margin16,
                 ),
-                FormHelper.elevatedButtonBasic(context, enabled: true,
+                ElevatedButtonWidget(
+                    enabled: true,
                     onTap: () {
-                  model.onSearchHostel(context);
-                }, title: 'Cari Hostel')
+                      model.onSearchHostel(context);
+                    },
+                    title: 'Cari Hostel')
               ],
             ),
           );

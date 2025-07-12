@@ -19,10 +19,13 @@ AppBar appbarBasicWidget(BuildContext context, {required String title}) {
 }
 
 AppBar appbarWidget(BuildContext context,
-    {required String title, Widget? suffixWidget}) {
+    {required String title,
+    Widget? suffixWidget,
+    Color? customColor,
+    Color? customForeground}) {
   return AppBar(
     elevation: 1,
-    backgroundColor: Colors.white,
+    backgroundColor: customColor ?? Colors.white,
     titleSpacing: 0,
     automaticallyImplyLeading: false,
     title: Container(
@@ -35,7 +38,7 @@ AppBar appbarWidget(BuildContext context,
             },
             child: Icon(
               Icons.arrow_back,
-              color: Theme.of(context).primaryColor,
+              color: customForeground ?? Theme.of(context).primaryColor,
             ),
           ),
           SizedBox(
@@ -45,7 +48,8 @@ AppBar appbarWidget(BuildContext context,
               child: Text(
             title,
             style: mainBody4.copyWith(
-                color: Colors.black87, fontWeight: FontWeight.bold),
+                color: customForeground ?? Colors.black87,
+                fontWeight: FontWeight.bold),
           )),
           suffixWidget ?? const SizedBox()
         ],

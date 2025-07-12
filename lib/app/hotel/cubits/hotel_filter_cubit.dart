@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sizer/sizer.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 import 'package:travelsya/app/hostel/widgets/count_picker_widget.dart';
 import 'package:travelsya/app/hotel/cubits/hotel_cubit.dart';
@@ -10,6 +9,11 @@ import 'package:travelsya/shared/widgets/multi_date_picker.dart';
 
 class HotelFilterCubit extends Cubit<HotelState> {
   HotelFilterCubit() : super(HotelInitial());
+
+  onChangeState(HotelSearchFilter data) {
+    emit(HotelLoading());
+    emit(data);
+  }
 
   onInit() {
     emit(HotelSearchFilter(
@@ -121,7 +125,8 @@ class HotelFilterCubit extends Cubit<HotelState> {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10.0),
           ),
-          constraints: BoxConstraints(maxHeight: 90.0.h),
+          constraints: BoxConstraints(
+              maxHeight: MediaQuery.of(context).size.height * 0.9),
           isScrollControlled: true,
           builder: (context) {
             return HotelCityPicker(

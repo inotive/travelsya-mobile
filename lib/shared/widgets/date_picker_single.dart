@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 import 'package:travelsya/shared/styles/font_style.dart';
+import 'package:travelsya/shared/styles/size_styles.dart';
 
 class DateSinglePicker extends StatefulWidget {
   final DateTime? selectedDate;
   final DateTime? minDate;
   final DateTime? maxDate;
   const DateSinglePicker(
-      {Key? key, this.selectedDate, this.minDate, this.maxDate})
-      : super(key: key);
+      {super.key, this.selectedDate, this.minDate, this.maxDate});
 
   @override
   // ignore: library_private_types_in_public_api
@@ -41,8 +40,8 @@ class _DateSinglePickerState extends State<DateSinglePicker> {
   Widget _buildContent() {
     return Center(
       child: Container(
-          width: 85.0.w,
-          padding: EdgeInsets.all(5.0.w),
+          width: MediaQuery.of(context).size.width * 0.85,
+          padding: EdgeInsets.all(margin16),
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10), color: Colors.white),
           child: Column(
@@ -54,7 +53,7 @@ class _DateSinglePickerState extends State<DateSinglePicker> {
                   Text(
                     'Pilih Tanggal',
                     style: mainFont.copyWith(
-                        fontSize: 12.0.sp,
+                        fontSize: 14,
                         color: Colors.black87,
                         fontWeight: FontWeight.bold),
                   ),
@@ -72,7 +71,7 @@ class _DateSinglePickerState extends State<DateSinglePicker> {
                 width: double.infinity,
                 height: 1,
                 color: Colors.black12,
-                margin: EdgeInsets.symmetric(vertical: 3.0.w),
+                margin: EdgeInsets.symmetric(vertical: margin24 / 2),
               ),
               SfDateRangePicker(
                 controller: dateController,
@@ -101,7 +100,7 @@ class _DateSinglePickerState extends State<DateSinglePicker> {
                   // }
                 },
               ),
-              SizedBox(height: 5.0.w),
+              SizedBox(height: margin16),
               Row(children: [
                 Flexible(
                     flex: 1,
@@ -111,7 +110,7 @@ class _DateSinglePickerState extends State<DateSinglePicker> {
                       },
                       child: Container(
                         width: double.infinity,
-                        padding: EdgeInsets.symmetric(vertical: 3.0.w),
+                        padding: EdgeInsets.symmetric(vertical: margin24 / 2),
                         alignment: Alignment.center,
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
@@ -120,13 +119,13 @@ class _DateSinglePickerState extends State<DateSinglePicker> {
                         child: Text(
                           'Batal',
                           style: mainFont.copyWith(
-                              fontSize: 12.0.sp,
+                              fontSize: 14,
                               color: Theme.of(context).primaryColor,
                               fontWeight: FontWeight.bold),
                         ),
                       ),
                     )),
-                SizedBox(width: 2.0.w),
+                SizedBox(width: margin8),
                 Flexible(
                     flex: 1,
                     child: GestureDetector(
@@ -137,7 +136,7 @@ class _DateSinglePickerState extends State<DateSinglePicker> {
                       },
                       child: Container(
                         width: double.infinity,
-                        padding: EdgeInsets.symmetric(vertical: 3.0.w),
+                        padding: EdgeInsets.symmetric(vertical: margin24 / 2),
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
                             color: selectedDate == null
@@ -147,7 +146,7 @@ class _DateSinglePickerState extends State<DateSinglePicker> {
                         child: Text(
                           'Pilih',
                           style: mainFont.copyWith(
-                              fontSize: 12.0.sp,
+                              fontSize: 14,
                               color: Colors.white,
                               fontWeight: FontWeight.bold),
                         ),

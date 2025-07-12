@@ -16,6 +16,7 @@ import 'package:travelsya/shared/styles/font_style.dart';
 import 'package:travelsya/shared/styles/size_styles.dart';
 import 'package:travelsya/shared/widgets/failed_request_horizontal_widget.dart';
 import 'package:travelsya/shared/widgets/form_helper.dart';
+import 'package:travelsya/shared/widgets/form_helper/elevated_button_widget.dart';
 import 'package:travelsya/shared/widgets/placeholder_widget.dart';
 
 class TopupConfirmationDialog extends StatefulWidget {
@@ -276,12 +277,14 @@ class _TopupConfirmationDialogState extends State<TopupConfirmationDialog> {
                     SizedBox(
                       height: margin8,
                     ),
-                    FormHelper.elevatedButtonBasic(context, enabled: true,
+                    ElevatedButtonWidget(
+                        enabled: true,
                         onTap: () {
-                      needLoginFeature(context, () {
-                        Navigator.pop(context, [true, usePoint]);
-                      });
-                    }, title: 'Lanjutkan ke Pembayaran')
+                          needLoginFeature(context, () {
+                            Navigator.pop(context, [true, usePoint]);
+                          });
+                        },
+                        title: 'Lanjutkan ke Pembayaran')
                   ],
                 ),
               )

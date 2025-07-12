@@ -43,7 +43,7 @@ class _HomePageBalanceSection extends StatelessWidget {
                       ],
                     ),
                     SizedBox(
-                      height: 1.0.w,
+                      height: margin4,
                     ),
                     BlocBuilder<AuthCubit, AuthState>(
                       bloc: BlocProvider.of<AuthCubit>(context),

@@ -7,9 +7,10 @@ import 'package:travelsya/shared/styles/size_styles.dart';
 import 'package:travelsya/shared/widgets/form_helper/elevated_button_widget.dart';
 import 'package:travelsya/shared/widgets/form_helper/rounded_texfield_widget.dart';
 import 'package:travelsya/shared/widgets/form_helper/validation_widget.dart';
+import 'package:travelsya/shared/widgets/statusbar_widget.dart';
 
 class ForgotPasswordPage extends StatefulWidget {
-  const ForgotPasswordPage({Key? key}) : super(key: key);
+  const ForgotPasswordPage({super.key});
 
   @override
   State<ForgotPasswordPage> createState() => _ForgotPasswordPageState();
@@ -24,11 +25,14 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
         },
         onViewModelReady: (model) {},
         builder: (context, model, child) {
-          return SafeArea(
+          return StatusbarWidget(
               child: Scaffold(
             backgroundColor: Colors.white,
             body: Column(
               children: [
+                SizedBox(
+                  height: MediaQuery.of(context).padding.top,
+                ),
                 Container(
                   padding: EdgeInsets.all(margin16),
                   child: Row(

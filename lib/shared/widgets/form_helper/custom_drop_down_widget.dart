@@ -5,7 +5,7 @@ import 'package:travelsya/shared/styles/size_styles.dart';
 class CustomDropdown extends StatelessWidget {
   final String? hintText;
   final String? value;
-  const CustomDropdown({Key? key, this.hintText, this.value}) : super(key: key);
+  const CustomDropdown({super.key, this.hintText, this.value});
 
   @override
   Widget build(BuildContext context) {

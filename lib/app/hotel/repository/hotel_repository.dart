@@ -5,6 +5,7 @@ import 'package:travelsya/app/hotel/models/hotel_room_model.dart';
 import 'package:travelsya/shared/api/api_connection.dart';
 import 'package:travelsya/shared/api/api_return_value.dart';
 import 'package:http/http.dart' as http;
+import 'package:travelsya/shared/widgets/city_picker_bottomsheet.dart';
 
 class HotelRepository {
   static Future<ApiReturnValue> ratingHotel(BuildContext context,
@@ -157,12 +158,12 @@ class HotelRepository {
     return returnValue;
   }
 
-  static Future<ApiReturnValue> fetchCityAvailable(
-    BuildContext context,
-  ) async {
+  static Future<ApiReturnValue> fetchCityAvailable(BuildContext context,
+      {CityPickerType type = CityPickerType.hotel}) async {
     ApiReturnValue returnValue;
 
-    String url = '$baseAPIUrl/hotel/city';
+    String url =
+        type == CityPickerType.hotel ? '$baseAPIUrl/hotel/city' : busCityUrl;
 
     var request = http.MultipartRequest('GET', Uri.parse(url));
 

@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
 import 'package:travelsya/app/hostel/models/hostel_detail_model.dart';
 import 'package:travelsya/shared/styles/font_style.dart';
+import 'package:travelsya/shared/styles/size_styles.dart';
 
 class HostelDetailInfoSection extends StatelessWidget {
   final HostelDetailModel data;
-  const HostelDetailInfoSection({Key? key, required this.data})
-      : super(key: key);
+  const HostelDetailInfoSection({super.key, required this.data});
 
   @override
   Widget build(BuildContext context) {
     return Column(children: [
       Container(
-        padding: EdgeInsets.all(5.0.w),
+        padding: EdgeInsets.all(margin16),
         child: Column(
           children: [
             Row(
@@ -21,7 +20,7 @@ class HostelDetailInfoSection extends StatelessWidget {
                 Text(
                   'Info Umum',
                   style: mainFont.copyWith(
-                      fontSize: 12.0.sp,
+                      fontSize: 14,
                       color: Colors.black87,
                       fontWeight: FontWeight.bold),
                 ),
@@ -36,15 +35,15 @@ class HostelDetailInfoSection extends StatelessWidget {
             ),
             Center(
               child: Container(
-                margin: EdgeInsets.only(top: 3.0.w, bottom: 2.0.w),
-                width: 80.0.w,
+                margin: EdgeInsets.only(top: margin24 / 2, bottom: margin8),
+                width: MediaQuery.of(context).size.width * 0.8,
                 child: IntrinsicHeight(
                   child: Row(
                     children: [
                       Flexible(
                         flex: 1,
                         child: Container(
-                          padding: EdgeInsets.symmetric(vertical: 3.0.w),
+                          padding: EdgeInsets.symmetric(vertical: margin24 / 2),
                           width: double.infinity,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(8),
@@ -54,13 +53,13 @@ class HostelDetailInfoSection extends StatelessWidget {
                               Text(
                                 'Check In',
                                 style: mainFont.copyWith(
-                                    fontSize: 8.0.sp,
+                                    fontSize: 10,
                                     color: const Color(0xffa5a5a5)),
                               ),
                               Text(
                                 data.checkIn,
                                 style: mainFont.copyWith(
-                                    fontSize: 11.0.sp,
+                                    fontSize: 13,
                                     color: Colors.black87,
                                     fontWeight: FontWeight.bold),
                               ),
@@ -69,7 +68,7 @@ class HostelDetailInfoSection extends StatelessWidget {
                         ),
                       ),
                       Container(
-                        margin: EdgeInsets.symmetric(horizontal: 3.0.w),
+                        margin: EdgeInsets.symmetric(horizontal: margin24 / 2),
                         height: double.infinity,
                         width: 1,
                         color: const Color(0xffa5a5a5),
@@ -77,7 +76,7 @@ class HostelDetailInfoSection extends StatelessWidget {
                       Flexible(
                         flex: 1,
                         child: Container(
-                          padding: EdgeInsets.symmetric(vertical: 3.0.w),
+                          padding: EdgeInsets.symmetric(vertical: margin24 / 2),
                           width: double.infinity,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(8),
@@ -87,13 +86,13 @@ class HostelDetailInfoSection extends StatelessWidget {
                               Text(
                                 'Check Out',
                                 style: mainFont.copyWith(
-                                    fontSize: 8.0.sp,
+                                    fontSize: 10,
                                     color: const Color(0xffa5a5a5)),
                               ),
                               Text(
                                 data.checkOut,
                                 style: mainFont.copyWith(
-                                    fontSize: 11.0.sp,
+                                    fontSize: 13,
                                     color: Colors.black87,
                                     fontWeight: FontWeight.bold),
                               ),

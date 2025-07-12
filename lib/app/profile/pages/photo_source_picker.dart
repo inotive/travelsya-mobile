@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:travelsya/shared/styles/font_style.dart';
 import 'package:travelsya/shared/styles/size_styles.dart';
 import 'package:travelsya/shared/widgets/form_helper.dart';
+import 'package:travelsya/shared/widgets/form_helper/elevated_button_widget.dart';
 
 class PhotoSourcePickerDialog extends StatelessWidget {
   const PhotoSourcePickerDialog({super.key});
@@ -33,15 +34,21 @@ class PhotoSourcePickerDialog extends StatelessWidget {
                 height: 1,
                 color: Colors.black12,
               ),
-              FormHelper.elevatedButtonBasic(context, enabled: true, onTap: () {
-                Navigator.pop(context, 0);
-              }, title: 'Galeri'),
+              ElevatedButtonWidget(
+                  enabled: true,
+                  onTap: () {
+                    Navigator.pop(context, 0);
+                  },
+                  title: 'Galeri'),
               SizedBox(
                 height: margin16,
               ),
-              FormHelper.elevatedButtonBasic(context, enabled: true, onTap: () {
-                Navigator.pop(context, 1);
-              }, title: 'Kamera'),
+              ElevatedButtonWidget(
+                  enabled: true,
+                  onTap: () {
+                    Navigator.pop(context, 1);
+                  },
+                  title: 'Kamera'),
               SizedBox(
                 height: margin32,
               ),

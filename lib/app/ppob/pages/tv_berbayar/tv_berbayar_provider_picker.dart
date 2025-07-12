@@ -9,8 +9,8 @@ import 'package:travelsya/shared/widgets/form_helper/rounded_texfield_widget.dar
 
 class TVBerbayarProviderPicker extends StatefulWidget {
   const TVBerbayarProviderPicker({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   State<TVBerbayarProviderPicker> createState() =>

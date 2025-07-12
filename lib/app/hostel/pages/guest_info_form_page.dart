@@ -3,12 +3,14 @@ import 'package:string_validator/string_validator.dart';
 import 'package:travelsya/app/hostel/models/hostel_model.dart';
 import 'package:travelsya/shared/function/show_snackbar.dart';
 import 'package:travelsya/shared/styles/font_style.dart';
-import 'package:sizer/sizer.dart';
-import 'package:travelsya/shared/widgets/form_helper.dart';
+import 'package:travelsya/shared/styles/size_styles.dart';
+import 'package:travelsya/shared/widgets/form_helper/elevated_button_widget.dart';
+import 'package:travelsya/shared/widgets/form_helper/rounded_texfield_widget.dart';
+import 'package:travelsya/shared/widgets/form_helper/title_with_widget.dart';
 
 class GuestInfoForm extends StatefulWidget {
   final GuestModel? data;
-  const GuestInfoForm({Key? key, this.data}) : super(key: key);
+  const GuestInfoForm({super.key, this.data});
 
   @override
   State<GuestInfoForm> createState() => _GuestInfoFormState();
@@ -34,7 +36,7 @@ class _GuestInfoFormState extends State<GuestInfoForm> {
       body: Column(
         children: [
           Container(
-            padding: EdgeInsets.all(5.0.w),
+            padding: EdgeInsets.all(margin16),
             color: Theme.of(context).primaryColor,
             child: Row(
               children: [
@@ -48,12 +50,12 @@ class _GuestInfoFormState extends State<GuestInfoForm> {
                   ),
                 ),
                 SizedBox(
-                  width: 3.0.w,
+                  width: margin24 / 2,
                 ),
                 Text(
                   'Informasi Tamu',
                   style: mainFont.copyWith(
-                      fontSize: 13.0.sp,
+                      fontSize: 15,
                       color: Colors.white,
                       fontWeight: FontWeight.w700),
                 )
@@ -62,60 +64,63 @@ class _GuestInfoFormState extends State<GuestInfoForm> {
           ),
           Expanded(
               child: ListView(
-            padding: EdgeInsets.symmetric(horizontal: 5.0.w),
+            padding: EdgeInsets.symmetric(horizontal: margin16),
             children: [
               SizedBox(
-                height: 5.0.w,
+                height: margin16,
               ),
-              FormHelper.titleWithWidget(
+              TitleWithWidget(
                   title: 'Nomor KTP',
-                  widget: FormHelper.roundedTextfield(context,
+                  child: RoundedTextfield(
                       keyboardType: TextInputType.number,
                       hintText: 'Nomor KTP Tamu',
                       controller: ktpController)),
               SizedBox(
-                height: 5.0.w,
+                height: margin16,
               ),
-              FormHelper.titleWithWidget(
+              TitleWithWidget(
                   title: 'Nama Sesuai KTP',
-                  widget: FormHelper.roundedTextfield(context,
+                  child: RoundedTextfield(
                       hintText: 'Nama Sesuai KTP', controller: nameController)),
               SizedBox(
-                height: 10.0.w,
+                height: margin32,
               ),
-              FormHelper.elevatedButtonBasic(context, enabled: true, onTap: () {
-                String validation = '';
+              ElevatedButtonWidget(
+                  enabled: true,
+                  onTap: () {
+                    String validation = '';
 
-                if (nameController.text.isEmpty) {
-                  validation = 'Mohon mengisi nama tamu';
-                } else {
-                  if (isAlpha(nameController.text.replaceAll(' ', ''))) {
-                    validation = 'Nama Tidak Valid';
-                  }
-                }
+                    if (nameController.text.isEmpty) {
+                      validation = 'Mohon mengisi nama tamu';
+                    } else {
+                      if (isAlpha(nameController.text.replaceAll(' ', ''))) {
+                        validation = 'Nama Tidak Valid';
+                      }
+                    }
 
-                if (ktpController.text.isEmpty) {
-                  validation = 'Mohon mengisi nomor KTP tamu';
-                } else {
-                  if (ktpController.text.length != 16) {
-                    validation = 'Nomor KTP Tidak Valid';
-                  }
-                }
+                    if (ktpController.text.isEmpty) {
+                      validation = 'Mohon mengisi nomor KTP tamu';
+                    } else {
+                      if (ktpController.text.length != 16) {
+                        validation = 'Nomor KTP Tidak Valid';
+                      }
+                    }
 
-                if (validation.isEmpty) {
-                  Navigator.pop(
-                      context,
-                      GuestModel(
-                          type: 'ktp',
-                          number: ktpController.text,
-                          name: nameController.text));
-                } else {
-                  showSnackbar(context,
-                      data: validation, colors: Colors.orange);
-                }
-              }, title: 'Simpan'),
+                    if (validation.isEmpty) {
+                      Navigator.pop(
+                          context,
+                          GuestModel(
+                              type: 'ktp',
+                              number: ktpController.text,
+                              name: nameController.text));
+                    } else {
+                      showSnackbar(context,
+                          data: validation, colors: Colors.orange);
+                    }
+                  },
+                  title: 'Simpan'),
               SizedBox(
-                height: 10.0.w,
+                height: margin32,
               ),
             ],
           ))

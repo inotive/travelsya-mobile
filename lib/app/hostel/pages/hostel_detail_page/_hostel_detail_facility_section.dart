@@ -12,7 +12,7 @@ class _HostelDetailFacilitySection extends StatelessWidget {
     return Column(
       children: [
         Container(
-          padding: EdgeInsets.all(5.0.w),
+          padding: EdgeInsets.all(margin16),
           child: Column(
             children: [
               Row(
