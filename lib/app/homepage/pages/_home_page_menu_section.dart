@@ -37,27 +37,28 @@ class _HomePageMenuSection extends StatelessWidget {
                                     ? Colors.grey
                                     : const Color(0xfff3f3f3)),
                             alignment: Alignment.center,
-                            child: ColorFiltered(
-                              colorFilter: model.isDisableMenu(
-                                      model.dataMenu[index]['id'])
-                                  ? const ColorFilter.mode(
-                                      Colors.grey,
-                                      BlendMode.saturation,
-                                    )
-                                  : const ColorFilter.mode(
-                                      Colors.transparent,
-                                      BlendMode.multiply,
-                                    ),
-                              child: FractionallySizedBox(
-                                widthFactor: 0.6,
-                                child: AspectRatio(
-                                  aspectRatio: 1,
-                                  child: Image.asset(
-                                    model.dataMenu[index]['assets'],
-                                  ),
-                                ),
-                              ),
-                            ),
+                            child: Image.asset(model.dataMenu[index]['assets']),
+                            // child: ColorFiltered(
+                            //   colorFilter: model.isDisableMenu(
+                            //           model.dataMenu[index]['id'])
+                            //       ? const ColorFilter.mode(
+                            //           Colors.grey,
+                            //           BlendMode.saturation,
+                            //         )
+                            //       : const ColorFilter.mode(
+                            //           Colors.transparent,
+                            //           BlendMode.multiply,
+                            //         ),
+                            //   child: FractionallySizedBox(
+                            //     widthFactor: 0.6,
+                            //     child: AspectRatio(
+                            //       aspectRatio: 1,
+                            //       child: Image.asset(
+                            //         model.dataMenu[index]['assets'],
+                            //       ),
+                            //     ),
+                            //   ),
+                            // ),
                           ),
                         ),
                       ),
