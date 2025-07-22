@@ -52,15 +52,15 @@ class _HomeMainPageState extends State<HomeMainPage> {
                   Positioned(
                     left: 0,
                     right: 0,
-                    bottom: margin24,
+                    bottom: margin32,
                     child: Center(
                       child: GestureDetector(
                         onTap: () {
                           model.onQrisTap(context);
                         },
                         child: Container(
-                          width: 45,
-                          height: 45,
+                          width: 50,
+                          height: 50,
                           decoration: BoxDecoration(
                               shape: BoxShape.circle,
                               color: Theme.of(context).primaryColor),

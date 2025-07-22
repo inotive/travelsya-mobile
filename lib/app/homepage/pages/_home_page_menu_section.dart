@@ -37,7 +37,12 @@ class _HomePageMenuSection extends StatelessWidget {
                                     ? Colors.grey
                                     : const Color(0xfff3f3f3)),
                             alignment: Alignment.center,
-                            child: Image.asset(model.dataMenu[index]['assets']),
+                            child: Image.asset(
+                              model.dataMenu[index]['assets'],
+                              width: 40,
+                              height: 40,
+                              fit: BoxFit.contain,
+                            ),
                             // child: ColorFiltered(
                             //   colorFilter: model.isDisableMenu(
                             //           model.dataMenu[index]['id'])

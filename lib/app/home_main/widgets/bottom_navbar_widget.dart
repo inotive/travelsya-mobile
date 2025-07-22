@@ -46,6 +46,9 @@ class BottomNavbarWidget extends StatelessWidget {
                               : neutral70,
                         )),
               ),
+              const SizedBox(
+                height: 4,
+              ),
               Text(title,
                   style: mainBody5.copyWith(
                       color: isActive ? neutral100 : neutral70))

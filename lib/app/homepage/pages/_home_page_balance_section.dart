@@ -70,7 +70,7 @@ class _HomePageBalanceSection extends StatelessWidget {
                               });
                         } else {
                           return Text(
-                            'Silahkan Login',
+                            'Silakan Login',
                             style: mainBody5.copyWith(
                                 color: Theme.of(context).primaryColor),
                           );
@@ -85,7 +85,7 @@ class _HomePageBalanceSection extends StatelessWidget {
               width: margin24 / 2,
             ),
             HomeSaldoActionWidget(
-              title: 'Topup',
+              title: 'Top Up',
               iconAsset: 'assets/icons/plus_1.png',
               onTap: () {
                 model.onTopupMenuTap(context);

@@ -13,6 +13,7 @@ class HomeBottomNavbar extends StatelessWidget {
     return Stack(
       children: [
         Container(
+          // height: 70,
           width: double.infinity,
           color: const Color(0xffF4F4F4),
           child: Row(children: [
@@ -33,7 +34,7 @@ class HomeBottomNavbar extends StatelessWidget {
               },
             ),
             BottomNavbarWidget(
-              title: 'Qris',
+              title: 'QRIS',
               isActive: selectedIndex == 99,
               showIcon: false,
               iconsAsset: ConstHelper.homeIcon,
