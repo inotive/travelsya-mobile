@@ -18,7 +18,7 @@ class _HotelSearchBackgroundSection extends StatelessWidget {
                 image: DecorationImage(
                     fit: BoxFit.cover,
                     image: AssetImage(
-                        'assets/images/edvin-johansson-rlwE8f8anOc-unsplash 1 (5).png'))),
+                        'assets/images/edvin-johansson-rlwE8f8anOc-unsplash_5.png'))),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [

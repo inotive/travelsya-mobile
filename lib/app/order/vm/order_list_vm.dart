@@ -25,38 +25,38 @@ class OrderListVM extends BaseViewModel {
 
   String getPreviewAsset(String service) {
     if (service == 'BPJS') {
-      return 'assets/icons/user-protection 1.png';
+      return 'assets/icons/user_protection_1.png';
     } else if (service == 'HOTEL') {
-      return 'assets/icons/surface1.png';
+      return 'assets/icons/surface_1.png';
     } else if (service == 'HOSTEL') {
-      return 'assets/icons/bank 1.png';
+      return 'assets/icons/bank_1.png';
     } else if (service == 'PLN') {
-      return 'assets/icons/light-bulb.png';
+      return 'assets/icons/light_bulb.png';
     } else if (service == 'PDAM') {
-      return 'assets/icons/Icon PDAM.png';
+      return 'assets/icons/icon_pdam.png';
     } else if (service.contains('PULSA')) {
-      return 'assets/icons/Group (3).png';
+      return 'assets/icons/icon_pulsa.png';
     } else if (service.contains('TV')) {
-      return 'assets/icons/Group (2).png';
+      return 'assets/icons/icon_tv.png';
     } else if (service == 'PAJAK') {
-      return 'assets/icons/Group (4).png';
+      return 'assets/icons/icon_tax.png';
     } else if (service == 'DATA') {
-      return 'assets/icons/Group (3).png';
+      return 'assets/icons/icon_pulsa.png';
     } else if (service == 'EWALLET') {
-      return 'assets/icons/purse 1.png';
+      return 'assets/icons/icon_ewallet.png';
     } else if (service == 'LISTRIK-TOKEN') {
-      return 'assets/icons/light-bulb.png';
+      return 'assets/icons/light_bulb.png';
     } else if (service == 'RECREATION') {
-      return 'assets/icons/Icon Rekreasi.png';
+      return 'assets/icons/icon_rekreasi.png';
     } else if (service == 'CAR-RENT') {
-      return 'assets/icons/sport-car 1.png';
+      return 'assets/icons/sport_car_1.png';
     } else if (service == 'HEALTH-BEAUTY') {
-      return 'assets/icons/Group (6).png';
+      return 'assets/icons/group_6.png';
     } else if (service == 'BUS-TRAVEL') {
       return ConstHelper.busIcon;
     }
 
-    return 'assets/icons/invoice 1.png';
+    return 'assets/icons/invoice.png';
   }
 
   List<OrderList> dataAfterFilter(List<OrderList> data) {

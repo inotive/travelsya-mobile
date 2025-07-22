@@ -35,7 +35,7 @@ class PaymentSuccessDialog extends StatelessWidget {
             SizedBox(
               width: 60,
               height: 60,
-              child: Image.asset('assets/icons/validating-ticket 1.png'),
+              child: Image.asset('assets/icons/validating_ticket.png'),
             ),
             SizedBox(
               height: margin24 / 2,

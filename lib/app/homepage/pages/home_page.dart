@@ -49,8 +49,14 @@ class HomePage extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    SizedBox(
+                    Container(
                       height: 40,
+                      width: 90,
+                      padding: const EdgeInsets.all(6),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(8),
+                      ),
                       child: Image.asset(ConstHelper.logoHomeIcon),
                     ),
                     HomeProfilePictureWidget(onProfileTap: () {

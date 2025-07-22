@@ -86,7 +86,7 @@ class _HomePageBalanceSection extends StatelessWidget {
             ),
             HomeSaldoActionWidget(
               title: 'Topup',
-              iconAsset: 'assets/icons/plus (1) 1.png',
+              iconAsset: 'assets/icons/plus_1.png',
               onTap: () {
                 model.onTopupMenuTap(context);
               },

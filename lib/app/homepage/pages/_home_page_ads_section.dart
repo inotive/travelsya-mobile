@@ -73,7 +73,7 @@ class _HomePageAdsSection extends StatelessWidget {
                                           image: DecorationImage(
                                               fit: BoxFit.cover,
                                               image: NetworkImage(baseUrl +
-                                                  state.data[index].image))),
+                                                  state.data[index].image),)),
                                     ),
                                   ),
                                 ],

@@ -40,7 +40,7 @@ class RentalSearchPage extends StatelessWidget {
                               image: DecorationImage(
                                   fit: BoxFit.cover,
                                   image: AssetImage(
-                                      'assets/images/edvin-johansson-rlwE8f8anOc-unsplash 1.png'))),
+                                      'assets/images/edvin-johansson-rlwE8f8anOc-unsplash1_1.png'))),
                           child: Container(
                             width: double.infinity,
                             height: double.infinity,

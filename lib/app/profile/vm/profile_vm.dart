@@ -17,7 +17,7 @@ class ProfileVM extends BaseViewModel {
           {
             'id': '0',
             'title': 'Profil Saya',
-            'assets': 'assets/icons/user (4) 1.png'
+            'assets': 'assets/icons/user_4.png'
           },
           // {
           //   'id': '1',
@@ -27,7 +27,7 @@ class ProfileVM extends BaseViewModel {
           {
             'id': '2',
             'title': 'Ganti Password',
-            'assets': 'assets/icons/lock (1) 1.png'
+            'assets': 'assets/icons/lock_1.png'
           },
           // {
           //   'id': '3',
@@ -37,29 +37,29 @@ class ProfileVM extends BaseViewModel {
           {
             'id': '4',
             'title': 'Kebijakan Refund & Pembatalan',
-            'assets': 'assets/icons/credit-card 1.png'
+            'assets': 'assets/icons/credit_card.png'
           },
           {
             'id': '5',
             'title': 'Pusat Bantuan',
-            'assets': 'assets/icons/headphones 1.png'
+            'assets': 'assets/icons/headphones.png'
           },
           {
             'id': '7',
             'title': 'Hapus Akun',
-            'assets': 'assets/icons/bin 1.png'
+            'assets': 'assets/icons/bin.png'
           },
           {
             'id': '6',
             'title': 'Log out',
-            'assets': 'assets/icons/log-out 1.png'
+            'assets': 'assets/icons/log_out.png'
           },
         ]
       : [
           {
             'id': '0',
             'title': 'Profil Saya',
-            'assets': 'assets/icons/user (4) 1.png'
+            'assets': 'assets/icons/user_4.png'
           },
           // {
           //   'id': '1',
@@ -69,7 +69,7 @@ class ProfileVM extends BaseViewModel {
           {
             'id': '2',
             'title': 'Ganti Password',
-            'assets': 'assets/icons/lock (1) 1.png'
+            'assets': 'assets/icons/lock_1.png'
           },
           // {
           //   'id': '3',
@@ -79,17 +79,17 @@ class ProfileVM extends BaseViewModel {
           {
             'id': '4',
             'title': 'Kebijakan Refund & Pembatalan',
-            'assets': 'assets/icons/credit-card 1.png'
+            'assets': 'assets/icons/credit_card.png'
           },
           {
             'id': '5',
             'title': 'Pusat Bantuan',
-            'assets': 'assets/icons/headphones 1.png'
+            'assets': 'assets/icons/headphones.png'
           },
           {
             'id': '6',
             'title': 'Log out',
-            'assets': 'assets/icons/log-out 1.png'
+            'assets': 'assets/icons/log_out.png'
           },
         ];
 

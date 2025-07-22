@@ -43,7 +43,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         image: DecorationImage(
                             fit: BoxFit.cover,
                             image: AssetImage(
-                                'assets/images/Rectangle 5636.png'))),
+                                'assets/images/rectangle_5636.png'))),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [

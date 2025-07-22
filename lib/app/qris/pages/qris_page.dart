@@ -101,7 +101,7 @@ class _QRISPageState extends State<QRISPage> {
                 ),
                 SizedBox(
                   width: 80,
-                  child: Image.asset('assets/icons/image 15.png'),
+                  child: Image.asset('assets/icons/image_15.png'),
                 )
               ],
             ),

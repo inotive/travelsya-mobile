@@ -83,7 +83,7 @@ class HealthCheckoutPage extends StatelessWidget {
                                   width: 45,
                                   height: 45,
                                   child: Image.asset(
-                                    'assets/icons/Group 23.png',
+                                    'assets/icons/group_23.png',
                                     fit: BoxFit.cover,
                                   ),
                                 ),

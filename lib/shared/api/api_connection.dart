@@ -1,4 +1,5 @@
-String baseUrl = 'https://travelsya.amaradvokat.com/';
+// String baseUrl = 'https://travelsya.amaradvokat.com/';
+String baseUrl = 'https://travelsya.inotivedev.com/';
 String basePathUserUrl = '${baseUrl}storage/public/users/';
 String baseAPIUrl = '${baseUrl}api';
 

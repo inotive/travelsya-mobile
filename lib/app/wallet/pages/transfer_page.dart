@@ -69,7 +69,7 @@ class TransferPage extends StatelessWidget {
                 children: [
                   SizedBox(
                     width: 45,
-                    child: Image.asset('assets/icons/image 16.png'),
+                    child: Image.asset('assets/icons/image_16.png'),
                   ),
                   SizedBox(
                     width: margin24 / 2,

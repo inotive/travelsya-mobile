@@ -1,0 +1,2 @@
+E:/Inotive/travelsya-mobile/android/app/.cxx/RelWithDebInfo/x142zp3n/x86_64/CMakeFiles/edit_cache.dir
+E:/Inotive/travelsya-mobile/android/app/.cxx/RelWithDebInfo/x142zp3n/x86_64/CMakeFiles/rebuild_cache.dir

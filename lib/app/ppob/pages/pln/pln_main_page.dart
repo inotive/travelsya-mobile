@@ -87,7 +87,7 @@ class PLNMainPage extends StatelessWidget {
                                           width: 25,
                                           height: 25,
                                           child: Image.asset(
-                                              'assets/icons/Logo_PLN.png')),
+                                              'assets/icons/logo_pln.png')),
                                       SizedBox(
                                         width: margin24 / 2,
                                       ),

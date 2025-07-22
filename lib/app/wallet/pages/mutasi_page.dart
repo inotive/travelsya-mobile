@@ -28,7 +28,7 @@ class _MutasiPageState extends State<MutasiPage> {
           'title': 'TOPUP E-WALLET',
           'desc': 'BCA',
           'value': 'IDR 300,000',
-          'assets': 'assets/icons/plus (1) 1.png'
+          'assets': 'assets/icons/plus_1.png'
         }
       ]
     },
@@ -47,7 +47,7 @@ class _MutasiPageState extends State<MutasiPage> {
           'title': 'TOPUP E-WALLET',
           'desc': 'BCA',
           'value': 'IDR 300,000',
-          'assets': 'assets/icons/plus (1) 1.png'
+          'assets': 'assets/icons/plus_1.png'
         }
       ]
     }
