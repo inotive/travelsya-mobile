@@ -63,12 +63,14 @@ class _ProfilePageState extends State<ProfilePage> {
                                               width: 80,
                                               height: 80,
                                               decoration: BoxDecoration(
-                                                  shape: BoxShape.circle,
-                                                  color: Colors.white54,
-                                                  image: DecorationImage(
-                                                      fit: BoxFit.cover,
-                                                      image: NetworkImage(
-                                                          '$basePathUserUrl${state.data.image}'))),
+                                                shape: BoxShape.circle,
+                                                color: Colors.white54,
+                                                image: DecorationImage(
+                                                  fit: BoxFit.cover,
+                                                  image: NetworkImage(
+                                                      '$basePathUserUrl${state.data.image}'),
+                                                ),
+                                              ),
                                             )
                                       : const Icon(
                                           Icons.account_circle,
