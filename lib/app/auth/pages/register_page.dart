@@ -71,6 +71,14 @@ class RegisterPage extends StatelessWidget {
                               height: margin32,
                             ),
                             TitleWithWidget(
+                                title: 'Nomor Handphone',
+                                child: RoundedTextfield(
+                                  onChanged: (value) {},
+                                  hintText: '81234567890',
+                                  prefixText: '+62 ',
+                                )),
+                            SizedBox(height: margin16),
+                            TitleWithWidget(
                                 title: 'Email',
                                 validation: model.emailValidation,
                                 child: RoundedTextfield(
