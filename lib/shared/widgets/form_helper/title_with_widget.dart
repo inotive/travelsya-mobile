@@ -10,6 +10,7 @@ class TitleWithWidget extends StatelessWidget {
   final bool isRequired;
   final String title;
   final Widget child;
+  final Color? customColor;
 
   const TitleWithWidget(
       {super.key,
@@ -19,7 +20,8 @@ class TitleWithWidget extends StatelessWidget {
       this.validation,
       this.isRequired = false,
       required this.title,
-      required this.child});
+      required this.child,
+      this.customColor});
 
   @override
   Widget build(BuildContext context) {
@@ -34,6 +36,7 @@ class TitleWithWidget extends StatelessWidget {
                 children: [
                   Text(title,
                       style: mainFont.copyWith(
+                        color: customColor,
                         fontSize: customTitleSize ?? 14,
                       )),
                   isRequired
