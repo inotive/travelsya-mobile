@@ -10,7 +10,7 @@ import 'package:travelsya/shared/function/date_to_readable_function.dart';
 import 'package:travelsya/shared/helper/function_helper.dart';
 import 'package:travelsya/shared/styles/font_style.dart';
 import 'package:travelsya/shared/styles/size_styles.dart';
-import 'package:travelsya/shared/styles/theme_style.dart';
+// import 'package:travelsya/shared/styles/theme_style.dart';
 import 'package:travelsya/shared/widgets/appbar_widget.dart';
 import 'package:travelsya/shared/widgets/failed_request_widget.dart';
 import 'package:travelsya/shared/widgets/statusbar_widget.dart';
@@ -41,9 +41,11 @@ class _OrderListPageState extends State<OrderListPage> {
             Container(
               padding: EdgeInsets.symmetric(vertical: margin24 / 2),
               width: double.infinity,
-              decoration: BoxDecoration(
-                  border: Border(
-                      bottom: BorderSide(color: neutral30.withOpacity(0.3)))),
+              decoration: const BoxDecoration(
+                border: Border(
+                  bottom: BorderSide(color: Color(0xffF4F4F4)),
+                ),
+              ),
               child: SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: Row(
@@ -72,8 +74,8 @@ class _OrderListPageState extends State<OrderListPage> {
                         child: Text(
                           filterData[index],
                           style: mainFont.copyWith(
-                              fontSize: 12,
-                              fontWeight: FontWeight.bold,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w600,
                               color: index == model.selectedFilter
                                   ? Theme.of(context).primaryColor
                                   : const Color(0xffA5A5A5)),
@@ -101,14 +103,14 @@ class _OrderListPageState extends State<OrderListPage> {
                                       width: 100,
                                       height: 100,
                                       child: Image.asset(
-                                        'assets/icons/logo.jpg',
+                                        'assets/icons/logo.png',
                                       ),
                                     ),
                                     SizedBox(
                                       height: margin24 / 2,
                                     ),
                                     Text(
-                                      'Data Kosong',
+                                      'Belum ada pemesanan',
                                       style: mainBody3.copyWith(
                                           color: Colors.black87,
                                           fontWeight: FontWeight.bold),
@@ -120,7 +122,7 @@ class _OrderListPageState extends State<OrderListPage> {
                                       margin: EdgeInsets.symmetric(
                                           horizontal: margin32),
                                       child: Text(
-                                        'Data Tidak Ditemukan, Silahkan melakukan pemesanan',
+                                        'Kamu belum melakukan pemesanan. Yuk, mulai pesan sekarang!',
                                         textAlign: TextAlign.center,
                                         style: mainBody4.copyWith(
                                           color: Colors.black54,
@@ -205,7 +207,7 @@ class _OrderListPageState extends State<OrderListPage> {
                                                     width: 50,
                                                     height: 50,
                                                     child: Image.asset(
-                                                      'assets/icons/Group 23.png',
+                                                      'assets/icons/group_23.png',
                                                       fit: BoxFit.cover,
                                                     ),
                                                   ),
