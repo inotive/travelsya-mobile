@@ -76,6 +76,7 @@ class RegisterPage extends StatelessWidget {
                                   onChanged: (value) {},
                                   hintText: '81234567890',
                                   prefixText: '+62 ',
+                                  keyboardType: TextInputType.number,
                                 )),
                             SizedBox(height: margin16),
                             TitleWithWidget(
@@ -83,6 +84,7 @@ class RegisterPage extends StatelessWidget {
                                 validation: model.emailValidation,
                                 child: RoundedTextfield(
                                     hintText: 'Masukkan email Anda',
+                                    keyboardType: TextInputType.emailAddress,
                                     onChanged: (value) {
                                       model.onEmailChanged(value);
                                     },

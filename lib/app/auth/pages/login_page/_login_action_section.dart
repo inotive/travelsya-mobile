@@ -13,30 +13,27 @@ class _LoginActionSection extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text('Belum punya akun? ', style: mainBody5),
+              Text('Belum punya akun? ', style: mainBody4),
               GestureDetector(
                 onTap: () {
                   model.onRegisterTap(context);
                 },
                 child: Text('Daftar',
-                    style: mainBody5.copyWith(
+                    style: mainBody4.copyWith(
                         fontWeight: FontWeight.bold,
                         color: Theme.of(context).primaryColor)),
               ),
             ],
           ),
           SizedBox(
-            height: margin8,
+            height: margin16,
           ),
-          Container(
-            margin: EdgeInsets.symmetric(horizontal: margin16),
-            child: ElevatedButtonWidget(
-                enabled: true,
-                onTap: () {
-                  model.onLogin(context);
-                },
-                title: 'Masuk'),
-          )
+          ElevatedButtonWidget(
+              enabled: true,
+              onTap: () {
+                model.onLogin(context);
+              },
+              title: 'Masuk')
         ],
       ),
     );

@@ -148,6 +148,7 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
                                 onChanged: (value) {},
                                 hintText: '81234567890',
                                 prefixText: '+62 ',
+                                keyboardType: TextInputType.number,
                               )),
                           SizedBox(
                             height: margin16,
@@ -158,6 +159,7 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
                               customColor: neutral30,
                               child: RoundedTextfield(
                                 controller: model.emailController,
+                                keyboardType: TextInputType.emailAddress,
                                 onChanged: (value) {},
                                 hintText: 'Masukkan Email',
                               )),
@@ -204,6 +206,7 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
                               child: RoundedTextfield(
                                 onChanged: (value) {},
                                 hintText: 'Masukkan NIK',
+                                keyboardType: TextInputType.number,
                               )),
                           Text(
                             'Warga Negara Asing (WNA) boleh memasukkan nomor izin tinggal atau nomor paspor',
@@ -237,6 +240,7 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
                               customColor: neutral30,
                               child: RoundedTextfield(
                                 onChanged: (value) {},
+                                keyboardType: TextInputType.number,
                                 hintText: 'Masukkan Nomor Paspor',
                               )),
                           SizedBox(
@@ -306,6 +310,7 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
                               customColor: neutral30,
                               child: RoundedTextfield(
                                 onChanged: (value) {},
+                                keyboardType: TextInputType.number,
                                 hintText: '81234567890',
                                 prefixText: '+62 ',
                               )),

@@ -31,6 +31,7 @@ class _LoginPageFormSection extends StatelessWidget {
                     validation: model.emailValidation,
                     child: RoundedTextfield(
                         hintText: 'Masukkan email Anda',
+                        keyboardType: TextInputType.emailAddress,
                         controller: model.emailController,
                         onChanged: (value) {
                           model.onEmailChanged(value);
@@ -86,7 +87,7 @@ class _LoginPageFormSection extends StatelessWidget {
                         ),
                         Text(
                           'Ingat Saya',
-                          style: mainBody5,
+                          style: mainBody4,
                         )
                       ],
                     ),
