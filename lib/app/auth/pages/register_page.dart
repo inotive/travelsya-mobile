@@ -102,7 +102,7 @@ class RegisterPage extends StatelessWidget {
                                 validation: model.passwordValidation,
                                 child: RoundedTextfield(
                                     hintText: 'Masukkan kata sandi Anda',
-                                    suffixWidget: GestureDetector(
+                                    suffixIcon: GestureDetector(
                                         onTap: () {
                                           model.onPasswordIconTap();
                                         },
@@ -126,7 +126,7 @@ class RegisterPage extends StatelessWidget {
                                 validation: model.confirmValidation,
                                 child: RoundedTextfield(
                                     hintText: 'Masukkan ulang kata sandi Anda',
-                                    suffixWidget: GestureDetector(
+                                    suffixIcon: GestureDetector(
                                         onTap: () {
                                           model.onPasswordIconTap();
                                         },

@@ -43,7 +43,7 @@ class ChangePasswordPage extends StatelessWidget {
                                 onChanged: (value) {
                                   model.onOldPasswordChanged(value);
                                 },
-                                suffixWidget: GestureDetector(
+                                suffixIcon: GestureDetector(
                                     onTap: () {
                                       model.onPasswordIconTap();
                                     },
@@ -67,7 +67,7 @@ class ChangePasswordPage extends StatelessWidget {
                                 onChanged: (value) {
                                   model.onPasswordChanged(value);
                                 },
-                                suffixWidget: GestureDetector(
+                                suffixIcon: GestureDetector(
                                     onTap: () {
                                       model.onPasswordIconTap();
                                     },
@@ -91,7 +91,7 @@ class ChangePasswordPage extends StatelessWidget {
                                 onChanged: (value) {
                                   model.onConfirmChanged(value);
                                 },
-                                suffixWidget: GestureDetector(
+                                suffixIcon: GestureDetector(
                                     onTap: () {
                                       model.onPasswordIconTap();
                                     },

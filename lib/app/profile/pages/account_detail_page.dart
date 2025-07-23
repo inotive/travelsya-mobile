@@ -96,7 +96,7 @@ class _AccountDetailPageState extends State<AccountDetailPage> {
                     RoundedTextfield(
                         controller: passController,
                         obscureText: !showPassword,
-                        suffixWidget: GestureDetector(
+                        suffixIcon: GestureDetector(
                             onTap: () {
                               setState(() {
                                 showPassword = !showPassword;

@@ -43,7 +43,7 @@ class _LoginPageFormSection extends StatelessWidget {
                     validation: model.passwordValidation,
                     child: RoundedTextfield(
                         hintText: 'Masukkan kata sandi Anda',
-                        suffixWidget: GestureDetector(
+                        suffixIcon: GestureDetector(
                             onTap: () {
                               model.onPasswordIconTap();
                             },

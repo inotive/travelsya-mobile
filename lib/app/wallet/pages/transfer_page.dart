@@ -52,7 +52,7 @@ class TransferPage extends StatelessWidget {
                   child: RoundedTextfield(
                       controller: TextEditingController(),
                       hintText: 'Cari nama rekening',
-                      suffixWidget: const Icon(Icons.search)),
+                      suffixIcon: const Icon(Icons.search)),
                 ),
               ],
             ),
