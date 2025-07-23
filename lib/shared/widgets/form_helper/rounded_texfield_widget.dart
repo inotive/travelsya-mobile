@@ -7,7 +7,7 @@ import 'package:travelsya/shared/styles/theme_style.dart';
 class RoundedTextfield extends StatelessWidget {
   final String? hintText;
   final Widget? prefixWidget;
-  final Widget? suffixWidget;
+  final Widget? suffixIcon;
   final bool? obscureText;
   final double? customRadius;
   final Widget? prefixIcon;
@@ -28,7 +28,7 @@ class RoundedTextfield extends StatelessWidget {
   final bool? enabled;
   final int? maxLength;
   final Function()? onTap;
-  final TextEditingController controller;
+  final TextEditingController? controller;
 
   const RoundedTextfield({
     super.key,
@@ -36,7 +36,7 @@ class RoundedTextfield extends StatelessWidget {
     this.onChanged,
     this.onEditingComplete,
     this.prefixWidget,
-    this.suffixWidget,
+    this.suffixIcon,
     this.obscureText,
     this.customRadius,
     this.prefixIcon,
@@ -55,7 +55,7 @@ class RoundedTextfield extends StatelessWidget {
     this.enabled,
     this.maxLength,
     this.onTap,
-    required this.controller,
+    this.controller,
   });
 
   @override
@@ -76,7 +76,7 @@ class RoundedTextfield extends StatelessWidget {
       keyboardType: keyboardType ?? TextInputType.text,
       obscureText: obscureText ?? false,
       inputFormatters: inputFormatters,
-      style: mainBody4,
+      style: mainBody4.copyWith(color: const Color(0xff333333)),
       decoration: InputDecoration(
           labelText: labelText,
           enabledBorder: OutlineInputBorder(
@@ -103,9 +103,9 @@ class RoundedTextfield extends StatelessWidget {
                 horizontal: margin24 / 2,
               ),
           errorMaxLines: 10,
-          hintStyle: mainBody5.copyWith(color: neutral60),
+          hintStyle: mainBody4.copyWith(color: neutral60),
           prefixIcon: prefixIcon,
-          suffixIcon: suffixWidget,
+          suffixIcon: suffixIcon,
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(customRadius ?? 6),
           )),
