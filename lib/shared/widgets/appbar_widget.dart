@@ -2,19 +2,32 @@ import 'package:flutter/material.dart';
 import 'package:travelsya/shared/styles/font_style.dart';
 import 'package:travelsya/shared/styles/size_styles.dart';
 
-AppBar appbarBasicWidget(BuildContext context, {required String title}) {
-  return AppBar(
-    elevation: 1,
-    backgroundColor: Theme.of(context).primaryColor,
-    titleSpacing: 0,
-    automaticallyImplyLeading: false,
-    title: Container(
-        padding: EdgeInsets.symmetric(horizontal: margin16),
-        child: Text(
-          title,
-          style: mainBody4.copyWith(
-              color: Colors.white, fontWeight: FontWeight.bold),
-        )),
+PreferredSizeWidget appbarBasicWidget(BuildContext context,
+    {required String title}) {
+  return PreferredSize(
+    preferredSize: const Size.fromHeight(60),
+    child: AppBar(
+      elevation: 1,
+      backgroundColor: Theme.of(context).primaryColor,
+      titleSpacing: 0,
+      automaticallyImplyLeading: false,
+      title: Center(
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 375),
+          child: Container(
+            alignment: Alignment.centerLeft,
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Text(
+              title,
+              style: mainBody3.copyWith(
+                color: Colors.white,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+          ),
+        ),
+      ),
+    ),
   );
 }
 
