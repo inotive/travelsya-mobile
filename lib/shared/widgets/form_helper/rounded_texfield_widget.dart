@@ -76,7 +76,7 @@ class RoundedTextfield extends StatelessWidget {
       keyboardType: keyboardType ?? TextInputType.text,
       obscureText: obscureText ?? false,
       inputFormatters: inputFormatters,
-      style: mainBody4.copyWith(color: const Color(0xff333333)),
+      style: mainBody4,
       decoration: InputDecoration(
           labelText: labelText,
           enabledBorder: OutlineInputBorder(
@@ -96,7 +96,7 @@ class RoundedTextfield extends StatelessWidget {
           prefixText: prefixText,
           prefix: prefixWidget,
           prefixStyle:
-              prefixStyle ?? mainBody4.copyWith(fontWeight: FontWeight.bold),
+              prefixStyle ?? mainBody4,
           contentPadding: contentPadding ??
               EdgeInsets.symmetric(
                 vertical: margin8,
