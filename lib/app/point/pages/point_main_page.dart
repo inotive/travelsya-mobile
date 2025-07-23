@@ -108,7 +108,7 @@ class PointMainPage extends StatelessWidget {
                                                         children: [
                                                           Text(
                                                             'Points Anda',
-                                                            style: mainBody5
+                                                            style: secondaryBody5
                                                                 .copyWith(
                                                                     color: Colors
                                                                         .black87),
@@ -137,7 +137,7 @@ class PointMainPage extends StatelessWidget {
                                                                               .currentPoint,
                                                                           customLabel:
                                                                               ''),
-                                                                      style: mainBody4.copyWith(
+                                                                      style: mainBody2.copyWith(
                                                                           color: Colors
                                                                               .black87,
                                                                           fontWeight:
@@ -179,10 +179,10 @@ class PointMainPage extends StatelessWidget {
                                                       ),
                                                       Container(
                                                         alignment: Alignment
-                                                            .bottomCenter,
+                                                            .centerRight,
                                                         child: Text(
                                                           '1 point senilai 1 IDR',
-                                                          style: mainBody5
+                                                          style: secondaryBody5
                                                               .copyWith(
                                                                   color:
                                                                       neutral80),

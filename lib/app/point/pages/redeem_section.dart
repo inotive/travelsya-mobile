@@ -42,85 +42,173 @@ class _RedeemSectionState extends State<RedeemSection> {
         BlocProvider.of<ProfileCubit>(context).fetchProfile(context);
         BlocProvider.of<PointCubit>(context).fetchPoint(context);
       },
-      child: ListView(
-        padding: EdgeInsets.zero,
-        children: [
-          Container(
-            padding: EdgeInsets.symmetric(horizontal: margin16),
-            child: Text(
-              'Redeem Poinmu Sekarang!',
-              style: mainBody4.copyWith(
-                  color: Colors.black87, fontWeight: FontWeight.bold),
-            ),
-          ),
-          Container(
-            padding: EdgeInsets.symmetric(horizontal: margin16),
-            child: Text(
-              'Poin Anda akan mencapai kadaluwarsa pada 31 Mei 2023. Ayo gunakan segera!',
-              style: mainBody5.copyWith(color: neutral70),
-            ),
-          ),
-          Column(
-            children: List.generate(dataMenu.length, (index) {
-              return GestureDetector(
-                onTap: () {
-                  BerandaVM berandaVM = BerandaVM();
-                  berandaVM.onMainMenuTap(context, dataMenu[index]['id']);
-                },
-                child: Container(
-                  padding: EdgeInsets.symmetric(
-                      vertical: margin16, horizontal: margin16),
-                  decoration: BoxDecoration(
-                      border: Border(
-                          bottom:
-                              BorderSide(color: neutral10Stroke, width: 0.5))),
-                  child: Row(
-                    children: [
-                      Container(
-                          width: 50,
-                          height: 50,
-                          alignment: Alignment.center,
-                          decoration: const BoxDecoration(
-                              shape: BoxShape.circle, color: Color(0xfff3f3f3)),
-                          child: SizedBox(
-                              width: 30,
-                              height: 30,
-                              child: Image.asset(dataMenu[index]['assets']))),
-                      SizedBox(
-                        width: margin24 / 2,
-                      ),
-                      Expanded(
-                          child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+      child: SingleChildScrollView(
+        child: Container(
+          padding: EdgeInsets.symmetric(horizontal: 16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Redeem Poinmu Sekarang!',
+                style: mainBody4.copyWith(
+                    color: const Color(0xff333333),
+                    fontWeight: FontWeight.w700),
+              ),
+              SizedBox(
+                height: margin8,
+              ),
+              Text(
+                'Poin Anda akan mencapai kadaluwarsa pada 31 Mei 2023. Ayo gunakan segera!',
+                style: secondaryBody5.copyWith(color: const Color(0xffA5A5A5)),
+              ),
+              SizedBox(
+                height: margin8,
+              ),
+              Column(
+                children: List.generate(dataMenu.length, (index) {
+                  return GestureDetector(
+                    onTap: () {
+                      BerandaVM berandaVM = BerandaVM();
+                      berandaVM.onMainMenuTap(context, dataMenu[index]['id']);
+                    },
+                    child: Container(
+                      padding: EdgeInsets.symmetric(
+                          vertical: margin16, horizontal: margin16),
+                      decoration: BoxDecoration(
+                          border: Border(
+                              bottom: BorderSide(
+                                  color: neutral10Stroke, width: 0.5))),
+                      child: Row(
                         children: [
-                          Text(
-                            dataMenu[index]['title'],
-                            style: mainBody3.copyWith(
-                                color: Colors.black87,
-                                fontWeight: FontWeight.bold),
+                          Container(
+                              width: 50,
+                              height: 50,
+                              alignment: Alignment.center,
+                              decoration: const BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: Color(0xfff3f3f3)),
+                              child: SizedBox(
+                                  width: 30,
+                                  height: 30,
+                                  child:
+                                      Image.asset(dataMenu[index]['assets']))),
+                          SizedBox(
+                            width: margin16,
                           ),
-                          Text(
-                            'Pesan Sekarang',
-                            style: mainBody5.copyWith(
-                                color: Theme.of(context).primaryColor),
+                          Expanded(
+                              child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                dataMenu[index]['title'],
+                                style: mainBody3.copyWith(
+                                    color: Colors.black87,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              SizedBox(
+                                height: margin4,
+                              ),
+                              Text(
+                                'Pesan Sekarang',
+                                style: secondaryBody5.copyWith(
+                                    color: Theme.of(context).primaryColor),
+                              )
+                            ],
+                          )),
+                          SizedBox(
+                            width: margin16,
+                          ),
+                          Icon(
+                            Icons.arrow_forward_ios_rounded,
+                            color: neutral10Stroke,
+                            size: 20,
                           )
                         ],
-                      )),
-                      SizedBox(
-                        width: margin16,
                       ),
-                      Icon(
-                        Icons.arrow_forward_ios_rounded,
-                        color: neutral10Stroke,
-                        size: 20,
-                      )
-                    ],
-                  ),
-                ),
-              );
-            }),
-          )
-        ],
+                    ),
+                  );
+                }),
+              )
+            ],
+          ),
+        ),
+        // children: [
+        //   Container(
+        //     padding: EdgeInsets.symmetric(horizontal: margin16),
+        //     child: Text(
+        //       'Redeem Poinmu Sekarang!',
+        //       style: mainBody4.copyWith(
+        //           color: Colors.black87, fontWeight: FontWeight.w700),
+        //     ),
+        //   ),
+        //   Container(
+        //     padding: EdgeInsets.symmetric(horizontal: margin16),
+        //     child: Text(
+        //       'Poin Anda akan mencapai kadaluwarsa pada 31 Mei 2023. Ayo gunakan segera!',
+        //       style: mainBody5.copyWith(color: neutral70),
+        //     ),
+        //   ),
+        //   Column(
+        //     children: List.generate(dataMenu.length, (index) {
+        //       return GestureDetector(
+        //         onTap: () {
+        //           BerandaVM berandaVM = BerandaVM();
+        //           berandaVM.onMainMenuTap(context, dataMenu[index]['id']);
+        //         },
+        //         child: Container(
+        //           padding: EdgeInsets.symmetric(
+        //               vertical: margin16, horizontal: margin16),
+        //           decoration: BoxDecoration(
+        //               border: Border(
+        //                   bottom:
+        //                       BorderSide(color: neutral10Stroke, width: 0.5))),
+        //           child: Row(
+        //             children: [
+        //               Container(
+        //                   width: 50,
+        //                   height: 50,
+        //                   alignment: Alignment.center,
+        //                   decoration: const BoxDecoration(
+        //                       shape: BoxShape.circle, color: Color(0xfff3f3f3)),
+        //                   child: SizedBox(
+        //                       width: 30,
+        //                       height: 30,
+        //                       child: Image.asset(dataMenu[index]['assets']))),
+        //               SizedBox(
+        //                 width: margin24 / 2,
+        //               ),
+        //               Expanded(
+        //                   child: Column(
+        //                 crossAxisAlignment: CrossAxisAlignment.start,
+        //                 children: [
+        //                   Text(
+        //                     dataMenu[index]['title'],
+        //                     style: mainBody3.copyWith(
+        //                         color: Colors.black87,
+        //                         fontWeight: FontWeight.bold),
+        //                   ),
+        //                   Text(
+        //                     'Pesan Sekarang',
+        //                     style: mainBody5.copyWith(
+        //                         color: Theme.of(context).primaryColor),
+        //                   )
+        //                 ],
+        //               )),
+        //               SizedBox(
+        //                 width: margin16,
+        //               ),
+        //               Icon(
+        //                 Icons.arrow_forward_ios_rounded,
+        //                 color: neutral10Stroke,
+        //                 size: 20,
+        //               )
+        //             ],
+        //           ),
+        //         ),
+        //       );
+        //     }),
+        //   )
+        // ],
       ),
     );
   }

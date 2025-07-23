@@ -38,13 +38,13 @@ class PointMainVM extends BaseViewModel {
           children: [
             Text(
               state.data.user.name,
-              style: mainBody5.copyWith(
-                  color: Colors.black87, fontWeight: FontWeight.bold),
+              style: mainBody4.copyWith(
+                  color: const Color(0xff333333), fontWeight: FontWeight.w600),
             ),
             Text(
               'Phone Number: ${state.data.user.phone ?? '-'}',
-              style: mainBody5.copyWith(
-                color: Colors.black54,
+              style: secondaryBody5.copyWith(
+                color: Color(0xffa5a5a5),
               ),
             )
           ],
