@@ -11,7 +11,8 @@ class _HotelSearchFilterSection extends StatelessWidget {
       builder: (context, state) {
         if (state is HotelSearchFilter) {
           return Container(
-            padding: EdgeInsets.symmetric(horizontal: margin16),
+            padding:
+                EdgeInsets.symmetric(horizontal: margin16, vertical: margin16),
             child: Column(
               children: [
                 IntrinsicHeight(
