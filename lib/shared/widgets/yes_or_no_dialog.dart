@@ -34,7 +34,7 @@ Future<bool> yesOrNoDialog(BuildContext context,
                       style: mainBody4.copyWith(fontWeight: FontWeight.bold),
                     ),
                     SizedBox(height: margin24 / 2),
-                    Text(desc, textAlign: TextAlign.center, style: mainBody5),
+                    Text(desc, textAlign: TextAlign.center, style: mainBody4),
                     SizedBox(height: margin24 / 2),
                     Row(children: [
                       Flexible(

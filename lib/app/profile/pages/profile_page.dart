@@ -135,7 +135,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                         children: [
                                           Text(
                                             'Points Anda',
-                                            style: mainBody5.copyWith(
+                                            style: mainBody4.copyWith(
                                                 color: neutral100),
                                           ),
                                           BlocBuilder<PointCubit, PointState>(
@@ -222,7 +222,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                         children: [
                                           Text(
                                             'Saldo Anda',
-                                            style: mainBody5.copyWith(
+                                            style: mainBody4.copyWith(
                                                 color: neutral100),
                                           ),
                                           BlocBuilder<ProfileCubit,

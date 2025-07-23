@@ -24,11 +24,7 @@ class ProfileVM extends BaseViewModel {
           //   'title': 'Data Penumpang',
           //   'assets': 'assets/icons/users (2) 1.png'
           // },
-          {
-            'id': '2',
-            'title': 'Ganti Password',
-            'assets': 'assets/icons/lock_1.png'
-          },
+          {'id': '2', 'title': 'Keamanan', 'assets': 'assets/icons/lock_1.png'},
           // {
           //   'id': '3',
           //   'title': 'Kode Referal',
@@ -44,16 +40,8 @@ class ProfileVM extends BaseViewModel {
             'title': 'Pusat Bantuan',
             'assets': 'assets/icons/headphones.png'
           },
-          {
-            'id': '7',
-            'title': 'Hapus Akun',
-            'assets': 'assets/icons/bin.png'
-          },
-          {
-            'id': '6',
-            'title': 'Log out',
-            'assets': 'assets/icons/log_out.png'
-          },
+          {'id': '7', 'title': 'Hapus Akun', 'assets': 'assets/icons/bin.png'},
+          {'id': '6', 'title': 'Log out', 'assets': 'assets/icons/log_out.png'},
         ]
       : [
           {
@@ -66,11 +54,7 @@ class ProfileVM extends BaseViewModel {
           //   'title': 'Data Penumpang',
           //   'assets': 'assets/icons/users (2) 1.png'
           // },
-          {
-            'id': '2',
-            'title': 'Ganti Password',
-            'assets': 'assets/icons/lock_1.png'
-          },
+          {'id': '2', 'title': 'Keamanan', 'assets': 'assets/icons/lock_1.png'},
           // {
           //   'id': '3',
           //   'title': 'Kode Referal',
@@ -86,11 +70,7 @@ class ProfileVM extends BaseViewModel {
             'title': 'Pusat Bantuan',
             'assets': 'assets/icons/headphones.png'
           },
-          {
-            'id': '6',
-            'title': 'Log out',
-            'assets': 'assets/icons/log_out.png'
-          },
+          {'id': '6', 'title': 'Log out', 'assets': 'assets/icons/log_out.png'},
         ];
 
   onMenuTap(BuildContext context, int index) {
