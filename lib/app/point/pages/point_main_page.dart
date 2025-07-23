@@ -93,8 +93,8 @@ class PointMainPage extends StatelessWidget {
                                                   child: Row(
                                                     children: [
                                                       SizedBox(
-                                                          width: 20,
-                                                          height: 20,
+                                                          width: 30,
+                                                          height: 30,
                                                           child: Image.asset(
                                                               ConstHelper
                                                                   .coinIcon)),
