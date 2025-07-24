@@ -290,9 +290,45 @@ class _RentalDetailPageState extends State<RentalDetailPage> {
                                             SizedBox(
                                               width: 60,
                                               height: 60,
-                                              child: Image.network(
-                                                  stateData.data[index].image),
+                                              child: (stateData.data[index]
+                                                      .image.isNotEmpty)
+                                                  ? Image.network(
+                                                      stateData
+                                                          .data[index].image,
+                                                      fit: BoxFit.cover,
+                                                      errorBuilder: (context,
+                                                          error, stackTrace) {
+                                                        return const Center(
+                                                          child: Text(
+                                                            'Gambar tidak tersedia',
+                                                            textAlign: TextAlign
+                                                                .center,
+                                                            style: TextStyle(
+                                                                fontSize: 10,
+                                                                color: Colors
+                                                                    .grey),
+                                                          ),
+                                                        );
+                                                      },
+                                                    )
+                                                  : const Center(
+                                                      child: Text(
+                                                        'Gambar tidak tersedia',
+                                                        textAlign:
+                                                            TextAlign.center,
+                                                        style: TextStyle(
+                                                            fontSize: 10,
+                                                            color: Colors.grey),
+                                                      ),
+                                                    ),
                                             )
+
+                                            // SizedBox(
+                                            //   width: 60,
+                                            //   height: 60,
+                                            //   child: Image.network(
+                                            //       stateData.data[index].image),
+                                            // )
                                           ],
                                         ),
                                       ));
