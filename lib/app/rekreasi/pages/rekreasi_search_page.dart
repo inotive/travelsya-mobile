@@ -43,7 +43,7 @@ class RekreasiSearchPage extends StatelessWidget {
                         borderRadius: BorderRadius.only(
                             topLeft: Radius.circular(20),
                             topRight: Radius.circular(20)),
-                        color: Colors.red),
+                        color: Colors.white),
                   ),
                 )
               ],
