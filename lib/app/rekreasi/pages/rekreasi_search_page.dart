@@ -5,6 +5,7 @@ import 'package:travelsya/app/rekreasi/cubits/recreation_cubit.dart';
 import 'package:travelsya/app/rekreasi/cubits/recreation_state.dart';
 import 'package:travelsya/app/rekreasi/models/recreation_model.dart';
 import 'package:travelsya/app/rekreasi/pages/rekreasi_detail_page.dart';
+import 'package:travelsya/app/rekreasi/pages/rekreasi_search_background_section.dart';
 import 'package:travelsya/app/rekreasi/pages/rekreasi_search_result_page.dart';
 import 'package:travelsya/app/rekreasi/viewmodel/recreation_main_vm.dart';
 import 'package:travelsya/shared/helper/function_helper.dart';
@@ -30,55 +31,7 @@ class RekreasiSearchPage extends StatelessWidget {
           children: [
             Stack(
               children: [
-                Container(
-                  width: double.infinity,
-                  height: 200,
-                  decoration: const BoxDecoration(
-                      image: DecorationImage(
-                          fit: BoxFit.cover,
-                          image: AssetImage(
-                              'assets/images/edvin-johansson-rlwE8f8anOc-unsplash_1.png'))),
-                  child: Container(
-                    width: double.infinity,
-                    height: double.infinity,
-                    color: Colors.black45,
-                  ),
-                ),
-                Positioned(
-                  left: margin16,
-                  top: MediaQuery.of(context).padding.top + margin24,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.pop(context);
-                        },
-                        child: Container(
-                          width: 37,
-                          height: 37,
-                          decoration: const BoxDecoration(
-                              shape: BoxShape.circle, color: Colors.white),
-                          alignment: Alignment.center,
-                          child: SizedBox(
-                            width: 16,
-                            height: 16,
-                            child: Image.asset('assets/new/back.png'),
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        height: margin48,
-                      ),
-                      Text(
-                        'Rekreasi',
-                        style: mainBody3.copyWith(
-                            color: Colors.white, fontWeight: FontWeight.bold),
-                      ),
-                    ],
-                  ),
-                ),
+                const RekreasiSearchBackgroundSection(),
                 Positioned(
                   bottom: 0,
                   left: 0,
@@ -90,13 +43,10 @@ class RekreasiSearchPage extends StatelessWidget {
                         borderRadius: BorderRadius.only(
                             topLeft: Radius.circular(20),
                             topRight: Radius.circular(20)),
-                        color: Colors.white),
+                        color: Colors.red),
                   ),
                 )
               ],
-            ),
-            SizedBox(
-              height: margin16,
             ),
             Container(
               margin: EdgeInsets.symmetric(horizontal: margin16),
