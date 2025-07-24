@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:stacked/stacked.dart';
 import 'package:travelsya/app/rental_mobil/cubits/rental_mobil_filter_cubit.dart';
 import 'package:travelsya/app/rental_mobil/cubits/rental_mobil_filter_state.dart';
+import 'package:travelsya/app/rental_mobil/pages/rental_mobil_background_section.dart';
 import 'package:travelsya/app/rental_mobil/pages/rental_mobil_detail_page.dart';
 import 'package:travelsya/app/rental_mobil/viewmodel/rental_mobil_search_vm.dart';
 import 'package:travelsya/shared/function/date_to_readable_function.dart';
@@ -33,57 +34,7 @@ class RentalSearchPage extends StatelessWidget {
                   children: [
                     Stack(
                       children: [
-                        Container(
-                          width: double.infinity,
-                          height: 200,
-                          decoration: const BoxDecoration(
-                              image: DecorationImage(
-                                  fit: BoxFit.cover,
-                                  image: AssetImage(
-                                      'assets/images/edvin-johansson-rlwE8f8anOc-unsplash1_1.png'))),
-                          child: Container(
-                            width: double.infinity,
-                            height: double.infinity,
-                            color: Colors.black45,
-                          ),
-                        ),
-                        Positioned(
-                          left: margin16,
-                          top: MediaQuery.of(context).padding.top + margin24,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              GestureDetector(
-                                onTap: () {
-                                  Navigator.pop(context);
-                                },
-                                child: Container(
-                                  width: 37,
-                                  height: 37,
-                                  decoration: const BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      color: Colors.white),
-                                  alignment: Alignment.center,
-                                  child: SizedBox(
-                                    width: 16,
-                                    height: 16,
-                                    child: Image.asset('assets/new/back.png'),
-                                  ),
-                                ),
-                              ),
-                              SizedBox(
-                                height: margin48,
-                              ),
-                              Text(
-                                'Rental Mobil',
-                                style: mainBody3.copyWith(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            ],
-                          ),
-                        ),
+                        const RentalMobilBackgroundSection(),
                         Positioned(
                           bottom: 0,
                           left: 0,
@@ -100,9 +51,9 @@ class RentalSearchPage extends StatelessWidget {
                         )
                       ],
                     ),
-                    SizedBox(
-                      height: margin8,
-                    ),
+                    // SizedBox(
+                    //   height: margin8,
+                    // ),
                     Container(
                       padding: EdgeInsets.symmetric(horizontal: margin16),
                       child: Column(
@@ -123,7 +74,7 @@ class RentalSearchPage extends StatelessWidget {
                           ),
                           Text(
                             'Area Rental',
-                            style: mainBody5.copyWith(color: neutral50),
+                            style: mainBody4.copyWith(color: neutral50),
                           ),
                           SizedBox(
                             height: margin24 / 2,
@@ -154,7 +105,7 @@ class RentalSearchPage extends StatelessWidget {
                                     Text(
                                       'Tanggal Rental',
                                       style:
-                                          mainBody5.copyWith(color: neutral50),
+                                          mainBody4.copyWith(color: neutral50),
                                     ),
                                   ],
                                 ),
@@ -186,7 +137,7 @@ class RentalSearchPage extends StatelessWidget {
                                     Text(
                                       'Jam Pengambilan',
                                       style:
-                                          mainBody5.copyWith(color: neutral50),
+                                          mainBody4.copyWith(color: neutral50),
                                     ),
                                   ],
                                 ),
@@ -219,7 +170,7 @@ class RentalSearchPage extends StatelessWidget {
                                     Text(
                                       'Durasi Rental',
                                       style:
-                                          mainBody5.copyWith(color: neutral50),
+                                          mainBody4.copyWith(color: neutral50),
                                     ),
                                   ],
                                 ),
@@ -251,7 +202,7 @@ class RentalSearchPage extends StatelessWidget {
                                   Text(
                                     'Dengan Sopir?',
                                     style:
-                                        mainBody5.copyWith(color: neutral100),
+                                        mainBody4.copyWith(color: neutral100),
                                   )
                                 ],
                               ),
