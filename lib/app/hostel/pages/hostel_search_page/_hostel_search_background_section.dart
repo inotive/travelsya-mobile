@@ -24,12 +24,15 @@ class _HostelSearchBackgroundSection extends StatelessWidget {
               children: [
                 Text(
                   'Hostel',
-                  style: mainBody2.copyWith(
+                  style: mainBody1.copyWith(
                       color: Colors.white, fontWeight: FontWeight.bold),
                 ),
+                const SizedBox(
+                  height: 10,
+                ),
                 Text(
-                  'Cari dan book Hostel untuk hari spesialmu!',
-                  style: mainBody5.copyWith(
+                  'Cari dan book hostel untuk hari spesialmu!',
+                  style: mainBody4.copyWith(
                     color: Colors.white,
                   ),
                 ),
