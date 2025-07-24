@@ -11,7 +11,7 @@ class _HostelSearchFilterSection extends StatelessWidget {
       builder: (context, state) {
         if (state is HostelSearchFilter) {
           return Container(
-            padding: EdgeInsets.symmetric(horizontal: margin16),
+            padding: EdgeInsets.all(margin16),
             child: Column(
               children: [
                 IntrinsicHeight(
@@ -122,7 +122,7 @@ class _HostelSearchFilterSection extends StatelessWidget {
                                   style: mainBody4.copyWith(
                                       color: Colors.black38)),
                               data: '',
-                              hintText: 'Tanggal Mengingap')),
+                              hintText: 'Tanggal Menginap')),
                     ),
                   ],
                 ),
