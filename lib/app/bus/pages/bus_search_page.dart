@@ -5,6 +5,7 @@ import 'package:stacked/stacked.dart';
 import 'package:travelsya/app/bus/cubits/bus_filter_cubit.dart';
 import 'package:travelsya/app/bus/cubits/bus_filter_state.dart';
 import 'package:travelsya/app/bus/pages/bus_detail_page.dart';
+import 'package:travelsya/app/bus/pages/bus_search_background_section.dart';
 import 'package:travelsya/app/bus/viewmodel/bus_search_vm.dart';
 import 'package:travelsya/shared/function/date_to_readable_function.dart';
 import 'package:travelsya/shared/styles/font_style.dart';
@@ -33,57 +34,7 @@ class BusSearchPage extends StatelessWidget {
                     children: [
                       Stack(
                         children: [
-                          Container(
-                            width: double.infinity,
-                            height: 200,
-                            decoration: const BoxDecoration(
-                                image: DecorationImage(
-                                    fit: BoxFit.cover,
-                                    image: AssetImage(
-                                        'assets/images/edvin-johansson-rlwE8f8anOc-unsplash_2.png'))),
-                            child: Container(
-                              width: double.infinity,
-                              height: double.infinity,
-                              color: Colors.black45,
-                            ),
-                          ),
-                          Positioned(
-                            left: margin16,
-                            top: MediaQuery.of(context).padding.top + margin24,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                GestureDetector(
-                                  onTap: () {
-                                    Navigator.pop(context);
-                                  },
-                                  child: Container(
-                                    width: 37,
-                                    height: 37,
-                                    decoration: const BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        color: Colors.white),
-                                    alignment: Alignment.center,
-                                    child: SizedBox(
-                                      width: 16,
-                                      height: 16,
-                                      child: Image.asset('assets/new/back.png'),
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: margin48,
-                                ),
-                                Text(
-                                  'Bus & Travel',
-                                  style: mainBody3.copyWith(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ],
-                            ),
-                          ),
+                          const BusSearchBackgroundSection(),
                           Positioned(
                             bottom: 0,
                             left: 0,
@@ -122,7 +73,7 @@ class BusSearchPage extends StatelessWidget {
                             ),
                             Text(
                               'Stasiun Asal',
-                              style: mainBody5.copyWith(color: neutral50),
+                              style: mainBody4.copyWith(color: neutral50),
                             ),
                             SizedBox(
                               height: margin24 / 2,
@@ -141,7 +92,7 @@ class BusSearchPage extends StatelessWidget {
                             ),
                             Text(
                               'Stasiun Tujuan',
-                              style: mainBody5.copyWith(color: neutral50),
+                              style: mainBody4.copyWith(color: neutral50),
                             ),
                             SizedBox(
                               height: margin24 / 2,
@@ -164,7 +115,7 @@ class BusSearchPage extends StatelessWidget {
                             ),
                             Text(
                               'Tanggal Keberangkatan',
-                              style: mainBody5.copyWith(color: neutral50),
+                              style: mainBody4.copyWith(color: neutral50),
                             ),
                             state.data.isWayBack
                                 ? Column(
@@ -197,7 +148,7 @@ class BusSearchPage extends StatelessWidget {
                                       ),
                                       Text(
                                         'Tanggal Kepulangan',
-                                        style: mainBody5.copyWith(
+                                        style: mainBody4.copyWith(
                                             color: neutral50),
                                       ),
                                     ],
@@ -230,7 +181,7 @@ class BusSearchPage extends StatelessWidget {
                                       ),
                                       Text(
                                         'Jumlah Penumpang',
-                                        style: mainBody5.copyWith(
+                                        style: mainBody4.copyWith(
                                             color: neutral50),
                                       ),
                                     ],
