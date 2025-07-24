@@ -65,7 +65,7 @@ class OrderDetailPage extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Detil Transaksi',
+                            'Detail Transaksi',
                             style: mainBody4.copyWith(
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold),
