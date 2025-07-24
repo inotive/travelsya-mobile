@@ -98,11 +98,11 @@ class FormHelper {
                     maxLines: 1,
                     style: data == null
                         ? mainFont.copyWith(
-                            fontSize: 13,
+                            fontSize: 14,
                             color: Colors.black87.withOpacity(0.3),
                           )
                         : mainFont.copyWith(
-                            fontSize: 13, color: Colors.black87),
+                            fontSize: 14, color: Colors.black87),
                   ),
             ),
           ),
