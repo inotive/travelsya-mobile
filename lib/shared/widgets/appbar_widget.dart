@@ -37,10 +37,11 @@ PreferredSizeWidget appbarWidget(
   Color? customForeground,
 }) {
   return PreferredSize(
-    preferredSize: Size.fromHeight(60),
+    preferredSize: const Size.fromHeight(60),
     child: AppBar(
       elevation: 1,
-      backgroundColor: customColor ?? Colors.white,
+      backgroundColor: Theme.of(context).primaryColor,
+      // backgroundColor: customColor ?? Colors.white,
       titleSpacing: 0,
       automaticallyImplyLeading: false,
       title: Container(
@@ -52,18 +53,19 @@ PreferredSizeWidget appbarWidget(
               onTap: () {
                 Navigator.pop(context);
               },
-              child: Icon(
+              child: const Icon(
                 Icons.arrow_back,
-                color: customForeground ?? Theme.of(context).primaryColor,
+                // color: customForeground ?? Theme.of(context).primaryColor,
+                color: Colors.white,
               ),
             ),
             SizedBox(width: margin24 / 2),
             Expanded(
               child: Text(
                 title,
-                style: mainBody4.copyWith(
-                  color: customForeground ?? Colors.black87,
-                  fontWeight: FontWeight.bold,
+                style: mainBody3.copyWith(
+                  color: Colors.white,
+                  fontWeight: FontWeight.w700,
                 ),
               ),
             ),
