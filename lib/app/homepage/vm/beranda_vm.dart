@@ -69,19 +69,35 @@ class BerandaVM extends BaseViewModel {
   }
 
   onCSTap(BuildContext context) async {
-    var contact = "+628115417708";
-    var androidUrl =
-        "whatsapp://send?phone=$contact&text=Halo CS Travelsya, Saya Butuh Bantuan";
-    var iosUrl =
-        "https://wa.me/$contact?text=${Uri.parse('Halo CS Travelsya, Saya Butuh Bantuan')}";
+    const contact = "6282277566690";
+    final message =
+        Uri.encodeComponent("Halo CS Travelsya, Saya Butuh Bantuan");
+    final url = "https://wa.me/$contact?text=$message";
 
-    if (await canLaunchUrl(
-        Uri.parse(Platform.isAndroid ? androidUrl : iosUrl))) {
-      launchUrl(Uri.parse(Platform.isAndroid ? androidUrl : iosUrl));
-    } else {
+    try {
+      final uri = Uri.parse(url);
+      final launched =
+          await launchUrl(uri, mode: LaunchMode.externalApplication);
+      if (!launched) {
+        final browserFallback = await launchUrl(
+          uri,
+          mode: LaunchMode.inAppWebView,
+        );
+        if (!browserFallback && context.mounted) {
+          showSnackbar(
+            context,
+            data: 'Gagal Membuka Link Chat CS',
+            colors: Colors.orange,
+          );
+        }
+      }
+    } catch (e) {
       if (context.mounted) {
-        showSnackbar(context,
-            data: 'Gagal Membuka Link Chat CS', colors: Colors.orange);
+        showSnackbar(
+          context,
+          data: 'Terjadi kesalahan: $e',
+          colors: Colors.red,
+        );
       }
     }
   }
