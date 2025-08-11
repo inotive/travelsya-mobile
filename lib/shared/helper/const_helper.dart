@@ -3,7 +3,7 @@ class ConstHelper {
   static const inquiryPLNPostpaidCode = 'CEKPLN';
   static const bpjsKSCode = 'PAYBPJSKS';
 
-  static const splashScreenImage = 'assets/images/splash_screen.png';
+  static const splashScreenImage = 'assets/images/splash_screen_new.png';
 
   static const loadingAsset = 'assets/animation/loading_animation.json';
 
@@ -24,8 +24,8 @@ class ConstHelper {
 
   static const avatarIcon = 'assets/icons/avatar.png';
   // static const logoHomeIcon = 'assets/icons/travelsya logo mobile 1.png';
-  static const logoHomeIcon = 'assets/icons/logo_appbar.jpg';
-  static const logoIcon = 'assets/icons/logo.jpg';
+  static const logoHomeIcon = 'assets/icons/logo_appbar_new.jpg';
+  static const logoIcon = 'assets/icons/logo_new.png';
 
   static const csIcon = 'assets/icons/cs.png';
 

@@ -62,10 +62,10 @@ dependencies:
   image_picker: ^1.1.1
 
 flutter_icons:
-  android: "launcher_icon"
+  android: true
   ios: true
   remove_alpha_ios: true
-  image_path: "assets/icons/logo.png"
+  image_path: "assets/icons/logo_new.png"
 
 dev_dependencies:
   flutter_test:
