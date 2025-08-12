@@ -20,11 +20,18 @@ class RecreationPreviewModel {
   RecreationPreviewModel.fromJson(Map<String, dynamic> jsonMap) {
     id = jsonMap['id'];
     name = jsonMap['name'] ?? '';
-    image = jsonMap['image'] ?? '';
+    // image = jsonMap['image'] ?? '';
     location = jsonMap['location'] ?? '';
     price = double.tryParse(jsonMap['price']?.toString() ?? '') ?? 0.0;
     ratingCount = jsonMap['rating_count'] ?? 0;
     avgRating = double.tryParse(jsonMap['avg_rating']?.toString() ?? '') ?? 0.0;
+    if (jsonMap['image'] != null && jsonMap['image'].toString().isNotEmpty) {
+      image = jsonMap['image'];
+    } else if (jsonMap['images'] != null && jsonMap['images'].isNotEmpty) {
+      image = jsonMap['images'][0].toString();
+    } else {
+      image = '';
+    }
   }
 }
 
@@ -114,7 +121,8 @@ class RecreationPackageModel {
   RecreationPackageModel.fromJson(Map<String, dynamic> jsonMap) {
     id = jsonMap['id'] ?? 0;
     recreationId = int.tryParse(jsonMap['recreation_id']?.toString() ?? '');
-    categoryRecreationId = int.tryParse(jsonMap['category_recreation_id']?.toString() ?? '');
+    categoryRecreationId =
+        int.tryParse(jsonMap['category_recreation_id']?.toString() ?? '');
     name = jsonMap['name'] ?? '';
     rule = jsonMap['rules'] ?? '';
     description = jsonMap['description'] ?? '';
@@ -124,7 +132,9 @@ class RecreationPackageModel {
     unitType = jsonMap['unit_price'] ?? '';
     price = double.tryParse(jsonMap['price']?.toString() ?? '') ?? 0.0;
     isActive = int.tryParse(jsonMap['is_active']?.toString() ?? '') ?? 0;
-    isRefundable = int.tryParse(jsonMap['is_refundable']?.toString() ?? '') ?? 0;
-    isRescheduleable = int.tryParse(jsonMap['is_reschedule']?.toString() ?? '') ?? 0;
+    isRefundable =
+        int.tryParse(jsonMap['is_refundable']?.toString() ?? '') ?? 0;
+    isRescheduleable =
+        int.tryParse(jsonMap['is_reschedule']?.toString() ?? '') ?? 0;
   }
 }

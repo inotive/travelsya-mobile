@@ -17,7 +17,7 @@ class NoDataWidget extends StatelessWidget {
           width: 100,
           height: 100,
           child: Image.asset(
-            'assets/icons/logo.jpg',
+            'assets/icons/logo.png',
           ),
         ),
         SizedBox(

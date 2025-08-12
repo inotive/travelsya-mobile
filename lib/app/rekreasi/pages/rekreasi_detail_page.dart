@@ -153,17 +153,17 @@ class _RekreasiDetailPageState extends State<RekreasiDetailPage> {
                                   SizedBox(
                                     width: margin24 / 2,
                                   ),
-                                  Container(
-                                    width: 45,
-                                    height: 45,
-                                    decoration: const BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        color: Color(0xffFFEEF1)),
-                                    child: Icon(
-                                      Icons.share,
-                                      color: Theme.of(context).primaryColor,
-                                    ),
-                                  )
+                                  // Container(
+                                  //   width: 45,
+                                  //   height: 45,
+                                  //   decoration: const BoxDecoration(
+                                  //       shape: BoxShape.circle,
+                                  //       color: Color(0xffFFEEF1)),
+                                  //   child: Icon(
+                                  //     Icons.share,
+                                  //     color: Theme.of(context).primaryColor,
+                                  //   ),
+                                  // )
                                 ],
                               ),
                             ),

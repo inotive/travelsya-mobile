@@ -98,20 +98,20 @@ class _HealthDetailPageState extends State<HealthDetailPage> {
                                       child: Image.asset('assets/new/back.png'),
                                     ),
                                   ),
-                                  Container(
-                                    width: 40,
-                                    height: 40,
-                                    decoration: const BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        color: Colors.white),
-                                    alignment: Alignment.center,
-                                    child: SizedBox(
-                                      width: 18,
-                                      height: 18,
-                                      child:
-                                          Image.asset('assets/new/share.png'),
-                                    ),
-                                  )
+                                  // Container(
+                                  //   width: 40,
+                                  //   height: 40,
+                                  //   decoration: const BoxDecoration(
+                                  //       shape: BoxShape.circle,
+                                  //       color: Colors.white),
+                                  //   alignment: Alignment.center,
+                                  //   child: SizedBox(
+                                  //     width: 18,
+                                  //     height: 18,
+                                  //     child:
+                                  //         Image.asset('assets/new/share.png'),
+                                  //   ),
+                                  // )
                                 ],
                               ),
                             )
