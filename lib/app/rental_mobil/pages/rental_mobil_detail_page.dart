@@ -13,6 +13,7 @@ import 'package:travelsya/shared/helper/function_helper.dart';
 import 'package:travelsya/shared/styles/font_style.dart';
 import 'package:travelsya/shared/styles/size_styles.dart';
 import 'package:travelsya/shared/styles/theme_style.dart';
+import 'package:travelsya/shared/widgets/no_data_widget.dart';
 
 class RentalDetailPage extends StatefulWidget {
   const RentalDetailPage({super.key});
@@ -145,7 +146,7 @@ class _RentalDetailPageState extends State<RentalDetailPage> {
                         }))),
                     Expanded(
                         child: Container(
-                      color: Colors.white,
+                      color: Colors.transparent,
                       child: BlocBuilder<RentalMobilCubit, RentalMobilState>(
                           bloc: model.rentalCubit,
                           builder: (context, stateData) {
@@ -156,6 +157,9 @@ class _RentalDetailPageState extends State<RentalDetailPage> {
                                 ),
                               );
                             } else if (stateData is RentalMobilSearchLoaded) {
+                              if (stateData.data.isEmpty) {
+                                return const NoDataWidget();
+                              }
                               return ListView(
                                 padding:
                                     EdgeInsets.symmetric(horizontal: margin16),
