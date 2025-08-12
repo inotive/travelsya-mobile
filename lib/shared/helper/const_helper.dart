@@ -24,7 +24,7 @@ class ConstHelper {
 
   static const avatarIcon = 'assets/icons/avatar.png';
   // static const logoHomeIcon = 'assets/icons/travelsya logo mobile 1.png';
-  static const logoHomeIcon = 'assets/icons/logo_appbar_new.jpg';
+  static const logoHomeIcon = 'assets/icons/logo_appbar_new.png';
   static const logoIcon = 'assets/icons/logo_new.png';
 
   static const csIcon = 'assets/icons/cs.png';

@@ -128,28 +128,29 @@ class RecreationService {
         exceptionStatusCode: [201],
         auth: false);
 
-    if (response!.status == RequestStatus.successRequest) {
+    if (response?.status == RequestStatus.successRequest) {
       List<RecreationPreviewModel> dataFinal = [];
 
-      for (var i = 0; i < response.data['data']['recreations'].length; i++) {
-        dataFinal.add(RecreationPreviewModel.fromJson(
-            response.data['data']['recreations'][i]));
+      // Karena 'data' adalah List, langsung looping
+      for (var item in response?.data['data']) {
+        dataFinal.add(RecreationPreviewModel.fromJson(item));
       }
 
-      returnValue =
-          ApiReturnValue(data: dataFinal, status: RequestStatus.successRequest);
+      returnValue = ApiReturnValue(
+        data: dataFinal,
+        status: RequestStatus.successRequest,
+      );
     } else {
       String? messages;
       try {
-        Map<String, dynamic> datamessages = response.data['data']['response'];
-
+        Map<String, dynamic> datamessages = response?.data['data']['response'];
         datamessages.forEach((key, value) {
           messages = value[0];
         });
       } catch (e) {
         messages = null;
       }
-      returnValue = ApiReturnValue(data: messages, status: response.status);
+      returnValue = ApiReturnValue(data: messages, status: response!.status);
     }
 
     return returnValue;
