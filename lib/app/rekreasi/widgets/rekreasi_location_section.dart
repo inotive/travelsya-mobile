@@ -13,8 +13,8 @@ class RekreasiLocationSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double latitude = data.latitude;
-    double longitude = data.longitude;
+    double? latitude = data.latitude;
+    double? longitude = data.longitude;
 
     return Column(
       children: [
@@ -68,7 +68,7 @@ class RekreasiLocationSection extends StatelessWidget {
               height: double.infinity,
               child: FlutterMap(
                   options: MapOptions(
-                    initialCenter: LatLng(latitude, longitude),
+                    initialCenter: LatLng(latitude!, longitude!),
                     initialZoom: 7,
                   ),
                   children: [

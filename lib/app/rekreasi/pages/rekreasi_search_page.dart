@@ -207,8 +207,9 @@ class RekreasiSearchPage extends StatelessWidget {
                                                           context,
                                                           MaterialPageRoute(
                                                               builder: (_) =>
-                                                                  const RekreasiDetailPage(
-                                                                    id: '1',
+                                                                  RekreasiDetailPage(
+                                                                    id: data.id
+                                                                        .toString(),
                                                                   )));
                                                     },
                                                     child: Card(

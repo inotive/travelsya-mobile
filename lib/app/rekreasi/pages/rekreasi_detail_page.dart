@@ -193,7 +193,7 @@ class _RekreasiDetailPageState extends State<RekreasiDetailPage> {
                                         color: Theme.of(context).primaryColor,
                                       ),
                                       Text(
-                                        data.avgRating.toStringAsFixed(1),
+                                        data.avgRating!.toStringAsFixed(1),
                                         style: mainBody3.copyWith(
                                             color: Colors.black87,
                                             fontWeight: FontWeight.bold),
