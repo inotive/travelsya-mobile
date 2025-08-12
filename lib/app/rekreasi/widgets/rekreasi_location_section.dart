@@ -115,30 +115,30 @@ class RekreasiLocationSection extends StatelessWidget {
                     fontStyle: FontStyle.normal,
                     color: const Color(0xff333333)),
               )),
-              GestureDetector(
-                onTap: () async {
-                  final url =
-                      'https://www.google.com/maps/search/?api=1&query=$latitude,$longitude';
-                  if (await canLaunchUrl(Uri.parse(url))) {
-                    await launchUrl(Uri.parse(url),
-                        mode: LaunchMode.externalApplication);
-                  } else {
-                    throw 'Could not launch $url';
-                  }
-                },
-                child: Container(
-                  margin: EdgeInsets.only(left: margin24 / 2),
-                  width: 48,
-                  height: 48,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
-                      color: Theme.of(context).primaryColor),
-                  child: const Icon(
-                    Icons.open_in_new_outlined,
-                    color: Colors.white,
-                  ),
-                ),
-              )
+              // GestureDetector(
+              //   onTap: () async {
+              //     final url =
+              //         'https://www.google.com/maps/search/?api=1&query=$latitude,$longitude';
+              //     if (await canLaunchUrl(Uri.parse(url))) {
+              //       await launchUrl(Uri.parse(url),
+              //           mode: LaunchMode.externalApplication);
+              //     } else {
+              //       throw 'Could not launch $url';
+              //     }
+              //   },
+              //   child: Container(
+              //     margin: EdgeInsets.only(left: margin24 / 2),
+              //     width: 48,
+              //     height: 48,
+              //     decoration: BoxDecoration(
+              //         borderRadius: BorderRadius.circular(8),
+              //         color: Theme.of(context).primaryColor),
+              //     child: const Icon(
+              //       Icons.open_in_new_outlined,
+              //       color: Colors.white,
+              //     ),
+              //   ),
+              // )
             ],
           ),
         ),
