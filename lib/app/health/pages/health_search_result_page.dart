@@ -328,12 +328,12 @@ class _HealthSearchResultPageState extends State<HealthSearchResultPage> {
                                                         )
                                                       ],
                                                     ),
-                                                    SizedBox(
-                                                      width: 20,
-                                                      height: 20,
-                                                      child: Image.asset(
-                                                          'assets/new/bookmark.png'),
-                                                    )
+                                                    // SizedBox(
+                                                    //   width: 20,
+                                                    //   height: 20,
+                                                    //   child: Image.asset(
+                                                    //       'assets/new/bookmark.png'),
+                                                    // )
                                                   ],
                                                 ),
                                                 SizedBox(

@@ -327,12 +327,12 @@ class _RekreasiSearchResultPageState extends State<RekreasiSearchResultPage> {
                                                         )
                                                       ],
                                                     ),
-                                                    SizedBox(
-                                                      width: 20,
-                                                      height: 20,
-                                                      child: Image.asset(
-                                                          'assets/new/bookmark.png'),
-                                                    )
+                                                    // SizedBox(
+                                                    //   width: 20,
+                                                    //   height: 20,
+                                                    //   child: Image.asset(
+                                                    //       'assets/new/bookmark.png'),
+                                                    // )
                                                   ],
                                                 ),
                                                 SizedBox(

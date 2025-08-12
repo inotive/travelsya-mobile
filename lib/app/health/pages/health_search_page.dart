@@ -374,12 +374,12 @@ class _HealthSearchPageState extends State<HealthSearchPage> {
                                                 SizedBox(
                                                   width: margin4,
                                                 ),
-                                                SizedBox(
-                                                  width: 16,
-                                                  height: 16,
-                                                  child: Image.asset(
-                                                      'assets/new/bookmark.png'),
-                                                )
+                                                // SizedBox(
+                                                //   width: 16,
+                                                //   height: 16,
+                                                //   child: Image.asset(
+                                                //       'assets/new/bookmark.png'),
+                                                // )
                                               ],
                                             ),
                                             SizedBox(
@@ -655,12 +655,12 @@ class _HealthSearchPageState extends State<HealthSearchPage> {
                                                     SizedBox(
                                                       width: margin4,
                                                     ),
-                                                    SizedBox(
-                                                      width: 16,
-                                                      height: 16,
-                                                      child: Image.asset(
-                                                          'assets/new/bookmark.png'),
-                                                    )
+                                                    // SizedBox(
+                                                    //   width: 16,
+                                                    //   height: 16,
+                                                    //   child: Image.asset(
+                                                    //       'assets/new/bookmark.png'),
+                                                    // )
                                                   ],
                                                 ),
                                                 SizedBox(
