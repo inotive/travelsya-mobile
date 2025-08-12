@@ -22,10 +22,23 @@ class RekreasiSearchResultPage extends StatefulWidget {
 class _RekreasiSearchResultPageState extends State<RekreasiSearchResultPage> {
   RecreationCubit searchCubit = RecreationCubit();
 
+  TextEditingController cityController = TextEditingController();
+
   @override
   void initState() {
-    searchCubit.onLoadSearchRecreation(context, city: widget.city);
+    cityController.text = widget.city ?? ''; // isi awal dari parameter
+    searchCubit.onLoadSearchRecreation(
+      context,
+      city: cityController.text,
+    );
     super.initState();
+  }
+
+  void _onCityChange(String value) {
+    searchCubit.onLoadSearchRecreation(
+      context,
+      city: value,
+    );
   }
 
   @override
@@ -75,15 +88,21 @@ class _RekreasiSearchResultPageState extends State<RekreasiSearchResultPage> {
                             width: margin8,
                           ),
                           Expanded(
-                              child: TextField(
-                            decoration: InputDecoration(
-                                isDense: true,
-                                hintText: 'Cari Rekreasi',
-                                border: InputBorder.none,
-                                contentPadding: EdgeInsets.zero,
-                                hintStyle: mainBody4.copyWith(
-                                    color: const Color(0xffa5a5a5))),
-                          )),
+                            child: TextField(
+                              onChanged: (value) {
+                                _onCityChange(
+                                    value); // langsung cari tiap ketik
+                              },
+                              controller: cityController,
+                              decoration: InputDecoration(
+                                  isDense: true,
+                                  hintText: 'Cari Rekreasi',
+                                  border: InputBorder.none,
+                                  contentPadding: EdgeInsets.zero,
+                                  hintStyle: mainBody4.copyWith(
+                                      color: const Color(0xffa5a5a5))),
+                            ),
+                          ),
                           Container(
                             margin: EdgeInsets.symmetric(
                                 horizontal: margin8, vertical: margin8),
