@@ -171,12 +171,18 @@ class _RekreasiDetailPageState extends State<RekreasiDetailPage> {
                                 ),
                                 SizedBox(height: margin8),
                                 Row(
+                                  crossAxisAlignment: CrossAxisAlignment.end,
                                   children: [
                                     Icon(Icons.star,
                                         color: Theme.of(context).primaryColor),
                                     Text(
                                       data.avgRating!.toStringAsFixed(1),
                                       style: mainBody3.copyWith(
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    Text(
+                                      '/5',
+                                      style: mainBody4.copyWith(
                                           fontWeight: FontWeight.bold),
                                     ),
                                     Text(' (${data.ratingCount})'),
@@ -264,7 +270,6 @@ class _RekreasiDetailPageState extends State<RekreasiDetailPage> {
                             child: RekreasiInfoSection(data: data),
                           ),
                           Container(
-                            // garis pemisah full width
                             width: double.infinity,
                             height: 8,
                             color: const Color(0xfff4f4f4),
@@ -283,7 +288,6 @@ class _RekreasiDetailPageState extends State<RekreasiDetailPage> {
                             child: RekreasiLocationSection(data: data),
                           ),
                           Container(
-                            // garis pemisah full width
                             width: double.infinity,
                             height: 8,
                             color: const Color(0xfff4f4f4),
@@ -305,7 +309,6 @@ class _RekreasiDetailPageState extends State<RekreasiDetailPage> {
                             ),
                           ),
                           Container(
-                            // garis pemisah full width
                             width: double.infinity,
                             height: 8,
                             color: const Color(0xfff4f4f4),
@@ -324,7 +327,6 @@ class _RekreasiDetailPageState extends State<RekreasiDetailPage> {
                             child: RekreasiReviewSection(data: data),
                           ),
                           Container(
-                            // garis pemisah full width
                             width: double.infinity,
                             height: 8,
                             color: const Color(0xfff4f4f4),

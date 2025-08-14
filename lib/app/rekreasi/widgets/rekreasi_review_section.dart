@@ -46,7 +46,7 @@ class RekreasiReviewSection extends StatelessWidget {
                     padding: EdgeInsets.all(margin24 / 2),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(4),
-                        color: neutral50),
+                        color: const Color(0XFFF4F4F4)),
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
@@ -61,7 +61,7 @@ class RekreasiReviewSection extends StatelessWidget {
                               color: neutral100, fontWeight: FontWeight.bold),
                         ),
                         Text(
-                          ' /5',
+                          '/5',
                           style: mainBody4.copyWith(
                               color: neutral50, fontWeight: FontWeight.bold),
                         )
