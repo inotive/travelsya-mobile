@@ -140,14 +140,9 @@ class RekreasiPackageSection extends StatelessWidget {
                 );
               }),
             )),
-        SizedBox(
-          height: margin8,
-        ),
-        Container(
-          width: double.infinity,
-          height: margin8,
-          color: const Color(0xfff4f4f4),
-        ),
+        // SizedBox(
+        //   height: margin8,
+        // ),
       ],
     );
   }

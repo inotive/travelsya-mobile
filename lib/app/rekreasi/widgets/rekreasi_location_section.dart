@@ -145,11 +145,6 @@ class RekreasiLocationSection extends StatelessWidget {
         SizedBox(
           height: margin16,
         ),
-        Container(
-          width: double.infinity,
-          height: 8,
-          color: const Color(0xfff4f4f4),
-        ),
       ],
     );
   }

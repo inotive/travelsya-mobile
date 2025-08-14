@@ -254,40 +254,82 @@ class _RekreasiDetailPageState extends State<RekreasiDetailPage> {
                         ),
                       ),
                     ),
-
                     // SECTION 0
                     SliverToBoxAdapter(
-                      child: Container(
-                        key: sectionKeys[0],
-                        padding: EdgeInsets.symmetric(horizontal: margin16),
-                        child: RekreasiInfoSection(data: data),
+                      child: Column(
+                        children: [
+                          Container(
+                            key: sectionKeys[0],
+                            padding: EdgeInsets.symmetric(horizontal: margin16),
+                            child: RekreasiInfoSection(data: data),
+                          ),
+                          Container(
+                            // garis pemisah full width
+                            width: double.infinity,
+                            height: 8,
+                            color: const Color(0xfff4f4f4),
+                          ),
+                        ],
                       ),
                     ),
+
                     // SECTION 1
                     SliverToBoxAdapter(
-                      child: Container(
-                        key: sectionKeys[1],
-                        padding: EdgeInsets.symmetric(horizontal: margin16),
-                        child: RekreasiLocationSection(data: data),
+                      child: Column(
+                        children: [
+                          Container(
+                            key: sectionKeys[1],
+                            padding: EdgeInsets.symmetric(horizontal: margin16),
+                            child: RekreasiLocationSection(data: data),
+                          ),
+                          Container(
+                            // garis pemisah full width
+                            width: double.infinity,
+                            height: 8,
+                            color: const Color(0xfff4f4f4),
+                          ),
+                        ],
                       ),
                     ),
+
                     // SECTION 2
                     SliverToBoxAdapter(
-                      child: Container(
-                        key: sectionKeys[2],
-                        padding: EdgeInsets.symmetric(horizontal: margin16),
-                        child: RekreasiPackageSection(
-                          data: data.package,
-                          dataDetail: data,
-                        ),
+                      child: Column(
+                        children: [
+                          Container(
+                            key: sectionKeys[2],
+                            padding: EdgeInsets.symmetric(horizontal: margin16),
+                            child: RekreasiPackageSection(
+                              data: data.package,
+                              dataDetail: data,
+                            ),
+                          ),
+                          Container(
+                            // garis pemisah full width
+                            width: double.infinity,
+                            height: 8,
+                            color: const Color(0xfff4f4f4),
+                          ),
+                        ],
                       ),
                     ),
+
                     // SECTION 3
                     SliverToBoxAdapter(
-                      child: Container(
-                        key: sectionKeys[3],
-                        padding: EdgeInsets.symmetric(horizontal: margin16),
-                        child: RekreasiReviewSection(data: data),
+                      child: Column(
+                        children: [
+                          Container(
+                            key: sectionKeys[3],
+                            padding: EdgeInsets.symmetric(horizontal: margin16),
+                            child: RekreasiReviewSection(data: data),
+                          ),
+                          Container(
+                            // garis pemisah full width
+                            width: double.infinity,
+                            height: 8,
+                            color: const Color(0xfff4f4f4),
+                          ),
+                        ],
                       ),
                     ),
                   ],

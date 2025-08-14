@@ -187,7 +187,7 @@ class RekreasiReviewSection extends StatelessWidget {
           ),
         ),
         SizedBox(
-          height: margin32,
+          height: margin8,
         ),
       ],
     );

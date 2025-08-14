@@ -220,11 +220,6 @@ class RekreasiInfoSection extends StatelessWidget {
           }),
         ),
       ),
-      Container(
-        width: double.infinity,
-        height: 8,
-        color: const Color(0xfff4f4f4),
-      ),
     ]);
   }
 }
