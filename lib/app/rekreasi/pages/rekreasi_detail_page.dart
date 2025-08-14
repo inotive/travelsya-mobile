@@ -40,6 +40,7 @@ class _RekreasiDetailPageState extends State<RekreasiDetailPage> {
         curve: Curves.ease);
     await itemScrollController.scrollTo(
         index: index,
+        alignment: 0,
         duration: const Duration(milliseconds: 300),
         curve: Curves.ease);
     selectedIndex.value = index;
@@ -69,21 +70,21 @@ class _RekreasiDetailPageState extends State<RekreasiDetailPage> {
 
     /// Capture the index of the first [ItemPosition]. If the saved index is same
     /// with the current one do nothing and return.
-    var firstIndex =
-        itemPositionsListener.itemPositions.value.elementAt(0).index;
-    if (selectedIndex.value == firstIndex) return;
+    // var firstIndex =
+    //     itemPositionsListener.itemPositions.value.elementAt(0).index;
+    // if (selectedIndex.value == firstIndex) return;
 
-    /// A new index has been detected.
-    await _handleTabScroll(firstIndex);
+    // /// A new index has been detected.
+    // await _handleTabScroll(firstIndex);
+    var firstItem = positions
+        .where((element) => element.itemLeadingEdge <= 0.1)
+        .reduce((min, element) => element.index < min.index ? element : min);
+
+    if (selectedIndex.value != firstItem.index) {
+      selectedIndex.value = firstItem.index;
+    }
   }
 
-  Future<void> _handleTabScroll(int index) async {
-    selectedIndex.value = index;
-    await itemScrollController.scrollTo(
-        index: selectedIndex.value,
-        duration: const Duration(milliseconds: 300),
-        curve: Curves.ease);
-  }
 
   RecreationCubit recreationCubit = RecreationCubit();
 
