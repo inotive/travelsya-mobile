@@ -203,7 +203,13 @@ class _RekreasiDetailPageState extends State<RekreasiDetailPage> {
                         ],
                       ),
                     ),
-
+                    SliverToBoxAdapter(
+                      child: Container(
+                        width: double.infinity,
+                        height: 8,
+                        color: const Color(0xfff4f4f4),
+                      ),
+                    ),
                     // STICKY TAB
                     SliverPersistentHeader(
                       pinned: true,
@@ -260,13 +266,19 @@ class _RekreasiDetailPageState extends State<RekreasiDetailPage> {
                         ),
                       ),
                     ),
+                    SliverToBoxAdapter(
+                      child: Container(
+                        width: double.infinity,
+                        height: 8,
+                        color: const Color(0xfff4f4f4),
+                      ),
+                    ),
                     // SECTION 0
                     SliverToBoxAdapter(
                       child: Column(
                         children: [
                           Container(
                             key: sectionKeys[0],
-                            padding: EdgeInsets.symmetric(horizontal: margin16),
                             child: RekreasiInfoSection(data: data),
                           ),
                           Container(
@@ -284,7 +296,6 @@ class _RekreasiDetailPageState extends State<RekreasiDetailPage> {
                         children: [
                           Container(
                             key: sectionKeys[1],
-                            padding: EdgeInsets.symmetric(horizontal: margin16),
                             child: RekreasiLocationSection(data: data),
                           ),
                           Container(
@@ -302,7 +313,6 @@ class _RekreasiDetailPageState extends State<RekreasiDetailPage> {
                         children: [
                           Container(
                             key: sectionKeys[2],
-                            padding: EdgeInsets.symmetric(horizontal: margin16),
                             child: RekreasiPackageSection(
                               data: data.package,
                               dataDetail: data,
@@ -323,7 +333,6 @@ class _RekreasiDetailPageState extends State<RekreasiDetailPage> {
                         children: [
                           Container(
                             key: sectionKeys[3],
-                            padding: EdgeInsets.symmetric(horizontal: margin16),
                             child: RekreasiReviewSection(data: data),
                           ),
                           Container(

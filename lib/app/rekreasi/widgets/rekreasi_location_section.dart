@@ -111,7 +111,7 @@ class RekreasiLocationSection extends StatelessWidget {
               Expanded(
                   child: Text(
                 data.address,
-                style: mainBody5.copyWith(
+                style: mainBody4.copyWith(
                     fontStyle: FontStyle.normal,
                     color: const Color(0xff333333)),
               )),
