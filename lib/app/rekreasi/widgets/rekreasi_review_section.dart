@@ -128,7 +128,7 @@ class RekreasiReviewSection extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      'Anonim',
+                                      data.comment[index].user?.name ?? 'Anonim',
                                       style: mainBody4.copyWith(
                                           color: neutral100,
                                           fontStyle: FontStyle.normal,

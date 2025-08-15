@@ -20,11 +20,11 @@ class RecreationPreviewModel {
   RecreationPreviewModel.fromJson(Map<String, dynamic> jsonMap) {
     id = jsonMap['id'];
     name = jsonMap['name'] ?? '';
-    // image = jsonMap['image'] ?? '';
     location = jsonMap['location'] ?? '';
     price = double.tryParse(jsonMap['price']?.toString() ?? '') ?? 0.0;
     ratingCount = jsonMap['rating_count'] ?? 0;
     avgRating = double.tryParse(jsonMap['avg_rating']?.toString() ?? '') ?? 0.0;
+
     if (jsonMap['image'] != null && jsonMap['image'].toString().isNotEmpty) {
       image = jsonMap['image'];
     } else if (jsonMap['images'] != null && jsonMap['images'].isNotEmpty) {
@@ -50,6 +50,7 @@ class RecreationDetailModel {
   late double? longitude;
   late double? avgRating;
   late int ratingCount;
+
   List<String> images = [];
   List<RecreationPackageModel> package = [];
   List<RecreationCommentModel> comment = [];
@@ -75,11 +76,13 @@ class RecreationDetailModel {
         images.add(img.toString());
       }
     }
+
     if (jsonMap['packages'] != null) {
       for (var pkg in jsonMap['packages']) {
         package.add(RecreationPackageModel.fromJson(pkg));
       }
     }
+
     if (jsonMap['comments'] != null) {
       for (var cmt in jsonMap['comments']) {
         comment.add(RecreationCommentModel.fromJson(cmt));
@@ -93,12 +96,28 @@ class RecreationCommentModel {
   late int rate;
   late String comment;
   late String? createdAt;
+  RecreationUserModel? user; // Tambahan user
 
   RecreationCommentModel.fromJson(Map<String, dynamic> jsonMap) {
     id = jsonMap['id'] ?? 0;
     rate = int.tryParse(jsonMap['rate']?.toString() ?? '') ?? 0;
     comment = jsonMap['comment'] ?? '';
     createdAt = jsonMap['created_at'];
+    user = jsonMap['user'] != null
+        ? RecreationUserModel.fromJson(jsonMap['user'])
+        : null;
+  }
+}
+
+class RecreationUserModel {
+  late int id;
+  late String name;
+  String? image;
+
+  RecreationUserModel.fromJson(Map<String, dynamic> jsonMap) {
+    id = jsonMap['id'] ?? 0;
+    name = jsonMap['name'] ?? '';
+    image = jsonMap['image'];
   }
 }
 
