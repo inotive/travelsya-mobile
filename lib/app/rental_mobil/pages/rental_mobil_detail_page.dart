@@ -98,12 +98,23 @@ class _RentalDetailPageState extends State<RentalDetailPage> {
                                 SizedBox(
                                   width: margin8,
                                 ),
-                                Text(
-                                  'Ubah',
-                                  style: mainBody5.copyWith(
-                                      color: Theme.of(context).primaryColor,
-                                      fontWeight: FontWeight.bold),
+                                GestureDetector(
+                                  onTap: () {
+                                    Navigator.pop(context);
+                                  },
+                                  child: Text(
+                                    'Ubah',
+                                    style: mainBody4.copyWith(
+                                        color: Theme.of(context).primaryColor,
+                                        fontWeight: FontWeight.bold),
+                                  ),
                                 )
+                                // Text(
+                                //   'Ubah',
+                                //   style: mainBody5.copyWith(
+                                //       color: Theme.of(context).primaryColor,
+                                //       fontWeight: FontWeight.bold),
+                                // )
                               ],
                             ),
                           )

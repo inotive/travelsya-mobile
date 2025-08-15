@@ -257,24 +257,52 @@ class _RekreasiSearchResultPageState extends State<RekreasiSearchResultPage> {
                                         children: [
                                           Stack(
                                             children: [
-                                              Container(
-                                                width: double.infinity,
-                                                height: 156,
-                                                decoration: BoxDecoration(
-                                                    color: Colors.black12,
-                                                    image: DecorationImage(
-                                                        fit: BoxFit.cover,
-                                                        image: NetworkImage(
-                                                            data.image)),
-                                                    borderRadius:
-                                                        const BorderRadius.only(
-                                                            topLeft:
-                                                                Radius.circular(
-                                                                    12),
-                                                            topRight:
-                                                                Radius.circular(
-                                                                    12))),
+                                              ClipRRect(
+                                                borderRadius:
+                                                    const BorderRadius.only(
+                                                        topLeft:
+                                                            Radius.circular(12),
+                                                        topRight:
+                                                            Radius.circular(
+                                                                12)),
+                                                child: SizedBox(
+                                                  width: double.infinity,
+                                                  height: 156,
+                                                  child: Image.network(
+                                                    data.image,
+                                                    fit: BoxFit.cover,
+                                                    errorBuilder: (context,
+                                                        error, stackTrace) {
+                                                      return const Center(
+                                                        child: Icon(
+                                                          Icons.broken_image,
+                                                          size: 50,
+                                                          color: Colors.grey,
+                                                        ),
+                                                      );
+                                                    },
+                                                  ),
+                                                ),
                                               ),
+
+                                              // Container(
+                                              //   width: double.infinity,
+                                              //   height: 156,
+                                              //   decoration: BoxDecoration(
+                                              //       color: Colors.black12,
+                                              //       image: DecorationImage(
+                                              //           fit: BoxFit.cover,
+                                              //           image: NetworkImage(
+                                              //               data.image)),
+                                              //       borderRadius:
+                                              //           const BorderRadius.only(
+                                              //               topLeft:
+                                              //                   Radius.circular(
+                                              //                       12),
+                                              //               topRight:
+                                              //                   Radius.circular(
+                                              //                       12))),
+                                              // ),
                                               // Positioned(
                                               //   bottom: margin8,
                                               //   left: 0,
