@@ -167,6 +167,33 @@ class _HealthSearchPageState extends State<HealthSearchPage> {
                     ),
                   ),
                 ),
+                SizedBox(
+                  width: margin16,
+                ),
+                GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      selectedIndex = 2;
+                    });
+                  },
+                  child: Container(
+                    padding: EdgeInsets.only(bottom: margin24 / 2),
+                    decoration: BoxDecoration(
+                        border: Border(
+                            bottom: BorderSide(
+                                color: selectedIndex == 2
+                                    ? Theme.of(context).primaryColor
+                                    : Colors.transparent))),
+                    child: Text(
+                      'Spa & Kecantikan',
+                      style: mainBody4.copyWith(
+                          fontWeight: FontWeight.bold,
+                          color: selectedIndex == 2
+                              ? Theme.of(context).primaryColor
+                              : const Color(0xffa5a5a5)),
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
