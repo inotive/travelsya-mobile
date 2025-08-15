@@ -337,20 +337,45 @@ class _HealthSearchPageState extends State<HealthSearchPage> {
                                     children: [
                                       Stack(
                                         children: [
-                                          Container(
-                                            width: 160,
-                                            height: 90,
-                                            decoration: BoxDecoration(
-                                                borderRadius:
-                                                    const BorderRadius.only(
-                                                        topLeft:
-                                                            Radius.circular(8),
-                                                        topRight:
-                                                            Radius.circular(8)),
-                                                image: DecorationImage(
-                                                    image: NetworkImage(
-                                                        data.image))),
+                                          ClipRRect(
+                                            borderRadius:
+                                                const BorderRadius.only(
+                                                    topLeft: Radius.circular(8),
+                                                    topRight:
+                                                        Radius.circular(8)),
+                                            child: SizedBox(
+                                              width: 160,
+                                              height: 90,
+                                              child: Image.network(
+                                                data.image,
+                                                fit: BoxFit.cover,
+                                                errorBuilder: (context, error,
+                                                    stackTrace) {
+                                                  return const Center(
+                                                    child: Icon(
+                                                      Icons.broken_image,
+                                                      size: 50,
+                                                      color: Colors.grey,
+                                                    ),
+                                                  );
+                                                },
+                                              ),
+                                            ),
                                           ),
+                                          // Container(
+                                          //   width: 160,
+                                          //   height: 90,
+                                          //   decoration: BoxDecoration(
+                                          //       borderRadius:
+                                          //           const BorderRadius.only(
+                                          //               topLeft:
+                                          //                   Radius.circular(8),
+                                          //               topRight:
+                                          //                   Radius.circular(8)),
+                                          //       image: DecorationImage(
+                                          //           image: NetworkImage(
+                                          //               data.image))),
+                                          // ),
                                           Positioned(
                                             left: margin8,
                                             bottom: margin8,
@@ -647,22 +672,47 @@ class _HealthSearchPageState extends State<HealthSearchPage> {
                                       children: [
                                         AspectRatio(
                                           aspectRatio: 167 / 100,
-                                          child: Container(
-                                            width: double.infinity,
-                                            height: double.infinity,
-                                            decoration: BoxDecoration(
-                                                borderRadius:
-                                                    const BorderRadius.only(
-                                                        topLeft:
-                                                            Radius.circular(8),
-                                                        topRight:
-                                                            Radius.circular(8)),
-                                                image: DecorationImage(
-                                                    fit: BoxFit.fitWidth,
-                                                    image: NetworkImage(
-                                                        dataFinal[index]
-                                                            .image))),
+                                          child: ClipRRect(
+                                            borderRadius:
+                                                const BorderRadius.only(
+                                                    topLeft: Radius.circular(8),
+                                                    topRight:
+                                                        Radius.circular(8)),
+                                            child: SizedBox(
+                                              width: 160,
+                                              height: 90,
+                                              child: Image.network(
+                                                dataFinal[index].image,
+                                                fit: BoxFit.cover,
+                                                errorBuilder: (context, error,
+                                                    stackTrace) {
+                                                  return const Center(
+                                                    child: Icon(
+                                                      Icons.broken_image,
+                                                      size: 50,
+                                                      color: Colors.grey,
+                                                    ),
+                                                  );
+                                                },
+                                              ),
+                                            ),
                                           ),
+                                          // Container(
+                                          //   width: double.infinity,
+                                          //   height: double.infinity,
+                                          //   decoration: BoxDecoration(
+                                          //       borderRadius:
+                                          //           const BorderRadius.only(
+                                          //               topLeft:
+                                          //                   Radius.circular(8),
+                                          //               topRight:
+                                          //                   Radius.circular(8)),
+                                          //       image: DecorationImage(
+                                          //           fit: BoxFit.fitWidth,
+                                          //           image: NetworkImage(
+                                          //               dataFinal[index]
+                                          //                   .image))),
+                                          // ),
                                         ),
                                         Container(
                                           padding: EdgeInsets.all(margin24 / 2),

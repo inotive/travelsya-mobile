@@ -98,7 +98,7 @@ class HealthCommentModel {
   late int clinicPackageId;
   late int userId;
   late int rate;
-  late String comment;
+  String? comment;
   String? createdAt;
 
   HealthCommentModel.fromJson(Map<String, dynamic> jsonMap) {
@@ -108,7 +108,7 @@ class HealthCommentModel {
     clinicPackageId = int.parse(jsonMap['clinic_package_id']);
     userId = int.parse(jsonMap['user_id']);
     rate = int.parse(jsonMap['rate']);
-    comment = jsonMap['comment'];
+    comment = jsonMap['comment']?.toString();
     createdAt = jsonMap['created_at'];
   }
 }

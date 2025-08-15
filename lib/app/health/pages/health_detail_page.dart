@@ -23,7 +23,7 @@ class HealthDetailPage extends StatefulWidget {
 
 class _HealthDetailPageState extends State<HealthDetailPage> {
   bool showMore = false;
-  final dataKey = new GlobalKey();
+  final dataKey = GlobalKey();
 
   HealthCubit clinicDetailCubit = HealthCubit();
 
@@ -67,14 +67,25 @@ class _HealthDetailPageState extends State<HealthDetailPage> {
                       children: [
                         Stack(
                           children: [
-                            Container(
-                              height: 200,
-                              width: double.infinity,
-                              decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                      fit: BoxFit.cover,
-                                      image:
-                                          NetworkImage(state.data.mainImage))),
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(8),
+                              child: SizedBox(
+                                height: 200,
+                                width: double.infinity,
+                                child: Image.network(
+                                  state.data.mainImage,
+                                  fit: BoxFit.cover,
+                                  errorBuilder: (context, error, stackTrace) {
+                                    return const Center(
+                                      child: Icon(
+                                        Icons.broken_image,
+                                        size: 50,
+                                        color: Colors.grey,
+                                      ),
+                                    );
+                                  },
+                                ),
+                              ),
                             ),
                             Positioned(
                               top:
@@ -667,7 +678,8 @@ class _HealthDetailPageState extends State<HealthDetailPage> {
                                                         FontWeight.bold),
                                               ),
                                               Text(
-                                                data.comment,
+                                                data.comment ??
+                                                    'Tidak Ada Komentar',
                                                 style: mainBody5.copyWith(
                                                     color: const Color(
                                                         0xffa5a5a5)),
@@ -929,18 +941,50 @@ class _HealthDetailPageState extends State<HealthDetailPage> {
                                                       Container(
                                                         width: 160,
                                                         height: 90,
-                                                        decoration: BoxDecoration(
-                                                            borderRadius: const BorderRadius
-                                                                .only(
-                                                                topLeft: Radius
-                                                                    .circular(
-                                                                        8),
-                                                                topRight: Radius
-                                                                    .circular(
-                                                                        8)),
-                                                            image: DecorationImage(
-                                                                image: NetworkImage(
-                                                                    data.image))),
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          borderRadius:
+                                                              const BorderRadius
+                                                                  .only(
+                                                            topLeft:
+                                                                Radius.circular(
+                                                                    8),
+                                                            topRight:
+                                                                Radius.circular(
+                                                                    8),
+                                                          ),
+                                                          color:
+                                                              Colors.grey[200],
+                                                        ),
+                                                        child: ClipRRect(
+                                                          borderRadius:
+                                                              const BorderRadius
+                                                                  .only(
+                                                            topLeft:
+                                                                Radius.circular(
+                                                                    8),
+                                                            topRight:
+                                                                Radius.circular(
+                                                                    8),
+                                                          ),
+                                                          child: Image.network(
+                                                            data.image,
+                                                            fit: BoxFit.cover,
+                                                            errorBuilder:
+                                                                (context, error,
+                                                                    stackTrace) {
+                                                              return const Center(
+                                                                child: Icon(
+                                                                  Icons
+                                                                      .broken_image,
+                                                                  size: 40,
+                                                                  color: Colors
+                                                                      .grey,
+                                                                ),
+                                                              );
+                                                            },
+                                                          ),
+                                                        ),
                                                       ),
                                                       Positioned(
                                                         left: margin8,
@@ -1010,15 +1054,15 @@ class _HealthDetailPageState extends State<HealthDetailPage> {
                                                                   color: const Color(
                                                                       0xffa5a5a5)),
                                                             )),
-                                                            SizedBox(
-                                                              width: margin4,
-                                                            ),
-                                                            SizedBox(
-                                                              width: 16,
-                                                              height: 16,
-                                                              child: Image.asset(
-                                                                  'assets/new/bookmark.png'),
-                                                            )
+                                                            // SizedBox(
+                                                            //   width: margin4,
+                                                            // ),
+                                                            // SizedBox(
+                                                            //   width: 16,
+                                                            //   height: 16,
+                                                            //   child: Image.asset(
+                                                            //       'assets/new/bookmark.png'),
+                                                            // )
                                                           ],
                                                         ),
                                                         SizedBox(
@@ -1119,58 +1163,58 @@ class _HealthDetailPageState extends State<HealthDetailPage> {
                       ],
                     ),
                   ),
-                  Container(
-                    padding: EdgeInsets.all(margin16),
-                    decoration: const BoxDecoration(
-                      color: Colors.white,
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey,
-                          offset: Offset(0.0, 1.0), //(x,y)
-                          blurRadius: 6.0,
-                        ),
-                      ],
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Mulai dari',
-                              style: mainBody5.copyWith(
-                                  color: const Color(0xffa5a5a5)),
-                            ),
-                            Text(
-                              moneyChanger(getLowestData(state.data.package),
-                                  customLabel: 'IDR '),
-                              style: mainBody4.copyWith(
-                                  color: Theme.of(context).primaryColor),
-                            )
-                          ],
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            // Scrollable.ensureVisible(dataKey.currentContext!);
-                          },
-                          child: Container(
-                            padding: EdgeInsets.symmetric(
-                                vertical: margin8, horizontal: margin16),
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(8),
-                                color: Theme.of(context).primaryColor),
-                            child: Text(
-                              'Pilih Paket',
-                              style: mainBody4.copyWith(
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white),
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
-                  )
+                  // Container(
+                  //   padding: EdgeInsets.all(margin16),
+                  //   decoration: const BoxDecoration(
+                  //     color: Colors.white,
+                  //     boxShadow: [
+                  //       BoxShadow(
+                  //         color: Colors.grey,
+                  //         offset: Offset(0.0, 1.0), //(x,y)
+                  //         blurRadius: 6.0,
+                  //       ),
+                  //     ],
+                  //   ),
+                  //   child: Row(
+                  //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //     children: [
+                  //       Column(
+                  //         crossAxisAlignment: CrossAxisAlignment.start,
+                  //         children: [
+                  //           Text(
+                  //             'Mulai dari',
+                  //             style: mainBody5.copyWith(
+                  //                 color: const Color(0xffa5a5a5)),
+                  //           ),
+                  //           Text(
+                  //             moneyChanger(getLowestData(state.data.package),
+                  //                 customLabel: 'IDR '),
+                  //             style: mainBody4.copyWith(
+                  //                 color: Theme.of(context).primaryColor),
+                  //           )
+                  //         ],
+                  //       ),
+                  //       GestureDetector(
+                  //         onTap: () {
+                  //           // Scrollable.ensureVisible(dataKey.currentContext!);
+                  //         },
+                  //         child: Container(
+                  //           padding: EdgeInsets.symmetric(
+                  //               vertical: margin8, horizontal: margin16),
+                  //           decoration: BoxDecoration(
+                  //               borderRadius: BorderRadius.circular(8),
+                  //               color: Theme.of(context).primaryColor),
+                  //           child: Text(
+                  //             'Pilih Paket1',
+                  //             style: mainBody4.copyWith(
+                  //                 fontWeight: FontWeight.bold,
+                  //                 color: Colors.white),
+                  //           ),
+                  //         ),
+                  //       )
+                  //     ],
+                  //   ),
+                  // )
                 ],
               );
             } else {
