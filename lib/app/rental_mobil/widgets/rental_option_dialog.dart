@@ -95,29 +95,46 @@ class RentalOptionDialog extends StatelessWidget {
                     SizedBox(
                       width: 60,
                       height: 60,
-                      child: (data.image.isNotEmpty)
-                          ? Image.network(
-                              data.image,
-                              fit: BoxFit.cover,
-                              errorBuilder: (context, error, stackTrace) =>
-                                  const Center(
-                                child: Text(
-                                  'Gambar tidak tersedia',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                      fontSize: 10, color: Colors.grey),
-                                ),
-                              ),
-                            )
-                          : const Center(
-                              child: Text(
-                                'Gambar tidak tersedia',
-                                textAlign: TextAlign.center,
-                                style:
-                                    TextStyle(fontSize: 10, color: Colors.grey),
-                              ),
+                      child: Image.network(
+                        data.image,
+                        fit: BoxFit.cover,
+                        errorBuilder: (context, error, stackTrace) {
+                          return const Center(
+                            child: Icon(
+                              Icons.broken_image,
+                              size: 50,
+                              color: Colors.grey,
                             ),
-                    )
+                          );
+                        },
+                      ),
+                    ),
+                    // SizedBox(
+                    //   width: 60,
+                    //   height: 60,
+                    //   child: (data.image.isNotEmpty)
+                    //       ? Image.network(
+                    //           data.image,
+                    //           fit: BoxFit.cover,
+                    //           errorBuilder: (context, error, stackTrace) =>
+                    //               const Center(
+                    //             child: Text(
+                    //               'Gambar tidak tersedia',
+                    //               textAlign: TextAlign.center,
+                    //               style: TextStyle(
+                    //                   fontSize: 10, color: Colors.grey),
+                    //             ),
+                    //           ),
+                    //         )
+                    //       : const Center(
+                    //           child: Text(
+                    //             'Gambar tidak tersedia',
+                    //             textAlign: TextAlign.center,
+                    //             style:
+                    //                 TextStyle(fontSize: 10, color: Colors.grey),
+                    //           ),
+                    //         ),
+                    // )
 
                     // SizedBox(
                     //     width: 60, height: 60, child: Image.network(data.image))
