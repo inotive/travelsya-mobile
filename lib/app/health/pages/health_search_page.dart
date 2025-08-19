@@ -569,7 +569,7 @@ class _HealthSearchPageState extends State<HealthSearchPage> {
                                     image: const DecorationImage(
                                         fit: BoxFit.cover,
                                         image: AssetImage(
-                                            'assets/new/deals_image.png'))),
+                                            'assets/new/deals_image.jpg'))),
                                 child: Container(
                                   width: double.infinity,
                                   height: double.infinity,
