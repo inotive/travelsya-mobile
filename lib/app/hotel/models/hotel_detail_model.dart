@@ -103,7 +103,7 @@ class HotelFacilites {
   late String image;
 
   HotelFacilites.fromJson(Map<String, dynamic> jsonMap) {
-    id = jsonMap['id'];
+    id = int.tryParse(jsonMap['id'].toString()) ?? 0;
     name = jsonMap['name'];
     image = "$baseUrl${jsonMap['image']}";
   }
@@ -114,7 +114,6 @@ class HotelReview {
   late String comment;
   late int userId;
   String? username;
-
   String? createdAt;
 
   HotelReview.fromJson(Map<String, dynamic> jsonMap) {
@@ -149,11 +148,11 @@ class HotelRoom {
   late double sellingPrice;
   //facilites
   late String bedType;
-  late int roomSize;
-  late int maxExtBed;
-  late int totalRoom;
+  late String roomSize;
+  late String maxExtBed;
+  late String totalRoom;
   late int roomLeft;
-  late int guest;
+  late String guest;
   List<String> images = [];
   late bool isActive;
 
@@ -166,7 +165,7 @@ class HotelRoom {
     //facilities
     bedType = jsonMap['bed_type'] ?? '-';
     roomSize = jsonMap['roomsize'];
-    maxExtBed = jsonMap['maxextrabed'] ?? 0;
+    maxExtBed = jsonMap['maxextrabed'] ?? "0";
     totalRoom = jsonMap['totalroom'];
     roomLeft = int.parse(jsonMap['room_left'].toString());
     guest = jsonMap['guest'];

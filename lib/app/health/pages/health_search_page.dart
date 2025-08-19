@@ -816,3 +816,4 @@ class _HealthSearchPageState extends State<HealthSearchPage> {
     );
   }
 }
+

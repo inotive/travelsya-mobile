@@ -1,8 +1,8 @@
 import 'package:travelsya/shared/api/api_connection.dart';
 
 class HotelRoomDetail {
-  late int roomSize;
-  late int maxGuest;
+  late String roomSize;
+  late String maxGuest;
   String? desc;
   List<String> images = [];
   List<dynamic> roomFacilities = [];
