@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:travelsya/app/auth/cubits/auth_cubit.dart';
 import 'package:travelsya/app/auth/cubits/auth_state.dart';
+import 'package:travelsya/shared/api/api_connection.dart';
 // import 'package:travelsya/shared/api/api_connection.dart';
 import 'package:travelsya/shared/helper/const_helper.dart';
 
@@ -29,8 +30,8 @@ class HomeProfilePictureWidget extends StatelessWidget {
                     image: DecorationImage(
                       fit: BoxFit.cover,
                       image:
-                          // NetworkImage('$basePathUserUrl${state.data.image}'),
-                          NetworkImage('${state.data.image}'),
+                          NetworkImage('$basePathUserUrl${state.data.image}'),
+                          // NetworkImage('${state.data.image}'),
                     ),
                   ),
                 ),
