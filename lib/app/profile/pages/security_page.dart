@@ -106,7 +106,7 @@ class SecurityPage extends StatelessWidget {
                             title: 'Kata Sandi Lama',
                             child: RoundedTextfield(
                                 controller: TextEditingController(),
-                                suffixIcon:
+                                suffixWidget:
                                     const Icon(Icons.visibility_off_outlined),
                                 hintText: 'Kata Sandi Lama')),
                         SizedBox(
@@ -116,7 +116,7 @@ class SecurityPage extends StatelessWidget {
                             title: 'Kata Sandi Baru',
                             child: RoundedTextfield(
                                 controller: TextEditingController(),
-                                suffixIcon:
+                                suffixWidget:
                                     const Icon(Icons.visibility_off_outlined),
                                 hintText: 'Kata Sandi Baru'))
                       ],

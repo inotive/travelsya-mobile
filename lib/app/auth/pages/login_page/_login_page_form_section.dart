@@ -31,7 +31,6 @@ class _LoginPageFormSection extends StatelessWidget {
                     validation: model.emailValidation,
                     child: RoundedTextfield(
                         hintText: 'Masukkan email Anda',
-                        keyboardType: TextInputType.emailAddress,
                         controller: model.emailController,
                         onChanged: (value) {
                           model.onEmailChanged(value);
@@ -44,7 +43,7 @@ class _LoginPageFormSection extends StatelessWidget {
                     validation: model.passwordValidation,
                     child: RoundedTextfield(
                         hintText: 'Masukkan kata sandi Anda',
-                        suffixIcon: GestureDetector(
+                        suffixWidget: GestureDetector(
                             onTap: () {
                               model.onPasswordIconTap();
                             },
@@ -87,7 +86,7 @@ class _LoginPageFormSection extends StatelessWidget {
                         ),
                         Text(
                           'Ingat Saya',
-                          style: mainBody4,
+                          style: mainBody5,
                         )
                       ],
                     ),

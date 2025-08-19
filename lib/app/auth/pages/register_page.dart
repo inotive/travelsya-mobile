@@ -71,20 +71,10 @@ class RegisterPage extends StatelessWidget {
                               height: margin32,
                             ),
                             TitleWithWidget(
-                                title: 'Nomor Handphone',
-                                child: RoundedTextfield(
-                                  onChanged: (value) {},
-                                  hintText: '81234567890',
-                                  prefixText: '+62 ',
-                                  keyboardType: TextInputType.number,
-                                )),
-                            SizedBox(height: margin16),
-                            TitleWithWidget(
                                 title: 'Email',
                                 validation: model.emailValidation,
                                 child: RoundedTextfield(
                                     hintText: 'Masukkan email Anda',
-                                    keyboardType: TextInputType.emailAddress,
                                     onChanged: (value) {
                                       model.onEmailChanged(value);
                                     },
@@ -112,7 +102,7 @@ class RegisterPage extends StatelessWidget {
                                 validation: model.passwordValidation,
                                 child: RoundedTextfield(
                                     hintText: 'Masukkan kata sandi Anda',
-                                    suffixIcon: GestureDetector(
+                                    suffixWidget: GestureDetector(
                                         onTap: () {
                                           model.onPasswordIconTap();
                                         },
@@ -136,7 +126,7 @@ class RegisterPage extends StatelessWidget {
                                 validation: model.confirmValidation,
                                 child: RoundedTextfield(
                                     hintText: 'Masukkan ulang kata sandi Anda',
-                                    suffixIcon: GestureDetector(
+                                    suffixWidget: GestureDetector(
                                         onTap: () {
                                           model.onPasswordIconTap();
                                         },

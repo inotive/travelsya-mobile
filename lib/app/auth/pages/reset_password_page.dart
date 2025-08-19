@@ -45,7 +45,7 @@ class ResetPasswordPage extends StatelessWidget {
                                 onChanged: (value) {
                                   model.onPasswordChanged(value);
                                 },
-                                suffixIcon: GestureDetector(
+                                suffixWidget: GestureDetector(
                                     onTap: () {
                                       model.onPasswordIconTap();
                                     },
@@ -69,7 +69,7 @@ class ResetPasswordPage extends StatelessWidget {
                                 onChanged: (value) {
                                   model.onConfirmChanged(value);
                                 },
-                                suffixIcon: GestureDetector(
+                                suffixWidget: GestureDetector(
                                     onTap: () {
                                       model.onPasswordIconTap();
                                     },
