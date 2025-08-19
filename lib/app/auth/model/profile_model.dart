@@ -9,9 +9,9 @@ class HistoryPoint {
   late String date;
   late String createdAt;
   late int point;
-  late OrderList transaction;
+  OrderList? transaction;
 
-  HistoryPoint.frmoJson(Map<String, dynamic> jsonMap) {
+  HistoryPoint.fromJson(Map<String, dynamic> jsonMap) {
     id = jsonMap['id'];
     userId = jsonMap['user_id'].toString();
     transactionId = jsonMap['transaction_id'].toString();
@@ -19,7 +19,11 @@ class HistoryPoint {
     point = int.parse(jsonMap['point'].toString());
     date = jsonMap['date'];
     createdAt = jsonMap['created_at'];
-    transaction = OrderList.fromJsonPoint(jsonMap['transaction']);
+    if (jsonMap['transaction'] != null) {
+      transaction = OrderList.fromJsonPoint(jsonMap['transaction']);
+    } else {
+      transaction = null;
+    }
   }
 }
 
@@ -29,8 +33,10 @@ class ProfileModel {
 
   ProfileModel.fromJson(Map<String, dynamic> jsonMap) {
     user = UserModel.fromJsonWithToken(jsonMap, '');
-    for (var i = 0; i < jsonMap['history_point'].length; i++) {
-      point.add(HistoryPoint.frmoJson(jsonMap['history_point'][i]));
+    if (jsonMap['history_point'] != null) {
+      for (var item in jsonMap['history_point']) {
+        point.add(HistoryPoint.fromJson(item));
+      }
     }
   }
 }

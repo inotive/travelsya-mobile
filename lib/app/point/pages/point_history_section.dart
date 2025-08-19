@@ -118,9 +118,11 @@ class _PointHistorySectionState extends State<PointHistorySection> {
                                         width: 25,
                                         height: 25,
                                         child: Image.asset(
-                                            getPreviewAssetTransaction(data
-                                                .transaction.service
-                                                .toUpperCase())),
+                                            getPreviewAssetTransaction(
+                                          data.transaction?.service
+                                                  .toUpperCase() ??
+                                              '',
+                                        )),
                                       ),
                                     ),
                                     SizedBox(
@@ -137,7 +139,8 @@ class _PointHistorySectionState extends State<PointHistorySection> {
                                         ),
                                         Text(
                                           state.data.point[index].transaction
-                                              .noInv,
+                                                  ?.noInv ??
+                                              "-",
                                           style: mainBody5.copyWith(
                                               fontSize: 10,
                                               color: Colors.black54),
@@ -147,7 +150,8 @@ class _PointHistorySectionState extends State<PointHistorySection> {
                                         ),
                                         Text(
                                           state.data.point[index].transaction
-                                              .service,
+                                                  ?.service ??
+                                              '-',
                                           style: mainBody4.copyWith(
                                               fontWeight: FontWeight.bold),
                                         ),
