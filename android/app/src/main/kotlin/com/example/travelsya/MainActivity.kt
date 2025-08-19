@@ -1,4 +1,4 @@
-package com.travelsya.id
+package com.travelsya.app
 
 import io.flutter.embedding.android.FlutterActivity
 
