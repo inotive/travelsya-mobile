@@ -371,7 +371,7 @@ class OrderDetailHotelModel {
   late int hotelRoomId;
   late String hotelName;
   late String hotelRoomName;
-  late String bookinId;
+  late String bookingId;
   late String guestName;
   late String guestPhone;
   late String guestEmail;
@@ -395,18 +395,18 @@ class OrderDetailHotelModel {
   OrderDetailHotelModel.fromJson(Map<String, dynamic> jsonMap) {
     id = jsonMap['id'];
     noInv = jsonMap['no_inv'];
-    hotelId = jsonMap['hotel_id'];
-    hotelRoomId = jsonMap['hotel_room_id'];
+    hotelId = int.tryParse(jsonMap['hotel_id'].toString()) ?? 0;
+    hotelRoomId = int.tryParse(jsonMap['hotel_room_id'].toString()) ?? 0;
     hotelName = jsonMap['hotel_name'];
     hotelRoomName = jsonMap['hotel_room_name'];
-    bookinId = jsonMap['booking_id'];
+    bookingId = jsonMap['booking_id'];
     guestName = jsonMap['guest_identity'][0]['name'] ?? '';
     guestPhone = jsonMap['guest_identity'][0]['handphone'] ?? '';
     guestEmail = jsonMap['guest_identity'][0]['email'] ?? '';
     startDate = jsonMap['reservation_start'];
     endDate = jsonMap['reservation_end'];
-    guest = jsonMap['guest'];
-    room = jsonMap['room'];
+    guest = int.tryParse(jsonMap['guest'].toString()) ?? 0;
+    room = int.tryParse(jsonMap['room'].toString()) ?? 0;
     reqId = jsonMap['req_id'];
     link = jsonMap['link'];
     service = jsonMap['service'];
@@ -416,9 +416,7 @@ class OrderDetailHotelModel {
     adminFee = double.parse(
         jsonMap['fee_admin'] == null ? '0' : jsonMap['fee_admin'].toString());
     total = double.parse(jsonMap['total'].toString());
-    pointReceived = double.parse(jsonMap['point_received'] == null
-        ? '0'
-        : jsonMap['point_received'].toString());
+    pointReceived = double.parse(jsonMap['received_point']?.toString() ?? '0');
     pointUsed = double.parse(
         jsonMap['used_point'] == null ? '0' : jsonMap['used_point'].toString());
     createdAt = jsonMap['created_at'];
