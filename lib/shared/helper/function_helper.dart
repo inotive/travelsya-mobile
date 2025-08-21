@@ -111,3 +111,17 @@ String getPreviewAssetTransaction(String service) {
 
   return 'assets/icons/invoice.png';
 }
+
+String dateTimeToReadableLocal(String? utcString,
+    {String format = 'dd MMM yyyy HH:mm'}) {
+  if (utcString == null) return '-';
+  try {
+    print("DEBUG createdAt: $utcString");
+    final utcTime = DateTime.parse(utcString);
+    final localTime = utcTime.toLocal();
+    return DateFormat(format).format(localTime);
+  } catch (e) {
+    print("DEBUG error parsing date: $e");
+    return '-';
+  }
+}

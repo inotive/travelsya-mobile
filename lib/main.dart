@@ -1,5 +1,7 @@
 import 'dart:async';
 import 'dart:io';
+import 'package:intl/intl.dart';
+import 'package:intl/date_symbol_data_local.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -30,6 +32,9 @@ Future<void> main() async {
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
   ]);
+
+  Intl.defaultLocale = 'id_ID';
+  await initializeDateFormatting('id_ID', null);
 
   HttpOverrides.global = MyHttpOverrides();
   runApp(MultiBlocProvider(
