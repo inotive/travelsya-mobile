@@ -386,9 +386,10 @@ class _HostelDetailOrderSectionState extends State<HostelDetailOrderSection> {
               ),
               DetailOrderSplitDataWidget(
                 title: 'Tanggal Transaksi',
-                data: widget.data.createdAt == null
-                    ? '-'
-                    : '${dateToReadable(widget.data.createdAt!.substring(0, 10))} ${widget.data.createdAt!.substring(11, 16)}',
+                data: dateTimeToReadableLocal(widget.data.createdAt),
+                // data: widget.data.createdAt == null
+                //     ? '-'
+                //     : '${dateToReadable(widget.data.createdAt!.substring(0, 10))} ${widget.data.createdAt!.substring(11, 16)}',
               ),
               SizedBox(
                 height: margin4,

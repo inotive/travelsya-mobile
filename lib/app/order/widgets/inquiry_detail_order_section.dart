@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:travelsya/app/order/models/order_detail_model.dart';
 import 'package:travelsya/app/order/widgets/detail_order_split_data_widget.dart';
-import 'package:travelsya/shared/function/date_to_readable_function.dart';
+// import 'package:travelsya/shared/function/date_to_readable_function.dart';
 import 'package:travelsya/shared/helper/function_helper.dart';
 import 'package:travelsya/shared/styles/font_style.dart';
 import 'package:travelsya/shared/styles/size_styles.dart';
@@ -78,9 +78,10 @@ class InquiryDetailOrderSection extends StatelessWidget {
               ),
               DetailOrderSplitDataWidget(
                 title: 'Tanggal Transaksi',
-                data: data.createdAt == null
-                    ? '-'
-                    : '${dateToReadable(data.createdAt!.substring(0, 10))} ${data.createdAt!.substring(11, 16)}',
+                data: dateTimeToReadableLocal(data.createdAt),
+                // data: data.createdAt == null
+                //     ? '-'
+                //     : '${dateToReadable(data.createdAt!.substring(0, 10))} ${data.createdAt!.substring(11, 16)}',
               ),
               SizedBox(
                 height: margin4,
