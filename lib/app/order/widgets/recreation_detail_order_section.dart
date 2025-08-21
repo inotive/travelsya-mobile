@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:travelsya/app/order/models/order_detail_model.dart';
 import 'package:travelsya/app/payment/pages/payment_webview_page.dart';
 import 'package:travelsya/app/order/widgets/detail_order_split_data_widget.dart';
+import 'package:travelsya/app/rekreasi/pages/rekreasi_search_page.dart';
 // import 'package:travelsya/shared/function/date_to_readable_function.dart';
 import 'package:travelsya/shared/helper/function_helper.dart';
 import 'package:travelsya/shared/styles/font_style.dart';
@@ -212,10 +213,43 @@ class RecreationDetailOrderSection extends StatelessWidget {
     );
   }
 
-  Widget _getActionButton(
-      BuildContext context, RecreationOrderDetailModel data) {
-    if (data.status.toLowerCase() == 'paid' ||
-        data.status.toLowerCase() == 'pending') {
+
+Widget _getActionButton(BuildContext context, RecreationOrderDetailModel data) {
+    final status = data.status.toLowerCase();
+
+    if (status == 'paid') {
+      // Jika sudah bayar, arahkan ke BusSearchPage
+      return GestureDetector(
+        onTap: () {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+                builder: (_) =>
+                    RekreasiSearchPage()), // <-- ganti sesuai import kamu
+          );
+        },
+        child: Container(
+          width: double.infinity,
+          margin: EdgeInsets.symmetric(horizontal: margin16, vertical: margin8),
+          padding:
+              EdgeInsets.symmetric(vertical: margin16, horizontal: margin16),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            color: Theme.of(context).primaryColor,
+          ),
+          child: Text(
+            'Pesan Lagi',
+            textAlign: TextAlign.center,
+            style: mainFont.copyWith(
+              fontSize: 14,
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+            ),
+          ),
+        ),
+      );
+    } else if (status == 'pending') {
+      // Jika pending, arahkan ke webview
       return GestureDetector(
         onTap: () {
           if (data.paymentLink != null) {
@@ -241,7 +275,7 @@ class RecreationDetailOrderSection extends StatelessWidget {
             color: Theme.of(context).primaryColor,
           ),
           child: Text(
-            data.status.toLowerCase() == 'paid' ? 'Pesan Lagi' : 'Bayar',
+            'Bayar',
             textAlign: TextAlign.center,
             style: mainFont.copyWith(
               fontSize: 14,
@@ -255,4 +289,48 @@ class RecreationDetailOrderSection extends StatelessWidget {
 
     return Container();
   }
+
+  // Widget _getActionButton(
+  //     BuildContext context, RecreationOrderDetailModel data) {
+  //   if (data.status.toLowerCase() == 'paid' ||
+  //       data.status.toLowerCase() == 'pending') {
+  //     return GestureDetector(
+  //       onTap: () {
+  //         if (data.paymentLink != null) {
+  //           Navigator.push(
+  //             context,
+  //             MaterialPageRoute(
+  //               builder: (_) => UserPaymentWebview(
+  //                 url: data.paymentLink!,
+  //               ),
+  //             ),
+  //           );
+  //         } else {
+  //           Navigator.pop(context);
+  //         }
+  //       },
+  //       child: Container(
+  //         width: double.infinity,
+  //         margin: EdgeInsets.symmetric(horizontal: margin16, vertical: margin8),
+  //         padding:
+  //             EdgeInsets.symmetric(vertical: margin16, horizontal: margin16),
+  //         decoration: BoxDecoration(
+  //           borderRadius: BorderRadius.circular(10),
+  //           color: Theme.of(context).primaryColor,
+  //         ),
+  //         child: Text(
+  //           data.status.toLowerCase() == 'paid' ? 'Pesan Lagi' : 'Bayar',
+  //           textAlign: TextAlign.center,
+  //           style: mainFont.copyWith(
+  //             fontSize: 14,
+  //             fontWeight: FontWeight.bold,
+  //             color: Colors.white,
+  //           ),
+  //         ),
+  //       ),
+  //     );
+  //   }
+
+  //   return Container();
+  // }
 }

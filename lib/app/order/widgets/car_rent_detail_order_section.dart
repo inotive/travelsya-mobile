@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:travelsya/app/order/models/order_detail_model.dart';
 import 'package:travelsya/app/order/widgets/detail_order_split_data_widget.dart';
+import 'package:travelsya/app/payment/pages/payment_webview_page.dart';
+import 'package:travelsya/app/rental_mobil/pages/rental_mobil_search_page.dart';
 // import 'package:travelsya/shared/function/date_to_readable_function.dart';
 import 'package:travelsya/shared/helper/function_helper.dart';
 import 'package:travelsya/shared/styles/font_style.dart';
@@ -119,6 +121,9 @@ class CarRentDetailOrderSection extends StatelessWidget {
             ],
           ),
         ),
+        Center(
+          child: _getActionButton(context, data),
+        ),
         Container(
           width: double.infinity,
           height: margin8,
@@ -181,5 +186,76 @@ class CarRentDetailOrderSection extends StatelessWidget {
         )
       ],
     );
+  }
+
+  Widget _getActionButton(BuildContext context, CarRentOrderDetailModel data) {
+    final status = data.status.toLowerCase();
+    if (status == 'paid') {
+      return GestureDetector(
+        onTap: () {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (_) => RentalSearchPage()),
+          );
+        },
+        child: Container(
+          width: double.infinity,
+          margin: EdgeInsets.symmetric(horizontal: margin16, vertical: margin8),
+          padding:
+              EdgeInsets.symmetric(vertical: margin16, horizontal: margin16),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            color: Theme.of(context).primaryColor,
+          ),
+          child: Text(
+            'Pesan Lagi',
+            textAlign: TextAlign.center,
+            style: mainFont.copyWith(
+              fontSize: 14,
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+            ),
+          ),
+        ),
+      );
+    } else if (status == 'pending') {
+      return GestureDetector(
+        onTap: () {
+          if (data.paymentLink != null) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (_) => UserPaymentWebview(
+                  url: data.paymentLink!,
+                ),
+              ),
+            );
+          } else {
+            Navigator.pop(context);
+          }
+        },
+        child: Container(
+          width: double.infinity,
+          margin: EdgeInsets.symmetric(horizontal: margin16, vertical: margin8),
+          padding:
+              EdgeInsets.symmetric(vertical: margin16, horizontal: margin16),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            color: Theme.of(context).primaryColor,
+          ),
+          child: Text(
+            'Bayar',
+            textAlign: TextAlign.center,
+            style: mainFont.copyWith(
+              fontSize: 14,
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+            ),
+          ),
+        ),
+      );
+    }
+
+    return Container();
   }
 }

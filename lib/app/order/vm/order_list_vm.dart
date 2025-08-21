@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stacked/stacked.dart';
+import 'package:travelsya/app/bus/pages/bus_search_page.dart';
 import 'package:travelsya/app/hostel/pages/hostel_search_page/hostel_search_page.dart';
 import 'package:travelsya/app/hotel/pages/hotel_search/hotel_search_page.dart';
 import 'package:travelsya/app/order/cubits/order_cubit.dart';
@@ -15,6 +16,7 @@ import 'package:travelsya/app/ppob/pages/pdam/pdam_main_page.dart';
 import 'package:travelsya/app/ppob/pages/pln/pln_main_page.dart';
 import 'package:travelsya/app/ppob/pages/pulsa/pulsa_form_page.dart';
 import 'package:travelsya/app/ppob/pages/tv_berbayar/tv_berbayar_main_page.dart';
+import 'package:travelsya/app/rental_mobil/pages/rental_mobil_search_page.dart';
 import 'package:travelsya/shared/helper/const_helper.dart';
 import 'package:travelsya/shared/styles/font_style.dart';
 import 'package:travelsya/shared/styles/size_styles.dart';
@@ -368,6 +370,12 @@ class OrderListVM extends BaseViewModel {
             } else if (data.service.toLowerCase() == 'hostel') {
               Navigator.push(context,
                   MaterialPageRoute(builder: (_) => const HostelSearchPage()));
+            } else if (data.service.toLowerCase() == 'bus-travel') {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (_) => const BusSearchPage()));
+            } else if (data.service.toLowerCase() == 'CAR-RENT') {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (_) => const RentalSearchPage()));
             }
           }
         },
