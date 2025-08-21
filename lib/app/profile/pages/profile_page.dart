@@ -68,7 +68,8 @@ class _ProfilePageState extends State<ProfilePage> {
                                                 image: DecorationImage(
                                                   fit: BoxFit.cover,
                                                   image: NetworkImage(
-                                                      '$basePathUserUrl${state.data.image}'),
+                                                      '${state.data.image}'),
+                                                  // '$basePathUserUrl${state.data.image}'),
                                                 ),
                                               ),
                                             )
