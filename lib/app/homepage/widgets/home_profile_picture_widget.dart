@@ -29,9 +29,9 @@ class HomeProfilePictureWidget extends StatelessWidget {
                     color: Colors.white54,
                     image: DecorationImage(
                       fit: BoxFit.cover,
-                      image:
-                          NetworkImage('$basePathUserUrl${state.data.image}'),
-                          // NetworkImage('${state.data.image}'),
+                      image: NetworkImage('${state.data.image}'),
+                      // NetworkImage('$basePathUserUrl${state.data.image}'),
+                      // NetworkImage('${state.data.image}'),
                     ),
                   ),
                 ),
