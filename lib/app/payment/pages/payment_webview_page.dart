@@ -33,9 +33,9 @@ class _UserPaymentWebviewState extends State<UserPaymentWebview> {
             now.difference(currentBackPressTime!) >
                 const Duration(seconds: 2)) {
           currentBackPressTime = now;
-          showSnackbar(context,
-              data: 'Tekan sekali lagi untuk keluar dari halaman pembayaran',
-              colors: Colors.black);
+          // showSnackbar(context,
+          //     data: 'Tekan sekali lagi untuk keluar dari halaman pembayaran',
+          //     colors: Colors.black);
         }
       },
       child: SafeArea(
