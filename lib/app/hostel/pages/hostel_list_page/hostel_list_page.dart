@@ -9,6 +9,7 @@ import 'package:travelsya/shared/helper/function_helper.dart';
 import 'package:travelsya/shared/styles/size_styles.dart';
 import 'package:travelsya/shared/widgets/appbar_widget.dart';
 import 'package:travelsya/shared/widgets/failed_request_widget.dart';
+import 'package:travelsya/shared/widgets/no_data_widget.dart';
 import 'package:travelsya/shared/widgets/placeholder_widget.dart';
 import 'package:travelsya/shared/styles/font_style.dart';
 
@@ -52,12 +53,7 @@ class HostelListPage extends StatelessWidget {
                   } else if (state is ListPreviewHostelLoaded) {
                     return Expanded(
                         child: state.data.isEmpty
-                            ? Center(
-                                child: Text(
-                                  'Data Tidak Ditemukan',
-                                  style: mainFont.copyWith(fontSize: 14),
-                                ),
-                              )
+                            ? const Center(child: NoDataWidget())
                             : ListView(
                                 children:
                                     List.generate(state.data.length, (index) {
