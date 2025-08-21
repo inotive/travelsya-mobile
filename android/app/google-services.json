@@ -1,36 +1,26 @@
 {
   "project_info": {
-    "project_number": "917410024641",
-    "project_id": "travelsya-22067",
-    "storage_bucket": "travelsya-22067.appspot.com"
+    "project_number": "412698617759",
+    "project_id": "travelsya-43d29",
+    "storage_bucket": "travelsya-43d29.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:917410024641:android:41a555c3094c820d149840",
+        "mobilesdk_app_id": "1:412698617759:android:ad24de160c39fb107f3faa",
         "android_client_info": {
           "package_name": "com.travelsya.app"
         }
       },
-      "oauth_client": [
-        {
-          "client_id": "917410024641-rg1jbej7q304ep1qkiqnqt7pu2u2m7ho.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
+      "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyCEBfp4-6x2ZFWi3rXTVPQB58G-fSeKtCg"
+          "current_key": "AIzaSyAg75T_IEKNNebRasaPF2pdGQlU4Gxur9M"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "917410024641-rg1jbej7q304ep1qkiqnqt7pu2u2m7ho.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "other_platform_oauth_client": []
         }
       }
     }
