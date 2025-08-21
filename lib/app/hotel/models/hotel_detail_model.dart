@@ -117,13 +117,25 @@ class HotelReview {
   String? createdAt;
 
   HotelReview.fromJson(Map<String, dynamic> jsonMap) {
-    rate = jsonMap['rate'];
+    // rate = jsonMap['rate'];
+    var rawRate = jsonMap['rate'];
+    if (rawRate is String) {
+      rate = int.tryParse(rawRate) ?? 0;
+    } else {
+      rate = rawRate ?? 0;
+    }
     comment = jsonMap['comment'] ?? '-';
-    username = jsonMap['user_name'];
-    try {
-      userId = jsonMap['user_id'];
-    } catch (e) {
-      userId = jsonMap['users_id'];
+    // username = jsonMap['user_name'];
+    // try {
+    //   userId = jsonMap['user_id'];
+    // } catch (e) {
+    //   userId = jsonMap['users_id'];
+    // }
+    var rawUserId = jsonMap['user_id'] ?? jsonMap['users_id'];
+    if (rawUserId is String) {
+      userId = int.tryParse(rawUserId) ?? 0;
+    } else {
+      userId = rawUserId ?? 0;
     }
 
     createdAt = jsonMap['created_at'];
