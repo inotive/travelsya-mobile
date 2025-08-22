@@ -65,7 +65,9 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
                                                   image: DecorationImage(
                                                       fit: BoxFit.cover,
                                                       image: NetworkImage(
-                                                          '$basePathUserUrl${state.data.image}'))),
+                                                          '${state.data.image}')
+                                                      // '$basePathUserUrl${state.data.image}')
+                                                      )),
                                             )
                                           : const Icon(
                                               Icons.account_circle,
