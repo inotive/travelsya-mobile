@@ -16,6 +16,7 @@ import 'package:travelsya/app/ppob/pages/pdam/pdam_main_page.dart';
 import 'package:travelsya/app/ppob/pages/pln/pln_main_page.dart';
 import 'package:travelsya/app/ppob/pages/pulsa/pulsa_form_page.dart';
 import 'package:travelsya/app/ppob/pages/tv_berbayar/tv_berbayar_main_page.dart';
+import 'package:travelsya/app/rekreasi/pages/rekreasi_search_page.dart';
 import 'package:travelsya/app/rental_mobil/pages/rental_mobil_search_page.dart';
 import 'package:travelsya/shared/helper/const_helper.dart';
 import 'package:travelsya/shared/styles/font_style.dart';
@@ -373,9 +374,13 @@ class OrderListVM extends BaseViewModel {
             } else if (data.service.toLowerCase() == 'bus-travel') {
               Navigator.push(context,
                   MaterialPageRoute(builder: (_) => const BusSearchPage()));
-            } else if (data.service.toLowerCase() == 'CAR-RENT') {
+            } else if (data.service.toLowerCase() == 'car-rent') {
               Navigator.push(context,
                   MaterialPageRoute(builder: (_) => const RentalSearchPage()));
+            }
+            else if (data.service.toLowerCase() == 'recreation') {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (_) => const RekreasiSearchPage()));
             }
           }
         },
