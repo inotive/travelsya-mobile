@@ -9,10 +9,10 @@ import 'package:travelsya/shared/styles/font_style.dart';
 import 'package:travelsya/shared/styles/size_styles.dart';
 import 'package:travelsya/shared/styles/theme_style.dart';
 
-class RekreasiPackageSection extends StatelessWidget {
+class NewRekreasiPackageSection extends StatelessWidget {
   final List<RecreationPackageModel> data;
   final RecreationDetailModel dataDetail;
-  const RekreasiPackageSection({
+  const NewRekreasiPackageSection({
     super.key,
     required this.data,
     required this.dataDetail,

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:travelsya/app/rekreasi/cubits/recreation_cubit.dart';
 import 'package:travelsya/app/rekreasi/cubits/recreation_state.dart';
+import 'package:travelsya/app/rekreasi/pages%20new/new_rekreasi_package_section.dart';
 import 'package:travelsya/app/rekreasi/widgets/rekreasi_info_section.dart';
 import 'package:travelsya/app/rekreasi/widgets/rekreasi_location_section.dart';
 import 'package:travelsya/app/rekreasi/widgets/rekreasi_package_section.dart';
@@ -313,7 +314,7 @@ class _NewRekreasiDetailPageState extends State<NewRekreasiDetailPage> {
                         children: [
                           Container(
                             key: sectionKeys[2],
-                            child: RekreasiPackageSection(
+                            child: NewRekreasiPackageSection(
                               data: data.package,
                               dataDetail: data,
                             ),

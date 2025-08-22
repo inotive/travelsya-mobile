@@ -125,8 +125,8 @@ class BerandaVM extends BaseViewModel {
           context, MaterialPageRoute(builder: (_) => const HostelSearchPage()));
     } else if (id == 8) {
       Navigator.push(
-          context, MaterialPageRoute(builder: (_) => const HealthSearchPageNew()));
-          // context, MaterialPageRoute(builder: (_) => const HealthSearchPage()));
+          // context, MaterialPageRoute(builder: (_) => const HealthSearchPageNew()));
+          context, MaterialPageRoute(builder: (_) => const HealthSearchPage()));
     } else if (id == 9) {
       Navigator.push(
           context, MaterialPageRoute(builder: (_) => const PLNMainPage()));
