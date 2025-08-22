@@ -4,7 +4,6 @@ import 'package:stacked/stacked.dart';
 import 'package:travelsya/app/rekreasi/cubits/recreation_cubit.dart';
 import 'package:travelsya/app/rekreasi/cubits/recreation_state.dart';
 import 'package:travelsya/app/rekreasi/models/recreation_model.dart';
-import 'package:travelsya/app/rekreasi/pages%20new/new_rekreasi_detail_page.dart';
 import 'package:travelsya/app/rekreasi/pages/rekreasi_detail_page.dart';
 import 'package:travelsya/app/rekreasi/pages/rekreasi_search_background_section.dart';
 import 'package:travelsya/app/rekreasi/pages/rekreasi_search_result_page.dart';
@@ -208,15 +207,10 @@ class RekreasiSearchPage extends StatelessWidget {
                                                           context,
                                                           MaterialPageRoute(
                                                               builder: (_) =>
-                                                                  NewRekreasiDetailPage(
+                                                                  RekreasiDetailPage(
                                                                     id: data.id
                                                                         .toString(),
-                                                                  )
-                                                              // RekreasiDetailPage(
-                                                              //   id: data.id
-                                                              //       .toString(),
-                                                              // )
-                                                              ));
+                                                                  )));
                                                     },
                                                     child: Card(
                                                       shape:

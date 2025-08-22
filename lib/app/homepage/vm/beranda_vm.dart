@@ -4,7 +4,6 @@ import 'package:stacked/stacked.dart';
 import 'package:travelsya/app/auth/cubits/profile_cubit.dart';
 import 'package:travelsya/app/bus/pages/bus_search_page.dart';
 import 'package:travelsya/app/health/pages/health_search_page.dart';
-import 'package:travelsya/app/health/pages/health_search_page_new.dart';
 import 'package:travelsya/app/homepage/cubits/ads_cubit.dart';
 import 'package:travelsya/app/hostel/pages/hostel_search_page/hostel_search_page.dart';
 import 'package:travelsya/app/hotel/pages/hotel_search/hotel_search_page.dart';
@@ -125,7 +124,6 @@ class BerandaVM extends BaseViewModel {
           context, MaterialPageRoute(builder: (_) => const HostelSearchPage()));
     } else if (id == 8) {
       Navigator.push(
-          // context, MaterialPageRoute(builder: (_) => const HealthSearchPageNew()));
           context, MaterialPageRoute(builder: (_) => const HealthSearchPage()));
     } else if (id == 9) {
       Navigator.push(
