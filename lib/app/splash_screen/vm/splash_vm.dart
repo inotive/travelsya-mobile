@@ -16,8 +16,11 @@ class SplashVM extends BaseViewModel {
           BlocProvider.of<AuthCubit>(context).loadSession(context);
         }
 
-        Navigator.push(
-            context, MaterialPageRoute(builder: (_) => const HomeMainPage()));
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (_) => const HomeMainPage()),
+          (route) => false,
+        );
       }
     });
   }

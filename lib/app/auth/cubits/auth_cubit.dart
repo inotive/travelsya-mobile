@@ -123,8 +123,7 @@ class AuthCubit extends Cubit<AuthState> {
         }
       } else {
         showSnackbar(context,
-            data: value.data ?? 'Gagal melakukan pendaftaran',
-            colors: Colors.orange);
+            data: value.data ?? 'Gagal melakukan Login', colors: Colors.orange);
       }
     });
   }

@@ -6,7 +6,7 @@ import 'package:travelsya/app/auth/cubits/auth_state.dart';
 import 'package:travelsya/app/auth/cubits/profile_cubit.dart';
 import 'package:travelsya/app/auth/cubits/profile_state.dart';
 import 'package:travelsya/app/profile/vm/profile_vm.dart';
-import 'package:travelsya/shared/api/api_connection.dart';
+// import 'package:travelsya/shared/api/api_connection.dart';
 import 'package:travelsya/shared/cubits/point/point_cubit.dart';
 import 'package:travelsya/shared/cubits/point/point_state.dart';
 import 'package:travelsya/shared/helper/const_helper.dart';

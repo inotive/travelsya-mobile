@@ -30,5 +30,5 @@ ThemeData mainTheme = ThemeData(
     primaryColor: primaryColor,
     scaffoldBackgroundColor: neutral10,
     cardColor: Colors.white,
-    cardTheme: const CardTheme(color: Colors.white),
+    // cardTheme: const CardTheme(color: Colors.white),
     dividerColor: Colors.transparent);

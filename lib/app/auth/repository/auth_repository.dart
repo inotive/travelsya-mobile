@@ -390,8 +390,10 @@ class AuthRepository {
         context,
         dataBody: dataBody,
         url: loginUrl,
-        exceptionStatusCode: [201, 401],
+        exceptionStatusCode: [200, 201, 401],
         auth: false);
+    print("=== LOGIN RESP === ${response?.data}");
+    print("=== STATUS === ${response?.status}");
 
     if (response!.status == RequestStatus.successRequest) {
       if (response.data['meta']['code'] == 200) {
