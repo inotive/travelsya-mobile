@@ -128,7 +128,8 @@ class RekreasiReviewSection extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      data.comment[index].user?.name ?? 'Anonim',
+                                      data.comment[index].user?.name ??
+                                          'Anonim',
                                       style: mainBody4.copyWith(
                                           color: neutral100,
                                           fontStyle: FontStyle.normal,
@@ -187,7 +188,7 @@ class RekreasiReviewSection extends StatelessWidget {
           ),
         ),
         SizedBox(
-          height: margin8,
+          height: margin16,
         ),
       ],
     );
