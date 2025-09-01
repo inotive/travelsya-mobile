@@ -314,7 +314,7 @@ class _RekreasiDetailPageState extends State<RekreasiDetailPage> {
                           Container(
                             key: sectionKeys[2],
                             child: RekreasiPackageSection(
-                              data: data.package,
+                              data: data.packages,
                               dataDetail: data,
                             ),
                           ),
