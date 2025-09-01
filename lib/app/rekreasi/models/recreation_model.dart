@@ -1,159 +1,226 @@
 class RecreationCategoryModel {
-  late int id;
-  late String name;
+  final int id;
+  final String name;
 
-  RecreationCategoryModel.fromJson(Map<String, dynamic> jsonMap) {
-    id = jsonMap['id'] ?? 0;
-    name = jsonMap['name'] ?? '';
+  RecreationCategoryModel({
+    required this.id,
+    required this.name,
+  });
+
+  factory RecreationCategoryModel.fromJson(Map<String, dynamic> json) {
+    return RecreationCategoryModel(
+      id: json['id'] ?? 0,
+      name: json['name'] ?? '',
+    );
   }
 }
 
 class RecreationPreviewModel {
-  late int? id;
-  late String name;
-  late String image;
-  late String location;
-  late double price;
-  late int ratingCount;
-  late double avgRating;
+  final int id;
+  final String name;
+  final String image;
+  final String location;
+  final double price;
+  final int ratingCount;
+  final double avgRating;
 
-  RecreationPreviewModel.fromJson(Map<String, dynamic> jsonMap) {
-    id = jsonMap['id'];
-    name = jsonMap['name'] ?? '';
-    location = jsonMap['location'] ?? '';
-    price = double.tryParse(jsonMap['price']?.toString() ?? '') ?? 0.0;
-    ratingCount = jsonMap['rating_count'] ?? 0;
-    avgRating = double.tryParse(jsonMap['avg_rating']?.toString() ?? '') ?? 0.0;
+  RecreationPreviewModel({
+    required this.id,
+    required this.name,
+    required this.image,
+    required this.location,
+    required this.price,
+    required this.ratingCount,
+    required this.avgRating,
+  });
 
-    if (jsonMap['image'] != null && jsonMap['image'].toString().isNotEmpty) {
-      image = jsonMap['image'];
-    } else if (jsonMap['images'] != null && jsonMap['images'].isNotEmpty) {
-      image = jsonMap['images'][0].toString();
-    } else {
-      image = '';
-    }
+  factory RecreationPreviewModel.fromJson(Map<String, dynamic> json) {
+    return RecreationPreviewModel(
+      id: json['id'] ?? 0,
+      name: json['name'] ?? '',
+      location: json['location'] ?? '',
+      price: double.tryParse(json['price']?.toString() ?? '') ?? 0.0,
+      ratingCount: json['rating_count'] ?? 0,
+      avgRating: double.tryParse(json['avg_rating']?.toString() ?? '') ?? 0.0,
+      image: (json['image'] != null && json['image'].toString().isNotEmpty)
+          ? json['image']
+          : (json['images'] != null && json['images'].isNotEmpty
+              ? json['images'][0].toString()
+              : ''),
+    );
   }
 }
 
 class RecreationDetailModel {
-  late int id;
-  late String service;
-  late String category;
-  late String user;
-  late String name;
-  late String? description;
-  late String openTime;
-  late String closeTime;
-  late String city;
-  late String address;
-  late double? latitude;
-  late double? longitude;
-  late double? avgRating;
-  late int ratingCount;
+  final int id;
+  final String service;
+  final String category;
+  final String user;
+  final String name;
+  final String description;
+  final String openTime;
+  final String closeTime;
+  final String city;
+  final String address;
+  final double? latitude;
+  final double? longitude;
+  final double avgRating;
+  final int ratingCount;
 
-  List<String> images = [];
-  List<RecreationPackageModel> package = [];
-  List<RecreationCommentModel> comment = [];
+  final List<String> images;
+  final List<RecreationPackageModel> packages;
+  final List<RecreationCommentModel> comments;
 
-  RecreationDetailModel.fromJson(Map<String, dynamic> jsonMap) {
-    id = jsonMap['recreation_id'] ?? 0;
-    service = jsonMap['service'] ?? '';
-    category = jsonMap['category'] ?? '';
-    user = jsonMap['user'] ?? '';
-    name = jsonMap['name'] ?? '';
-    description = jsonMap['description'];
-    openTime = jsonMap['buka'] ?? '';
-    closeTime = jsonMap['tutup'] ?? '';
-    city = jsonMap['city'] ?? '';
-    address = jsonMap['address'] ?? '';
-    latitude = double.tryParse(jsonMap['latitude']?.toString() ?? '');
-    longitude = double.tryParse(jsonMap['longitude']?.toString() ?? '');
-    avgRating = double.tryParse(jsonMap['avg_rating']?.toString() ?? '');
-    ratingCount = jsonMap['rating_count'] ?? 0;
+  RecreationDetailModel({
+    required this.id,
+    required this.service,
+    required this.category,
+    required this.user,
+    required this.name,
+    required this.description,
+    required this.openTime,
+    required this.closeTime,
+    required this.city,
+    required this.address,
+    required this.latitude,
+    required this.longitude,
+    required this.avgRating,
+    required this.ratingCount,
+    required this.images,
+    required this.packages,
+    required this.comments,
+  });
 
-    if (jsonMap['images'] != null) {
-      for (var img in jsonMap['images']) {
-        images.add(img.toString());
-      }
-    }
-
-    if (jsonMap['packages'] != null) {
-      for (var pkg in jsonMap['packages']) {
-        package.add(RecreationPackageModel.fromJson(pkg));
-      }
-    }
-
-    if (jsonMap['comments'] != null) {
-      for (var cmt in jsonMap['comments']) {
-        comment.add(RecreationCommentModel.fromJson(cmt));
-      }
-    }
+  factory RecreationDetailModel.fromJson(Map<String, dynamic> json) {
+    return RecreationDetailModel(
+      id: json['recreation_id'] ?? 0,
+      service: json['service'] ?? '',
+      category: json['category'] ?? '',
+      user: json['user'] ?? '',
+      name: json['name'] ?? '',
+      description: json['description'] ?? '',
+      openTime: json['buka'] ?? '',
+      closeTime: json['tutup'] ?? '',
+      city: json['city'] ?? '',
+      address: json['address'] ?? '',
+      latitude: double.tryParse(json['latitude']?.toString() ?? ''),
+      longitude: double.tryParse(json['longitude']?.toString() ?? ''),
+      avgRating: double.tryParse(json['avg_rating']?.toString() ?? '') ?? 0.0,
+      ratingCount: json['rating_count'] ?? 0,
+      images: (json['images'] != null)
+          ? List<String>.from(json['images'].map((e) => e.toString()))
+          : [],
+      packages: (json['packages'] != null)
+          ? List<RecreationPackageModel>.from(
+              json['packages'].map((e) => RecreationPackageModel.fromJson(e)))
+          : [],
+      comments: (json['comments'] != null)
+          ? List<RecreationCommentModel>.from(
+              json['comments'].map((e) => RecreationCommentModel.fromJson(e)))
+          : [],
+    );
   }
 }
 
 class RecreationCommentModel {
-  late int id;
-  late int rate;
-  late String comment;
-  late String? createdAt;
-  RecreationUserModel? user; // Tambahan user
+  final int id;
+  final int rate;
+  final String comment;
+  final String? createdAt;
+  final RecreationUserModel? user;
 
-  RecreationCommentModel.fromJson(Map<String, dynamic> jsonMap) {
-    id = jsonMap['id'] ?? 0;
-    rate = int.tryParse(jsonMap['rate']?.toString() ?? '') ?? 0;
-    comment = jsonMap['comment'] ?? '';
-    createdAt = jsonMap['created_at'];
-    user = jsonMap['user'] != null
-        ? RecreationUserModel.fromJson(jsonMap['user'])
-        : null;
+  RecreationCommentModel({
+    required this.id,
+    required this.rate,
+    required this.comment,
+    this.createdAt,
+    this.user,
+  });
+
+  factory RecreationCommentModel.fromJson(Map<String, dynamic> json) {
+    return RecreationCommentModel(
+      id: json['id'] ?? 0,
+      rate: int.tryParse(json['rate']?.toString() ?? '') ?? 0,
+      comment: json['comment'] ?? '',
+      createdAt: json['created_at'],
+      user: json['user'] != null
+          ? RecreationUserModel.fromJson(json['user'])
+          : null,
+    );
   }
 }
 
 class RecreationUserModel {
-  late int id;
-  late String name;
-  String? image;
+  final int id;
+  final String name;
+  final String? image;
 
-  RecreationUserModel.fromJson(Map<String, dynamic> jsonMap) {
-    id = jsonMap['id'] ?? 0;
-    name = jsonMap['name'] ?? '';
-    image = jsonMap['image'];
+  RecreationUserModel({
+    required this.id,
+    required this.name,
+    this.image,
+  });
+
+  factory RecreationUserModel.fromJson(Map<String, dynamic> json) {
+    return RecreationUserModel(
+      id: json['id'] ?? 0,
+      name: json['name'] ?? '',
+      image: json['image'],
+    );
   }
 }
 
 class RecreationPackageModel {
-  late int id;
-  late int? recreationId;
-  late int? categoryRecreationId;
-  late String name;
-  late String rule;
-  late String description;
-  late String duration;
-  late int expiredDate;
-  late String expiredType;
-  late String unitType;
-  late double price;
-  late int isActive;
-  late int isRefundable;
-  late int isRescheduleable;
+  final int id;
+  final int? recreationId;
+  final int? categoryRecreationId;
+  final String name;
+  final String rule;
+  final String description;
+  final String duration;
+  final int expiredDate;
+  final String expiredType;
+  final String unitType;
+  final double price;
+  final int isActive;
+  final int isRefundable;
+  final int isRescheduleable;
 
-  RecreationPackageModel.fromJson(Map<String, dynamic> jsonMap) {
-    id = jsonMap['id'] ?? 0;
-    recreationId = int.tryParse(jsonMap['recreation_id']?.toString() ?? '');
-    categoryRecreationId =
-        int.tryParse(jsonMap['category_recreation_id']?.toString() ?? '');
-    name = jsonMap['name'] ?? '';
-    rule = jsonMap['rules'] ?? '';
-    description = jsonMap['description'] ?? '';
-    duration = jsonMap['duration'] ?? '';
-    expiredDate = int.tryParse(jsonMap['expiry_date']?.toString() ?? '') ?? 0;
-    expiredType = jsonMap['expiry_type'] ?? '';
-    unitType = jsonMap['unit_price'] ?? '';
-    price = double.tryParse(jsonMap['price']?.toString() ?? '') ?? 0.0;
-    isActive = int.tryParse(jsonMap['is_active']?.toString() ?? '') ?? 0;
-    isRefundable =
-        int.tryParse(jsonMap['is_refundable']?.toString() ?? '') ?? 0;
-    isRescheduleable =
-        int.tryParse(jsonMap['is_reschedule']?.toString() ?? '') ?? 0;
+  RecreationPackageModel({
+    required this.id,
+    this.recreationId,
+    this.categoryRecreationId,
+    required this.name,
+    required this.rule,
+    required this.description,
+    required this.duration,
+    required this.expiredDate,
+    required this.expiredType,
+    required this.unitType,
+    required this.price,
+    required this.isActive,
+    required this.isRefundable,
+    required this.isRescheduleable,
+  });
+
+  factory RecreationPackageModel.fromJson(Map<String, dynamic> json) {
+    return RecreationPackageModel(
+      id: json['id'] ?? 0,
+      recreationId: int.tryParse(json['recreation_id']?.toString() ?? ''),
+      categoryRecreationId:
+          int.tryParse(json['category_recreation_id']?.toString() ?? ''),
+      name: json['name'] ?? '',
+      rule: json['rules'] ?? '',
+      description: json['description'] ?? '',
+      duration: json['duration'] ?? '',
+      expiredDate: int.tryParse(json['expiry_date']?.toString() ?? '') ?? 0,
+      expiredType: json['expiry_type'] ?? '',
+      unitType: json['unit_price'] ?? '',
+      price: double.tryParse(json['price']?.toString() ?? '') ?? 0.0,
+      isActive: int.tryParse(json['is_active']?.toString() ?? '') ?? 0,
+      isRefundable: int.tryParse(json['is_refundable']?.toString() ?? '') ?? 0,
+      isRescheduleable:
+          int.tryParse(json['is_reschedule']?.toString() ?? '') ?? 0,
+    );
   }
 }
