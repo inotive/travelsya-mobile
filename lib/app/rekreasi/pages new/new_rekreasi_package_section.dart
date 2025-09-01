@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:travelsya/app/rekreasi/cubits/quantity_cubit.dart';
 import 'package:travelsya/app/rekreasi/models/recreation_model.dart';
-import 'package:travelsya/app/rekreasi/pages/rekreasi_checkout_page.dart';
-import 'package:travelsya/shared/function/need_login_function.dart';
 import 'package:travelsya/shared/helper/function_helper.dart';
 import 'package:travelsya/shared/styles/font_style.dart';
 import 'package:travelsya/shared/styles/size_styles.dart';
