@@ -5,7 +5,6 @@ import 'package:travelsya/app/rekreasi/cubits/recreation_state.dart';
 import 'package:travelsya/app/rekreasi/pages%20new/new_rekreasi_package_section.dart';
 import 'package:travelsya/app/rekreasi/widgets/rekreasi_info_section.dart';
 import 'package:travelsya/app/rekreasi/widgets/rekreasi_location_section.dart';
-import 'package:travelsya/app/rekreasi/widgets/rekreasi_package_section.dart';
 import 'package:travelsya/app/rekreasi/widgets/rekreasi_review_section.dart';
 import 'package:travelsya/shared/styles/font_style.dart';
 import 'package:travelsya/shared/styles/size_styles.dart';
@@ -118,234 +117,314 @@ class _NewRekreasiDetailPageState extends State<NewRekreasiDetailPage> {
             } else if (state is RecreationDetailLoaded) {
               final data = state.data;
 
-              return SafeArea(
-                top: true,
-                bottom: false,
-                child: CustomScrollView(
-                  controller: scrollController,
-                  slivers: [
-                    // HEADER
-                    SliverToBoxAdapter(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          AspectRatio(
-                            aspectRatio: 375 / 264,
-                            child: Image.network(
-                              data.images[0],
-                              fit: BoxFit.cover,
-                              width: double.infinity,
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.all(margin16),
-                            child: Row(
-                              children: [
-                                GestureDetector(
-                                  onTap: () => Navigator.pop(context),
-                                  child: Container(
-                                    width: 45,
-                                    height: 45,
-                                    decoration: const BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      color: Color(0xffFFEEF1),
-                                    ),
-                                    child: Icon(
-                                      Icons.arrow_back,
-                                      color: Theme.of(context).primaryColor,
-                                    ),
-                                  ),
+              return Stack(
+                children: [
+                  SafeArea(
+                    top: true,
+                    bottom: false,
+                    child: CustomScrollView(
+                      controller: scrollController,
+                      slivers: [
+                        // HEADER
+                        SliverToBoxAdapter(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              AspectRatio(
+                                aspectRatio: 375 / 264,
+                                child: Image.network(
+                                  data.images[0],
+                                  fit: BoxFit.cover,
+                                  width: double.infinity,
                                 ),
-                              ],
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.symmetric(horizontal: margin16),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(data.category, style: mainBody5),
-                                Text(
-                                  data.name,
-                                  style: mainBody3.copyWith(
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                SizedBox(height: margin8),
-                                Row(
-                                  crossAxisAlignment: CrossAxisAlignment.end,
+                              ),
+                              Padding(
+                                padding: EdgeInsets.all(margin16),
+                                child: Row(
                                   children: [
-                                    Icon(Icons.star,
-                                        color: Theme.of(context).primaryColor),
+                                    GestureDetector(
+                                      onTap: () => Navigator.pop(context),
+                                      child: Container(
+                                        width: 45,
+                                        height: 45,
+                                        decoration: const BoxDecoration(
+                                          shape: BoxShape.circle,
+                                          color: Color(0xffFFEEF1),
+                                        ),
+                                        child: Icon(
+                                          Icons.arrow_back,
+                                          color: Theme.of(context).primaryColor,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Padding(
+                                padding:
+                                    EdgeInsets.symmetric(horizontal: margin16),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(data.category, style: mainBody5),
                                     Text(
-                                      data.avgRating!.toStringAsFixed(1),
+                                      data.name,
                                       style: mainBody3.copyWith(
                                           fontWeight: FontWeight.bold),
                                     ),
-                                    Text(
-                                      '/5',
-                                      style: mainBody4.copyWith(
-                                          fontWeight: FontWeight.bold),
+                                    SizedBox(height: margin8),
+                                    Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.end,
+                                      children: [
+                                        Icon(Icons.star,
+                                            color:
+                                                Theme.of(context).primaryColor),
+                                        Text(
+                                          data.avgRating!.toStringAsFixed(1),
+                                          style: mainBody3.copyWith(
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                        Text(
+                                          '/5',
+                                          style: mainBody4.copyWith(
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                        Text(' (${data.ratingCount})'),
+                                        SizedBox(width: margin4),
+                                        Text(
+                                          data.city,
+                                          style: mainBody4.copyWith(
+                                            color:
+                                                Theme.of(context).primaryColor,
+                                            decoration:
+                                                TextDecoration.underline,
+                                          ),
+                                        )
+                                      ],
                                     ),
-                                    Text(' (${data.ratingCount})'),
-                                    SizedBox(width: margin4),
-                                    Text(
-                                      data.city,
-                                      style: mainBody4.copyWith(
-                                        color: Theme.of(context).primaryColor,
-                                        decoration: TextDecoration.underline,
-                                      ),
-                                    )
+                                    SizedBox(height: margin16),
                                   ],
                                 ),
-                                SizedBox(height: margin16),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    SliverToBoxAdapter(
-                      child: Container(
-                        width: double.infinity,
-                        height: 8,
-                        color: const Color(0xfff4f4f4),
-                      ),
-                    ),
-                    // STICKY TAB
-                    SliverPersistentHeader(
-                      pinned: true,
-                      delegate: _TabBarDelegate(
-                        child: Container(
-                          color: Colors.white,
-                          child: ValueListenableBuilder<int>(
-                            valueListenable: selectedIndex,
-                            builder: (context, idx, _) {
-                              return SingleChildScrollView(
-                                controller: tabScrollController,
-                                scrollDirection: Axis.horizontal,
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: margin16, vertical: margin8),
-                                child: Row(
-                                  children: List.generate(4, (index) {
-                                    return GestureDetector(
-                                      onTap: () async {
-                                        await _scrollToSection(index);
-                                        selectedIndex.value = index;
-                                      },
-                                      child: Container(
-                                        margin: EdgeInsets.only(right: margin8),
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: margin16, vertical: 8),
-                                        decoration: BoxDecoration(
-                                          color: idx == index
-                                              ? const Color(0xffFFEEF1)
-                                              : Colors.transparent,
-                                          borderRadius:
-                                              BorderRadius.circular(16),
-                                          border: Border.all(
-                                            color: idx == index
-                                                ? Theme.of(context).primaryColor
-                                                : const Color(0xffa5a5a5),
-                                          ),
-                                        ),
-                                        child: Text(
-                                          getFilterData(index),
-                                          style: mainBody4.copyWith(
-                                            fontWeight: FontWeight.bold,
-                                            color: idx == index
-                                                ? Theme.of(context).primaryColor
-                                                : const Color(0xffa5a5a5),
-                                          ),
-                                        ),
-                                      ),
-                                    );
-                                  }),
-                                ),
-                              );
-                            },
+                              ),
+                            ],
                           ),
                         ),
-                      ),
-                    ),
-                    SliverToBoxAdapter(
-                      child: Container(
-                        width: double.infinity,
-                        height: 8,
-                        color: const Color(0xfff4f4f4),
-                      ),
-                    ),
-                    // SECTION 0
-                    SliverToBoxAdapter(
-                      child: Column(
-                        children: [
-                          Container(
-                            key: sectionKeys[0],
-                            child: RekreasiInfoSection(data: data),
-                          ),
-                          Container(
+                        SliverToBoxAdapter(
+                          child: Container(
                             width: double.infinity,
                             height: 8,
                             color: const Color(0xfff4f4f4),
                           ),
-                        ],
-                      ),
-                    ),
-
-                    // SECTION 1
-                    SliverToBoxAdapter(
-                      child: Column(
-                        children: [
-                          Container(
-                            key: sectionKeys[1],
-                            child: RekreasiLocationSection(data: data),
-                          ),
-                          Container(
-                            width: double.infinity,
-                            height: 8,
-                            color: const Color(0xfff4f4f4),
-                          ),
-                        ],
-                      ),
-                    ),
-
-                    // SECTION 2
-                    SliverToBoxAdapter(
-                      child: Column(
-                        children: [
-                          Container(
-                            key: sectionKeys[2],
-                            child: NewRekreasiPackageSection(
-                              data: data.package,
-                              dataDetail: data,
+                        ),
+                        // STICKY TAB
+                        SliverPersistentHeader(
+                          pinned: true,
+                          delegate: _TabBarDelegate(
+                            child: Container(
+                              color: Colors.white,
+                              child: ValueListenableBuilder<int>(
+                                valueListenable: selectedIndex,
+                                builder: (context, idx, _) {
+                                  return SingleChildScrollView(
+                                    controller: tabScrollController,
+                                    scrollDirection: Axis.horizontal,
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal: margin16,
+                                        vertical: margin8),
+                                    child: Row(
+                                      children: List.generate(4, (index) {
+                                        return GestureDetector(
+                                          onTap: () async {
+                                            await _scrollToSection(index);
+                                            selectedIndex.value = index;
+                                          },
+                                          child: Container(
+                                            margin:
+                                                EdgeInsets.only(right: margin8),
+                                            padding: EdgeInsets.symmetric(
+                                                horizontal: margin16,
+                                                vertical: 8),
+                                            decoration: BoxDecoration(
+                                              color: idx == index
+                                                  ? const Color(0xffFFEEF1)
+                                                  : Colors.transparent,
+                                              borderRadius:
+                                                  BorderRadius.circular(16),
+                                              border: Border.all(
+                                                color: idx == index
+                                                    ? Theme.of(context)
+                                                        .primaryColor
+                                                    : const Color(0xffa5a5a5),
+                                              ),
+                                            ),
+                                            child: Text(
+                                              getFilterData(index),
+                                              style: mainBody4.copyWith(
+                                                fontWeight: FontWeight.bold,
+                                                color: idx == index
+                                                    ? Theme.of(context)
+                                                        .primaryColor
+                                                    : const Color(0xffa5a5a5),
+                                              ),
+                                            ),
+                                          ),
+                                        );
+                                      }),
+                                    ),
+                                  );
+                                },
+                              ),
                             ),
                           ),
-                          Container(
+                        ),
+                        SliverToBoxAdapter(
+                          child: Container(
                             width: double.infinity,
                             height: 8,
                             color: const Color(0xfff4f4f4),
                           ),
-                        ],
-                      ),
-                    ),
+                        ),
+                        // SECTION 0
+                        SliverToBoxAdapter(
+                          child: Column(
+                            children: [
+                              Container(
+                                key: sectionKeys[0],
+                                child: RekreasiInfoSection(data: data),
+                              ),
+                              Container(
+                                width: double.infinity,
+                                height: 8,
+                                color: const Color(0xfff4f4f4),
+                              ),
+                            ],
+                          ),
+                        ),
 
-                    // SECTION 3
-                    SliverToBoxAdapter(
-                      child: Column(
-                        children: [
-                          Container(
-                            key: sectionKeys[3],
-                            child: RekreasiReviewSection(data: data),
+                        // SECTION 1
+                        SliverToBoxAdapter(
+                          child: Column(
+                            children: [
+                              Container(
+                                key: sectionKeys[1],
+                                child: RekreasiLocationSection(data: data),
+                              ),
+                              Container(
+                                width: double.infinity,
+                                height: 8,
+                                color: const Color(0xfff4f4f4),
+                              ),
+                            ],
                           ),
-                          Container(
-                            width: double.infinity,
-                            height: 8,
-                            color: const Color(0xfff4f4f4),
+                        ),
+
+                        // SECTION 2
+                        SliverToBoxAdapter(
+                          child: Column(
+                            children: [
+                              Container(
+                                key: sectionKeys[2],
+                                child: NewRekreasiPackageSection(
+                                  data: data.package,
+                                  dataDetail: data,
+                                ),
+                              ),
+                              Container(
+                                width: double.infinity,
+                                height: 8,
+                                color: const Color(0xfff4f4f4),
+                              ),
+                            ],
                           ),
-                        ],
-                      ),
+                        ),
+
+                        // SECTION 3
+                        SliverToBoxAdapter(
+                          child: Column(
+                            children: [
+                              Container(
+                                key: sectionKeys[3],
+                                child: RekreasiReviewSection(data: data),
+                              ),
+                              Container(
+                                width: double.infinity,
+                                height: 8,
+                                color: const Color(0xfff4f4f4),
+                              ),
+                            ],
+                          ),
+                        ),
+
+                        const SliverToBoxAdapter(
+                          child: SizedBox(height: 70),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
+                  ),
+                  Positioned(
+                      left: 0,
+                      right: 0,
+                      bottom: 0,
+                      child: Container(
+                        padding: EdgeInsets.all(margin16),
+                        decoration: const BoxDecoration(
+                          color: Colors.white,
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey,
+                              offset: Offset(0.0, 1.0), //(x,y)
+                              blurRadius: 6.0,
+                            ),
+                          ],
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Total Harga',
+                                  style: mainBody5.copyWith(
+                                      color: const Color(0xffa5a5a5)),
+                                ),
+                                Text(
+                                  'IDR 40.000',
+                                  style: mainBody4.copyWith(
+                                      color: Theme.of(context).primaryColor),
+                                ),
+                                // Text(
+                                //   moneyChanger(
+                                //       getLowestData(state.data.package),
+                                //       customLabel: 'IDR '),
+                                //   style: mainBody4.copyWith(
+                                //       color: Theme.of(context).primaryColor),
+                                // )
+                              ],
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                // Scrollable.ensureVisible(dataKey.currentContext!);
+                              },
+                              child: Container(
+                                padding: EdgeInsets.symmetric(
+                                    vertical: margin8, horizontal: margin16),
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(8),
+                                    color: Theme.of(context).primaryColor),
+                                child: Text(
+                                  'Pesan',
+                                  style: mainBody4.copyWith(
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white),
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                      ))
+                ],
               );
             } else {
               return Container(
