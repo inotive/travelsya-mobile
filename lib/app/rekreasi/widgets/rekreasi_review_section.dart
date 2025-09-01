@@ -100,11 +100,12 @@ class RekreasiReviewSection extends StatelessWidget {
             scrollDirection: Axis.horizontal,
             child: IntrinsicHeight(
               child: Row(
-                children: List.generate(data.comment.length, (index) {
+                children: List.generate(data.comments.length, (index) {
                   return Container(
                     margin: EdgeInsets.only(
                         left: index == 0 ? margin16 : 0,
-                        right: index == data.comment.length - 1 ? margin16 : 0),
+                        right:
+                            index == data.comments.length - 1 ? margin16 : 0),
                     child: Card(
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(6)),
@@ -128,7 +129,7 @@ class RekreasiReviewSection extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      data.comment[index].user?.name ??
+                                      data.comments[index].user?.name ??
                                           'Anonim',
                                       style: mainBody4.copyWith(
                                           color: neutral100,
@@ -136,10 +137,10 @@ class RekreasiReviewSection extends StatelessWidget {
                                           fontWeight: FontWeight.bold),
                                     ),
                                     Text(
-                                      data.comment[index].createdAt == null
+                                      data.comments[index].createdAt == null
                                           ? '-'
                                           : dateToReadable(data
-                                              .comment[index].createdAt!
+                                              .comments[index].createdAt!
                                               .substring(0, 10)),
                                       style:
                                           mainBody5.copyWith(color: neutral50),
@@ -154,7 +155,7 @@ class RekreasiReviewSection extends StatelessWidget {
                                 ),
                                 SizedBox(width: margin4),
                                 Text(
-                                  data.comment[index].rate
+                                  data.comments[index].rate
                                       .toDouble()
                                       .toStringAsFixed(1),
                                   style: mainBody4.copyWith(
@@ -173,7 +174,7 @@ class RekreasiReviewSection extends StatelessWidget {
                             SizedBox(
                               width: double.infinity,
                               child: Text(
-                                data.comment[index].comment,
+                                data.comments[index].comment,
                                 style: mainBody5.copyWith(color: neutral100),
                               ),
                             )
