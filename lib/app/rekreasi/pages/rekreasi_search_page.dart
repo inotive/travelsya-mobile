@@ -56,7 +56,7 @@ class RekreasiSearchPage extends StatelessWidget {
                   model.onChangeSelectedCity(context);
                 },
                 child: FormHelper.dropdownForm(context,
-                    data: model.selectedCity ?? 'Semua Lokasi',
+                    data: model.selectedCity?.cityName,
                     hintText: 'Kota Reservasi'),
               ),
             ),
@@ -71,7 +71,7 @@ class RekreasiSearchPage extends StatelessWidget {
                         context,
                         MaterialPageRoute(
                             builder: (_) => RekreasiSearchResultPage(
-                                  city: model.selectedCity,
+                                  city: model.selectedCity?.cityName,
                                 )));
                   },
                   title: 'Cari Sekarang',
