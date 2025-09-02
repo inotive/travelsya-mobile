@@ -370,5 +370,5 @@ enum RequestStatus {
   failedRequest,
   failedParsing,
   serverError,
-  internetIssue
+  internetIssue, failed
 }
