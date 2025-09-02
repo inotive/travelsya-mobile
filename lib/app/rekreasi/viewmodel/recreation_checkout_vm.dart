@@ -57,7 +57,8 @@ class RecreationCheckoutVM extends BaseViewModel {
       "payment": "xendit",
       "package_id": packageId.toString(),
       "point": usePoint ? '1' : '0',
-      "total_ticket": '1'
+      "total_ticket": '1',
+      "status": "pending"
     }).then((value) async {
       if (context.mounted) {
         Navigator.pop(context);
