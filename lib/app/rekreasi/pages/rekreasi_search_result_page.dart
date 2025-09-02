@@ -3,7 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:travelsya/app/rekreasi/cubits/recreation_cubit.dart';
 import 'package:travelsya/app/rekreasi/cubits/recreation_state.dart';
 import 'package:travelsya/app/rekreasi/models/recreation_model.dart';
-import 'package:travelsya/app/rekreasi/pages/rekreasi_detail_page.dart';
+import 'package:travelsya/app/rekreasi/pages%20new/new_rekreasi_detail_page.dart';
+// import 'package:travelsya/app/rekreasi/pages/rekreasi_detail_page.dart';
 import 'package:travelsya/shared/helper/function_helper.dart';
 import 'package:travelsya/shared/styles/font_style.dart';
 import 'package:travelsya/shared/styles/size_styles.dart';
@@ -247,7 +248,7 @@ class _RekreasiSearchResultPageState extends State<RekreasiSearchResultPage> {
                                           context,
                                           MaterialPageRoute(
                                               builder: (_) =>
-                                                  RekreasiDetailPage(
+                                                  NewRekreasiDetailPage(
                                                     id: data.id.toString(),
                                                   )));
                                     },
