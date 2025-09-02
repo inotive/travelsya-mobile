@@ -12,15 +12,21 @@ import 'package:travelsya/shared/styles/size_styles.dart';
 import 'package:travelsya/shared/styles/theme_style.dart';
 import 'package:travelsya/shared/widgets/form_helper/elevated_button_widget.dart';
 
-class NewRekreasiCheckoutPage extends StatelessWidget {
-  final RecreationDetailModel data;
+class CheckoutItem {
   final RecreationPackageModel package;
   final int quantity;
+
+  CheckoutItem({required this.package, required this.quantity});
+}
+
+class NewRekreasiCheckoutPage extends StatelessWidget {
+  final RecreationDetailModel data;
+  final List<CheckoutItem> items;
   const NewRekreasiCheckoutPage(
-      {super.key,
-      required this.data,
-      required this.package,
-      required this.quantity});
+      {super.key, required this.data, required this.items});
+
+  double get totalHarga =>
+      items.fold(0, (sum, e) => sum + (e.package.price * e.quantity));
 
   @override
   Widget build(BuildContext context) {
@@ -106,31 +112,45 @@ class NewRekreasiCheckoutPage extends StatelessWidget {
                                         color: neutral100,
                                         fontWeight: FontWeight.bold),
                                   ),
-                                  Container(
-                                    margin: EdgeInsets.symmetric(
-                                        vertical: margin24 / 2),
-                                    width: double.infinity,
-                                    height: 1,
-                                    color: neutral50.withOpacity(0.3),
-                                  ),
-                                  Text(
-                                    data.name,
-                                    style: mainBody4,
-                                  ),
-                                  Text(
-                                    package.name,
-                                    style: mainBody5.copyWith(
-                                        color: Theme.of(context).primaryColor),
-                                  ),
-                                  SizedBox(
-                                    height: margin4,
-                                  ),
-                                  Text(
-                                    moneyChanger(package.price * quantity,
-                                        customLabel: 'IDR '),
-                                    style: mainBody4.copyWith(
-                                        fontWeight: FontWeight.bold),
-                                  )
+                                  Divider(color: neutral50.withOpacity(0.3)),
+                                  // Container(
+                                  //   margin: EdgeInsets.symmetric(
+                                  //       vertical: margin24 / 2),
+                                  //   width: double.infinity,
+                                  //   height: 1,
+                                  //   color: neutral50.withOpacity(0.3),
+                                  // ),
+                                  ...items.map((e) => Padding(
+                                        padding: EdgeInsets.symmetric(
+                                            vertical: margin8),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              data.name,
+                                              style: mainBody4,
+                                            ),
+                                            Text(
+                                              "${e.package.name} x${e.quantity}",
+                                              style: mainBody5.copyWith(
+                                                  color: Theme.of(context)
+                                                      .primaryColor),
+                                            ),
+                                            SizedBox(
+                                              height: margin4,
+                                            ),
+                                            Text(
+                                              moneyChanger(
+                                                  e.package.price * e.quantity,
+                                                  customLabel: 'IDR '),
+                                              style: mainBody4.copyWith(
+                                                  fontWeight: FontWeight.bold),
+                                            )
+                                          ],
+                                        ),
+                                      ))
+
                                   // Row(
                                   //   children: [
                                   //     Expanded(
@@ -374,7 +394,7 @@ class NewRekreasiCheckoutPage extends StatelessWidget {
                           style: mainBody5.copyWith(color: neutral100),
                         ),
                         Text(
-                          moneyChanger(package.price, customLabel: 'IDR '),
+                          moneyChanger(totalHarga, customLabel: 'IDR '),
                           style: mainBody4.copyWith(
                               color: neutral100, fontWeight: FontWeight.bold),
                         )
@@ -386,10 +406,13 @@ class NewRekreasiCheckoutPage extends StatelessWidget {
                     ElevatedButtonWidget(
                         enabled: true,
                         onTap: () {
-                          model.onSubmit(
-                            context,
-                            packageId: package.id,
-                          );
+                          for (var item in items) {
+                            model.onSubmit(
+                              context,
+                              packageId: item.package.id,
+                              // quantity: item.quantity,
+                            );
+                          }
                         },
                         title: 'Lanjutkan ke Pembayaran')
                   ],
