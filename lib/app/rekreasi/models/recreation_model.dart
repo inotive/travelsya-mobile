@@ -224,3 +224,32 @@ class RecreationPackageModel {
     );
   }
 }
+
+class RecreationCityModel {
+  final int id;
+  final int cityId;
+  final String cityName;
+  final int provId;
+  final int status;
+  final String image;
+
+  RecreationCityModel({
+    required this.id,
+    required this.cityId,
+    required this.cityName,
+    required this.provId,
+    required this.status,
+    required this.image,
+  });
+
+  factory RecreationCityModel.fromJson(Map<String, dynamic> json) {
+    return RecreationCityModel(
+      id: json['id'],
+      cityId: int.tryParse(json['city_id'].toString()) ?? 0,
+      cityName: json['city_name'],
+      provId: int.tryParse(json['prov_id'].toString()) ?? 0,
+      status: int.tryParse(json['status'].toString()) ?? 0,
+      image: json['image'],
+    );
+  }
+}
