@@ -3,6 +3,7 @@ import 'package:travelsya/app/rekreasi/models/recreation_model.dart';
 import 'package:travelsya/shared/api/api_connection.dart';
 import 'package:travelsya/shared/api/api_return_value.dart';
 import 'package:http/http.dart' as http;
+import 'package:travelsya/shared/widgets/city_picker_bottomsheet.dart';
 
 class RecreationService {
   static Future<ApiReturnValue> checkoutRecreation(BuildContext context,
@@ -36,12 +37,12 @@ class RecreationService {
   }
 
   static Future<ApiReturnValue> recreationSearch(BuildContext context,
-      {String city = ''}) async {
+      {String city = '', String name = ''}) async {
     ApiReturnValue returnValue;
 
     var request = http.MultipartRequest(
       'GET',
-      Uri.parse('$recreationSearchUrl?location=$city'),
+      Uri.parse('$recreationSearchUrl?name=$name&location=$city'),
     );
 
     ApiReturnValue<dynamic>? response = await ApiReturnValue.httpRequest(
@@ -182,6 +183,54 @@ class RecreationService {
 
       returnValue =
           ApiReturnValue(data: dataFinal, status: RequestStatus.successRequest);
+    } else {
+      String? messages;
+      try {
+        Map<String, dynamic> datamessages = response.data['data']['response'];
+
+        datamessages.forEach((key, value) {
+          messages = value[0];
+        });
+      } catch (e) {
+        messages = null;
+      }
+      returnValue = ApiReturnValue(data: messages, status: response.status);
+    }
+
+    return returnValue;
+  }
+
+  static Future<ApiReturnValue> fetchCityAvailable(BuildContext context,
+      {CityPickerType type = CityPickerType.recreation}) async {
+    ApiReturnValue returnValue;
+
+    String url = type == CityPickerType.recreation
+        ? '$baseAPIUrl/recreation/city'
+        : busCityUrl;
+
+    var request = http.MultipartRequest('GET', Uri.parse(url));
+
+    ApiReturnValue<dynamic>? response = await ApiReturnValue.httpRequest(
+        context,
+        request: request,
+        exceptionStatusCode: [201, 400],
+        auth: true);
+
+    if (response!.status == RequestStatus.successRequest) {
+      if (response.data['data'] == null) {
+        returnValue = ApiReturnValue(
+            data: <RecreationCityModel>[],
+            status: RequestStatus.successRequest);
+      } else {
+        List<RecreationCityModel> dataFinal = response.data['data']
+            .map<RecreationCityModel>((e) => RecreationCityModel.fromJson(e))
+            .toList();
+        // for (var i = 0; i < response.data['data'].length; i++) {
+        //   dataFinal.add(response.data['data'][i].toString());
+        // }
+        returnValue = ApiReturnValue(
+            data: dataFinal, status: RequestStatus.successRequest);
+      }
     } else {
       String? messages;
       try {
