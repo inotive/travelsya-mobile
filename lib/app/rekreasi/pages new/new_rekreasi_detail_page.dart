@@ -3,10 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:travelsya/app/rekreasi/cubits/quantity_cubit.dart';
 import 'package:travelsya/app/rekreasi/cubits/recreation_cubit.dart';
 import 'package:travelsya/app/rekreasi/cubits/recreation_state.dart';
+import 'package:travelsya/app/rekreasi/pages%20new/new_rekreasi_checkout_page.dart';
 import 'package:travelsya/app/rekreasi/pages%20new/new_rekreasi_package_section.dart';
 import 'package:travelsya/app/rekreasi/widgets/rekreasi_info_section.dart';
 import 'package:travelsya/app/rekreasi/widgets/rekreasi_location_section.dart';
 import 'package:travelsya/app/rekreasi/widgets/rekreasi_review_section.dart';
+import 'package:travelsya/shared/function/need_login_function.dart';
 import 'package:travelsya/shared/helper/function_helper.dart';
 import 'package:travelsya/shared/styles/font_style.dart';
 import 'package:travelsya/shared/styles/size_styles.dart';
@@ -416,8 +418,8 @@ class _NewRekreasiDetailPageState extends State<NewRekreasiDetailPage> {
                                         double.tryParse(pkg.price.toString()) ??
                                             0;
                                     total += qty * price;
-                                    print(
-                                        "Package: ${pkg.id}, qty: $qty, price: $price, subtotal: ${qty * price}");
+                                    // print(
+                                    //     "Package: ${pkg.id}, qty: $qty, price: $price, subtotal: ${qty * price}");
                                   }
 
                                   return Column(
@@ -443,7 +445,37 @@ class _NewRekreasiDetailPageState extends State<NewRekreasiDetailPage> {
                               ),
                               GestureDetector(
                                 onTap: () {
-                                  // Scrollable.ensureVisible(dataKey.currentContext!);
+                                  needLoginFeature(context, () {
+                                    final qtyState = context
+                                        .read<QuantityManagerCubit>()
+                                        .state;
+
+                                    final selectedPackages = data.packages
+                                        .where((pkg) =>
+                                            (qtyState[pkg.id.toString()] ?? 0) >
+                                            0)
+                                        .map((pkg) => CheckoutItem(
+                                            package: pkg,
+                                            quantity:
+                                                qtyState[pkg.id.toString()]!))
+                                        .toList();
+
+                                    if (selectedPackages.isEmpty) {
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(const SnackBar(
+                                              content: Text(
+                                                  "Silakan pilih paket terlebih dahulu")));
+                                      return;
+                                    }
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (_) =>
+                                                NewRekreasiCheckoutPage(
+                                                  data: data,
+                                                  items: selectedPackages,
+                                                )));
+                                  });
                                 },
                                 child: Container(
                                   padding: EdgeInsets.symmetric(
