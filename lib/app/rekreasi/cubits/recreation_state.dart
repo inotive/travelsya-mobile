@@ -13,6 +13,15 @@ class RecreationInitial extends RecreationState {}
 
 class RecreationLoading extends RecreationState {}
 
+class ListRecreationCityLoaded extends RecreationState {
+  final List<RecreationCityModel> data;
+
+  const ListRecreationCityLoaded(this.data);
+
+  @override
+  List<Object> get props => [data];
+}
+
 class RecreationFailed extends RecreationState {
   final ApiReturnValue data;
 
