@@ -31,6 +31,7 @@ String recreationSearchUrl = '$baseAPIUrl/recreation_search';
 String recreationDetailUrl = '$baseAPIUrl/recreation_detail';
 String recreationOrderUrl = '$baseAPIUrl/recreation/transaction/request';
 String recreationReviewUrl = '$baseAPIUrl/recreation/rating';
+String recreationCity = '$baseAPIUrl/recreation/city';
 
 //Car rent
 String carFindUrl = '$baseAPIUrl/find_car';
