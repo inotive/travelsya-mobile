@@ -8,9 +8,11 @@ import 'package:travelsya/shared/api/api_return_value.dart';
 class RecreationCubit extends Cubit<RecreationState> {
   RecreationCubit() : super(RecreationInitial());
 
-  onLoadSearchRecreation(BuildContext context, {String? city}) {
+  onLoadSearchRecreation(BuildContext context, {String? city, String? name}) {
     emit(RecreationLoading());
-    RecreationService.recreationSearch(context, city: city ?? '').then((value) {
+    RecreationService.recreationSearch(context,
+            city: city ?? '', name: name ?? '')
+        .then((value) {
       if (value.status == RequestStatus.successRequest) {
         emit(RecreationPreviewListLoaded(value.data));
       } else {
@@ -56,6 +58,27 @@ class RecreationCubit extends Cubit<RecreationState> {
       } else {
         emit(RecreationFailed(value));
       }
+    });
+  }
+
+  fetchRecreationAvailableCity(
+    BuildContext context, {
+    void Function(List<RecreationCityModel>)? onDataReady,
+  }) {
+    emit(RecreationLoading());
+    RecreationService.fetchCityAvailable(context).then((value) {
+      if (value.status == RequestStatus.successRequest) {
+        final data = value.data as List<RecreationCityModel>;
+        if (onDataReady != null) {
+          onDataReady(data);
+        }
+        emit(ListRecreationCityLoaded(data));
+      } else {
+        emit(RecreationFailed(value));
+      }
+    }).catchError((e) {
+      emit(RecreationFailed(
+          ApiReturnValue(data: e.toString(), status: RequestStatus.failed)));
     });
   }
 }
