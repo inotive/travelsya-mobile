@@ -22,22 +22,22 @@ class RekreasiSearchResultPage extends StatefulWidget {
 class _RekreasiSearchResultPageState extends State<RekreasiSearchResultPage> {
   RecreationCubit searchCubit = RecreationCubit();
 
-  TextEditingController cityController = TextEditingController();
+  TextEditingController searchController = TextEditingController();
 
   @override
   void initState() {
-    cityController.text = widget.city ?? ''; // isi awal dari parameter
-    searchCubit.onLoadSearchRecreation(
-      context,
-      city: cityController.text,
-    );
+    // cityController.text = widget.city ?? ''; // isi awal dari parameter
     super.initState();
+    searchCubit.onLoadSearchRecreation(context,
+        city: widget.city ?? '', name: '');
   }
 
   void _onCityChange(String value) {
     searchCubit.onLoadSearchRecreation(
       context,
-      city: value,
+      // city: value,
+      city: widget.city ?? '',
+      name: value,
     );
   }
 
@@ -89,11 +89,13 @@ class _RekreasiSearchResultPageState extends State<RekreasiSearchResultPage> {
                           ),
                           Expanded(
                             child: TextField(
-                              onChanged: (value) {
-                                _onCityChange(
-                                    value); // langsung cari tiap ketik
-                              },
-                              controller: cityController,
+                              // onChanged: (value) {
+                              //   _onCityChange(
+                              //       value); // langsung cari tiap ketik
+                              // },
+                              onChanged: _onCityChange,
+                              controller: searchController,
+                              // controller: cityController,
                               decoration: InputDecoration(
                                   isDense: true,
                                   hintText: 'Cari Rekreasi',
@@ -246,7 +248,7 @@ class _RekreasiSearchResultPageState extends State<RekreasiSearchResultPage> {
                                           MaterialPageRoute(
                                               builder: (_) =>
                                                   RekreasiDetailPage(
-                                                    id: data.id!.toString(),
+                                                    id: data.id.toString(),
                                                   )));
                                     },
                                     child: Card(
