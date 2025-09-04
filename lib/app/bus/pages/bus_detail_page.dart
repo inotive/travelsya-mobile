@@ -8,8 +8,9 @@ import 'package:travelsya/app/bus/cubits/bus_filter_state.dart';
 import 'package:travelsya/app/bus/cubits/bus_state.dart';
 import 'package:travelsya/app/bus/models/bus_model.dart';
 import 'package:travelsya/app/bus/viewmodel/bus_detail_vm.dart';
+import 'package:travelsya/app/bus/widgets/bus_route_timeline_widget.dart';
 import 'package:travelsya/shared/function/date_to_readable_function.dart';
-import 'package:travelsya/shared/helper/function_helper.dart';
+// import 'package:travelsya/shared/helper/function_helper.dart';
 import 'package:travelsya/shared/styles/font_style.dart';
 import 'package:travelsya/shared/styles/size_styles.dart';
 import 'package:travelsya/shared/styles/theme_style.dart';
@@ -265,265 +266,276 @@ class BusDetailPage extends StatelessWidget {
                                               model.goData == null
                                                   ? state.dataGo[index]
                                                   : state.dataBack[index];
-
-                                          return GestureDetector(
-                                            onTap: () {
-                                              model.onTapDetail(context, data);
-                                            },
-                                            child: Container(
-                                              margin: EdgeInsets.only(
-                                                  top: index == 0
-                                                      ? margin16
-                                                      : margin24 / 2),
-                                              padding: EdgeInsets.all(margin16),
-                                              width: double.infinity,
-                                              decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(8),
-                                                  border: Border.all(
-                                                      color: neutral50
-                                                          .withOpacity(0.3))),
-                                              child: Column(
-                                                children: [
-                                                  Row(
-                                                    children: [
-                                                      Expanded(
-                                                          child: Column(
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                        children: [
-                                                          Text(
-                                                            data.bussinessName,
-                                                            style: mainBody4.copyWith(
-                                                                color:
-                                                                    neutral100,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold),
-                                                          ),
-                                                          Text(
-                                                            data.kelas,
-                                                            style: mainBody5
-                                                                .copyWith(
-                                                              color: neutral50,
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      )),
-                                                      SizedBox(
-                                                        width: margin24 / 2,
-                                                      ),
-                                                      Column(
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .end,
-                                                        children: [
-                                                          Text(
-                                                            '${data.availableTicket} kursi tersedia',
-                                                            style: mainBody5
-                                                                .copyWith(
-                                                                    color: Colors
-                                                                        .green),
-                                                          ),
-                                                          Row(
-                                                            children: [
-                                                              Text(
-                                                                moneyChanger(
-                                                                    data.price,
-                                                                    customLabel:
-                                                                        'IDR '),
-                                                                style: mainBody3.copyWith(
-                                                                    color: Theme.of(
-                                                                            context)
-                                                                        .primaryColor,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .bold),
-                                                              ),
-                                                              Text(
-                                                                ' /pax',
-                                                                style: mainBody5
-                                                                    .copyWith(
-                                                                        color:
-                                                                            neutral50),
-                                                              )
-                                                            ],
-                                                          )
-                                                        ],
-                                                      ),
-                                                    ],
-                                                  ),
-                                                  SizedBox(
-                                                    height: margin24 / 2,
-                                                  ),
-                                                  SizedBox(
-                                                    child: Column(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        SizedBox(
-                                                          height: margin8,
-                                                        ),
-                                                        IntrinsicHeight(
-                                                          child: Row(
-                                                            children: [
-                                                              Container(
-                                                                constraints:
-                                                                    const BoxConstraints(
-                                                                        maxWidth:
-                                                                            64),
-                                                                child: Column(
-                                                                  crossAxisAlignment:
-                                                                      CrossAxisAlignment
-                                                                          .start,
-                                                                  children: [
-                                                                    Text(
-                                                                      data.departureTime,
-                                                                      style: mainBody3.copyWith(
-                                                                          color:
-                                                                              neutral100,
-                                                                          fontWeight:
-                                                                              FontWeight.bold),
-                                                                    ),
-                                                                    Text(
-                                                                      '${getDay(DateFormat('yyyy-MM-dd').format(model.goData != null ? stateFilter.data.selectedDateBack! : stateFilter.data.selectedDateGo!))}, ${dateToReadable(DateFormat('yyyy-MM-dd').format(model.goData != null ? stateFilter.data.selectedDateBack! : stateFilter.data.selectedDateGo!))}',
-                                                                      style: mainBody4.copyWith(
-                                                                          color:
-                                                                              neutral100),
-                                                                    ),
-                                                                    SizedBox(
-                                                                      height:
-                                                                          margin32,
-                                                                    ),
-                                                                  ],
-                                                                ),
-                                                              ),
-                                                              Container(
-                                                                margin: EdgeInsets
-                                                                    .symmetric(
-                                                                        horizontal:
-                                                                            margin8),
-                                                                height: double
-                                                                    .infinity,
-                                                                child: Column(
-                                                                  children: [
-                                                                    Container(
-                                                                      width:
-                                                                          margin8,
-                                                                      height:
-                                                                          margin8,
-                                                                      decoration: BoxDecoration(
-                                                                          shape: BoxShape
-                                                                              .circle,
-                                                                          color:
-                                                                              Theme.of(context).primaryColor),
-                                                                    ),
-                                                                    Expanded(
-                                                                        child:
-                                                                            Container(
-                                                                      width: 1,
-                                                                      height: double
-                                                                          .infinity,
-                                                                      color: Theme.of(
-                                                                              context)
-                                                                          .primaryColor,
-                                                                    ))
-                                                                  ],
-                                                                ),
-                                                              ),
-                                                              Expanded(
-                                                                  child: Column(
-                                                                crossAxisAlignment:
-                                                                    CrossAxisAlignment
-                                                                        .start,
-                                                                children: [
-                                                                  Text(
-                                                                    data.departurePoint,
-                                                                    style: mainBody4
-                                                                        .copyWith(
-                                                                      color:
-                                                                          neutral100,
-                                                                    ),
-                                                                  ),
-                                                                ],
-                                                              ))
-                                                            ],
-                                                          ),
-                                                        ),
-                                                        IntrinsicHeight(
-                                                          child: Row(
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .start,
-                                                            children: [
-                                                              Container(
-                                                                constraints:
-                                                                    const BoxConstraints(
-                                                                        maxWidth:
-                                                                            64),
-                                                                child: Column(
-                                                                  crossAxisAlignment:
-                                                                      CrossAxisAlignment
-                                                                          .start,
-                                                                  children: [
-                                                                    Text(
-                                                                      data.arrivalTime,
-                                                                      style: mainBody3.copyWith(
-                                                                          color:
-                                                                              neutral100,
-                                                                          fontWeight:
-                                                                              FontWeight.bold),
-                                                                    ),
-                                                                    Text(
-                                                                      '${getDay(DateFormat('yyyy-MM-dd').format(model.goData != null ? stateFilter.data.selectedDateBack! : stateFilter.data.selectedDateGo!))}, ${dateToReadable(DateFormat('yyyy-MM-dd').format(model.goData != null ? stateFilter.data.selectedDateBack! : stateFilter.data.selectedDateGo!))}',
-                                                                      style: mainBody4.copyWith(
-                                                                          color:
-                                                                              neutral100),
-                                                                    )
-                                                                  ],
-                                                                ),
-                                                              ),
-                                                              Container(
-                                                                margin: const EdgeInsets
-                                                                    .symmetric(
-                                                                    horizontal:
-                                                                        10),
-                                                                child:
-                                                                    Container(
-                                                                  width:
-                                                                      margin8,
-                                                                  height:
-                                                                      margin8,
-                                                                  decoration: BoxDecoration(
-                                                                      shape: BoxShape
-                                                                          .circle,
-                                                                      color: Theme.of(
-                                                                              context)
-                                                                          .primaryColor),
-                                                                ),
-                                                              ),
-                                                              Expanded(
-                                                                child: Text(
-                                                                  data.arrivalPoint,
-                                                                  style: mainBody4
-                                                                      .copyWith(
-                                                                    color:
-                                                                        neutral100,
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                            ],
-                                                          ),
-                                                        )
-                                                      ],
-                                                    ),
-                                                  )
-                                                ],
-                                              ),
-                                            ),
+                                          return BusRouteTimelineCard(
+                                            data: data,
+                                            selectedDate: model.goData != null
+                                                ? stateFilter
+                                                    .data.selectedDateBack!
+                                                : stateFilter
+                                                    .data.selectedDateGo!,
+                                            onTap: () => model.onTapDetail(
+                                                context, data),
                                           );
+
+                                          // return GestureDetector(
+                                          //   onTap: () {
+                                          //     model.onTapDetail(context, data);
+                                          //   },
+                                          //   child: Container(
+                                          //     margin: EdgeInsets.only(
+                                          //         top: index == 0
+                                          //             ? margin16
+                                          //             : margin24 / 2),
+                                          //     padding: EdgeInsets.all(margin16),
+                                          //     width: double.infinity,
+                                          //     decoration: BoxDecoration(
+                                          //         borderRadius:
+                                          //             BorderRadius.circular(8),
+                                          //         border: Border.all(
+                                          //             // color: neutral50
+                                          //             //     .withOpacity(0.3)
+                                          //             color: Colors.green)),
+                                          //     child: Column(
+                                          //       children: [
+                                          //         Row(
+                                          //           children: [
+                                          //             Expanded(
+                                          //                 child: Column(
+                                          //               crossAxisAlignment:
+                                          //                   CrossAxisAlignment
+                                          //                       .start,
+                                          //               children: [
+                                          //                 Text(
+                                          //                   data.bussinessName,
+                                          //                   style: mainBody4.copyWith(
+                                          //                       color:
+                                          //                           neutral100,
+                                          //                       fontWeight:
+                                          //                           FontWeight
+                                          //                               .bold),
+                                          //                 ),
+                                          //                 Text(
+                                          //                   data.kelas,
+                                          //                   style: mainBody5
+                                          //                       .copyWith(
+                                          //                     color: neutral50,
+                                          //                   ),
+                                          //                 ),
+                                          //               ],
+                                          //             )),
+                                          //             SizedBox(
+                                          //               width: margin24 / 2,
+                                          //             ),
+                                          //             Column(
+                                          //               crossAxisAlignment:
+                                          //                   CrossAxisAlignment
+                                          //                       .end,
+                                          //               children: [
+                                          //                 Text(
+                                          //                   '${data.availableTicket} kursi tersedia',
+                                          //                   style: mainBody5
+                                          //                       .copyWith(
+                                          //                           color: Colors
+                                          //                               .green),
+                                          //                 ),
+                                          //                 Row(
+                                          //                   children: [
+                                          //                     Text(
+                                          //                       moneyChanger(
+                                          //                           data.price,
+                                          //                           customLabel:
+                                          //                               'IDR '),
+                                          //                       style: mainBody3.copyWith(
+                                          //                           color: Theme.of(
+                                          //                                   context)
+                                          //                               .primaryColor,
+                                          //                           fontWeight:
+                                          //                               FontWeight
+                                          //                                   .bold),
+                                          //                     ),
+                                          //                     Text(
+                                          //                       ' /pax',
+                                          //                       style: mainBody5
+                                          //                           .copyWith(
+                                          //                               color:
+                                          //                                   neutral50),
+                                          //                     )
+                                          //                   ],
+                                          //                 )
+                                          //               ],
+                                          //             ),
+                                          //           ],
+                                          //         ),
+                                          //         SizedBox(
+                                          //           height: margin24 / 2,
+                                          //         ),
+                                          //         SizedBox(
+                                          //           child: Column(
+                                          //             crossAxisAlignment:
+                                          //                 CrossAxisAlignment
+                                          //                     .start,
+                                          //             children: [
+                                          //               SizedBox(
+                                          //                 height: margin8,
+                                          //               ),
+                                          //               IntrinsicHeight(
+                                          //                 child: Row(
+                                          //                   children: [
+                                          //                     Container(
+                                          //                       constraints:
+                                          //                           const BoxConstraints(
+                                          //                               maxWidth:
+                                          //                                   64),
+                                          //                       child: Column(
+                                          //                         crossAxisAlignment:
+                                          //                             CrossAxisAlignment
+                                          //                                 .start,
+                                          //                         children: [
+                                          //                           Text(
+                                          //                             data.departureTime,
+                                          //                             style: mainBody3.copyWith(
+                                          //                                 color:
+                                          //                                     neutral100,
+                                          //                                 fontWeight:
+                                          //                                     FontWeight.bold),
+                                          //                           ),
+                                          //                           Text(
+                                          //                             '${getDay(DateFormat('yyyy-MM-dd').format(model.goData != null ? stateFilter.data.selectedDateBack! : stateFilter.data.selectedDateGo!))}, ${dateToReadable(DateFormat('yyyy-MM-dd').format(model.goData != null ? stateFilter.data.selectedDateBack! : stateFilter.data.selectedDateGo!))}',
+                                          //                             style: mainBody4.copyWith(
+                                          //                                 color:
+                                          //                                     neutral100),
+                                          //                           ),
+                                          //                           SizedBox(
+                                          //                             height:
+                                          //                                 margin32,
+                                          //                           ),
+                                          //                         ],
+                                          //                       ),
+                                          //                     ),
+                                          //                     Container(
+                                          //                       margin: EdgeInsets
+                                          //                           .symmetric(
+                                          //                               horizontal:
+                                          //                                   margin8),
+                                          //                       height: double
+                                          //                           .infinity,
+                                          //                       child: Column(
+                                          //                         children: [
+                                          //                           Container(
+                                          //                             width:
+                                          //                                 margin8,
+                                          //                             height:
+                                          //                                 margin8,
+                                          //                             decoration: BoxDecoration(
+                                          //                                 shape: BoxShape.circle,
+                                          //                                 // color:
+                                          //                                 //     Theme.of(context).primaryColor
+                                          //                                 color: Colors.blue),
+                                          //                           ),
+                                          //                           Expanded(
+                                          //                               child:
+                                          //                                   Container(
+                                          //                             width: 1,
+                                          //                             height: double
+                                          //                                 .infinity,
+                                          //                             color: Theme.of(
+                                          //                                     context)
+                                          //                                 .primaryColor,
+                                          //                           ))
+                                          //                         ],
+                                          //                       ),
+                                          //                     ),
+                                          //                     Expanded(
+                                          //                         child: Column(
+                                          //                       crossAxisAlignment:
+                                          //                           CrossAxisAlignment
+                                          //                               .start,
+                                          //                       children: [
+                                          //                         Text(
+                                          //                           data.departurePoint,
+                                          //                           style: mainBody4
+                                          //                               .copyWith(
+                                          //                             color:
+                                          //                                 neutral100,
+                                          //                           ),
+                                          //                         ),
+                                          //                       ],
+                                          //                     ))
+                                          //                   ],
+                                          //                 ),
+                                          //               ),
+                                          //               IntrinsicHeight(
+                                          //                 child: Row(
+                                          //                   crossAxisAlignment:
+                                          //                       CrossAxisAlignment
+                                          //                           .start,
+                                          //                   children: [
+                                          //                     Container(
+                                          //                       constraints:
+                                          //                           const BoxConstraints(
+                                          //                               maxWidth:
+                                          //                                   64),
+                                          //                       child: Column(
+                                          //                         crossAxisAlignment:
+                                          //                             CrossAxisAlignment
+                                          //                                 .start,
+                                          //                         children: [
+                                          //                           Text(
+                                          //                             data.arrivalTime,
+                                          //                             style: mainBody3.copyWith(
+                                          //                                 color:
+                                          //                                     neutral100,
+                                          //                                 fontWeight:
+                                          //                                     FontWeight.bold),
+                                          //                           ),
+                                          //                           Text(
+                                          //                             '${getDay(DateFormat('yyyy-MM-dd').format(model.goData != null ? stateFilter.data.selectedDateBack! : stateFilter.data.selectedDateGo!))}, ${dateToReadable(DateFormat('yyyy-MM-dd').format(model.goData != null ? stateFilter.data.selectedDateBack! : stateFilter.data.selectedDateGo!))}',
+                                          //                             style: mainBody4.copyWith(
+                                          //                                 color:
+                                          //                                     neutral100),
+                                          //                           )
+                                          //                         ],
+                                          //                       ),
+                                          //                     ),
+                                          //                     Container(
+                                          //                       margin: const EdgeInsets
+                                          //                           .symmetric(
+                                          //                           horizontal:
+                                          //                               10),
+                                          //                       child:
+                                          //                           Container(
+                                          //                         width:
+                                          //                             margin8,
+                                          //                         height:
+                                          //                             margin8,
+                                          //                         decoration: BoxDecoration(
+                                          //                             shape: BoxShape
+                                          //                                 .circle,
+                                          //                             color: Theme.of(
+                                          //                                     context)
+                                          //                                 .primaryColor),
+                                          //                       ),
+                                          //                     ),
+                                          //                     Expanded(
+                                          //                       child: Text(
+                                          //                         data.arrivalPoint,
+                                          //                         style: mainBody4
+                                          //                             .copyWith(
+                                          //                           color:
+                                          //                               neutral100,
+                                          //                         ),
+                                          //                       ),
+                                          //                     ),
+                                          //                   ],
+                                          //                 ),
+                                          //               )
+                                          //             ],
+                                          //           ),
+                                          //         )
+                                          //       ],
+                                          //     ),
+                                          //   ),
+                                          // );
                                         }),
                                       ),
                                     );
