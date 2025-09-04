@@ -32,7 +32,7 @@ class _HotelSearchCitySection extends StatelessWidget {
           height: margin16,
         ),
         BlocBuilder<HotelCubit, HotelState>(
-            bloc: model.locationHotelCubit,
+            // bloc: model.locationHotelCubit,
             builder: (context, state) {
               if (state is ListHotelCityLoaded) {
                 return Column(
@@ -147,10 +147,10 @@ class _HotelSearchCitySection extends StatelessWidget {
               } else {
                 return FailedRequestWidget(
                   onRetry: () {
-                    model.locationHotelCubit.fetchHotelAvailableCity(context,
-                        onDataReady: (data) {
-                      model.initCityHotel(context, data[0]);
-                    });
+                    // model.locationHotelCubit.fetchHotelAvailableCity(context,
+                    //     onDataReady: (data) {
+                    //   model.initCityHotel(context, data[0]);
+                    // });
                   },
                 );
               }

@@ -162,8 +162,7 @@ class HotelRepository {
       {CityPickerType type = CityPickerType.hotel}) async {
     ApiReturnValue returnValue;
 
-    String url =
-        type == CityPickerType.hotel ? '$baseAPIUrl/hotel/city' : busCityUrl;
+    String url = hotelCityUrl;
 
     var request = http.MultipartRequest('GET', Uri.parse(url));
 

@@ -56,9 +56,6 @@ class ListHotelCityLoaded extends HotelState {
   final List<String> data;
 
   const ListHotelCityLoaded(this.data);
-
-  @override
-  List<Object> get props => [data];
 }
 
 // ignore: must_be_immutable

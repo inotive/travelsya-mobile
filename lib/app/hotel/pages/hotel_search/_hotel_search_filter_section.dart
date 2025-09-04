@@ -22,8 +22,26 @@ class _HotelSearchFilterSection extends StatelessWidget {
                         child: TitleWithWidget(
                           title: 'Lokasi Hotel',
                           child: GestureDetector(
-                            onTap: () {
-                              model.onLocationPicker(context);
+                            onTap: () async {
+                              // model.onLocationPicker(context);
+                              final selected = await showCityPicker<String,
+                                      HotelCubit, HotelState>(context,
+                                  cubit: context.read<HotelCubit>(),
+                                  fetchFunction: (cubit, ctx) async {
+                                    cubit.fetchHotelAvailableCity(ctx);
+                                  },
+                                  isLoading: (state) => state is HotelLoading,
+                                  getCities: (state) =>
+                                      state is ListHotelCityLoaded
+                                          ? state.data
+                                          : [],
+                                  displayName: (city) => city);
+
+                              if (selected != null) {
+                                BlocProvider.of<HotelFilterCubit>(context)
+                                    .onLocationTap(context,
+                                        hotelCubit: context.read<HotelCubit>());
+                              }
                             },
                             child: FormHelper.dropdownForm(context,
                                 data: state.selectedLocation.isEmpty

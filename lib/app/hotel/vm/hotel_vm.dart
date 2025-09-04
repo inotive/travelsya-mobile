@@ -4,7 +4,6 @@ import 'package:stacked/stacked.dart';
 import 'package:travelsya/app/hostel/cubits/hostel_cubit.dart';
 import 'package:travelsya/app/hotel/cubits/hotel_cubit.dart';
 import 'package:travelsya/app/hotel/cubits/hotel_filter_cubit.dart';
-import 'package:travelsya/app/hotel/cubits/hotel_state.dart';
 import 'package:travelsya/app/hotel/pages/hotel_list_page/hotel_list_page.dart';
 
 class HotelVM extends BaseViewModel {
@@ -52,15 +51,15 @@ class HotelVM extends BaseViewModel {
     BlocProvider.of<HotelFilterCubit>(context).onRemoveLocation();
   }
 
-  onLocationPicker(BuildContext context) async {
-    HotelState state = locationHotelCubit.state;
-    if (state is HotelInitial) {
-      locationHotelCubit.fetchHotelAvailableCity(context);
-    }
+  // onLocationPicker(BuildContext context) async {
+  //   HotelState state = locationHotelCubit.state;
+  //   if (state is HotelInitial) {
+  //     locationHotelCubit.fetchHotelAvailableCity(context);
+  //   }
 
-    BlocProvider.of<HotelFilterCubit>(context)
-        .onLocationTap(context, hotelCubit: locationHotelCubit);
-  }
+  //   BlocProvider.of<HotelFilterCubit>(context)
+  //       .onLocationTap(context, hotelCubit: locationHotelCubit);
+  // }
 
   onSearchHotel(BuildContext context) {
     Navigator.push(

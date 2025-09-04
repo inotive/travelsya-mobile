@@ -10,6 +10,7 @@ import 'package:travelsya/app/hotel/widgets/hotel_preview_widget.dart';
 import 'package:travelsya/shared/function/date_to_readable_function.dart';
 import 'package:travelsya/shared/styles/size_styles.dart';
 import 'package:travelsya/shared/styles/theme_style.dart';
+import 'package:travelsya/shared/widgets/city_picker_bottomsheet.dart';
 import 'package:travelsya/shared/widgets/failed_request_widget.dart';
 import 'package:travelsya/shared/widgets/form_helper/elevated_button_widget.dart';
 import 'package:travelsya/shared/widgets/form_helper/title_with_widget.dart';
@@ -30,7 +31,7 @@ class HotelSearchPage extends StatelessWidget {
     return ViewModelBuilder<HotelVM>.reactive(viewModelBuilder: () {
       return HotelVM();
     }, onViewModelReady: (model) {
-      model.onInit(context);
+      // model.onInit(context);
     }, builder: (context, model, child) {
       return Scaffold(
         body: Stack(

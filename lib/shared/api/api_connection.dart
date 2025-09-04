@@ -15,6 +15,7 @@ String hotelPopularUrl = '$baseAPIUrl/hotel/populer';
 String hotelUrl = '$baseAPIUrl/hotel';
 String hotelRoomUrl = '$baseAPIUrl/hotel/room';
 String hotelReviewUrl = '$baseAPIUrl/hotel/rating';
+String hotelCityUrl = '$baseAPIUrl/hotel/city';
 
 String feeAdminUrl = '$baseAPIUrl/fee-admin';
 String pointUrl = '$baseAPIUrl/user/total-point-available';
