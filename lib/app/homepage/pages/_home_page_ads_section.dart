@@ -63,17 +63,23 @@ class _HomePageAdsSection extends StatelessWidget {
                                 children: [
                                   AspectRatio(
                                     aspectRatio: 1440 / 576,
-                                    child: Container(
-                                      width: double.infinity,
-                                      height: double.infinity,
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                          color: Colors.black12,
-                                          image: DecorationImage(
-                                              fit: BoxFit.cover,
-                                              image: NetworkImage(baseUrl +
-                                                  state.data[index].image),)),
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(10),
+                                      child: Image.network(
+                                        state.data[index].image,
+                                        fit: BoxFit.cover,
+                                        errorBuilder:
+                                            (context, error, stackTrace) {
+                                          return Container(
+                                            color: Colors.black12,
+                                            child: const Icon(
+                                              Icons.broken_image,
+                                              size: 40,
+                                              color: Colors.grey,
+                                            ),
+                                          );
+                                        },
+                                      ),
                                     ),
                                   ),
                                 ],

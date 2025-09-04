@@ -24,10 +24,11 @@ class AdsRepository {
     if (response!.status == RequestStatus.successRequest) {
       List<AdsModel> dataFinal = [];
 
-      if (response.data == null) {
+      if (response.data != null) {
         for (var i = 0; i < response.data['data'].length; i++) {
-          if (AdsModel.fromJson(response.data['data'][i]).isActive == 1) {
-            dataFinal.add(AdsModel.fromJson(response.data['data'][i]));
+          final ads = AdsModel.fromJson(response.data['data'][i]);
+          if (ads.isActive == 1) {
+            dataFinal.add(ads);
           }
         }
       }
