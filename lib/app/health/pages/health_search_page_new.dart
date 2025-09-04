@@ -69,20 +69,30 @@ class _HealthSearchPageNewState extends State<HealthSearchPageNew> {
             SizedBox(height: margin16),
 
             // City picker
-            Container(
-              margin: EdgeInsets.symmetric(horizontal: margin16),
-              child: GestureDetector(
-                onTap: () async {
-                  String? result = await showCityPicker(context);
-                  if (result != null) setState(() => selectedCity = result);
-                },
-                child: FormHelper.dropdownForm(
-                  context,
-                  data: selectedCity ?? 'Semua Lokasi',
-                  hintText: 'Kota Reservasi',
-                ),
-              ),
-            ),
+            // Container(
+            //   margin: EdgeInsets.symmetric(horizontal: margin16),
+            //   child: GestureDetector(
+            //     onTap: () async {
+            //       String? result =
+            //           await showCityPicker<HealthCubit, HealthState>(context,
+            //               cubit: HealthCityCubit,
+            //               fetchFunction: (cubit, BuildContext ctx) async {
+            //                 cubit.fetchHealthAvailableCity(ctx);
+            //               },
+            //               isLoading: (state) => state is HealthLoading,
+            //               getCities: (state) =>
+            //                   state is ListHealthCityLoaded
+            //                       ? state.data
+            //                       : []);
+            //       if (result != null) setState(() => selectedCity = result);
+            //     },
+            //     child: FormHelper.dropdownForm(
+            //       context,
+            //       data: selectedCity ?? 'Semua Lokasi',
+            //       hintText: 'Kota Reservasi',
+            //     ),
+            //   ),
+            // ),
 
             SizedBox(height: margin16),
 

@@ -200,23 +200,23 @@ class _HealthSearchPageState extends State<HealthSearchPage> {
           SizedBox(
             height: margin16,
           ),
-          Container(
-            margin: EdgeInsets.symmetric(horizontal: margin16),
-            child: GestureDetector(
-              onTap: () async {
-                String? result = await showCityPicker(context);
+          // Container(
+          //   margin: EdgeInsets.symmetric(horizontal: margin16),
+          //   child: GestureDetector(
+          //     onTap: () async {
+          //       String? result = await showCityPicker(context);
 
-                if (result != null) {
-                  setState(() {
-                    selectedCity = result;
-                  });
-                }
-              },
-              child: FormHelper.dropdownForm(context,
-                  data: selectedCity ?? 'Semua Lokasi',
-                  hintText: 'Kota Reservasi'),
-            ),
-          ),
+          //       if (result != null) {
+          //         setState(() {
+          //           selectedCity = result;
+          //         });
+          //       }
+          //     },
+          //     child: FormHelper.dropdownForm(context,
+          //         data: selectedCity ?? 'Semua Lokasi',
+          //         hintText: 'Kota Reservasi'),
+          //   ),
+          // ),
           // SizedBox(
           //   height: margin16,
           // ),
