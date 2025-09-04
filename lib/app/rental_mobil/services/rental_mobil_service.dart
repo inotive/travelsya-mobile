@@ -79,6 +79,15 @@ class RentalMobilService {
               response.data['data']['vendor']));
         }
       }
+      if (filter.tranmition == 1) {
+        dataFinal = dataFinal
+            .where((e) => e.transmision.toLowerCase() == 'manual')
+            .toList();
+      } else if (filter.tranmition == 2) {
+        dataFinal = dataFinal
+            .where((e) => e.transmision.toLowerCase() == 'automatic')
+            .toList();
+      }
 
       returnValue =
           ApiReturnValue(data: dataFinal, status: RequestStatus.successRequest);

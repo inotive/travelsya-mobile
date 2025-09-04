@@ -59,16 +59,16 @@ class RentalSearchPage extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          GestureDetector(
-                            onTap: () {
-                              BlocProvider.of<RentalMobilFilterCubit>(context)
-                                  .onPickCity(context);
-                            },
-                            child: FormHelper.dropdownForm(context,
-                                data: state.data.selectedLocation ??
-                                    'Semua Lokasi',
-                                hintText: 'Area Rental'),
-                          ),
+                          // GestureDetector(
+                          //   onTap: () {
+                          //     BlocProvider.of<RentalMobilFilterCubit>(context)
+                          //         .onPickCity(context);
+                          //   },
+                          //   child: FormHelper.dropdownForm(context,
+                          //       data: state.data.selectedLocation ??
+                          //           'Semua Lokasi',
+                          //       hintText: 'Area Rental'),
+                          // ),
                           SizedBox(
                             height: margin8,
                           ),

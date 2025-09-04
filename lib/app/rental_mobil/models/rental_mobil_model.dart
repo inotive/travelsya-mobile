@@ -14,6 +14,9 @@ class RentalMobilModel {
     seats = int.parse(jsonMap['seats'].toString());
     price = double.parse(jsonMap['price'].toString());
     transmision = jsonMap['transmission'];
+    // transmision =
+    //     (jsonMap['transmission'] ?? '').toString().trim().toLowerCase();
+
     image = jsonMap['image'];
     try {
       List<dynamic> dataRaw = dataVendor[brand];

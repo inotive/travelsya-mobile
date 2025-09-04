@@ -230,10 +230,25 @@ class RentalCheckoutPage extends StatelessWidget {
                                                 width: margin24 / 2,
                                               ),
                                               SizedBox(
-                                                  width: 45,
-                                                  height: 45,
-                                                  child: Image.network(
-                                                      dataRental.image))
+                                                width: 45,
+                                                height: 45,
+                                                child: Image.network(
+                                                  dataRental.image,
+                                                  fit: BoxFit.cover,
+                                                  errorBuilder: (context, error,
+                                                      stackTrace) {
+                                                    return const Center(
+                                                      child: Icon(
+                                                        Icons.broken_image,
+                                                        size: 50,
+                                                        color: Colors.grey,
+                                                      ),
+                                                    );
+                                                  },
+                                                ),
+                                                // Image.network(
+                                                //     dataRental.image)
+                                              )
                                             ],
                                           )
                                         ],
