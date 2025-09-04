@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:travelsya/app/bus/cubits/bus_city_cubit.dart';
+import 'package:travelsya/app/bus/cubits/bus_city_state.dart';
 import 'package:travelsya/app/bus/cubits/bus_filter_state.dart';
 import 'package:travelsya/app/bus/models/bus_filter_model.dart';
+import 'package:travelsya/app/bus/models/bus_model.dart';
 import 'package:travelsya/shared/function/show_snackbar.dart';
 import 'package:travelsya/shared/widgets/city_picker_bottomsheet.dart';
 import 'package:travelsya/shared/widgets/date_picker_single.dart';
@@ -21,20 +24,31 @@ class BusFilterCubit extends Cubit<BusFilterState> {
     emit(BusFilterLoaded(data));
   }
 
-  onPickCity(BuildContext context,
-      {bool isOrigin = true,
-      CityPickerType type = CityPickerType.hotel}) async {
-    BusFilterState stateFilter = state;
+  Future<void> onPickCity(
+    BuildContext context, {
+    bool isOrigin = true,
+  }) async {
+    final stateFilter = state;
     if (stateFilter is BusFilterLoaded) {
-      BusFilterModel dataFinal = stateFilter.data;
+      final dataFinal = stateFilter.data;
 
-      String? result = await showCityPicker(context, type: CityPickerType.bus);
+      final selectedCity =
+          await showCityPicker<BusCityModel, BusCityCubit, BusCityState>(
+        context,
+        cubit: BlocProvider.of<BusCityCubit>(context),
+        fetchFunction: (cubit, ctx) async {
+          await cubit.fetchCities(ctx);
+        },
+        isLoading: (state) => state is BusCityLoading,
+        getCities: (state) => state is BusCityLoaded ? state.cities : [],
+        displayName: (item) => item.name,
+      );
 
-      if (result != null) {
+      if (selectedCity != null) {
         if (isOrigin) {
-          dataFinal.selectedCityOrigin = result;
+          dataFinal.selectedCityOrigin = selectedCity.name;
         } else {
-          dataFinal.selectedCityDestination = result;
+          dataFinal.selectedCityDestination = selectedCity.name;
         }
         onLoadDataFilter(dataFinal);
       }

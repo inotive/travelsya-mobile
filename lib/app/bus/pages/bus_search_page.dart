@@ -51,14 +51,21 @@ class BusSearchPage extends StatelessWidget {
                           )
                         ],
                       ),
-                      SizedBox(
-                        height: margin16,
-                      ),
+                      // SizedBox(
+                      //   height: margin16,
+                      // ),
                       Container(
                         padding: EdgeInsets.symmetric(horizontal: margin16),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
+                            Text(
+                              'Stasiun Asal',
+                              style: mainBody4.copyWith(color: neutral50),
+                            ),
+                            SizedBox(
+                              height: margin8,
+                            ),
                             GestureDetector(
                               onTap: () {
                                 BlocProvider.of<BusFilterCubit>(context)
@@ -69,14 +76,14 @@ class BusSearchPage extends StatelessWidget {
                                   hintText: 'Kota Asal'),
                             ),
                             SizedBox(
-                              height: margin8,
+                              height: margin24 / 2,
                             ),
                             Text(
-                              'Stasiun Asal',
+                              'Stasiun Tujuan',
                               style: mainBody4.copyWith(color: neutral50),
                             ),
                             SizedBox(
-                              height: margin24 / 2,
+                              height: margin8,
                             ),
                             GestureDetector(
                               onTap: () {
@@ -88,14 +95,14 @@ class BusSearchPage extends StatelessWidget {
                                   hintText: 'Kota Tujuan'),
                             ),
                             SizedBox(
-                              height: margin8,
+                              height: margin24 / 2,
                             ),
                             Text(
-                              'Stasiun Tujuan',
+                              'Tanggal Keberangkatan',
                               style: mainBody4.copyWith(color: neutral50),
                             ),
                             SizedBox(
-                              height: margin24 / 2,
+                              height: margin8,
                             ),
                             GestureDetector(
                               onTap: () {
@@ -110,13 +117,6 @@ class BusSearchPage extends StatelessWidget {
                                       .format(state.data.selectedDateGo!)),
                                   hintText: 'Tanggal Keberangkatan'),
                             ),
-                            SizedBox(
-                              height: margin8,
-                            ),
-                            Text(
-                              'Tanggal Keberangkatan',
-                              style: mainBody4.copyWith(color: neutral50),
-                            ),
                             state.data.isWayBack
                                 ? Column(
                                     crossAxisAlignment:
@@ -124,6 +124,14 @@ class BusSearchPage extends StatelessWidget {
                                     children: [
                                       SizedBox(
                                         height: margin24 / 2,
+                                      ),
+                                      Text(
+                                        'Tanggal Kepulangan',
+                                        style: mainBody4.copyWith(
+                                            color: neutral50),
+                                      ),
+                                      SizedBox(
+                                        height: margin8,
                                       ),
                                       GestureDetector(
                                         onTap: () {
@@ -143,14 +151,6 @@ class BusSearchPage extends StatelessWidget {
                                                         .selectedDateBack!)),
                                             hintText: 'Tanggal Kepulangan'),
                                       ),
-                                      SizedBox(
-                                        height: margin8,
-                                      ),
-                                      Text(
-                                        'Tanggal Kepulangan',
-                                        style: mainBody4.copyWith(
-                                            color: neutral50),
-                                      ),
                                     ],
                                   )
                                 : Container(),
@@ -158,13 +158,20 @@ class BusSearchPage extends StatelessWidget {
                               height: margin24 / 2,
                             ),
                             Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Expanded(
                                   child: Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
+                                      Text(
+                                        'Jumlah Penumpang',
+                                        style: mainBody4.copyWith(
+                                            color: neutral50),
+                                      ),
+                                      SizedBox(
+                                        height: margin8,
+                                      ),
                                       GestureDetector(
                                         onTap: () {
                                           BlocProvider.of<BusFilterCubit>(
@@ -175,14 +182,6 @@ class BusSearchPage extends StatelessWidget {
                                             data:
                                                 '${state.data.totalPassanger} Penumpang',
                                             hintText: 'Jumlah Penumpang'),
-                                      ),
-                                      SizedBox(
-                                        height: margin8,
-                                      ),
-                                      Text(
-                                        'Jumlah Penumpang',
-                                        style: mainBody4.copyWith(
-                                            color: neutral50),
                                       ),
                                     ],
                                   ),

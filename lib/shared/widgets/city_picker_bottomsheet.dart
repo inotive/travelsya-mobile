@@ -1,44 +1,65 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:travelsya/app/hotel/cubits/hotel_cubit.dart';
-import 'package:travelsya/app/hotel/cubits/hotel_state.dart';
 import 'package:travelsya/shared/styles/font_style.dart';
 import 'package:travelsya/shared/styles/size_styles.dart';
 
-Future<String?> showCityPicker(BuildContext context,
-    {CityPickerType type = CityPickerType.hotel}) async {
-  String? result = await showModalBottomSheet(
-      context: context,
-      backgroundColor: Colors.white,
-      shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(10), topRight: Radius.circular(10))),
-      builder: (context) {
-        return CityPickerBottomsheet(
-          type: type,
-        );
-      });
-
-  return result;
+Future<TItem?> showCityPicker<TItem, TCubit extends Cubit<TState>, TState>(
+  BuildContext context, {
+  required TCubit cubit,
+  required Future<void> Function(TCubit cubit, BuildContext ctx) fetchFunction,
+  required bool Function(TState state) isLoading,
+  required List<TItem> Function(TState state)? getCities,
+  required String Function(TItem item) displayName,
+}) {
+  return showModalBottomSheet<TItem>(
+    context: context,
+    backgroundColor: Colors.white,
+    shape: const RoundedRectangleBorder(
+      borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(10), topRight: Radius.circular(10)),
+    ),
+    builder: (context) {
+      return CityPickerBottomsheet<TItem, TCubit, TState>(
+        cubit: cubit,
+        fetchFunction: fetchFunction,
+        isLoading: isLoading,
+        getCities: getCities,
+        displayName: displayName,
+      );
+    },
+  );
 }
 
-enum CityPickerType { hotel, bus }
+class CityPickerBottomsheet<TItem, TCubit extends Cubit<TState>, TState>
+    extends StatefulWidget {
+  final TCubit cubit;
+  final Future<void> Function(TCubit cubit, BuildContext ctx) fetchFunction;
+  final bool Function(TState state) isLoading;
+  final List<TItem> Function(TState state)? getCities;
+  final String Function(TItem item) displayName;
 
-class CityPickerBottomsheet extends StatefulWidget {
-  final CityPickerType type;
-  const CityPickerBottomsheet({super.key, this.type = CityPickerType.hotel});
+  const CityPickerBottomsheet({
+    super.key,
+    required this.cubit,
+    required this.fetchFunction,
+    required this.isLoading,
+    this.getCities,
+    required this.displayName,
+  });
 
   @override
-  State<CityPickerBottomsheet> createState() => _CityPickerBottomsheetState();
+  State<CityPickerBottomsheet<TItem, TCubit, TState>> createState() =>
+      _CityPickerBottomsheetState<TItem, TCubit, TState>();
 }
 
-class _CityPickerBottomsheetState extends State<CityPickerBottomsheet> {
-  HotelCubit cityCubit = HotelCubit();
+enum CityPickerType { hotel, bus, recreation }
 
+class _CityPickerBottomsheetState<TItem, TCubit extends Cubit<TState>, TState>
+    extends State<CityPickerBottomsheet<TItem, TCubit, TState>> {
   @override
   void initState() {
-    cityCubit.fetchHotelAvailableCity(context, type: widget.type);
     super.initState();
+    widget.fetchFunction(widget.cubit, context);
   }
 
   @override
@@ -46,62 +67,71 @@ class _CityPickerBottomsheetState extends State<CityPickerBottomsheet> {
     return Column(
       children: [
         Container(
-            padding: EdgeInsets.only(
-                left: margin16,
-                right: margin16,
-                top: margin16,
-                bottom: margin8),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text('Pilih Kota',
-                    style: mainFont.copyWith(
-                        fontSize: 14,
-                        color: Colors.black87,
-                        fontWeight: FontWeight.bold)),
-                GestureDetector(
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
-                    child: const Icon(Icons.close, color: Colors.black87))
-              ],
-            )),
+          padding:
+              EdgeInsets.symmetric(horizontal: margin16, vertical: margin8),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'Pilih Kota',
+                style: mainFont.copyWith(
+                  fontSize: 14,
+                  color: Colors.black87,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              GestureDetector(
+                onTap: () => Navigator.pop(
+                  context,
+                ),
+                child: const Icon(Icons.close, color: Colors.black87),
+              ),
+            ],
+          ),
+        ),
         Expanded(
-            child: BlocBuilder<HotelCubit, HotelState>(
-                bloc: cityCubit,
-                builder: (context, state) {
-                  if (state is HotelLoading) {
-                    return Center(
-                      child: CircularProgressIndicator(
-                        color: Theme.of(context).primaryColor,
+          child: BlocBuilder<TCubit, TState>(
+            bloc: widget.cubit,
+            builder: (context, state) {
+              if (widget.isLoading(state)) {
+                return Center(
+                  child: CircularProgressIndicator(
+                    color: Theme.of(context).primaryColor,
+                  ),
+                );
+              }
+              final cities = widget.getCities?.call(state) ?? [];
+              if (cities.isEmpty) {
+                return const Center(child: Text("Kota tidak tersedia"));
+              }
+              return ListView.builder(
+                padding: EdgeInsets.zero,
+                itemCount: cities.length,
+                itemBuilder: (context, index) {
+                  final item = cities[index];
+                  return GestureDetector(
+                    onTap: () {
+                      Navigator.pop(context, item);
+                      // Navigator.pop(context, widget.displayName(item));
+                    },
+                    child: Container(
+                      padding: EdgeInsets.all(margin16),
+                      decoration: const BoxDecoration(
+                        border: Border(
+                          bottom: BorderSide(color: Colors.black12),
+                        ),
                       ),
-                    );
-                  } else if (state is ListHotelCityLoaded) {
-                    return ListView(
-                      padding: EdgeInsets.zero,
-                      children: List.generate(state.data.length, (index) {
-                        return GestureDetector(
-                          onTap: () {
-                            Navigator.pop(context, state.data[index]);
-                          },
-                          child: Container(
-                            padding: EdgeInsets.all(margin16),
-                            decoration: const BoxDecoration(
-                              border: Border(
-                                  bottom: BorderSide(color: Colors.black12)),
-                            ),
-                            child: Text(
-                              state.data[index],
-                              style: mainBody4.copyWith(color: Colors.black87),
-                            ),
-                          ),
-                        );
-                      }),
-                    );
-                  }
-
-                  return Container();
-                })),
+                      child: Text(
+                        widget.displayName(item),
+                        style: mainBody4.copyWith(color: Colors.black87),
+                      ),
+                    ),
+                  );
+                },
+              );
+            },
+          ),
+        ),
       ],
     );
   }

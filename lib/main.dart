@@ -7,6 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:travelsya/app/auth/cubits/auth_cubit.dart';
 import 'package:travelsya/app/auth/cubits/profile_cubit.dart';
+import 'package:travelsya/app/bus/cubits/bus_city_cubit.dart';
 import 'package:travelsya/app/bus/cubits/bus_filter_cubit.dart';
 import 'package:travelsya/app/hostel/cubits/hostel_filter_cubit.dart';
 import 'package:travelsya/app/hotel/cubits/hotel_filter_cubit.dart';
@@ -66,9 +67,11 @@ Future<void> main() async {
       BlocProvider<RentalMobilFilterCubit>(
         create: (context) => RentalMobilFilterCubit(),
       ),
-      BlocProvider<BusFilterCubit>(
-        create: (context) => BusFilterCubit(),
-      ),
+      // BlocProvider<BusFilterCubit>(
+      //   create: (context) => BusFilterCubit(),
+      // ),
+      BlocProvider(create: (_) => BusFilterCubit()..onResetData()),
+      BlocProvider(create: (_) => BusCityCubit()),
     ],
     child: const MyApp(),
   ));

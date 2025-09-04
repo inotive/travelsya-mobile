@@ -21,3 +21,13 @@ class BusDataModel {
     availableTicket = jsonMap['available_tickets'];
   }
 }
+
+class BusCityModel {
+  final String name;
+
+  BusCityModel({required this.name});
+
+  factory BusCityModel.fromJson(dynamic json) {
+    return BusCityModel(name: json.toString());
+  }
+}
