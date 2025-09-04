@@ -39,8 +39,8 @@ class _HotelSearchFilterSection extends StatelessWidget {
 
                               if (selected != null) {
                                 BlocProvider.of<HotelFilterCubit>(context)
-                                    .onLocationTap(context,
-                                        hotelCubit: context.read<HotelCubit>());
+                                    .onLocationSelected(
+                                        selected); // simpan hasil saja
                               }
                             },
                             child: FormHelper.dropdownForm(context,
@@ -55,27 +55,27 @@ class _HotelSearchFilterSection extends StatelessWidget {
                         width:
                             state.selectedLocation.isEmpty ? 0 : margin24 / 2,
                       ),
-                      state.selectedLocation.isEmpty
-                          ? const SizedBox()
-                          : AspectRatio(
-                              aspectRatio: 1,
-                              child: GestureDetector(
-                                onTap: () {
-                                  model.onLocationPickerRemove(context);
-                                },
-                                child: Container(
-                                  width: double.infinity,
-                                  height: double.infinity,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(8),
-                                      color: Colors.red),
-                                  child: const Icon(
-                                    Icons.close,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ),
-                            )
+                      // state.selectedLocation.isEmpty
+                      //     ? const SizedBox()
+                      //     : AspectRatio(
+                      //         aspectRatio: 1,
+                      //         child: GestureDetector(
+                      //           onTap: () {
+                      //             model.onLocationPickerRemove(context);
+                      //           },
+                      //           child: Container(
+                      //             width: double.infinity,
+                      //             height: double.infinity,
+                      //             decoration: BoxDecoration(
+                      //                 borderRadius: BorderRadius.circular(8),
+                      //                 color: Colors.green),
+                      //             child: const Icon(
+                      //               Icons.close,
+                      //               color: Colors.white,
+                      //             ),
+                      //           ),
+                      //         ),
+                      //       )
                     ],
                   ),
                 ),

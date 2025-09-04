@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 import 'package:travelsya/app/hostel/widgets/count_picker_widget.dart';
-import 'package:travelsya/app/hotel/cubits/hotel_cubit.dart';
 import 'package:travelsya/app/hotel/cubits/hotel_state.dart';
-import 'package:travelsya/app/hotel/widgets/hotel_city_picker.dart';
 import 'package:travelsya/shared/widgets/multi_date_picker.dart';
 
 class HotelFilterCubit extends Cubit<HotelState> {
@@ -115,30 +113,39 @@ class HotelFilterCubit extends Cubit<HotelState> {
     }
   }
 
-  onLocationTap(BuildContext context, {required HotelCubit hotelCubit}) async {
+  void onLocationSelected(String selectedLocation) {
     HotelState state = this.state;
     if (state is HotelSearchFilter) {
-      HotelSearchFilter data = state;
-
-      String? selected = await showModalBottomSheet(
-          context: context,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10.0),
-          ),
-          constraints: BoxConstraints(
-              maxHeight: MediaQuery.of(context).size.height * 0.9),
-          isScrollControlled: true,
-          builder: (context) {
-            return HotelCityPicker(
-              dataCubit: hotelCubit,
-            );
-          });
-
-      if (selected != null) {
-        data.selectedLocation = selected;
-        emit(HotelLoading());
-        emit(data);
-      }
+      state.selectedLocation = selectedLocation;
+      emit(HotelLoading());
+      emit(state);
     }
   }
+
+  // onLocationTap(BuildContext context, {required HotelCubit hotelCubit}) async {
+  //   HotelState state = this.state;
+  //   if (state is HotelSearchFilter) {
+  //     HotelSearchFilter data = state;
+
+  //     String? selected = await showModalBottomSheet(
+  //         context: context,
+  //         shape: RoundedRectangleBorder(
+  //           borderRadius: BorderRadius.circular(10.0),
+  //         ),
+  //         constraints: BoxConstraints(
+  //             maxHeight: MediaQuery.of(context).size.height * 0.9),
+  //         isScrollControlled: true,
+  //         builder: (context) {
+  //           return HotelCityPicker(
+  //             dataCubit: hotelCubit,
+  //           );
+  //         });
+
+  //     if (selected != null) {
+  //       data.selectedLocation = selected;
+  //       emit(HotelLoading());
+  //       emit(data);
+  //     }
+  //   }
+  // }
 }

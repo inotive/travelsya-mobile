@@ -32,7 +32,7 @@ class _HotelSearchCitySection extends StatelessWidget {
           height: margin16,
         ),
         BlocBuilder<HotelCubit, HotelState>(
-            // bloc: model.locationHotelCubit,
+            bloc: model.locationHotelCubit,
             builder: (context, state) {
               if (state is ListHotelCityLoaded) {
                 return Column(
