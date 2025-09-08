@@ -290,6 +290,7 @@ class RekreasiSearchPage extends StatelessWidget {
                                                             // ),
                                                           ),
                                                           Container(
+                                                            color: Colors.white,
                                                             padding:
                                                                 EdgeInsets.all(
                                                                     margin24 /
