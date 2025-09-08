@@ -56,7 +56,7 @@ class RekreasiReviewSection extends StatelessWidget {
                           width: margin4,
                         ),
                         Text(
-                          data.avgRating!.toStringAsFixed(1),
+                          data.avgRating.toStringAsFixed(1),
                           style: mainBody3.copyWith(
                               color: neutral100, fontWeight: FontWeight.bold),
                         ),
@@ -75,7 +75,7 @@ class RekreasiReviewSection extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        data.avgRating!.toStringAsFixed(1),
+                        data.avgRating.toStringAsFixed(1),
                         style: mainBody4.copyWith(
                             color: neutral100, fontWeight: FontWeight.bold),
                       ),

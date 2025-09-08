@@ -10,7 +10,6 @@ import 'package:travelsya/app/homepage/cubits/ads_state.dart';
 import 'package:travelsya/app/homepage/vm/beranda_vm.dart';
 import 'package:travelsya/app/homepage/widgets/home_profile_picture_widget.dart';
 import 'package:travelsya/app/homepage/widgets/home_saldo_action_widget.dart';
-import 'package:travelsya/shared/api/api_connection.dart';
 import 'package:travelsya/shared/cubits/main_index_cubit.dart';
 import 'package:travelsya/shared/helper/const_helper.dart';
 import 'package:travelsya/shared/styles/font_style.dart';

@@ -176,7 +176,7 @@ class _RekreasiDetailPageState extends State<RekreasiDetailPage> {
                                     Icon(Icons.star,
                                         color: Theme.of(context).primaryColor),
                                     Text(
-                                      data.avgRating!.toStringAsFixed(1),
+                                      data.avgRating.toStringAsFixed(1),
                                       style: mainBody3.copyWith(
                                           fontWeight: FontWeight.bold),
                                     ),
