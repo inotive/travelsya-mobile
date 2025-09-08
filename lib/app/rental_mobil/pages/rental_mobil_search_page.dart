@@ -69,13 +69,13 @@ class RentalSearchPage extends StatelessWidget {
                           //           'Semua Lokasi',
                           //       hintText: 'Area Rental'),
                           // ),
-                          SizedBox(
-                            height: margin8,
-                          ),
-                          Text(
-                            'Area Rental',
-                            style: mainBody4.copyWith(color: neutral50),
-                          ),
+                          // SizedBox(
+                          //   height: margin8,
+                          // ),
+                          // Text(
+                          //   'Area Rental',
+                          //   style: mainBody4.copyWith(color: neutral50),
+                          // ),
                           SizedBox(
                             height: margin24 / 2,
                           ),
@@ -86,6 +86,14 @@ class RentalSearchPage extends StatelessWidget {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
+                                    Text(
+                                      'Tanggal Rental',
+                                      style:
+                                          mainBody4.copyWith(color: neutral50),
+                                    ),
+                                    SizedBox(
+                                      height: margin8,
+                                    ),
                                     GestureDetector(
                                       onTap: () {
                                         BlocProvider.of<RentalMobilFilterCubit>(
@@ -99,14 +107,6 @@ class RentalSearchPage extends StatelessWidget {
                                           customIcons: Icons.date_range,
                                           hintText: 'Tanggal Rental'),
                                     ),
-                                    SizedBox(
-                                      height: margin8,
-                                    ),
-                                    Text(
-                                      'Tanggal Rental',
-                                      style:
-                                          mainBody4.copyWith(color: neutral50),
-                                    ),
                                   ],
                                 ),
                               ),
@@ -118,6 +118,14 @@ class RentalSearchPage extends StatelessWidget {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
+                                    Text(
+                                      'Jam Pengambilan',
+                                      style:
+                                          mainBody4.copyWith(color: neutral50),
+                                    ),
+                                    SizedBox(
+                                      height: margin8,
+                                    ),
                                     GestureDetector(
                                       onTap: () {
                                         BlocProvider.of<RentalMobilFilterCubit>(
@@ -130,14 +138,6 @@ class RentalSearchPage extends StatelessWidget {
                                           data:
                                               '${state.data.selectedTime.hour.toString().padLeft(2, '0')}:${state.data.selectedTime.minute.toString().padLeft(2, '0')}',
                                           hintText: 'Jam Pengambilan'),
-                                    ),
-                                    SizedBox(
-                                      height: margin8,
-                                    ),
-                                    Text(
-                                      'Jam Pengambilan',
-                                      style:
-                                          mainBody4.copyWith(color: neutral50),
                                     ),
                                   ],
                                 ),
@@ -154,6 +154,14 @@ class RentalSearchPage extends StatelessWidget {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
+                                    Text(
+                                      'Durasi Rental',
+                                      style:
+                                          mainBody4.copyWith(color: neutral50),
+                                    ),
+                                    SizedBox(
+                                      height: margin8,
+                                    ),
                                     GestureDetector(
                                       onTap: () {
                                         BlocProvider.of<RentalMobilFilterCubit>(
@@ -163,14 +171,6 @@ class RentalSearchPage extends StatelessWidget {
                                       child: FormHelper.dropdownForm(context,
                                           data: '${state.data.duration} Hari',
                                           hintText: ''),
-                                    ),
-                                    SizedBox(
-                                      height: margin8,
-                                    ),
-                                    Text(
-                                      'Durasi Rental',
-                                      style:
-                                          mainBody4.copyWith(color: neutral50),
                                     ),
                                   ],
                                 ),
