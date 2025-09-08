@@ -46,6 +46,7 @@ class HotelPreviewWidget extends StatelessWidget {
               ),
             ),
             Container(
+              color: Colors.white,
               padding: EdgeInsets.all(margin24 / 2),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

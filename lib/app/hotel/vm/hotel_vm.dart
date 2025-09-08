@@ -1,68 +1,73 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stacked/stacked.dart';
-import 'package:travelsya/app/hostel/cubits/hostel_cubit.dart';
+import 'package:travelsya/app/hotel/cubits/hotel_by_location_cubit.dart';
+import 'package:travelsya/app/hotel/cubits/hotel_city_cubit.dart';
 import 'package:travelsya/app/hotel/cubits/hotel_cubit.dart';
 import 'package:travelsya/app/hotel/cubits/hotel_filter_cubit.dart';
+import 'package:travelsya/app/hotel/cubits/hotel_populer_cubit.dart';
 import 'package:travelsya/app/hotel/pages/hotel_list_page/hotel_list_page.dart';
 
 class HotelVM extends BaseViewModel {
-  HostelCubit hostelCubit = HostelCubit();
-  HotelCubit hostelCubitSearch = HotelCubit();
-  HotelCubit locationHotelCubit = HotelCubit();
-  HotelCubit hotelByLocationCubit = HotelCubit();
+  final HotelCubit hotelCubit;
+  final HotelPopulerCubit hotelCubitSearch;
+  final HotelCityCubit locationHotelCubit;
+  final HotelByLocationCubit hotelByLocationCubit;
 
   String selectedCity = '';
 
-  initCityHotel(BuildContext context, String city) {
-    selectedCity = city;
-    hotelByLocationCubit.fetchHotelData(context, location: city);
-
-    notifyListeners();
+  HotelVM(BuildContext context)
+      : hotelCubit = BlocProvider.of<HotelCubit>(context),
+        hotelCubitSearch = BlocProvider.of<HotelPopulerCubit>(context),
+        locationHotelCubit = BlocProvider.of<HotelCityCubit>(context),
+        hotelByLocationCubit = BlocProvider.of<HotelByLocationCubit>(context) {
+    onInit(context);
   }
 
-  onInit(BuildContext context) {
+  void onInit(BuildContext context) {
     BlocProvider.of<HotelFilterCubit>(context).onInit();
+
     locationHotelCubit.fetchHotelAvailableCity(context, onDataReady: (data) {
-      initCityHotel(context, data[0]);
+      if (data.isNotEmpty) {
+        initCityHotel(context, data[0]);
+      }
     });
-    hostelCubitSearch.fetchPopulerHotel(context);
+
+    hotelCubitSearch.fetchPopulerHotel(context);
   }
 
-  onChangeIndexCity(BuildContext context, String value) {
-    selectedCity = value;
-    hotelByLocationCubit.fetchHotelData(context, location: value);
+  void initCityHotel(BuildContext context, String city) {
+    selectedCity = city;
+    hotelByLocationCubit.fetchHotelByLocation(context, city);
     notifyListeners();
   }
 
-  onRoomCountChanged(BuildContext context) async {
+  void onChangeIndexCity(BuildContext context, String value) {
+    selectedCity = value;
+    hotelByLocationCubit.fetchHotelByLocation(context, value);
+    notifyListeners();
+  }
+
+  void onRoomCountChanged(BuildContext context) async {
     BlocProvider.of<HotelFilterCubit>(context).onRoomCountChanged(context);
   }
 
-  onGuessChanged(BuildContext context) async {
+  void onGuessChanged(BuildContext context) async {
     BlocProvider.of<HotelFilterCubit>(context).onGuessChanged(context);
   }
 
-  onDateTap(BuildContext context) async {
+  void onDateTap(BuildContext context) async {
     BlocProvider.of<HotelFilterCubit>(context).onDateTap(context);
   }
 
-  onLocationPickerRemove(BuildContext context) {
+  void onLocationPickerRemove(BuildContext context) {
     BlocProvider.of<HotelFilterCubit>(context).onRemoveLocation();
   }
 
-  // onLocationPicker(BuildContext context) async {
-  //   HotelState state = locationHotelCubit.state;
-  //   if (state is HotelInitial) {
-  //     locationHotelCubit.fetchHotelAvailableCity(context);
-  //   }
-
-  //   BlocProvider.of<HotelFilterCubit>(context)
-  //       .onLocationTap(context, hotelCubit: locationHotelCubit);
-  // }
-
-  onSearchHotel(BuildContext context) {
+  void onSearchHotel(BuildContext context) {
     Navigator.push(
-        context, MaterialPageRoute(builder: (_) => const HotelListPage()));
+      context,
+      MaterialPageRoute(builder: (_) => const HotelListPage()),
+    );
   }
 }

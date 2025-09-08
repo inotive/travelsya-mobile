@@ -11,8 +11,9 @@ class _HotelSearchFilterSection extends StatelessWidget {
       builder: (context, state) {
         if (state is HotelSearchFilter) {
           return Container(
-            padding:
-                EdgeInsets.symmetric(horizontal: margin16, vertical: margin16),
+            padding: EdgeInsets.symmetric(
+              horizontal: margin16,
+            ),
             child: Column(
               children: [
                 IntrinsicHeight(
@@ -25,10 +26,11 @@ class _HotelSearchFilterSection extends StatelessWidget {
                             onTap: () async {
                               // model.onLocationPicker(context);
                               final selected = await showCityPicker<String,
-                                      HotelCubit, HotelState>(context,
-                                  cubit: context.read<HotelCubit>(),
+                                      HotelCityCubit, HotelState>(context,
+                                  cubit: context.read<HotelCityCubit>(),
                                   fetchFunction: (cubit, ctx) async {
                                     cubit.fetchHotelAvailableCity(ctx);
+                                    // cubit.fetchHotelAvailableCity(ctx);
                                   },
                                   isLoading: (state) => state is HotelLoading,
                                   getCities: (state) =>
@@ -39,8 +41,7 @@ class _HotelSearchFilterSection extends StatelessWidget {
 
                               if (selected != null) {
                                 BlocProvider.of<HotelFilterCubit>(context)
-                                    .onLocationSelected(
-                                        selected); // simpan hasil saja
+                                    .onLocationSelected(selected);
                               }
                             },
                             child: FormHelper.dropdownForm(context,

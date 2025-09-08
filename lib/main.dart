@@ -10,8 +10,11 @@ import 'package:travelsya/app/auth/cubits/profile_cubit.dart';
 import 'package:travelsya/app/bus/cubits/bus_city_cubit.dart';
 import 'package:travelsya/app/bus/cubits/bus_filter_cubit.dart';
 import 'package:travelsya/app/hostel/cubits/hostel_filter_cubit.dart';
+import 'package:travelsya/app/hotel/cubits/hotel_by_location_cubit.dart';
+import 'package:travelsya/app/hotel/cubits/hotel_city_cubit.dart';
 import 'package:travelsya/app/hotel/cubits/hotel_cubit.dart';
 import 'package:travelsya/app/hotel/cubits/hotel_filter_cubit.dart';
+import 'package:travelsya/app/hotel/cubits/hotel_populer_cubit.dart';
 import 'package:travelsya/app/ppob/cubits/ppob_cubit.dart';
 import 'package:travelsya/app/rental_mobil/cubits/rental_mobil_filter_cubit.dart';
 import 'package:travelsya/app/splash_screen/pages/splash_screen_page.dart';
@@ -53,11 +56,17 @@ Future<void> main() async {
       BlocProvider<PPOBCubit>(
         create: (context) => PPOBCubit(),
       ),
+      BlocProvider<HotelFilterCubit>(
+        create: (context) => HotelFilterCubit(),
+      ),
+      // BlocProvider(create: (_) => HotelFilterCubit()..onInit()),
+      BlocProvider<HotelCubit>(create: (_) => HotelCubit()),
+
+      BlocProvider(create: (_) => HotelPopulerCubit()),
+      BlocProvider(create: (_) => HotelCityCubit()),
+      BlocProvider(create: (_) => HotelByLocationCubit()),
       // BlocProvider<HotelFilterCubit>(
-      //   create: (context) => HotelFilterCubit(),
-      // ),
-      BlocProvider(create: (_) => HotelFilterCubit()..onInit()),
-      BlocProvider(create: (_) => HotelCubit()),
+      //     create: (_) => HotelFilterCubit()..onInit()),
       BlocProvider<HostelFilterCubit>(
         create: (context) => HostelFilterCubit(),
       ),

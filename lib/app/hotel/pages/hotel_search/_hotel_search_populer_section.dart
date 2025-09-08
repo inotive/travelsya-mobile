@@ -25,8 +25,8 @@ class _HotelSearchPopulerSection extends StatelessWidget {
           SizedBox(
             height: margin16,
           ),
-          BlocBuilder<HotelCubit, HotelState>(
-              bloc: model.hostelCubitSearch,
+          BlocBuilder<HotelPopulerCubit, HotelState>(
+              bloc: model.hotelCubitSearch,
               builder: (context, state) {
                 if (state is PreviewHotelListLoaded) {
                   return SizedBox(
@@ -35,14 +35,15 @@ class _HotelSearchPopulerSection extends StatelessWidget {
                       alignment: WrapAlignment.spaceBetween,
                       children: List.generate(state.data.length, (index) {
                         return FractionallySizedBox(
-                            widthFactor: 0.49,
-                            child: HotelPreviewWidget(
-                              data: state.data[index],
-                            ));
+                          widthFactor: 0.49,
+                          child: HotelPreviewWidget(
+                            data: state.data[index],
+                          ),
+                        );
                       }),
                     ),
                   );
-                } else if (state is HotelLoading) {
+                } else if (state is HotelLoading || state is HotelInitial) {
                   return SizedBox(
                     width: double.infinity,
                     child: Wrap(
@@ -67,11 +68,14 @@ class _HotelSearchPopulerSection extends StatelessWidget {
                 } else {
                   return FailedRequestWidget(
                     onRetry: () {
-                      model.hostelCubitSearch.fetchPopulerHotel(context);
+                      context
+                          .read<HotelPopulerCubit>()
+                          .fetchPopulerHotel(context);
+                      // model.hotelCubitSearch.fetchPopulerHotel(context);
                     },
                   );
                 }
-              }),
+              })
         ],
       ),
     );

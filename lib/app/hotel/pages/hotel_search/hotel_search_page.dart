@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:stacked/stacked.dart';
-import 'package:travelsya/app/hotel/cubits/hotel_cubit.dart';
+import 'package:travelsya/app/hotel/cubits/hotel_by_location_cubit.dart';
+import 'package:travelsya/app/hotel/cubits/hotel_city_cubit.dart';
 import 'package:travelsya/app/hotel/cubits/hotel_filter_cubit.dart';
+import 'package:travelsya/app/hotel/cubits/hotel_populer_cubit.dart';
 import 'package:travelsya/app/hotel/cubits/hotel_state.dart';
 import 'package:travelsya/app/hotel/vm/hotel_vm.dart';
 import 'package:travelsya/app/hotel/widgets/hotel_preview_widget.dart';
@@ -29,7 +31,7 @@ class HotelSearchPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<HotelVM>.reactive(viewModelBuilder: () {
-      return HotelVM();
+      return HotelVM(context);
     }, onViewModelReady: (model) {
       // model.onInit(context);
     }, builder: (context, model, child) {

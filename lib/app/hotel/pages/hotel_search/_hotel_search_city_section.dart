@@ -31,7 +31,7 @@ class _HotelSearchCitySection extends StatelessWidget {
         SizedBox(
           height: margin16,
         ),
-        BlocBuilder<HotelCubit, HotelState>(
+        BlocBuilder<HotelCityCubit, HotelState>(
             bloc: model.locationHotelCubit,
             builder: (context, state) {
               if (state is ListHotelCityLoaded) {
@@ -84,7 +84,7 @@ class _HotelSearchCitySection extends StatelessWidget {
                     SizedBox(
                       height: margin24 / 2,
                     ),
-                    BlocBuilder<HotelCubit, HotelState>(
+                    BlocBuilder<HotelByLocationCubit, HotelState>(
                       bloc: model.hotelByLocationCubit,
                       builder: (context, stateHotelCity) {
                         if (stateHotelCity is PreviewHotelListLoaded) {
@@ -116,7 +116,14 @@ class _HotelSearchCitySection extends StatelessWidget {
                           );
                         } else {
                           return FailedRequestWidget(
-                            onRetry: () {},
+                            onRetry: () {
+                              final retryCity = model.selectedCity; // ✅ CHANGED
+
+                              model.hotelByLocationCubit.fetchHotelByLocation(
+                                  context, retryCity); // ✅ CHANGED
+                              // model.hotelByLocationCubit
+                              //     .fetchHotelByLocation(context, "Balikpapan");
+                            },
                           );
                         }
                       },
@@ -147,10 +154,12 @@ class _HotelSearchCitySection extends StatelessWidget {
               } else {
                 return FailedRequestWidget(
                   onRetry: () {
-                    // model.locationHotelCubit.fetchHotelAvailableCity(context,
-                    //     onDataReady: (data) {
-                    //   model.initCityHotel(context, data[0]);
-                    // });
+                    model.locationHotelCubit.fetchHotelAvailableCity(context,
+                        onDataReady: (data) {
+                      if (data.isNotEmpty) {
+                        model.initCityHotel(context, data[0]);
+                      }
+                    });
                   },
                 );
               }
