@@ -4,6 +4,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stacked/stacked.dart';
 import 'package:travelsya/app/rekreasi/models/recreation_model.dart';
 import 'package:travelsya/app/rekreasi/viewmodel/recreation_checkout_vm.dart';
+import 'package:travelsya/app/rekreasi/widgets/rekreasi_checkout_bill_detail_card.dart';
+import 'package:travelsya/app/rekreasi/widgets/rekreasi_checkout_detail_card.dart';
+import 'package:travelsya/app/rekreasi/widgets/rekreasi_checkout_order_user_card.dart';
+import 'package:travelsya/app/rekreasi/widgets/rekreasi_rules_checkout_section.dart';
 import 'package:travelsya/shared/cubits/point/point_cubit.dart';
 import 'package:travelsya/shared/cubits/point/point_state.dart';
 import 'package:travelsya/shared/helper/function_helper.dart';
@@ -69,196 +73,26 @@ class NewRekreasiCheckoutPage extends StatelessWidget {
               Expanded(
                   child: ListView(
                 children: [
-                  Container(
-                    padding: EdgeInsets.all(margin16),
-                    color: neutral10,
-                    child: Column(
-                      children: [
-                        Stack(
-                          children: [
-                            Positioned(
-                              top: 0,
-                              bottom: 0,
-                              left: 0,
-                              right: 0,
-                              child: Container(
-                                width: double.infinity,
-                                height: double.infinity,
-                                decoration: BoxDecoration(
-                                    border: Border.all(
-                                        color: neutral50.withOpacity(0.3)),
-                                    borderRadius: BorderRadius.circular(10),
-                                    color: Colors.white),
-                                alignment: Alignment.topRight,
-                                child: SizedBox(
-                                  width: 45,
-                                  height: 45,
-                                  child: Image.asset(
-                                    'assets/icons/group_23.png',
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Container(
-                              padding: EdgeInsets.all(margin16),
-                              width: double.infinity,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    'Detail Paket',
-                                    style: mainBody4.copyWith(
-                                        color: neutral100,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  Divider(color: neutral50.withOpacity(0.3)),
-                                  // Container(
-                                  //   margin: EdgeInsets.symmetric(
-                                  //       vertical: margin24 / 2),
-                                  //   width: double.infinity,
-                                  //   height: 1,
-                                  //   color: neutral50.withOpacity(0.3),
-                                  // ),
-                                  ...items.map((e) => Padding(
-                                        padding: EdgeInsets.symmetric(
-                                            vertical: margin8),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              data.name,
-                                              style: mainBody4,
-                                            ),
-                                            Text(
-                                              "${e.package.name} x${e.quantity}",
-                                              style: mainBody5.copyWith(
-                                                  color: Theme.of(context)
-                                                      .primaryColor),
-                                            ),
-                                            SizedBox(
-                                              height: margin4,
-                                            ),
-                                            Text(
-                                              moneyChanger(
-                                                  e.package.price * e.quantity,
-                                                  customLabel: 'IDR '),
-                                              style: mainBody4.copyWith(
-                                                  fontWeight: FontWeight.bold),
-                                            )
-                                          ],
-                                        ),
-                                      ))
-
-                                  // Row(
-                                  //   children: [
-                                  //     Expanded(
-                                  //         child: Column(
-                                  //       crossAxisAlignment:
-                                  //           CrossAxisAlignment.start,
-                                  //       children: [
-                                  //         RichText(
-                                  //             text: TextSpan(children: [
-                                  //           TextSpan(
-                                  //               text: dataVendor.name,
-                                  //               style: mainBody5.copyWith(
-                                  //                   color: neutral100,
-                                  //                   fontWeight:
-                                  //                       FontWeight.bold)),
-                                  //           TextSpan(
-                                  //               text:
-                                  //                   ' - ${state.data.isWithDriver ? 'Dengan Supir' : 'Lepas Kunci'}',
-                                  //               style: mainBody5.copyWith(
-                                  //                   color: neutral50,
-                                  //                   fontStyle:
-                                  //                       FontStyle.italic))
-                                  //         ])),
-                                  //         Text(
-                                  //           dataRental.brand,
-                                  //           style: mainBody5.copyWith(
-                                  //               color: neutral100),
-                                  //         ),
-                                  //         SizedBox(
-                                  //           height: margin8,
-                                  //         ),
-                                  //         Row(
-                                  //           children: [
-                                  //             SizedBox(
-                                  //                 width: margin16,
-                                  //                 height: margin16,
-                                  //                 child: Image.asset(
-                                  //                     'assets/icons/users.png')),
-                                  //             SizedBox(
-                                  //               width: margin4,
-                                  //             ),
-                                  //             Text(
-                                  //               '${dataRental.seats} Orang',
-                                  //               style: mainBody5.copyWith(
-                                  //                   color: neutral50),
-                                  //             ),
-                                  //             SizedBox(
-                                  //               width: margin24 / 2,
-                                  //             ),
-                                  //             SizedBox(
-                                  //                 width: margin16,
-                                  //                 height: margin16,
-                                  //                 child: Image.asset(
-                                  //                     'assets/icons/users.png')),
-                                  //             SizedBox(
-                                  //               width: margin4,
-                                  //             ),
-                                  //             Text(
-                                  //               dataRental.transmision,
-                                  //               style: mainBody5.copyWith(
-                                  //                   color: neutral50),
-                                  //             )
-                                  //           ],
-                                  //         ),
-                                  //         SizedBox(
-                                  //           height: margin24 / 2,
-                                  //         ),
-                                  //         Row(
-                                  //           children: [
-                                  //             Text(
-                                  //               moneyChanger(
-                                  //                   dataVendor.price),
-                                  //               style: mainBody4.copyWith(
-                                  //                   color: Theme.of(context)
-                                  //                       .primaryColor,
-                                  //                   fontWeight:
-                                  //                       FontWeight.bold),
-                                  //             ),
-                                  //             Text(
-                                  //               ' /hari',
-                                  //               style: mainBody5.copyWith(
-                                  //                   color: neutral50),
-                                  //             )
-                                  //           ],
-                                  //         )
-                                  //       ],
-                                  //     )),
-                                  //     SizedBox(
-                                  //       width: margin24 / 2,
-                                  //     ),
-                                  //     SizedBox(
-                                  //         width: 45,
-                                  //         height: 45,
-                                  //         child: Image.network(
-                                  //             dataRental.image))
-                                  //   ],
-                                  // )
-                                ],
-                              ),
-                            )
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
+                  ...items.map((item) => RekreasiCheckoutDetailCard(
+                        package: item.package,
+                        dataDetail: data,
+                      )),
                   SizedBox(
                     height: margin32,
-                  )
+                  ),
+                  const RekreasiRulesCheckoutSection(),
+                  Container(
+                    width: double.infinity,
+                    height: 8,
+                    color: const Color(0xfff4f4f4),
+                  ),
+                  const RekreasiCheckoutOrderUserCard(),
+                  Container(
+                    width: double.infinity,
+                    height: 8,
+                    color: const Color(0xfff4f4f4),
+                  ),
+                  const RekreasiCheckoutBillDetailCard()
                 ],
               )),
               Container(
@@ -414,7 +248,7 @@ class NewRekreasiCheckoutPage extends StatelessWidget {
                             );
                           }
                         },
-                        title: 'Lanjutkan ke Pembayaran')
+                        title: 'Lanjutkan ke Pembayaran Baru')
                   ],
                 ),
               )
