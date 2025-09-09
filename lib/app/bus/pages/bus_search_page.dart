@@ -225,6 +225,26 @@ class BusSearchPage extends StatelessWidget {
                             ElevatedButtonWidget(
                                 enabled: true,
                                 onTap: () {
+                                  final busFilter = state.data;
+
+                                  if (busFilter.selectedCityOrigin == null) {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      const SnackBar(
+                                          content: Text(
+                                              "Pilih kota asal terlebih dahulu")),
+                                    );
+                                    return;
+                                  }
+
+                                  if (busFilter.selectedCityDestination ==
+                                      null) {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      const SnackBar(
+                                          content: Text(
+                                              "Pilih kota tujuan terlebih dahulu")),
+                                    );
+                                    return;
+                                  }
                                   BlocProvider.of<BusFilterCubit>(context)
                                       .onSearch(context, onSuccess: () {
                                     Navigator.push(
