@@ -6,7 +6,7 @@ import 'package:travelsya/app/auth/cubits/auth_state.dart';
 import 'package:travelsya/app/auth/cubits/profile_cubit.dart';
 import 'package:travelsya/app/auth/cubits/profile_state.dart';
 import 'package:travelsya/app/profile/vm/profile_vm.dart';
-// import 'package:travelsya/shared/api/api_connection.dart';
+import 'package:travelsya/shared/api/api_connection.dart';
 import 'package:travelsya/shared/cubits/point/point_cubit.dart';
 import 'package:travelsya/shared/cubits/point/point_state.dart';
 import 'package:travelsya/shared/helper/const_helper.dart';
@@ -68,11 +68,15 @@ class _ProfilePageState extends State<ProfilePage> {
                                                 image: DecorationImage(
                                                   fit: BoxFit.cover,
                                                   image: NetworkImage(
-                                                      '${state.data.image}'),
-                                                  // '$basePathUserUrl${state.data.image}'),
+                                                    state.data.image!
+                                                            .startsWith('http')
+                                                        ? state.data.image!
+                                                        : '$basePathUserUrl${state.data.image!}',
+                                                    // '${state.data.image}'),
+                                                    // '$basePathUserUrl${state.data.image}'),
+                                                  ),
                                                 ),
-                                              ),
-                                            )
+                                              ))
                                       : const Icon(
                                           Icons.account_circle,
                                           size: 80,

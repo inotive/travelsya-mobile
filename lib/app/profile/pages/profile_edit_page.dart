@@ -6,7 +6,6 @@ import 'package:stacked/stacked.dart';
 import 'package:travelsya/app/auth/cubits/auth_cubit.dart';
 import 'package:travelsya/app/auth/cubits/auth_state.dart';
 import 'package:travelsya/app/profile/vm/profile_edit_vm.dart';
-import 'package:travelsya/shared/api/api_connection.dart';
 // import 'package:travelsya/shared/api/api_connection.dart';
 import 'package:travelsya/shared/styles/font_style.dart';
 import 'package:travelsya/shared/styles/size_styles.dart';
@@ -66,8 +65,9 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
                                                   image: DecorationImage(
                                                       fit: BoxFit.cover,
                                                       image: NetworkImage(
-                                                          // '${state.data.image}')
-                                                          '$basePathUserUrl${state.data.image}'))),
+                                                          '${state.data.image}')
+                                                      // '$basePathUserUrl${state.data.image}')
+                                                      )),
                                             )
                                           : const Icon(
                                               Icons.account_circle,
