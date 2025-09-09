@@ -8,6 +8,7 @@ import 'package:travelsya/app/rekreasi/pages%20new/new_rekreasi_package_section.
 import 'package:travelsya/app/rekreasi/widgets/rekreasi_info_section.dart';
 import 'package:travelsya/app/rekreasi/widgets/rekreasi_location_section.dart';
 import 'package:travelsya/app/rekreasi/widgets/rekreasi_review_section.dart';
+import 'package:travelsya/shared/api/api_connection.dart';
 import 'package:travelsya/shared/function/need_login_function.dart';
 import 'package:travelsya/shared/helper/function_helper.dart';
 import 'package:travelsya/shared/styles/font_style.dart';
@@ -140,19 +141,9 @@ class _NewRekreasiDetailPageState extends State<NewRekreasiDetailPage> {
                                   aspectRatio: 375 / 264,
                                   child: (data.images.isNotEmpty)
                                       ? Image.network(
-                                          data.images[0],
+                                          "$baseAPIImageUrl${data.images[0]}",
                                           fit: BoxFit.cover,
                                           width: double.infinity,
-                                          errorBuilder:
-                                              (context, error, stackTrace) {
-                                            return const Center(
-                                              child: Icon(
-                                                Icons.broken_image,
-                                                size: 80,
-                                                color: Colors.grey,
-                                              ),
-                                            );
-                                          },
                                         )
                                       : const Center(
                                           child: Icon(
@@ -162,6 +153,61 @@ class _NewRekreasiDetailPageState extends State<NewRekreasiDetailPage> {
                                           ),
                                         ),
                                 ),
+                                const SizedBox(
+                                  height: 3,
+                                ),
+                                if (data.images.length > 1)
+                                  Row(
+                                    children: [
+                                      // Gambar kedua
+                                      Expanded(
+                                        child: Image.network(
+                                          "$baseAPIImageUrl${data.images[1]}",
+                                          fit: BoxFit.cover,
+                                          height: 74,
+                                        ),
+                                      ),
+                                      const SizedBox(width: 3),
+                                      // Gambar ketiga
+                                      Expanded(
+                                        child: Image.network(
+                                          "$baseAPIImageUrl${data.images[2]}",
+                                          fit: BoxFit.cover,
+                                          height: 74,
+                                        ),
+                                      ),
+                                      const SizedBox(width: 3),
+
+                                      Expanded(
+                                        child: Stack(
+                                          children: [
+                                            Image.network(
+                                              "$baseAPIImageUrl${data.images[3]}",
+                                              fit: BoxFit.cover,
+                                              width: double.infinity,
+                                              height: 74,
+                                            ),
+                                            if (data.images.length > 4)
+                                              Container(
+                                                height: 74,
+                                                color: Colors.black45,
+                                                child: Center(
+                                                  child: Text(
+                                                    '+${data.images.length - 3} lainnya',
+                                                    style:
+                                                        secondaryBody4.copyWith(
+                                                      color: Colors.white,
+                                                      fontWeight:
+                                                          FontWeight.w600,
+                                                    ),
+                                                  ),
+                                                ),
+                                              )
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 Padding(
                                   padding: EdgeInsets.all(margin16),
                                   child: Row(
@@ -219,7 +265,7 @@ class _NewRekreasiDetailPageState extends State<NewRekreasiDetailPage> {
                                           Text(' (${data.ratingCount})'),
                                           SizedBox(width: margin4),
                                           Text(
-                                            data.city,
+                                            'Kota ${data.city}',
                                             style: mainBody4.copyWith(
                                               color: Theme.of(context)
                                                   .primaryColor,

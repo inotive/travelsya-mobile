@@ -2,6 +2,7 @@
 String baseUrl = 'https://travelsya.inotivedev.com/';
 String basePathUserUrl = '${baseUrl}storage/public/users/';
 String baseAPIUrl = '${baseUrl}api';
+String baseAPIImageUrl = '${baseUrl}public';
 
 String adsUrl = '$baseAPIUrl/ads';
 

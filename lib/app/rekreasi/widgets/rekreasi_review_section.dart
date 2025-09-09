@@ -110,6 +110,7 @@ class RekreasiReviewSection extends StatelessWidget {
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(6)),
                       child: Container(
+                        color: Colors.white,
                         constraints: const BoxConstraints(maxWidth: 200),
                         padding: EdgeInsets.all(margin24 / 2),
                         height: double.infinity,
