@@ -70,6 +70,10 @@ class RekreasiLocationSection extends StatelessWidget {
                   options: MapOptions(
                     initialCenter: LatLng(latitude!, longitude!),
                     initialZoom: 7,
+                    minZoom: 3,
+                    maxZoom: 18,
+                    interactiveFlags:
+                        InteractiveFlag.pinchZoom | InteractiveFlag.drag,
                   ),
                   children: [
                     TileLayer(
