@@ -222,6 +222,7 @@ class _HealthSearchPageState extends State<HealthSearchPage> {
                   if (result != null) {
                     setState(() {
                       selectedCity = result; // simpan model
+                      print("DEBUG => Kota terpilih: ${selectedCity?.name}");
                     });
                   }
                 },
@@ -291,6 +292,7 @@ class _HealthSearchPageState extends State<HealthSearchPage> {
                         MaterialPageRoute(
                             builder: (_) => HealthSearchResultPage(
                                   isHealth: selectedIndex == 0,
+                                  city: selectedCity?.name,
                                 )));
                   },
                   title: 'Cari Sekarang',

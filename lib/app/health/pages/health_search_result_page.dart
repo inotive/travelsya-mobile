@@ -22,11 +22,99 @@ class HealthSearchResultPage extends StatefulWidget {
 class _HealthSearchResultPageState extends State<HealthSearchResultPage> {
   HealthCubit searchCubit = HealthCubit();
 
+  List<HealthPreviewModel> originalData = [];
+
+  String? selectedSort;
+  DateTime? selectedDate;
+  double? minPrice;
+  double? maxPrice;
+
   @override
   void initState() {
     searchCubit.searchClinic(context,
         isHealth: widget.isHealth, city: widget.city);
     super.initState();
+  }
+
+  void applyFilter() {
+    List<HealthPreviewModel> filteredData = List.from(originalData);
+
+    if (minPrice != null) {
+      filteredData = filteredData.where((e) => e.price >= minPrice!).toList();
+    }
+    if (maxPrice != null) {
+      filteredData = filteredData.where((e) => e.price >= maxPrice!).toList();
+    }
+
+    if (selectedDate != null) {
+      // filteredData =
+      //     filteredData.where((e) => e.availableDate == selectedDate).toList();
+    }
+
+    if (selectedSort != null) {
+      if (selectedSort == 'Harga Tertinggi') {
+        filteredData.sort((a, b) => b.price.compareTo(a.price));
+      } else if (selectedSort == 'Harga Terendah') {
+        filteredData.sort((a, b) => a.price.compareTo(b.price));
+      }
+    }
+    // searchCubit.emit(HealthSearchLoaded(filteredData));
+  }
+
+  Future<Map<String, double>?> showPriceRangeDialog(
+      BuildContext context) async {
+    double? min;
+    double? max;
+    return showDialog<Map<String, double>>(
+        context: context,
+        builder: (_) => AlertDialog(
+              title: const Text('Filter Harga'),
+              content: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  TextField(
+                    keyboardType: TextInputType.number,
+                    decoration: const InputDecoration(labelText: 'Min Price'),
+                    onChanged: (val) => min = double.tryParse(val),
+                  ),
+                  TextField(
+                    keyboardType: TextInputType.number,
+                    decoration: const InputDecoration(labelText: 'Max Price'),
+                    onChanged: (val) => max = double.tryParse(val),
+                  ),
+                ],
+              ),
+              actions: [
+                TextButton(
+                    onPressed: () => Navigator.pop(context, null),
+                    child: const Text('Batal')),
+                TextButton(
+                    onPressed: () => Navigator.pop(context,
+                        {'min': min ?? 0, 'max': max ?? double.infinity}),
+                    child: const Text('Terapkan')),
+              ],
+            ));
+  }
+
+  Future<String?> showSortDialog(BuildContext context) async {
+    return showDialog<String>(
+        context: context,
+        builder: (_) => AlertDialog(
+              title: const Text('Urutkan'),
+              content: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  ListTile(
+                    title: const Text('Harga Tertinggi'),
+                    onTap: () => Navigator.pop(context, 'Harga Tertinggi'),
+                  ),
+                  ListTile(
+                    title: const Text('Harga Terendah'),
+                    onTap: () => Navigator.pop(context, 'Harga Terendah'),
+                  ),
+                ],
+              ),
+            ));
   }
 
   @override
@@ -95,23 +183,29 @@ class _HealthSearchResultPageState extends State<HealthSearchResultPage> {
                           Container(
                             padding:
                                 EdgeInsets.symmetric(vertical: margin24 / 2),
-                            child: Row(
-                              children: [
-                                SizedBox(
-                                  width: 18,
-                                  height: 18,
-                                  child: Image.asset('assets/new/location.png'),
-                                ),
-                                SizedBox(
-                                  width: margin4,
-                                ),
-                                Text(
-                                  widget.city ?? 'Semua Lokasi',
-                                  style: mainBody5.copyWith(
-                                      fontWeight: FontWeight.bold,
-                                      color: Theme.of(context).primaryColor),
-                                )
-                              ],
+                            child: GestureDetector(
+                              onTap: () {
+                                Navigator.pop(context);
+                              },
+                              child: Row(
+                                children: [
+                                  SizedBox(
+                                    width: 18,
+                                    height: 18,
+                                    child:
+                                        Image.asset('assets/new/location.png'),
+                                  ),
+                                  SizedBox(
+                                    width: margin4,
+                                  ),
+                                  Text(
+                                    widget.city ?? 'Semua Lokasi',
+                                    style: mainBody5.copyWith(
+                                        fontWeight: FontWeight.bold,
+                                        color: Theme.of(context).primaryColor),
+                                  )
+                                ],
+                              ),
                             ),
                           ),
                           SizedBox(
@@ -165,53 +259,95 @@ class _HealthSearchResultPageState extends State<HealthSearchResultPage> {
                                   style: mainBody4.copyWith(
                                       color: const Color(0xffa5a5a5)))
                             ])),
-                            // SizedBox(
-                            //   height: margin16,
-                            // ),
-                            // SingleChildScrollView(
-                            //   scrollDirection: Axis.horizontal,
-                            //   child: Row(
-                            //     children: List.generate(4, (index) {
-                            //       return Container(
-                            //         margin: EdgeInsets.only(right: margin8),
-                            //         padding: EdgeInsets.symmetric(
-                            //             vertical: margin8, horizontal: margin8),
-                            //         decoration: BoxDecoration(
-                            //             borderRadius: BorderRadius.circular(20),
-                            //             border: Border.all(
-                            //                 color: const Color(0xffa5a5a5))),
-                            //         child: Row(
-                            //           children: [
-                            //             SizedBox(
-                            //               width: 16,
-                            //               height: 16,
-                            //               child: Image.asset(index == 0
-                            //                   ? 'assets/new/filter.png'
-                            //                   : index == 1
-                            //                       ? 'assets/new/date.png'
-                            //                       : index == 2
-                            //                           ? 'assets/new/money.png'
-                            //                           : 'assets/new/filter.png'),
-                            //             ),
-                            //             SizedBox(
-                            //               width: margin4,
-                            //             ),
-                            //             Text(
-                            //               index == 0
-                            //                   ? 'Filter'
-                            //                   : index == 1
-                            //                       ? 'Tanggal'
-                            //                       : index == 2
-                            //                           ? 'Harga'
-                            //                           : 'Urutkan',
-                            //               style: mainBody4,
-                            //             )
-                            //           ],
-                            //         ),
-                            //       );
-                            //     }),
-                            //   ),
-                            // ),
+                            SizedBox(
+                              height: margin16,
+                            ),
+                            Row(
+                              children: List.generate(4, (index) {
+                                return GestureDetector(
+                                  onTap: () async {
+                                    if (index == 0) {
+                                      // Filter harga
+                                      final result =
+                                          await showPriceRangeDialog(context);
+                                      if (result != null) {
+                                        setState(() {
+                                          minPrice = result['min'];
+                                          maxPrice = result['max'];
+                                        });
+                                        applyFilter();
+                                      }
+                                    } else if (index == 1) {
+                                      // Tanggal
+                                      final date = await showDatePicker(
+                                        context: context,
+                                        initialDate: DateTime.now(),
+                                        firstDate: DateTime.now(),
+                                        lastDate: DateTime.now()
+                                            .add(const Duration(days: 365)),
+                                      );
+                                      if (date != null) {
+                                        setState(() {
+                                          selectedDate = date;
+                                        });
+                                        applyFilter();
+                                      }
+                                    } else if (index == 2) {
+                                      // Urutkan harga
+                                      final sort =
+                                          await showSortDialog(context);
+                                      if (sort != null) {
+                                        setState(() {
+                                          selectedSort = sort;
+                                        });
+                                        applyFilter();
+                                      }
+                                    } else if (index == 3) {
+                                      // Urutkan lain-lain (opsional)
+                                    }
+                                  },
+                                  child: Container(
+                                    margin: EdgeInsets.only(right: margin8),
+                                    padding: EdgeInsets.symmetric(
+                                        vertical: margin8,
+                                        horizontal: margin8),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(20),
+                                      border: Border.all(
+                                          color: const Color(0xffa5a5a5)),
+                                    ),
+                                    child: Row(
+                                      children: [
+                                        SizedBox(
+                                          width: 16,
+                                          height: 16,
+                                          child: Image.asset(
+                                            index == 0
+                                                ? 'assets/new/filter.png'
+                                                : index == 1
+                                                    ? 'assets/new/date.png'
+                                                    : index == 2
+                                                        ? 'assets/new/money.png'
+                                                        : 'assets/new/filter.png',
+                                          ),
+                                        ),
+                                        SizedBox(width: margin4),
+                                        Text(
+                                          index == 0
+                                              ? 'Filter'
+                                              : index == 1
+                                                  ? 'Tanggal'
+                                                  : index == 2
+                                                      ? 'Harga'
+                                                      : 'Urutkan',
+                                          style: mainBody4,
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                );
+                              }),
+                            ),
                             SizedBox(
                               height: margin16,
                             ),
@@ -232,6 +368,7 @@ class _HealthSearchResultPageState extends State<HealthSearchResultPage> {
                                                   )));
                                     },
                                     child: Card(
+                                      color: Colors.white,
                                       shape: RoundedRectangleBorder(
                                           borderRadius:
                                               BorderRadius.circular(12)),

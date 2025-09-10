@@ -82,6 +82,7 @@ class HealthService {
       Uri.parse(
           '${isHealth ? healthSearchUrl : beautySearchUrl}?location=${city ?? ''}'),
     );
+    print("DEBUG => healthSearch city param: $city");
 
     ApiReturnValue<dynamic>? response = await ApiReturnValue.httpRequest(
         context,

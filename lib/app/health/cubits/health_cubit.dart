@@ -7,16 +7,36 @@ import 'package:travelsya/shared/api/api_return_value.dart';
 class HealthCubit extends Cubit<HealthState> {
   HealthCubit() : super(HealthInitial());
 
-  searchClinic(BuildContext context, {String? city, bool isHealth = true}) {
+  // searchClinic(BuildContext context, {String? city, bool isHealth = true}) {
+  //   emit(HealthLoading());
+  //   HealthService.healthSearch(context, city: city, isHealth: isHealth)
+  //       .then((value) {
+  //     if (value.status == RequestStatus.successRequest) {
+  //       emit(HealthSearchLoaded(value.data));
+  //     } else {
+  //       emit(HealthFailed(value));
+  //     }
+  //   });
+  // }
+
+  Future<void> searchClinic(
+    BuildContext context, {
+    String? city,
+    bool isHealth = true,
+  }) async {
     emit(HealthLoading());
-    HealthService.healthSearch(context, city: city, isHealth: isHealth)
-        .then((value) {
-      if (value.status == RequestStatus.successRequest) {
-        emit(HealthSearchLoaded(value.data));
-      } else {
-        emit(HealthFailed(value));
-      }
-    });
+
+    final value = await HealthService.healthSearch(
+      context,
+      city: city,
+      isHealth: isHealth,
+    );
+
+    if (value.status == RequestStatus.successRequest) {
+      emit(HealthSearchLoaded(value.data));
+    } else {
+      emit(HealthFailed(value));
+    }
   }
 
   fetchDetailClinic(BuildContext context, {required String id}) {
