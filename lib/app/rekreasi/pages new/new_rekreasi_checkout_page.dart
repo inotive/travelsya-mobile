@@ -7,7 +7,7 @@ import 'package:travelsya/app/rekreasi/viewmodel/recreation_checkout_vm.dart';
 import 'package:travelsya/app/rekreasi/widgets/rekreasi_checkout_bill_detail_card.dart';
 import 'package:travelsya/app/rekreasi/widgets/rekreasi_checkout_detail_card.dart';
 import 'package:travelsya/app/rekreasi/widgets/rekreasi_checkout_order_user_card.dart';
-import 'package:travelsya/app/rekreasi/widgets/rekreasi_rules_checkout_section.dart';
+// import 'package:travelsya/app/rekreasi/widgets/rekreasi_rules_checkout_section.dart';
 import 'package:travelsya/shared/cubits/point/point_cubit.dart';
 import 'package:travelsya/shared/cubits/point/point_state.dart';
 import 'package:travelsya/shared/helper/function_helper.dart';
@@ -78,9 +78,8 @@ class NewRekreasiCheckoutPage extends StatelessWidget {
                         dataDetail: data,
                       )),
                   SizedBox(
-                    height: margin32,
+                    height: margin16,
                   ),
-                  const RekreasiRulesCheckoutSection(),
                   Container(
                     width: double.infinity,
                     height: 8,

@@ -7,44 +7,34 @@ class RekreasiRulesCheckoutSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: const Color(0xffFFEEF1),
-      // color: primaryBorderColor,
-      padding: const EdgeInsets.only(
-        right: 16,
-        left: 16,
-        top: 32,
-        bottom: 48,
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              Text(
-                'Peraturan',
-                style: mainBody2.copyWith(
-                    fontWeight: FontWeight.bold, color: neutral100),
-              ),
-              const SizedBox(
-                width: 16,
-              ),
-              Text(
-                'Reflexology 30 menit',
-                style: mainBody3.copyWith(
-                    fontWeight: FontWeight.w600, color: primaryColor),
-              ),
-            ],
-          ),
-          const SizedBox(
-            height: 16,
-          ),
-          Text(
-            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse nisl justo, imperdiet ut metus sit amet, semper molestie quam. Pellentesque molestie ante tempus mauris tincidunt, sed elementum massa venenatis. Duis facilisis urna massa, ut varius nibh viverra in. ',
-            style: secondaryBody5.copyWith(color: neutral100),
-          )
-        ],
-      ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          children: [
+            Text(
+              'Peraturan',
+              style: mainBody4.copyWith(
+                  fontWeight: FontWeight.bold, color: neutral100),
+            ),
+            const SizedBox(
+              width: 4,
+            ),
+            Text(
+              'Reflexology 30 menit',
+              style: mainBody4.copyWith(
+                  fontWeight: FontWeight.w600, color: primaryColor),
+            ),
+          ],
+        ),
+        const SizedBox(
+          height: 8,
+        ),
+        Text(
+          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse nisl justo, imperdiet ut metus sit amet, semper molestie quam. Pellentesque molestie ante tempus mauris tincidunt, sed elementum massa venenatis. Duis facilisis urna massa, ut varius nibh viverra in. ',
+          style: secondaryBody5.copyWith(color: neutral100),
+        )
+      ],
     );
   }
 }

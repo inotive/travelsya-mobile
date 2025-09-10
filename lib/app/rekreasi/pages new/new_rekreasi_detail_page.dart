@@ -516,11 +516,20 @@ class _NewRekreasiDetailPageState extends State<NewRekreasiDetailPage> {
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (_) =>
-                                                NewRekreasiCheckoutPage(
-                                                  data: data,
-                                                  items: selectedPackages,
-                                                )));
+                                          // builder: (_) =>
+                                          //     NewRekreasiCheckoutPage(
+                                          // data: data,
+                                          // items: selectedPackages,
+                                          //     )
+                                          builder: (_) => BlocProvider.value(
+                                            value: context
+                                                .read<QuantityManagerCubit>(),
+                                            child: NewRekreasiCheckoutPage(
+                                              data: data,
+                                              items: selectedPackages,
+                                            ),
+                                          ),
+                                        ));
                                   });
                                 },
                                 child: Container(

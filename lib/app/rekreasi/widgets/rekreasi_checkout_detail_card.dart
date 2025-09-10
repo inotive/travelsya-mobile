@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:travelsya/app/rekreasi/cubits/quantity_cubit.dart';
 import 'package:travelsya/app/rekreasi/models/recreation_model.dart';
+import 'package:travelsya/app/rekreasi/widgets/rekreasi_rules_checkout_section.dart';
 import 'package:travelsya/shared/helper/function_helper.dart';
 import 'package:travelsya/shared/styles/font_style.dart';
 import 'package:travelsya/shared/styles/size_styles.dart';
@@ -94,34 +97,33 @@ class RekreasiCheckoutDetailCard extends StatelessWidget {
                               ),
                             ],
                           ),
-                          Text(
-                            'x1',
-                            style: secondaryBody5.copyWith(color: neutral30),
+                          BlocBuilder<QuantityManagerCubit, Map<String, int>>(
+                            builder: (context, state) {
+                              final qty = context
+                                  .read<QuantityManagerCubit>()
+                                  .getQty(package.id.toString());
+                              return Text(
+                                'x$qty',
+                                style:
+                                    secondaryBody5.copyWith(color: neutral30),
+                              );
+                            },
                           ),
                         ],
                       ),
+                      Container(
+                        margin: EdgeInsets.symmetric(vertical: margin24 / 2),
+                        width: double.infinity,
+                        height: 1,
+                        color: neutral50.withOpacity(0.3),
+                      ),
+                      const RekreasiRulesCheckoutSection()
                     ],
                   ),
                 ),
               ],
             ),
           ),
-          const SizedBox(
-            height: 10,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Text(
-                '1',
-                style: secondaryBody5,
-              ),
-              Text(
-                '/2 Layanan',
-                style: secondaryBody5.copyWith(color: neutral30),
-              ),
-            ],
-          )
         ],
       ),
     );
