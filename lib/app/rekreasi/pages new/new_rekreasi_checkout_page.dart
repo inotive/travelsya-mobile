@@ -29,8 +29,13 @@ class NewRekreasiCheckoutPage extends StatelessWidget {
   const NewRekreasiCheckoutPage(
       {super.key, required this.data, required this.items});
 
-  double get totalHarga =>
-      items.fold(0, (sum, e) => sum + (e.package.price * e.quantity));
+  double getTotalTagihan(List<CheckoutItem> items,
+      {double admin = 1.0, double unitCode = 1000}) {
+    final totalItems =
+        items.fold(0.0, (sum, e) => sum + (e.package.price * e.quantity));
+    final adminFee = totalItems * (admin / 100);
+    return totalItems + adminFee + unitCode;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -91,7 +96,18 @@ class NewRekreasiCheckoutPage extends StatelessWidget {
                     height: 8,
                     color: const Color(0xfff4f4f4),
                   ),
-                  const RekreasiCheckoutBillDetailCard()
+                  RekreasiCheckoutBillDetailCard(
+                    items: items
+                        .map((e) => RekreasiBillItem(
+                              title: e.package.name,
+                              subtitle: e.package.duration,
+                              price: e.package.price,
+                              quantity: e.quantity,
+                            ))
+                        .toList(),
+                    adminFeePercent: 1.0,
+                    unitCode: 1000,
+                  )
                 ],
               )),
               Container(
@@ -227,7 +243,8 @@ class NewRekreasiCheckoutPage extends StatelessWidget {
                           style: mainBody5.copyWith(color: neutral100),
                         ),
                         Text(
-                          moneyChanger(totalHarga, customLabel: 'IDR '),
+                          moneyChanger(getTotalTagihan(items),
+                              customLabel: 'IDR '),
                           style: mainBody4.copyWith(
                               color: neutral100, fontWeight: FontWeight.bold),
                         )
@@ -239,13 +256,11 @@ class NewRekreasiCheckoutPage extends StatelessWidget {
                     ElevatedButtonWidget(
                         enabled: true,
                         onTap: () {
-                          for (var item in items) {
-                            model.onSubmit(
-                              context,
-                              packageId: item.package.id,
-                              // quantity: item.quantity,
-                            );
-                          }
+                          model.onSubmit(
+                            context,
+                            items: items,
+                            // quantity: item.quantity,
+                          );
                         },
                         title: 'Lanjutkan ke Pembayaran Baru')
                   ],

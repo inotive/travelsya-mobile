@@ -382,10 +382,10 @@ class RekreasiCheckoutPage extends StatelessWidget {
                     ElevatedButtonWidget(
                         enabled: true,
                         onTap: () {
-                          model.onSubmit(
-                            context,
-                            packageId: package.id,
-                          );
+                          // model.onSubmit(
+                          //   context,
+                          //   packageId: package.id,
+                          // );
                         },
                         title: 'Lanjutkan ke Pembayaran')
                   ],
