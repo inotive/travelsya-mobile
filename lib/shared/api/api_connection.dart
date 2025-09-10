@@ -50,6 +50,7 @@ String beautySearchUrl = '$baseAPIUrl/beauty_search';
 String clinicDetailUrl = '$baseAPIUrl/clinic_detail';
 String clinicOrderUrl = '$baseAPIUrl/clinic/transaction/request';
 String healthBeautyReviewUrl = '$baseAPIUrl/clinic/rating';
+String healthCityUrl = '$baseAPIUrl/health-beauty/city';
 
 //bus & travel
 String busSearchUrl = '$baseAPIUrl/find_bus';

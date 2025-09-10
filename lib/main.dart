@@ -9,6 +9,8 @@ import 'package:travelsya/app/auth/cubits/auth_cubit.dart';
 import 'package:travelsya/app/auth/cubits/profile_cubit.dart';
 import 'package:travelsya/app/bus/cubits/bus_city_cubit.dart';
 import 'package:travelsya/app/bus/cubits/bus_filter_cubit.dart';
+import 'package:travelsya/app/health/cubits/health_city_cubit.dart';
+import 'package:travelsya/app/health/cubits/health_cubit.dart';
 import 'package:travelsya/app/hostel/cubits/hostel_filter_cubit.dart';
 import 'package:travelsya/app/hotel/cubits/hotel_by_location_cubit.dart';
 import 'package:travelsya/app/hotel/cubits/hotel_city_cubit.dart';
@@ -84,6 +86,8 @@ Future<void> main() async {
       // ),
       BlocProvider(create: (_) => BusFilterCubit()..onResetData()),
       BlocProvider(create: (_) => BusCityCubit()),
+      BlocProvider(create: (_) => HealthCubit()),
+      BlocProvider(create: (_) => HealthCityCubit()),
       // BlocProvider(create: (_) => HotelCityCubit()..fetchCities(context)),
     ],
     child: const MyApp(),

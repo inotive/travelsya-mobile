@@ -331,9 +331,9 @@ class _HealthDetailPageState extends State<HealthDetailPage> {
                                 padding: EdgeInsets.all(margin16),
                                 child: Column(
                                   children: List.generate(
-                                      state.data.package.length, (index) {
+                                      state.data.packages.length, (index) {
                                     HealthPackageModel data =
-                                        state.data.package[index];
+                                        state.data.packages[index];
                                     return Card(
                                       shape: RoundedRectangleBorder(
                                           borderRadius:
@@ -463,7 +463,7 @@ class _HealthDetailPageState extends State<HealthDetailPage> {
                                                   children: [
                                                     Text(
                                                       moneyChanger(
-                                                          data.unitPirce,
+                                                          data.unitPrice,
                                                           customLabel: 'IDR '),
                                                       style: mainBody5.copyWith(
                                                           color: const Color(
@@ -615,10 +615,10 @@ class _HealthDetailPageState extends State<HealthDetailPage> {
                         SingleChildScrollView(
                           scrollDirection: Axis.horizontal,
                           child: Row(
-                            children: List.generate(state.data.comment.length,
+                            children: List.generate(state.data.comments.length,
                                 (index) {
                               HealthCommentModel data =
-                                  state.data.comment[index];
+                                  state.data.comments[index];
                               return Container(
                                 margin: EdgeInsets.only(
                                     left: index == 0 ? margin16 : margin8),

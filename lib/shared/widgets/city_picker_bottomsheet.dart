@@ -52,7 +52,7 @@ class CityPickerBottomsheet<TItem, TCubit extends Cubit<TState>, TState>
       _CityPickerBottomsheetState<TItem, TCubit, TState>();
 }
 
-enum CityPickerType { hotel, bus, recreation }
+enum CityPickerType { hotel, bus, recreation, health }
 
 class _CityPickerBottomsheetState<TItem, TCubit extends Cubit<TState>, TState>
     extends State<CityPickerBottomsheet<TItem, TCubit, TState>> {

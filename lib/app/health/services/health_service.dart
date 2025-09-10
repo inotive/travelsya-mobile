@@ -3,6 +3,7 @@ import 'package:travelsya/app/health/models/health_model.dart';
 import 'package:travelsya/shared/api/api_connection.dart';
 import 'package:travelsya/shared/api/api_return_value.dart';
 import 'package:http/http.dart' as http;
+import 'package:travelsya/shared/widgets/city_picker_bottomsheet.dart';
 
 class HealthService {
   static Future<ApiReturnValue> checkoutHealth(BuildContext context,
@@ -196,6 +197,91 @@ class HealthService {
 
       returnValue = ApiReturnValue(
           data: [datahealth, databeauty], status: RequestStatus.successRequest);
+    } else {
+      String? messages;
+      try {
+        Map<String, dynamic> datamessages = response.data['data']['response'];
+
+        datamessages.forEach((key, value) {
+          messages = value[0];
+        });
+      } catch (e) {
+        messages = null;
+      }
+      returnValue = ApiReturnValue(data: messages, status: response.status);
+    }
+
+    return returnValue;
+  }
+
+  // static Future<ApiReturnValue> getCities(BuildContext context,
+  //     {CityPickerType type = CityPickerType.health}) async {
+  //   ApiReturnValue returnValue;
+
+  //   var request = http.MultipartRequest('GET', Uri.parse(healthCityUrl));
+
+  //   ApiReturnValue<dynamic>? response = await ApiReturnValue.httpRequest(
+  //     context,
+  //     request: request,
+  //     exceptionStatusCode: [201, 400],
+  //     auth: true,
+  //   );
+
+  //   if (response!.status == RequestStatus.successRequest) {
+  //     List<HealthCityModel> dataFinal = (response.data['data'] as List)
+  //         .map<HealthCityModel>((city) => HealthCityModel.fromJson(city))
+  //         .toList();
+
+  //     returnValue = ApiReturnValue(
+  //       data: dataFinal,
+  //       status: RequestStatus.successRequest,
+  //     );
+  //   } else {
+  //     String? messages;
+  //     try {
+  //       Map<String, dynamic> datamessages = response.data['data']['response'];
+  //       datamessages.forEach((key, value) {
+  //         messages = value[0];
+  //       });
+  //     } catch (e) {
+  //       messages = null;
+  //     }
+  //     returnValue = ApiReturnValue(
+  //       data: messages,
+  //       status: response.status,
+  //     );
+  //   }
+
+  //   return returnValue;
+  // }
+
+  static Future<ApiReturnValue> getCities(BuildContext context,
+      {CityPickerType type = CityPickerType.health}) async {
+    ApiReturnValue returnValue;
+
+    String url = healthCityUrl;
+
+    var request = http.MultipartRequest('GET', Uri.parse(url));
+
+    ApiReturnValue<dynamic>? response = await ApiReturnValue.httpRequest(
+        context,
+        request: request,
+        exceptionStatusCode: [201, 400],
+        auth: true);
+
+    if (response!.status == RequestStatus.successRequest) {
+      if (response.data['data'] == null) {
+        List<String> data = [];
+        returnValue =
+            ApiReturnValue(data: data, status: RequestStatus.successRequest);
+      } else {
+        List<String> dataFinal = [];
+        for (var i = 0; i < response.data['data'].length; i++) {
+          dataFinal.add(response.data['data'][i].toString());
+        }
+        returnValue = ApiReturnValue(
+            data: dataFinal, status: RequestStatus.successRequest);
+      }
     } else {
       String? messages;
       try {

@@ -37,11 +37,20 @@ class _HotelDetailInfoSection extends StatelessWidget {
                         child: Container(
                           width: double.infinity,
                           height: double.infinity,
-                          decoration: BoxDecoration(
-                              image: DecorationImage(
-                                  fit: BoxFit.cover,
-                                  image: NetworkImage(
-                                      model.dataAllImage(data)[index]))),
+                          color: Colors.grey[200],
+                          child: Image.network(
+                            model.dataAllImage(data)[index],
+                            fit: BoxFit.cover,
+                            errorBuilder: (context, error, stackTrace) {
+                              return const Center(
+                                child: Icon(
+                                  Icons.broken_image,
+                                  size: 48,
+                                  color: Colors.grey,
+                                ),
+                              );
+                            },
+                          ),
                         ),
                       );
                     }),

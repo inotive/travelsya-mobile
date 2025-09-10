@@ -67,3 +67,32 @@ class HealthSearchLoaded extends HealthState {
         data,
       ];
 }
+
+class HealthCityState extends Equatable {
+  const HealthCityState();
+
+  @override
+  List<Object?> get props => [];
+}
+
+class HealthCityInitial extends HealthCityState {}
+
+class HealthCityLoading extends HealthCityState {}
+
+class HealthCityLoaded extends HealthCityState {
+  final List<HealthCityModel> cities;
+
+  const HealthCityLoaded(this.cities);
+
+  @override
+  List<Object?> get props => [cities];
+}
+
+class HealthCityFailed extends HealthCityState {
+  final String message;
+
+  const HealthCityFailed(this.message);
+
+  @override
+  List<Object?> get props => [message];
+}
