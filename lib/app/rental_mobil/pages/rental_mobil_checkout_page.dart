@@ -296,7 +296,7 @@ class RentalCheckoutPage extends StatelessWidget {
                                         children: [
                                           Text(
                                             'Waktu Sewa',
-                                            style: mainBody5.copyWith(
+                                            style: mainBody4.copyWith(
                                                 color: neutral100,
                                                 fontWeight: FontWeight.bold),
                                           ),
@@ -387,33 +387,33 @@ class RentalCheckoutPage extends StatelessWidget {
                                               ),
                                             ],
                                           ),
-                                          Container(
-                                            margin: EdgeInsets.symmetric(
-                                                vertical: margin24 / 2),
-                                            width: double.infinity,
-                                            height: 1,
-                                            color: neutral50.withOpacity(0.3),
-                                          ),
-                                          Row(
-                                            children: [
-                                              Expanded(
-                                                  child: Text(
-                                                'Bisa refund, reschedule dan overtime',
-                                                style: mainBody5.copyWith(
-                                                    fontWeight: FontWeight.bold,
-                                                    color: Theme.of(context)
-                                                        .primaryColor),
-                                              )),
-                                              SizedBox(
-                                                width: margin24 / 2,
-                                              ),
-                                              Icon(
-                                                Icons.arrow_forward_ios_rounded,
-                                                color: neutral100,
-                                                size: 15,
-                                              )
-                                            ],
-                                          )
+                                          // Container(
+                                          //   margin: EdgeInsets.symmetric(
+                                          //       vertical: margin24 / 2),
+                                          //   width: double.infinity,
+                                          //   height: 1,
+                                          //   color: neutral50.withOpacity(0.3),
+                                          // ),
+                                          // Row(
+                                          //   children: [
+                                          //     Expanded(
+                                          //         child: Text(
+                                          //       'Bisa refund, reschedule dan overtime',
+                                          //       style: mainBody5.copyWith(
+                                          //           fontWeight: FontWeight.bold,
+                                          //           color: Theme.of(context)
+                                          //               .primaryColor),
+                                          //     )),
+                                          //     SizedBox(
+                                          //       width: margin24 / 2,
+                                          //     ),
+                                          //     Icon(
+                                          //       Icons.arrow_forward_ios_rounded,
+                                          //       color: neutral100,
+                                          //       size: 15,
+                                          //     )
+                                          //   ],
+                                          // )
                                         ],
                                       ),
                                     )
@@ -459,19 +459,6 @@ class RentalCheckoutPage extends StatelessWidget {
                                         children: [
                                           Text(
                                             'Area Sewa',
-                                            style: mainBody5.copyWith(
-                                                color: neutral100,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                          Container(
-                                            margin: EdgeInsets.symmetric(
-                                                vertical: margin24 / 2),
-                                            width: double.infinity,
-                                            height: 1,
-                                            color: neutral50.withOpacity(0.3),
-                                          ),
-                                          Text(
-                                            'Jakarta',
                                             style: mainBody4.copyWith(
                                                 color: neutral100,
                                                 fontWeight: FontWeight.bold),
@@ -483,26 +470,41 @@ class RentalCheckoutPage extends StatelessWidget {
                                             height: 1,
                                             color: neutral50.withOpacity(0.3),
                                           ),
-                                          Row(
-                                            children: [
-                                              Expanded(
-                                                  child: Text(
-                                                'Lihat Cakupan Area',
-                                                style: mainBody5.copyWith(
-                                                    fontWeight: FontWeight.bold,
-                                                    color: Theme.of(context)
-                                                        .primaryColor),
-                                              )),
-                                              SizedBox(
-                                                width: margin24 / 2,
-                                              ),
-                                              Icon(
-                                                Icons.arrow_forward_ios_rounded,
+                                          Text(
+                                            state.data.selectedLocation ??
+                                                'Kota tidak tersedia',
+                                            // 'Jakarta',
+                                            style: mainBody4.copyWith(
                                                 color: neutral100,
-                                                size: 15,
-                                              )
-                                            ],
-                                          )
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          // Container(
+                                          //   margin: EdgeInsets.symmetric(
+                                          //       vertical: margin24 / 2),
+                                          //   width: double.infinity,
+                                          //   height: 1,
+                                          //   color: neutral50.withOpacity(0.3),
+                                          // ),
+                                          // Row(
+                                          //   children: [
+                                          //     Expanded(
+                                          //         child: Text(
+                                          //       'Lihat Cakupan Area',
+                                          //       style: mainBody5.copyWith(
+                                          //           fontWeight: FontWeight.bold,
+                                          //           color: Theme.of(context)
+                                          //               .primaryColor),
+                                          //     )),
+                                          //     SizedBox(
+                                          //       width: margin24 / 2,
+                                          //     ),
+                                          //     Icon(
+                                          //       Icons.arrow_forward_ios_rounded,
+                                          //       color: neutral100,
+                                          //       size: 15,
+                                          //     )
+                                          //   ],
+                                          // )
                                         ],
                                       ),
                                     )
