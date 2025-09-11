@@ -96,3 +96,13 @@ class HealthCityFailed extends HealthCityState {
   @override
   List<Object?> get props => [message];
 }
+
+class SpaHomeLoaded extends HealthState {
+  final List<HealthCategoryModel> category;
+  final List<HealthPreviewModel> specialDeal;
+
+  const SpaHomeLoaded(this.category, this.specialDeal);
+
+  @override
+  List<Object> get props => [category, specialDeal];
+}

@@ -74,7 +74,7 @@ class HealthService {
   }
 
   static Future<ApiReturnValue> healthSearch(BuildContext context,
-      {String? city, bool isHealth = true}) async {
+      {String? city, bool isHealth = true, bool isSpa = false}) async {
     ApiReturnValue returnValue;
 
     var request = http.MultipartRequest(
@@ -288,6 +288,58 @@ class HealthService {
       try {
         Map<String, dynamic> datamessages = response.data['data']['response'];
 
+        datamessages.forEach((key, value) {
+          messages = value[0];
+        });
+      } catch (e) {
+        messages = null;
+      }
+      returnValue = ApiReturnValue(data: messages, status: response.status);
+    }
+
+    return returnValue;
+  }
+
+  static Future<ApiReturnValue> spaHome(BuildContext context) async {
+    ApiReturnValue returnValue;
+
+    var request = http.MultipartRequest(
+      'GET',
+      Uri.parse(spaHomeUrl),
+    );
+
+    ApiReturnValue<dynamic>? response = await ApiReturnValue.httpRequest(
+      context,
+      request: request,
+      exceptionStatusCode: [201],
+      auth: false,
+    );
+
+    if (response!.status == RequestStatus.successRequest) {
+      List<HealthCategoryModel> dataCategory = [];
+      List<HealthPreviewModel> dataFinal = [];
+
+      for (var i = 0; i < response.data['data']['categories'].length; i++) {
+        dataCategory.add(
+          HealthCategoryModel.fromJson(response.data['data']['categories'][i]),
+        );
+      }
+
+      for (var i = 0; i < response.data['data']['special_deals'].length; i++) {
+        dataFinal.add(
+          HealthPreviewModel.fromJson(
+              response.data['data']['special_deals'][i]),
+        );
+      }
+
+      returnValue = ApiReturnValue(
+        data: [dataCategory, dataFinal],
+        status: RequestStatus.successRequest,
+      );
+    } else {
+      String? messages;
+      try {
+        Map<String, dynamic> datamessages = response.data['data']['response'];
         datamessages.forEach((key, value) {
           messages = value[0];
         });

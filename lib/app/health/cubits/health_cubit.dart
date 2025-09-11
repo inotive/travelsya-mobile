@@ -7,18 +7,6 @@ import 'package:travelsya/shared/api/api_return_value.dart';
 class HealthCubit extends Cubit<HealthState> {
   HealthCubit() : super(HealthInitial());
 
-  // searchClinic(BuildContext context, {String? city, bool isHealth = true}) {
-  //   emit(HealthLoading());
-  //   HealthService.healthSearch(context, city: city, isHealth: isHealth)
-  //       .then((value) {
-  //     if (value.status == RequestStatus.successRequest) {
-  //       emit(HealthSearchLoaded(value.data));
-  //     } else {
-  //       emit(HealthFailed(value));
-  //     }
-  //   });
-  // }
-
   Future<void> searchClinic(
     BuildContext context, {
     String? city,
@@ -70,6 +58,17 @@ class HealthCubit extends Cubit<HealthState> {
     HealthService.healthHome(context, isHealth: isHealth).then((value) {
       if (value.status == RequestStatus.successRequest) {
         emit(HealthHomeLoaded(value.data[0], value.data[1]));
+      } else {
+        emit(HealthFailed(value));
+      }
+    });
+  }
+
+  fetchSpaHome(BuildContext context) {
+    emit(HealthLoading());
+    HealthService.spaHome(context).then((value) {
+      if (value.status == RequestStatus.successRequest) {
+        emit(SpaHomeLoaded(value.data[0], value.data[1]));
       } else {
         emit(HealthFailed(value));
       }
