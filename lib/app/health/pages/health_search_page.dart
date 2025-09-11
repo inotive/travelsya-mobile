@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 import 'package:travelsya/app/health/cubits/health_city_cubit.dart';
 import 'package:travelsya/app/health/cubits/health_cubit.dart';
 import 'package:travelsya/app/health/cubits/health_state.dart';
@@ -10,6 +11,7 @@ import 'package:travelsya/shared/helper/function_helper.dart';
 import 'package:travelsya/shared/styles/font_style.dart';
 import 'package:travelsya/shared/styles/size_styles.dart';
 import 'package:travelsya/shared/widgets/city_picker_bottomsheet.dart';
+import 'package:travelsya/shared/widgets/date_picker_single.dart';
 import 'package:travelsya/shared/widgets/form_helper/elevated_button_widget.dart';
 
 class HealthSearchPage extends StatefulWidget {
@@ -21,6 +23,7 @@ class HealthSearchPage extends StatefulWidget {
 
 class _HealthSearchPageState extends State<HealthSearchPage> {
   int selectedIndex = 0;
+  DateTime? selectedDate;
 
   HealthCubit healthHomeCubit = HealthCubit();
   HealthCubit beautyHomeCubit = HealthCubit();
@@ -221,7 +224,7 @@ class _HealthSearchPageState extends State<HealthSearchPage> {
 
                   if (result != null) {
                     setState(() {
-                      selectedCity = result; // simpan model
+                      selectedCity = result;
                       print("DEBUG => Kota terpilih: ${selectedCity?.name}");
                     });
                   }
@@ -258,26 +261,48 @@ class _HealthSearchPageState extends State<HealthSearchPage> {
             ),
             Container(
               margin: EdgeInsets.symmetric(horizontal: margin16),
-              padding: EdgeInsets.symmetric(vertical: 14, horizontal: margin16),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8),
-                  border: Border.all(color: const Color(0xffa5a5a5))),
-              child: Row(
-                children: [
-                  SizedBox(
-                    width: 18,
-                    height: 18,
-                    child: Image.asset('assets/new/date_2.png'),
+              child: GestureDetector(
+                onTap: () async {
+                  final selected = await showDialog(
+                      context: context,
+                      builder: (_) => DateSinglePicker(
+                            selectedDate: selectedDate,
+                            minDate: DateTime.now(),
+                          ));
+                  if (selected != null) {
+                    setState(() {
+                      selectedDate = selected;
+                      print("Debug => Tanggal terpilih: $selectedDate");
+                    });
+                  }
+                },
+                child: Container(
+                  padding:
+                      EdgeInsets.symmetric(vertical: 14, horizontal: margin16),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8),
+                      border: Border.all(color: const Color(0xffa5a5a5))),
+                  child: Row(
+                    children: [
+                      SizedBox(
+                        width: 18,
+                        height: 18,
+                        child: Image.asset('assets/new/date_2.png'),
+                      ),
+                      SizedBox(
+                        width: margin16,
+                      ),
+                      Expanded(
+                          child: Text(
+                        selectedDate != null
+                            ? DateFormat('dd MMM yyyy').format(selectedDate!)
+                            : 'Tanggal reservasi',
+                        style:
+                            mainBody5.copyWith(color: const Color(0xffa5a5a5)),
+                      ))
+                    ],
                   ),
-                  SizedBox(
-                    width: margin16,
-                  ),
-                  Expanded(
-                      child: Text(
-                    'Tanggal reservasi',
-                    style: mainBody5.copyWith(color: const Color(0xffa5a5a5)),
-                  ))
-                ],
+                ),
               ),
             ),
             SizedBox(
