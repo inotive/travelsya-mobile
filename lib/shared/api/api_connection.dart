@@ -40,6 +40,7 @@ String carFindUrl = '$baseAPIUrl/find_car';
 String carDetailUrl = '$baseAPIUrl/detail_car';
 String carOrderUrl = '$baseAPIUrl/car_rent/transaction/request';
 String carReviewUrl = '$baseAPIUrl/car_rent/rating';
+String carCityUrl = '$baseAPIUrl/car-rent/city';
 
 //health & beauty
 String healthBeautyListUrl = '$baseAPIUrl/health_beauty';

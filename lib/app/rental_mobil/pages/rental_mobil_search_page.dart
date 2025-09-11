@@ -51,33 +51,30 @@ class RentalSearchPage extends StatelessWidget {
                         )
                       ],
                     ),
-                    // SizedBox(
-                    //   height: margin8,
-                    // ),
                     Container(
                       padding: EdgeInsets.symmetric(horizontal: margin16),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          // GestureDetector(
-                          //   onTap: () {
-                          //     BlocProvider.of<RentalMobilFilterCubit>(context)
-                          //         .onPickCity(context);
-                          //   },
-                          //   child: FormHelper.dropdownForm(context,
-                          //       data: state.data.selectedLocation ??
-                          //           'Semua Lokasi',
-                          //       hintText: 'Area Rental'),
-                          // ),
-                          // SizedBox(
-                          //   height: margin8,
-                          // ),
-                          // Text(
-                          //   'Area Rental',
-                          //   style: mainBody4.copyWith(color: neutral50),
-                          // ),
+                          Text(
+                            'Area Rental',
+                            style: mainBody4.copyWith(color: neutral50),
+                          ),
                           SizedBox(
-                            height: margin24 / 2,
+                            height: margin8,
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              BlocProvider.of<RentalMobilFilterCubit>(context)
+                                  .onPickCity(context);
+                            },
+                            child: FormHelper.dropdownForm(context,
+                                data: state.data.selectedLocation ??
+                                    'Semua Lokasi',
+                                hintText: 'Area Rental'),
+                          ),
+                          SizedBox(
+                            height: margin8,
                           ),
                           Row(
                             children: [

@@ -18,6 +18,7 @@ import 'package:travelsya/app/hotel/cubits/hotel_cubit.dart';
 import 'package:travelsya/app/hotel/cubits/hotel_filter_cubit.dart';
 import 'package:travelsya/app/hotel/cubits/hotel_populer_cubit.dart';
 import 'package:travelsya/app/ppob/cubits/ppob_cubit.dart';
+import 'package:travelsya/app/rental_mobil/cubits/rental_mobil_city_cubit.dart';
 import 'package:travelsya/app/rental_mobil/cubits/rental_mobil_filter_cubit.dart';
 import 'package:travelsya/app/splash_screen/pages/splash_screen_page.dart';
 import 'package:travelsya/shared/cubits/fee_admin/fee_admin_cubit.dart';
@@ -61,14 +62,10 @@ Future<void> main() async {
       BlocProvider<HotelFilterCubit>(
         create: (context) => HotelFilterCubit(),
       ),
-      // BlocProvider(create: (_) => HotelFilterCubit()..onInit()),
       BlocProvider<HotelCubit>(create: (_) => HotelCubit()),
-
       BlocProvider(create: (_) => HotelPopulerCubit()),
       BlocProvider(create: (_) => HotelCityCubit()),
       BlocProvider(create: (_) => HotelByLocationCubit()),
-      // BlocProvider<HotelFilterCubit>(
-      //     create: (_) => HotelFilterCubit()..onInit()),
       BlocProvider<HostelFilterCubit>(
         create: (context) => HostelFilterCubit(),
       ),
@@ -78,17 +75,14 @@ Future<void> main() async {
       BlocProvider<PointCubit>(
         create: (context) => PointCubit(),
       ),
+      BlocProvider(create: (_) => RentalMobilCityCubit()),
       BlocProvider<RentalMobilFilterCubit>(
         create: (context) => RentalMobilFilterCubit(),
       ),
-      // BlocProvider<BusFilterCubit>(
-      //   create: (context) => BusFilterCubit(),
-      // ),
       BlocProvider(create: (_) => BusFilterCubit()..onResetData()),
       BlocProvider(create: (_) => BusCityCubit()),
       BlocProvider(create: (_) => HealthCubit()),
       BlocProvider(create: (_) => HealthCityCubit()),
-      // BlocProvider(create: (_) => HotelCityCubit()..fetchCities(context)),
     ],
     child: const MyApp(),
   ));

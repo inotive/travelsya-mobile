@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:travelsya/app/rental_mobil/cubits/rental_mobil_city_cubit.dart';
+import 'package:travelsya/app/rental_mobil/cubits/rental_mobil_city_state.dart';
 import 'package:travelsya/app/rental_mobil/cubits/rental_mobil_filter_state.dart';
 import 'package:travelsya/app/rental_mobil/models/rental_mobil_fitler_model.dart';
+import 'package:travelsya/app/rental_mobil/models/rental_mobil_model.dart';
+import 'package:travelsya/shared/widgets/city_picker_bottomsheet.dart';
 // import 'package:travelsya/shared/widgets/city_picker_bottomsheet.dart';
 import 'package:travelsya/shared/widgets/date_picker_single.dart';
 import 'package:travelsya/shared/widgets/yes_or_no_dialog.dart';
@@ -32,6 +36,33 @@ class RentalMobilFilterCubit extends Cubit<RentalMobilFilterState> {
   //     }
   //   }
   // }
+
+  Future<void> onPickCity(
+    BuildContext context,
+  ) async {
+    final stateFilter = state;
+    if (stateFilter is RentalMobilFilterLoaded) {
+      final dataFinal = stateFilter.data;
+
+      final selectedCity = await showCityPicker<RentalMobilCityModel,
+          RentalMobilCityCubit, RentalMobilCityState>(
+        context,
+        cubit: BlocProvider.of<RentalMobilCityCubit>(context),
+        fetchFunction: (cubit, ctx) async {
+          await cubit.fetchCities(ctx);
+        },
+        isLoading: (state) => state is RentalMobilCityLoading,
+        getCities: (state) =>
+            state is RentalMobilCityLoaded ? state.cities : [],
+        displayName: (item) => item.name,
+      );
+
+      if (selectedCity != null) {
+        dataFinal.selectedLocation = selectedCity.name;
+        onLoadDataFilter(dataFinal);
+      }
+    }
+  }
 
   onPickDuration(BuildContext context) async {
     RentalMobilFilterState stateFilter = state;

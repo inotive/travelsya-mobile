@@ -107,4 +107,44 @@ class RentalMobilService {
 
     return returnValue;
   }
+
+  static Future<ApiReturnValue> getCities(BuildContext context) async {
+    ApiReturnValue returnValue;
+
+    var request = http.MultipartRequest('GET', Uri.parse(carCityUrl));
+
+    ApiReturnValue<dynamic>? response = await ApiReturnValue.httpRequest(
+      context,
+      request: request,
+      exceptionStatusCode: [201, 400],
+      auth: true,
+    );
+
+    if (response!.status == RequestStatus.successRequest) {
+      List<RentalMobilCityModel> dataFinal = (response.data['data'] as List)
+          .map((city) => RentalMobilCityModel.fromJson(city))
+          .toList();
+
+      returnValue = ApiReturnValue(
+        data: dataFinal,
+        status: RequestStatus.successRequest,
+      );
+    } else {
+      String? messages;
+      try {
+        Map<String, dynamic> datamessages = response.data['data']['response'];
+        datamessages.forEach((key, value) {
+          messages = value[0];
+        });
+      } catch (e) {
+        messages = null;
+      }
+      returnValue = ApiReturnValue(
+        data: messages,
+        status: response.status,
+      );
+    }
+
+    return returnValue;
+  }
 }

@@ -40,3 +40,13 @@ class VendorRentalModel {
     price = double.parse(jsonMap['price'].toString());
   }
 }
+
+class RentalMobilCityModel {
+  final String name;
+
+  RentalMobilCityModel({required this.name});
+
+  factory RentalMobilCityModel.fromJson(dynamic json) {
+    return RentalMobilCityModel(name: json.toString());
+  }
+}

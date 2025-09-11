@@ -3,21 +3,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stacked/stacked.dart';
 import 'package:travelsya/app/auth/cubits/auth_cubit.dart';
 import 'package:travelsya/app/auth/cubits/auth_state.dart';
-import 'package:travelsya/app/home_main/pages/home_main_page.dart';
-import 'package:travelsya/app/payment/pages/payment_webview_page.dart';
 // import 'package:travelsya/app/home_main/pages/home_main_page.dart';
 // import 'package:travelsya/app/payment/pages/payment_webview_page.dart';
 import 'package:travelsya/app/rekreasi/pages%20new/new_rekreasi_checkout_page.dart';
 import 'package:travelsya/app/rekreasi/services/recreation_service.dart';
-import 'package:travelsya/shared/api/api_return_value.dart';
 // import 'package:travelsya/shared/api/api_return_value.dart';
 import 'package:travelsya/shared/cubits/fee_admin/fee_admin_model.dart';
-import 'package:travelsya/shared/cubits/main_index_cubit.dart';
 // import 'package:travelsya/shared/cubits/main_index_cubit.dart';
 import 'package:travelsya/shared/cubits/point/point_cubit.dart';
 import 'package:travelsya/shared/cubits/point/point_state.dart';
 import 'package:travelsya/shared/function/show_loading.dart';
-import 'package:travelsya/shared/function/show_snackbar.dart';
 // import 'package:travelsya/shared/function/show_snackbar.dart';
 
 class RecreationCheckoutVM extends BaseViewModel {
