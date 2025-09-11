@@ -229,8 +229,9 @@ class BusSearchPage extends StatelessWidget {
 
                                   if (busFilter.selectedCityOrigin == null) {
                                     ScaffoldMessenger.of(context).showSnackBar(
-                                      const SnackBar(
-                                          content: Text(
+                                      SnackBar(
+                                          backgroundColor: primaryColor,
+                                          content: const Text(
                                               "Pilih kota asal terlebih dahulu")),
                                     );
                                     return;
@@ -239,8 +240,9 @@ class BusSearchPage extends StatelessWidget {
                                   if (busFilter.selectedCityDestination ==
                                       null) {
                                     ScaffoldMessenger.of(context).showSnackBar(
-                                      const SnackBar(
-                                          content: Text(
+                                      SnackBar(
+                                          backgroundColor: primaryColor,
+                                          content: const Text(
                                               "Pilih kota tujuan terlebih dahulu")),
                                     );
                                     return;
