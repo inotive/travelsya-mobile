@@ -24,7 +24,7 @@ class BusRouteTimelineCard extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        margin: EdgeInsets.only(top: margin16),
+        // margin: EdgeInsets.only(top: margin16),
         padding: EdgeInsets.all(margin16),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8),

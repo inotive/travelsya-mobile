@@ -143,7 +143,7 @@ class BusCheckoutPage extends StatelessWidget {
                                       )),
                                     ],
                                   ),
-                                )
+                                ),
                               ],
                             ),
                           ),
@@ -166,242 +166,132 @@ class BusCheckoutPage extends StatelessWidget {
                                       selectedDate:
                                           stateFilter.data.selectedDateBack!,
                                       onTap: () {})
-                                ]
+                                ],
+                                SizedBox(
+                                  height: margin16,
+                                ),
+                                Stack(
+                                  children: [
+                                    Positioned(
+                                      top: 0,
+                                      bottom: 0,
+                                      left: 0,
+                                      right: 0,
+                                      child: Container(
+                                        width: double.infinity,
+                                        height: double.infinity,
+                                        decoration: BoxDecoration(
+                                            border: Border.all(
+                                                color:
+                                                    neutral50.withOpacity(0.3)),
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                            color: Colors.white),
+                                        alignment: Alignment.topRight,
+                                        child: SizedBox(
+                                          width: 45,
+                                          height: 45,
+                                          child: Image.asset(
+                                            'assets/icons/group_23.png',
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    Container(
+                                      padding: EdgeInsets.all(margin16),
+                                      width: double.infinity,
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            'Deskripsi',
+                                            style: mainBody4.copyWith(
+                                                color: neutral100,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          Container(
+                                            margin: EdgeInsets.symmetric(
+                                                vertical: margin24 / 2),
+                                            width: double.infinity,
+                                            height: 1,
+                                            color: neutral50.withOpacity(0.3),
+                                          ),
+                                          Text(
+                                            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+                                            style: mainBody4.copyWith(
+                                              color: neutral100,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    )
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: margin16,
+                                ),
+                                Stack(
+                                  children: [
+                                    Positioned(
+                                      top: 0,
+                                      bottom: 0,
+                                      left: 0,
+                                      right: 0,
+                                      child: Container(
+                                        width: double.infinity,
+                                        height: double.infinity,
+                                        decoration: BoxDecoration(
+                                            border: Border.all(
+                                                color:
+                                                    neutral50.withOpacity(0.3)),
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                            color: Colors.white),
+                                        alignment: Alignment.topRight,
+                                        child: SizedBox(
+                                          width: 45,
+                                          height: 45,
+                                          child: Image.asset(
+                                            'assets/icons/group_23.png',
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    Container(
+                                      padding: EdgeInsets.all(margin16),
+                                      width: double.infinity,
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            'Peraturan',
+                                            style: mainBody4.copyWith(
+                                                color: neutral100,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          Container(
+                                            margin: EdgeInsets.symmetric(
+                                                vertical: margin24 / 2),
+                                            width: double.infinity,
+                                            height: 1,
+                                            color: neutral50.withOpacity(0.3),
+                                          ),
+                                          Text(
+                                            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+                                            style: mainBody4.copyWith(
+                                              color: neutral100,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    )
+                                  ],
+                                ),
                               ],
-                              // children: List.generate(
-                              //     stateFilter.data.isWayBack ? 2 : 1, (index) {
-                              //   BusDataModel data =
-                              //       index == 0 ? goData : backData!;
-
-                              //   return Container(
-                              //     margin: EdgeInsets.only(
-                              //         top: index == 0 ? 0 : margin24 / 2),
-                              //     padding: EdgeInsets.all(margin16),
-                              //     width: double.infinity,
-                              //     decoration: BoxDecoration(
-                              //         color: Colors.white,
-                              //         borderRadius: BorderRadius.circular(8),
-                              //         border: Border.all(
-                              //             color: neutral50.withOpacity(0.3))),
-                              //     child: Column(
-                              //       children: [
-                              //         Row(
-                              //           children: [
-                              //             Expanded(
-                              //                 child: Column(
-                              //               crossAxisAlignment:
-                              //                   CrossAxisAlignment.start,
-                              //               children: [
-                              //                 Text(
-                              //                   data.bussinessName,
-                              //                   style: mainBody4.copyWith(
-                              //                       color: neutral100,
-                              //                       fontWeight:
-                              //                           FontWeight.bold),
-                              //                 ),
-                              //                 Text(
-                              //                   data.kelas,
-                              //                   style: mainBody5.copyWith(
-                              //                     color: neutral50,
-                              //                   ),
-                              //                 ),
-                              //               ],
-                              //             )),
-                              //             SizedBox(
-                              //               width: margin24 / 2,
-                              //             ),
-                              //             Column(
-                              //               crossAxisAlignment:
-                              //                   CrossAxisAlignment.end,
-                              //               children: [
-                              //                 Text(
-                              //                   '${data.availableTicket} kursi tersedia',
-                              //                   style: mainBody5.copyWith(
-                              //                       color: Colors.green),
-                              //                 ),
-                              //                 Row(
-                              //                   children: [
-                              //                     Text(
-                              //                       moneyChanger(data.price,
-                              //                           customLabel: 'IDR '),
-                              //                       style: mainBody4.copyWith(
-                              //                           color: Theme.of(context)
-                              //                               .primaryColor,
-                              //                           fontWeight:
-                              //                               FontWeight.bold),
-                              //                     ),
-                              //                     Text(
-                              //                       ' /pax',
-                              //                       style: mainBody5.copyWith(
-                              //                           color: neutral50),
-                              //                     )
-                              //                   ],
-                              //                 )
-                              //               ],
-                              //             ),
-                              //           ],
-                              //         ),
-                              //         SizedBox(
-                              //           height: margin24 / 2,
-                              //         ),
-                              //         SizedBox(
-                              //           child: Column(
-                              //             crossAxisAlignment:
-                              //                 CrossAxisAlignment.start,
-                              //             children: [
-                              //               SizedBox(
-                              //                 height: margin8,
-                              //               ),
-                              //               IntrinsicHeight(
-                              //                 child: Row(
-                              //                   children: [
-                              //                     Container(
-                              //                       constraints:
-                              //                           const BoxConstraints(
-                              //                               maxWidth: 64),
-                              //                       child: Column(
-                              //                         crossAxisAlignment:
-                              //                             CrossAxisAlignment
-                              //                                 .start,
-                              //                         children: [
-                              //                           Text(
-                              //                             data.departureTime,
-                              //                             style: mainBody3
-                              //                                 .copyWith(
-                              //                                     color:
-                              //                                         neutral100,
-                              //                                     fontWeight:
-                              //                                         FontWeight
-                              //                                             .bold),
-                              //                           ),
-                              //                           Text(
-                              //                             "${getDay(DateFormat('yyyy-MM-dd').format(index == 0 ? stateFilter.data.selectedDateGo! : stateFilter.data.selectedDateBack!))} ${dateToReadable(DateFormat('yyyy-MM-dd').format(index == 0 ? stateFilter.data.selectedDateGo! : stateFilter.data.selectedDateBack!))}",
-                              //                             style: mainBody4
-                              //                                 .copyWith(
-                              //                                     color:
-                              //                                         neutral100),
-                              //                           ),
-                              //                           SizedBox(
-                              //                             height: margin32,
-                              //                           ),
-                              //                         ],
-                              //                       ),
-                              //                     ),
-                              //                     Container(
-                              //                       margin:
-                              //                           EdgeInsets.symmetric(
-                              //                               horizontal:
-                              //                                   margin8),
-                              //                       height: double.infinity,
-                              //                       child: Column(
-                              //                         children: [
-                              //                           Container(
-                              //                             width: margin8,
-                              //                             height: margin8,
-                              //                             decoration: BoxDecoration(
-                              //                                 shape: BoxShape
-                              //                                     .circle,
-                              //                                 color: Theme.of(
-                              //                                         context)
-                              //                                     .primaryColor),
-                              //                           ),
-                              //                           Expanded(
-                              //                               child: Container(
-                              //                             width: 1,
-                              //                             height:
-                              //                                 double.infinity,
-                              //                             color:
-                              //                                 Theme.of(context)
-                              //                                     .primaryColor,
-                              //                           ))
-                              //                         ],
-                              //                       ),
-                              //                     ),
-                              //                     Expanded(
-                              //                         child: Column(
-                              //                       crossAxisAlignment:
-                              //                           CrossAxisAlignment
-                              //                               .start,
-                              //                       children: [
-                              //                         Text(
-                              //                           data.departurePoint,
-                              //                           style:
-                              //                               mainBody4.copyWith(
-                              //                             color: neutral100,
-                              //                           ),
-                              //                         ),
-                              //                       ],
-                              //                     ))
-                              //                   ],
-                              //                 ),
-                              //               ),
-                              //               IntrinsicHeight(
-                              //                 child: Row(
-                              //                   crossAxisAlignment:
-                              //                       CrossAxisAlignment.start,
-                              //                   children: [
-                              //                     Container(
-                              //                       constraints:
-                              //                           const BoxConstraints(
-                              //                               maxWidth: 64),
-                              //                       child: Column(
-                              //                         crossAxisAlignment:
-                              //                             CrossAxisAlignment
-                              //                                 .start,
-                              //                         children: [
-                              //                           Text(
-                              //                             data.arrivalTime,
-                              //                             style: mainBody3
-                              //                                 .copyWith(
-                              //                                     color:
-                              //                                         neutral100,
-                              //                                     fontWeight:
-                              //                                         FontWeight
-                              //                                             .bold),
-                              //                           ),
-                              //                           Text(
-                              //                             "${getDay(DateFormat('yyyy-MM-dd').format(index == 0 ? stateFilter.data.selectedDateGo! : stateFilter.data.selectedDateBack!))} ${dateToReadable(DateFormat('yyyy-MM-dd').format(index == 0 ? stateFilter.data.selectedDateGo! : stateFilter.data.selectedDateBack!))}",
-                              //                             style: mainBody4
-                              //                                 .copyWith(
-                              //                                     color:
-                              //                                         neutral100),
-                              //                           )
-                              //                         ],
-                              //                       ),
-                              //                     ),
-                              //                     Container(
-                              //                       margin: const EdgeInsets
-                              //                           .symmetric(
-                              //                           horizontal: 10),
-                              //                       child: Container(
-                              //                         width: margin8,
-                              //                         height: margin8,
-                              //                         decoration: BoxDecoration(
-                              //                             shape:
-                              //                                 BoxShape.circle,
-                              //                             color: Theme.of(
-                              //                                     context)
-                              //                                 .primaryColor),
-                              //                       ),
-                              //                     ),
-                              //                     Expanded(
-                              //                       child: Text(
-                              //                         data.arrivalPoint,
-                              //                         style: mainBody4.copyWith(
-                              //                           color: neutral100,
-                              //                         ),
-                              //                       ),
-                              //                     ),
-                              //                   ],
-                              //                 ),
-                              //               )
-                              //             ],
-                              //           ),
-                              //         )
-                              //       ],
-                              //     ),
-                              //   );
-                              // }),
                             ),
                           ),
                           Container(
