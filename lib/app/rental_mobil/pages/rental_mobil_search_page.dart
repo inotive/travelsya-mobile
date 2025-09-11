@@ -145,7 +145,7 @@ class RentalSearchPage extends StatelessWidget {
                             height: margin24 / 2,
                           ),
                           Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Expanded(
                                 child: Column(
