@@ -69,8 +69,9 @@ class RentalSearchPage extends StatelessWidget {
                                   .onPickCity(context);
                             },
                             child: FormHelper.dropdownForm(context,
-                                data: state.data.selectedLocation ??
-                                    'Semua Lokasi',
+                                data: state.data.selectedLocation,
+                                // ??
+                                //     'Semua Lokasi',
                                 hintText: 'Area Rental'),
                           ),
                           SizedBox(
@@ -211,6 +212,26 @@ class RentalSearchPage extends StatelessWidget {
                           ElevatedButtonWidget(
                               enabled: true,
                               onTap: () {
+                                final filterCubit =
+                                    BlocProvider.of<RentalMobilFilterCubit>(
+                                        context);
+                                final selectedLocation =
+                                    filterCubit.state is RentalMobilFilterLoaded
+                                        ? (filterCubit.state
+                                                as RentalMobilFilterLoaded)
+                                            .data
+                                            .selectedLocation
+                                        : null;
+
+                                if (selectedLocation == null ||
+                                    selectedLocation.isEmpty) {
+                                  ScaffoldMessenger.of(context)
+                                      .showSnackBar(SnackBar(
+                                    content: const Text('Area Rental wajib diisi'),
+                                    backgroundColor: primaryColor,
+                                  ));
+                                  return;
+                                }
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
