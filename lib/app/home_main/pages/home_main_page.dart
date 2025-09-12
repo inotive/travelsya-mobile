@@ -47,7 +47,6 @@ class _HomeMainPageState extends State<HomeMainPage> {
                               ],
                             );
                           }
-              
                           return Container();
                         }),
                     Positioned(
