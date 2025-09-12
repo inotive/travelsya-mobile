@@ -23,80 +23,83 @@ class BusRouteTimelineCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
-      child: Container(
-        // margin: EdgeInsets.only(top: margin16),
-        padding: EdgeInsets.all(margin16),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8),
-          border: Border.all(color: neutral50.withOpacity(0.3)),
-          color: Colors.white,
-        ),
-        child: Column(
-          children: [
-            // Header: Business info + Price
-            Row(
-              children: [
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        data.bussinessName,
-                        style: mainBody4.copyWith(
-                          color: neutral100,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      Text(
-                        data.kelas,
-                        style: mainBody5.copyWith(color: neutral50),
-                      ),
-                    ],
-                  ),
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Text(
-                      '${data.availableTicket} kursi tersedia',
-                      style: mainBody5.copyWith(color: Colors.green),
-                    ),
-                    Row(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 8),
+        child: Container(
+          // margin: EdgeInsets.only(top: margin16),
+          padding: EdgeInsets.all(margin16),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(8),
+            border: Border.all(color: neutral50.withOpacity(0.3)),
+            color: Colors.white,
+          ),
+          child: Column(
+            children: [
+              // Header: Business info + Price
+              Row(
+                children: [
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          moneyChanger(data.price, customLabel: 'IDR '),
-                          style: mainBody3.copyWith(
-                            color: Theme.of(context).primaryColor,
+                          data.bussinessName,
+                          style: mainBody4.copyWith(
+                            color: neutral100,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                         Text(
-                          ' /pax',
+                          data.kelas,
                           style: mainBody5.copyWith(color: neutral50),
                         ),
                       ],
-                    )
-                  ],
-                ),
-              ],
-            ),
-            SizedBox(height: margin16),
-            // Timeline
-            _buildTimeline(
-              context,
-              time: data.departureTime,
-              date: selectedDate,
-              point: data.departurePoint,
-              isTop: true,
-            ),
-            _buildTimeline(
-              context,
-              time: data.arrivalTime,
-              date: selectedDate,
-              point: data.arrivalPoint,
-              isTop: false,
-            ),
-          ],
+                    ),
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Text(
+                        '${data.availableTicket} kursi tersedia',
+                        style: mainBody5.copyWith(color: Colors.green),
+                      ),
+                      Row(
+                        children: [
+                          Text(
+                            moneyChanger(data.price, customLabel: 'IDR '),
+                            style: mainBody3.copyWith(
+                              color: Theme.of(context).primaryColor,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          Text(
+                            ' /pax',
+                            style: mainBody5.copyWith(color: neutral50),
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                ],
+              ),
+              SizedBox(height: margin16),
+              // Timeline
+              _buildTimeline(
+                context,
+                time: data.departureTime,
+                date: selectedDate,
+                point: data.departurePoint,
+                isTop: true,
+              ),
+              _buildTimeline(
+                context,
+                time: data.arrivalTime,
+                date: selectedDate,
+                point: data.arrivalPoint,
+                isTop: false,
+              ),
+            ],
+          ),
         ),
       ),
     );
