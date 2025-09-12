@@ -15,14 +15,17 @@ class SplashScreenPage extends StatelessWidget {
     }, builder: (context, model, child) {
       return StatusbarWidget(
         customBrightness: Brightness.light,
-        child: Scaffold(
-          body: Container(
-            width: double.infinity,
-            height: double.infinity,
-            decoration: const BoxDecoration(
-                image: DecorationImage(
-                    fit: BoxFit.cover,
-                    image: AssetImage('assets/images/splash_screen_new.jpg'))),
+        child: SafeArea(
+          child: Scaffold(
+            body: Container(
+              width: double.infinity,
+              height: double.infinity,
+              decoration: const BoxDecoration(
+                  image: DecorationImage(
+                      fit: BoxFit.cover,
+                      image:
+                          AssetImage('assets/images/splash_screen_new.jpg'))),
+            ),
           ),
         ),
       );
