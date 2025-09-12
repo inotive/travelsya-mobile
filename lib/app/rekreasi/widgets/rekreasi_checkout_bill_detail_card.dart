@@ -7,13 +7,13 @@ import 'package:intl/intl.dart';
 class RekreasiCheckoutBillDetailCard extends StatelessWidget {
   final List<RekreasiBillItem> items;
   final double adminFeePercent;
-  final double unitCode;
+  final double unikCode;
 
   const RekreasiCheckoutBillDetailCard({
     super.key,
     required this.items,
     this.adminFeePercent = 1.0,
-    this.unitCode = 1000,
+    this.unikCode = 1000,
   });
 
   @override
@@ -21,7 +21,7 @@ class RekreasiCheckoutBillDetailCard extends StatelessWidget {
     double totalItemPrice =
         items.fold(0, (sum, item) => sum + (item.price * item.quantity));
     double adminFee = totalItemPrice * (adminFeePercent / 100);
-    double total = totalItemPrice + adminFee + unitCode;
+    double total = totalItemPrice + adminFee + unikCode;
 
     final currencyFormat = NumberFormat.currency(
       locale: 'id_ID',
@@ -50,8 +50,8 @@ class RekreasiCheckoutBillDetailCard extends StatelessWidget {
               format: currencyFormat),
           const SizedBox(height: 10),
           _summaryRow(
-              label: 'Kode Unit',
-              price: unitCode.toDouble(),
+              label: 'Kode Unik',
+              price: unikCode.toDouble(),
               format: currencyFormat),
           const SizedBox(height: 10),
           _summaryRow(label: 'Total', price: total, format: currencyFormat),
