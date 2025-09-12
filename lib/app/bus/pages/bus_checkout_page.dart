@@ -326,14 +326,14 @@ class BusCheckoutPage extends StatelessWidget {
                                 TitleWithWidget(
                                     title: 'Nomor Handphone',
                                     child: RoundedTextfield(
-                                        prefixIcon: Center(
-                                          widthFactor: 1,
-                                          child: Text(
-                                            '+62',
-                                            style: mainBody4.copyWith(
-                                                color: Colors.black87),
-                                          ),
-                                        ),
+                                        // prefixIcon: Center(
+                                        //   widthFactor: 1,
+                                        //   child: Text(
+                                        //     '+62',
+                                        //     style: mainBody4.copyWith(
+                                        //         color: Colors.black87),
+                                        //   ),
+                                        // ),
                                         hintText: '812xxxxxx',
                                         controller: model.phoneController)),
                                 SizedBox(
