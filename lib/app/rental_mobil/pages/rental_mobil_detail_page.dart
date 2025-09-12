@@ -207,6 +207,7 @@ class _RentalDetailPageState extends State<RentalDetailPage> {
                                                 : margin24 / 2),
                                         padding: EdgeInsets.all(margin16),
                                         decoration: BoxDecoration(
+                                            color: Colors.white,
                                             borderRadius:
                                                 BorderRadius.circular(10),
                                             border:
