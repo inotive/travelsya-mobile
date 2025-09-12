@@ -12,11 +12,14 @@ class _HomePageMenuSection extends StatelessWidget {
       child: Wrap(
         runSpacing: margin16,
         children: List.generate(model.dataMenu.length, (index) {
+          final menu = model.dataMenu[index];
+          final isDisabled = model.isDisableMenu(menu['id']);
+
           return FractionallySizedBox(
             widthFactor: 0.25,
             child: GestureDetector(
               onTap: () {
-                model.onMainMenuTap(context, model.dataMenu[index]['id']);
+                model.onMainMenuTap(context, menu['id']);
               },
               child: Container(
                 margin: EdgeInsets.symmetric(horizontal: margin4),
@@ -28,53 +31,33 @@ class _HomePageMenuSection extends StatelessWidget {
                         child: AspectRatio(
                           aspectRatio: 1,
                           child: Container(
-                            width: double.infinity,
-                            height: double.infinity,
                             decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: model.isDisableMenu(
-                                        model.dataMenu[index]['id'])
-                                    ? Colors.grey
-                                    : const Color(0xfff3f3f3)),
+                              shape: BoxShape.circle,
+                              color: isDisabled
+                                  ? Colors.grey.shade300
+                                  : const Color(0xfff3f3f3),
+                            ),
                             alignment: Alignment.center,
                             child: Image.asset(
-                              model.dataMenu[index]['assets'],
+                              menu['assets'],
                               width: 40,
                               height: 40,
                               fit: BoxFit.contain,
+                              color: isDisabled
+                                  ? Colors.black.withOpacity(0.4)
+                                  : null,
                             ),
-                            // child: ColorFiltered(
-                            //   colorFilter: model.isDisableMenu(
-                            //           model.dataMenu[index]['id'])
-                            //       ? const ColorFilter.mode(
-                            //           Colors.grey,
-                            //           BlendMode.saturation,
-                            //         )
-                            //       : const ColorFilter.mode(
-                            //           Colors.transparent,
-                            //           BlendMode.multiply,
-                            //         ),
-                            //   child: FractionallySizedBox(
-                            //     widthFactor: 0.6,
-                            //     child: AspectRatio(
-                            //       aspectRatio: 1,
-                            //       child: Image.asset(
-                            //         model.dataMenu[index]['assets'],
-                            //       ),
-                            //     ),
-                            //   ),
-                            // ),
                           ),
                         ),
                       ),
                     ),
-                    SizedBox(
-                      height: margin4,
-                    ),
+                    SizedBox(height: margin4),
                     Text(
-                      model.dataMenu[index]['title'],
+                      menu['title'],
                       textAlign: TextAlign.center,
-                      style: mainBody5,
+                      style: mainBody5.copyWith(
+                        color: isDisabled ? Colors.grey : Colors.black,
+                      ),
                     )
                   ],
                 ),
