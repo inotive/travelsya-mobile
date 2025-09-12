@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stacked/stacked.dart';
+import 'package:travelsya/app/auth/cubits/auth_cubit.dart';
+import 'package:travelsya/app/auth/cubits/auth_state.dart';
 import 'package:travelsya/app/health/services/health_service.dart';
 import 'package:travelsya/app/home_main/pages/home_main_page.dart';
 import 'package:travelsya/app/payment/pages/payment_webview_page.dart';
@@ -15,6 +17,10 @@ import 'package:travelsya/shared/function/show_snackbar.dart';
 class HealthCheckoutVM extends BaseViewModel {
   bool usePoint = false;
   double pointUsed = 0;
+
+  TextEditingController nameController = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
 
   FeeAdmin? feeAdminData(List<FeeAdmin> data) {
     for (var i = 0; i < data.length; i++) {
@@ -44,7 +50,14 @@ class HealthCheckoutVM extends BaseViewModel {
   }
 
   onInit(BuildContext context) {
+    AuthState stateUser = BlocProvider.of<AuthCubit>(context).state;
     BlocProvider.of<PointCubit>(context).fetchPoint(context);
+    if (stateUser is AuthLoaded) {
+      nameController.text = stateUser.data.name;
+      phoneController.text = stateUser.data.phone ?? '';
+      emailController.text = stateUser.data.email;
+      notifyListeners();
+    }
   }
 
   onSubmit(

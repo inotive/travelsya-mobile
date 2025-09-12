@@ -337,6 +337,7 @@ class _HealthDetailPageState extends State<HealthDetailPage> {
                                       HealthPackageModel data =
                                           state.data.packages[index];
                                       return Card(
+                                        color: Colors.white,
                                         shape: RoundedRectangleBorder(
                                             borderRadius:
                                                 BorderRadius.circular(8)),
@@ -509,6 +510,14 @@ class _HealthDetailPageState extends State<HealthDetailPage> {
                                                                       dataDetail:
                                                                           state
                                                                               .data,
+                                                                      items: [
+                                                                        CheckoutItem(
+                                                                          package:
+                                                                              data,
+                                                                          quantity:
+                                                                              1,
+                                                                        )
+                                                                      ],
                                                                     )));
                                                       });
                                                     },

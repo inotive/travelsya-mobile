@@ -1,9 +1,14 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stacked/stacked.dart';
+
 import 'package:travelsya/app/health/models/health_model.dart';
 import 'package:travelsya/app/health/viewmodel/health_checkout_vm.dart';
+import 'package:travelsya/app/health/widgets/health_checkout_bill_detail_card.dart';
+import 'package:travelsya/app/health/widgets/health_checkout_detail_card.dart';
+import 'package:travelsya/app/health/widgets/health_checkout_order_user_card.dart';
 import 'package:travelsya/shared/cubits/point/point_cubit.dart';
 import 'package:travelsya/shared/cubits/point/point_state.dart';
 import 'package:travelsya/shared/helper/function_helper.dart';
@@ -12,11 +17,32 @@ import 'package:travelsya/shared/styles/size_styles.dart';
 import 'package:travelsya/shared/styles/theme_style.dart';
 import 'package:travelsya/shared/widgets/form_helper/elevated_button_widget.dart';
 
+class CheckoutItem {
+  final HealthPackageModel package;
+  final int quantity;
+
+  CheckoutItem({required this.package, required this.quantity});
+}
+
 class HealthCheckoutPage extends StatelessWidget {
   final HealthPackageModel dataPackage;
   final HealthDetailModel dataDetail;
-  const HealthCheckoutPage(
-      {super.key, required this.dataDetail, required this.dataPackage});
+  final List<CheckoutItem> items;
+
+  const HealthCheckoutPage({
+    super.key,
+    required this.items,
+    required this.dataPackage,
+    required this.dataDetail,
+  });
+
+  double getTotalTagihan(List<CheckoutItem> items,
+      {double admin = 1.0, double unitCode = 1000}) {
+    final totalItems =
+        items.fold(0.0, (sum, e) => sum + (e.package.price * e.quantity));
+    final adminFee = totalItems * (admin / 100);
+    return totalItems + adminFee + unitCode;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -63,171 +89,27 @@ class HealthCheckoutPage extends StatelessWidget {
                     color: neutral10,
                     child: Column(
                       children: [
-                        Stack(
-                          children: [
-                            Positioned(
-                              top: 0,
-                              bottom: 0,
-                              left: 0,
-                              right: 0,
-                              child: Container(
-                                width: double.infinity,
-                                height: double.infinity,
-                                decoration: BoxDecoration(
-                                    border: Border.all(
-                                        color: neutral50.withOpacity(0.3)),
-                                    borderRadius: BorderRadius.circular(10),
-                                    color: Colors.white),
-                                alignment: Alignment.topRight,
-                                child: SizedBox(
-                                  width: 45,
-                                  height: 45,
-                                  child: Image.asset(
-                                    'assets/icons/group_23.png',
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Container(
-                              padding: EdgeInsets.all(margin16),
-                              width: double.infinity,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    'Detail Paket',
-                                    style: mainBody4.copyWith(
-                                        color: neutral100,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.symmetric(
-                                        vertical: margin24 / 2),
-                                    width: double.infinity,
-                                    height: 1,
-                                    color: neutral50.withOpacity(0.3),
-                                  ),
-                                  Text(
-                                    dataDetail.name,
-                                    style: mainBody4,
-                                  ),
-                                  Text(
-                                    dataPackage.name,
-                                    style: mainBody5.copyWith(
-                                        color: Theme.of(context).primaryColor),
-                                  ),
-                                  SizedBox(
-                                    height: margin4,
-                                  ),
-                                  Text(
-                                    moneyChanger(dataPackage.price,
-                                        customLabel: 'IDR '),
-                                    style: mainBody4.copyWith(
-                                        fontWeight: FontWeight.bold),
-                                  )
-                                  // Row(
-                                  //   children: [
-                                  //     Expanded(
-                                  //         child: Column(
-                                  //       crossAxisAlignment:
-                                  //           CrossAxisAlignment.start,
-                                  //       children: [
-                                  //         RichText(
-                                  //             text: TextSpan(children: [
-                                  //           TextSpan(
-                                  //               text: dataVendor.name,
-                                  //               style: mainBody5.copyWith(
-                                  //                   color: neutral100,
-                                  //                   fontWeight:
-                                  //                       FontWeight.bold)),
-                                  //           TextSpan(
-                                  //               text:
-                                  //                   ' - ${state.data.isWithDriver ? 'Dengan Supir' : 'Lepas Kunci'}',
-                                  //               style: mainBody5.copyWith(
-                                  //                   color: neutral50,
-                                  //                   fontStyle:
-                                  //                       FontStyle.italic))
-                                  //         ])),
-                                  //         Text(
-                                  //           dataRental.brand,
-                                  //           style: mainBody5.copyWith(
-                                  //               color: neutral100),
-                                  //         ),
-                                  //         SizedBox(
-                                  //           height: margin8,
-                                  //         ),
-                                  //         Row(
-                                  //           children: [
-                                  //             SizedBox(
-                                  //                 width: margin16,
-                                  //                 height: margin16,
-                                  //                 child: Image.asset(
-                                  //                     'assets/icons/users.png')),
-                                  //             SizedBox(
-                                  //               width: margin4,
-                                  //             ),
-                                  //             Text(
-                                  //               '${dataRental.seats} Orang',
-                                  //               style: mainBody5.copyWith(
-                                  //                   color: neutral50),
-                                  //             ),
-                                  //             SizedBox(
-                                  //               width: margin24 / 2,
-                                  //             ),
-                                  //             SizedBox(
-                                  //                 width: margin16,
-                                  //                 height: margin16,
-                                  //                 child: Image.asset(
-                                  //                     'assets/icons/users.png')),
-                                  //             SizedBox(
-                                  //               width: margin4,
-                                  //             ),
-                                  //             Text(
-                                  //               dataRental.transmision,
-                                  //               style: mainBody5.copyWith(
-                                  //                   color: neutral50),
-                                  //             )
-                                  //           ],
-                                  //         ),
-                                  //         SizedBox(
-                                  //           height: margin24 / 2,
-                                  //         ),
-                                  //         Row(
-                                  //           children: [
-                                  //             Text(
-                                  //               moneyChanger(
-                                  //                   dataVendor.price),
-                                  //               style: mainBody4.copyWith(
-                                  //                   color: Theme.of(context)
-                                  //                       .primaryColor,
-                                  //                   fontWeight:
-                                  //                       FontWeight.bold),
-                                  //             ),
-                                  //             Text(
-                                  //               ' /hari',
-                                  //               style: mainBody5.copyWith(
-                                  //                   color: neutral50),
-                                  //             )
-                                  //           ],
-                                  //         )
-                                  //       ],
-                                  //     )),
-                                  //     SizedBox(
-                                  //       width: margin24 / 2,
-                                  //     ),
-                                  //     SizedBox(
-                                  //         width: 45,
-                                  //         height: 45,
-                                  //         child: Image.network(
-                                  //             dataRental.image))
-                                  //   ],
-                                  // )
-                                ],
-                              ),
-                            )
-                          ],
+                        HealthCheckoutDetailCard(
+                            dataDetail: dataDetail, dataPackage: dataPackage),
+                        SizedBox(
+                          height: margin16,
                         ),
+                        const HealthCheckoutOrderUserCard(),
+                        SizedBox(
+                          height: margin16,
+                        ),
+                        HealthCheckoutBillDetailCard(
+                          items: items
+                              .map((e) => HealthBillItem(
+                                    title: e.package.name,
+                                    subtitle: "${e.package.duration}",
+                                    price: e.package.price,
+                                    quantity: e.quantity,
+                                  ))
+                              .toList(),
+                          adminFeePercent: 1.0,
+                          unikCode: 1000,
+                        )
                       ],
                     ),
                   ),
@@ -369,7 +251,9 @@ class HealthCheckoutPage extends StatelessWidget {
                           style: mainBody5.copyWith(color: neutral100),
                         ),
                         Text(
-                          moneyChanger(dataPackage.price, customLabel: 'IDR '),
+                          moneyChanger(getTotalTagihan(items),
+                              customLabel: 'IDR '),
+                          // moneyChanger(dataPackage.price, customLabel: 'IDR '),
                           style: mainBody4.copyWith(
                               color: neutral100, fontWeight: FontWeight.bold),
                         )
