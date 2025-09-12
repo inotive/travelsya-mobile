@@ -106,7 +106,7 @@ class NewRekreasiCheckoutPage extends StatelessWidget {
                             ))
                         .toList(),
                     adminFeePercent: 1.0,
-                    unitCode: 1000,
+                    unikCode: 1000,
                   )
                 ],
               )),
@@ -256,11 +256,13 @@ class NewRekreasiCheckoutPage extends StatelessWidget {
                     ElevatedButtonWidget(
                         enabled: true,
                         onTap: () {
-                          model.onSubmit(
-                            context,
-                            items: items,
-                            // quantity: item.quantity,
-                          );
+                          model.onSubmit(context,
+                              packageId: items.first.package.id);
+                          // model.onSubmit(
+                          //   context,
+                          //   items: items,
+                          // // quantity: item.quantity,
+                          // );
                         },
                         title: 'Lanjutkan ke Pembayaran Baru')
                   ],
