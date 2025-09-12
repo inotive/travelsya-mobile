@@ -69,7 +69,7 @@ class HostelDetailModel {
 class HostelRoom {
   late int id;
   late String name;
-  late String? desc;
+  late String desc;
   late double price;
   late double sellingPrice;
   late String bedType;
@@ -82,33 +82,30 @@ class HostelRoom {
   List<String> images = [];
 
   HostelRoom.fromJson(Map<String, dynamic> jsonMap) {
-    id = jsonMap['id'];
-    name = jsonMap['name'];
+    id = jsonMap['id'] ?? 0;
+    name = jsonMap['name'] ?? '-';
     desc = jsonMap['description'] ?? '';
-    price = double.parse(
-        jsonMap['price'] == null ? '0' : jsonMap['price'].toString());
-    sellingPrice = double.parse(jsonMap['sellingprice'] == null
-        ? '0'
-        : jsonMap['sellingprice'].toString());
-    guest = jsonMap['guest'] ?? '0';
+    price = double.tryParse(jsonMap['price']?.toString() ?? '0') ?? 0;
+    sellingPrice =
+        double.tryParse(jsonMap['sellingprice']?.toString() ?? '0') ?? 0;
+    guest = jsonMap['guest']?.toString() ?? '0';
     bedType = jsonMap['bed_type'] ?? '-';
-    roomSize = jsonMap['roomsize'];
-    roomLeft = int.parse(jsonMap['room_left'].toString());
-    maxExtBed = jsonMap['maxextrabed'] ?? 0;
-    extBedPrice = jsonMap['maxextrabed'] ?? 0;
-    totalRoom = jsonMap['totalroom'];
+    roomSize = int.tryParse(jsonMap['roomsize']?.toString() ?? '0') ?? 0;
+    roomLeft = int.tryParse(jsonMap['room_left']?.toString() ?? '0') ?? 0;
+    maxExtBed = int.tryParse(jsonMap['maxextrabed']?.toString() ?? '0') ?? 0;
+    extBedPrice =
+        int.tryParse(jsonMap['extrabed_price']?.toString() ?? '0') ?? 0;
+    totalRoom = int.tryParse(jsonMap['totalroom']?.toString() ?? '0') ?? 0;
+
     try {
-      for (var i = 0; i < jsonMap['hostel_room_image'].length; i++) {
-        String imageUrlTemp = jsonMap['hostel_room_image'][i]['image'] == null
-            ? null
-            : jsonMap['hostel_room_image'][i]['image'].toString() == '-'
-                ? null
-                : jsonMap['hostel_room_image'][i]['image']
-                        .toString()
-                        .contains('https')
-                    ? jsonMap['hostel_room_image'][i]['image']
-                    : "$baseUrl${jsonMap['hostel_room_image'][i]['image']}";
-        images.add(imageUrlTemp);
+      if (jsonMap['hostel_room_image'] != null) {
+        for (var img in jsonMap['hostel_room_image']) {
+          final raw = img['image']?.toString();
+          if (raw != null && raw.isNotEmpty && raw != '-') {
+            final imageUrlTemp = raw.contains('https') ? raw : "$baseUrl$raw";
+            images.add(imageUrlTemp);
+          }
+        }
       }
     } catch (e) {
       images = [];

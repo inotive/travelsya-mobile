@@ -15,37 +15,60 @@ class _HostelDetailInfoSection extends StatelessWidget {
         model.dataAllImage(data).isEmpty
             ? AspectRatio(
                 aspectRatio: 375 / 264,
-                child: SizedBox(
-                    width: double.infinity,
-                    height: double.infinity,
-                    child: Image.asset(ConstHelper.logoIcon)),
+                child: Container(
+                  color: Colors.black12,
+                  child: const Icon(
+                    Icons.broken_image,
+                    size: 48,
+                    color: Colors.grey,
+                  ),
+                ),
               )
             : AspectRatio(
                 aspectRatio: 375 / 265,
                 child: CarouselSlider(
-                    items:
-                        List.generate(model.dataAllImage(data).length, (index) {
+                  items: List.generate(
+                    model.dataAllImage(data).length,
+                    (index) {
+                      final imageUrl = model.dataAllImage(data)[index];
                       return GestureDetector(
                         onTap: () {
                           Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (_) => PhotoViewListPage(
-                                      images: model.dataAllImage(data))));
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => PhotoViewListPage(
+                                images: model.dataAllImage(data),
+                              ),
+                            ),
+                          );
                         },
-                        child: Container(
+                        child: SizedBox(
                           width: double.infinity,
                           height: double.infinity,
-                          decoration: BoxDecoration(
-                              image: DecorationImage(
-                                  fit: BoxFit.cover,
-                                  image: NetworkImage(
-                                      model.dataAllImage(data)[index]))),
+                          child: Image.network(
+                            imageUrl,
+                            fit: BoxFit.cover,
+                            errorBuilder: (context, error, stackTrace) {
+                              return Container(
+                                color: Colors.black12,
+                                child: const Icon(
+                                  Icons.broken_image,
+                                  size: 48,
+                                  color: Colors.grey,
+                                ),
+                              );
+                            },
+                          ),
                         ),
                       );
-                    }),
-                    options: CarouselOptions(
-                        viewportFraction: 1, height: double.infinity))),
+                    },
+                  ),
+                  options: CarouselOptions(
+                    viewportFraction: 1,
+                    height: double.infinity,
+                  ),
+                ),
+              ),
         Container(
           padding: EdgeInsets.all(margin16),
           child: Row(

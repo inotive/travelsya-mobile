@@ -10,17 +10,26 @@ class HostelRoomDetail {
   List<dynamic> roomFacilities = [];
 
   HostelRoomDetail.fromJson(Map<String, dynamic> jsonMap) {
-    roomSize = jsonMap['room_size'];
-    maxGuest = jsonMap['max_guest'].toString();
-    totalBed = jsonMap['total_bed_room'];
-    totalBath = jsonMap['total_bath_room'];
+    roomSize = int.tryParse(jsonMap['room_size']?.toString() ?? '0') ?? 0;
+    totalBed = int.tryParse(jsonMap['total_bed_room']?.toString() ?? '0') ?? 0;
+    totalBath =
+        int.tryParse(jsonMap['total_bath_room']?.toString() ?? '0') ?? 0;
+    maxGuest = jsonMap['max_guest']?.toString() ?? '0';
     desc = jsonMap['description'];
-    roomFacilities = jsonMap['room_facilities'];
-    for (var i = 0; i < jsonMap['room_images'].length; i++) {
-      if (jsonMap['room_images'][i].toString().contains('http')) {
-        images.add(jsonMap['room_images'][i]['image']);
-      } else {
-        images.add('${baseUrl}storage/${jsonMap['room_images'][i]['image']}');
+
+    roomFacilities = (jsonMap['room_facilities'] ?? []) as List;
+
+    images = [];
+    if (jsonMap['room_images'] != null) {
+      for (var img in jsonMap['room_images']) {
+        final raw = img['image']?.toString();
+        if (raw != null && raw.isNotEmpty) {
+          if (raw.contains('http')) {
+            images.add(raw);
+          } else {
+            images.add('${baseUrl}storage/$raw');
+          }
+        }
       }
     }
   }

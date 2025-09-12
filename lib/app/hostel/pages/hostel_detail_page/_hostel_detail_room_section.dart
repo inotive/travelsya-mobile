@@ -56,12 +56,17 @@ class _HostelDetailRoomSection extends StatelessWidget {
                     child: Column(
                       children: [
                         data.room[index].images.isEmpty
-                            ? AspectRatio(
+                            ? const AspectRatio(
                                 aspectRatio: 167 / 100,
                                 child: SizedBox(
-                                    width: double.infinity,
-                                    height: double.infinity,
-                                    child: Image.asset(ConstHelper.logoIcon)),
+                                  width: double.infinity,
+                                  height: double.infinity,
+                                  child: Icon(
+                                    Icons.broken_image,
+                                    size: 48,
+                                    color: Colors.grey,
+                                  ),
+                                ),
                               )
                             : AspectRatio(
                                 aspectRatio: 167 / 100,

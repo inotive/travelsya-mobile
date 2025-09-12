@@ -21,28 +21,57 @@ class HostelPreviewWidget extends StatelessWidget {
                     )));
       },
       child: Card(
+        color: Colors.white,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
         child: Column(
           children: [
             AspectRatio(
               aspectRatio: 167 / 100,
-              child: Container(
-                width: double.infinity,
-                height: double.infinity,
-                decoration: BoxDecoration(
-                    borderRadius: const BorderRadius.only(
-                        topLeft: Radius.circular(8),
-                        topRight: Radius.circular(8)),
-                    color: Colors.black12,
-                    image: data.image == null
-                        ? const DecorationImage(
-                            fit: BoxFit.cover,
-                            image: AssetImage('assets/icons/logo.jpg'))
-                        : DecorationImage(
-                            fit: BoxFit.cover,
-                            image: NetworkImage(data.image!))),
+              child: ClipRRect(
+                borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(8),
+                  topRight: Radius.circular(8),
+                ),
+                child: data.image == null
+                    ? Image.asset(
+                        'assets/icons/logo.jpg',
+                        fit: BoxFit.cover,
+                      )
+                    : Image.network(
+                        data.image!,
+                        fit: BoxFit.cover,
+                        errorBuilder: (context, error, stackTrace) {
+                          return const Center(
+                            child: Icon(
+                              Icons.broken_image,
+                              size: 48,
+                              color: Colors.grey,
+                            ),
+                          );
+                        },
+                      ),
               ),
             ),
+
+            // AspectRatio(
+            //   aspectRatio: 167 / 100,
+            //   child: Container(
+            //     width: double.infinity,
+            //     height: double.infinity,
+            //     decoration: BoxDecoration(
+            //         borderRadius: const BorderRadius.only(
+            //             topLeft: Radius.circular(8),
+            //             topRight: Radius.circular(8)),
+            //         color: Colors.black12,
+            //         image: data.image == null
+            //             ? const DecorationImage(
+            //                 fit: BoxFit.cover,
+            //                 image: AssetImage('assets/icons/logo.jpg'))
+            //             : DecorationImage(
+            //                 fit: BoxFit.cover,
+            //                 image: NetworkImage(data.image!))),
+            //   ),
+            // ),
             Container(
               padding: EdgeInsets.all(margin24 / 2),
               child: Column(

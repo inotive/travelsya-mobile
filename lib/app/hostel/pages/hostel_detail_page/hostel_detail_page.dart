@@ -12,7 +12,6 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:travelsya/shared/api/api_connection.dart';
 import 'package:travelsya/shared/function/date_to_readable_function.dart';
 import 'package:travelsya/shared/function/need_login_function.dart';
-import 'package:travelsya/shared/helper/const_helper.dart';
 import 'package:travelsya/shared/helper/function_helper.dart';
 
 import 'package:travelsya/shared/styles/font_style.dart';
