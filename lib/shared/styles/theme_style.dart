@@ -25,6 +25,7 @@ Color neutral70 = const Color(0xff717171);
 Color neutral80 = const Color(0xff5D5D5D);
 Color neutral90 = const Color(0xff3D3D3D);
 Color neutral100 = const Color(0xff0A0A0A);
+Color neutral501 = const Color(0xff333333);
 
 ThemeData mainTheme = ThemeData(
     primaryColor: primaryColor,
