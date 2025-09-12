@@ -26,400 +26,405 @@ class RekreasiSearchPage extends StatelessWidget {
     }, onViewModelReady: (model) {
       model.onLoadCategory(context);
     }, builder: (context, model, child) {
-      return Scaffold(
-        body: ListView(
-          padding: EdgeInsets.zero,
-          children: [
-            Stack(
-              children: [
-                const RekreasiSearchBackgroundSection(),
-                Positioned(
-                  bottom: 0,
-                  left: 0,
-                  right: 0,
-                  child: Container(
-                    width: double.infinity,
-                    height: 20,
-                    decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(20),
-                            topRight: Radius.circular(20)),
-                        color: Colors.white),
-                  ),
-                )
-              ],
-            ),
-            Container(
-              margin: EdgeInsets.symmetric(horizontal: margin16),
-              child: GestureDetector(
-                onTap: () async {
-                  model.onChangeSelectedCity(context);
-                },
-                child: FormHelper.dropdownForm(context,
-                    data: model.selectedCity?.cityName,
-                    hintText: 'Kota Reservasi'),
-              ),
-            ),
-            SizedBox(
-              height: margin16,
-            ),
-            Container(
-                margin: EdgeInsets.symmetric(horizontal: margin16),
-                child: ElevatedButtonWidget(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (_) => RekreasiSearchResultPage(
-                                  city: model.selectedCity?.cityName,
-                                )));
-                  },
-                  title: 'Cari Sekarang',
-                )),
-            SizedBox(
-              height: margin16,
-            ),
-            SizedBox(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+      return SafeArea(
+        child: Scaffold(
+          body: ListView(
+            padding: EdgeInsets.zero,
+            children: [
+              Stack(
                 children: [
-                  Container(
-                    padding: EdgeInsets.symmetric(horizontal: margin16),
-                    child: Text(
-                      'Apa yang ingin kamu lakukan?',
-                      style: mainBody3.copyWith(
-                          color: Colors.black87, fontWeight: FontWeight.bold),
+                  const RekreasiSearchBackgroundSection(),
+                  Positioned(
+                    bottom: 0,
+                    left: 0,
+                    right: 0,
+                    child: Container(
+                      width: double.infinity,
+                      height: 20,
+                      decoration: const BoxDecoration(
+                          borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(20),
+                              topRight: Radius.circular(20)),
+                          color: Colors.white),
                     ),
-                  ),
-                  SizedBox(
-                    height: margin24 / 2,
-                  ),
-                  BlocBuilder<RecreationCubit, RecreationState>(
-                      bloc: model.recreationCategoryCubit,
-                      builder: (context, stateCategory) {
-                        if (stateCategory is RecreationLoading) {
-                          return Container(
-                            margin: EdgeInsets.only(left: margin16),
-                            width: 25,
-                            height: 25,
-                            child: CircularProgressIndicator(
-                              color: Theme.of(context).primaryColor,
-                            ),
-                          );
-                        } else if (stateCategory is RecreationCategoryLoaded) {
-                          return Column(
-                            children: [
-                              SizedBox(
-                                width: double.infinity,
-                                child: SingleChildScrollView(
-                                  scrollDirection: Axis.horizontal,
-                                  child: Row(
-                                    children: List.generate(
-                                        stateCategory.data.length, (index) {
-                                      return GestureDetector(
-                                        onTap: () {
-                                          model.onChangeIndexCategory(context,
-                                              stateCategory.data[index].id);
-                                        },
-                                        child: Container(
-                                          margin: EdgeInsets.only(
-                                              left: index == 0
-                                                  ? margin16
-                                                  : margin4,
-                                              right: index ==
-                                                      stateCategory
-                                                              .data.length -
-                                                          1
-                                                  ? margin16
-                                                  : 0),
-                                          padding: EdgeInsets.symmetric(
-                                              vertical: margin4,
-                                              horizontal: margin16),
-                                          decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(20),
-                                              color: stateCategory
-                                                          .data[index].id ==
-                                                      model.selectedCategory
-                                                  ? const Color(0xffFFEEF1)
-                                                  : Colors.transparent,
-                                              border: Border.all(
+                  )
+                ],
+              ),
+              Container(
+                margin: EdgeInsets.symmetric(horizontal: margin16),
+                child: GestureDetector(
+                  onTap: () async {
+                    model.onChangeSelectedCity(context);
+                  },
+                  child: FormHelper.dropdownForm(context,
+                      data: model.selectedCity?.cityName,
+                      hintText: 'Kota Reservasi'),
+                ),
+              ),
+              SizedBox(
+                height: margin16,
+              ),
+              Container(
+                  margin: EdgeInsets.symmetric(horizontal: margin16),
+                  child: ElevatedButtonWidget(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (_) => RekreasiSearchResultPage(
+                                    city: model.selectedCity?.cityName,
+                                  )));
+                    },
+                    title: 'Cari Sekarang',
+                  )),
+              SizedBox(
+                height: margin16,
+              ),
+              SizedBox(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      padding: EdgeInsets.symmetric(horizontal: margin16),
+                      child: Text(
+                        'Apa yang ingin kamu lakukan?',
+                        style: mainBody3.copyWith(
+                            color: Colors.black87, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    SizedBox(
+                      height: margin24 / 2,
+                    ),
+                    BlocBuilder<RecreationCubit, RecreationState>(
+                        bloc: model.recreationCategoryCubit,
+                        builder: (context, stateCategory) {
+                          if (stateCategory is RecreationLoading) {
+                            return Container(
+                              margin: EdgeInsets.only(left: margin16),
+                              width: 25,
+                              height: 25,
+                              child: CircularProgressIndicator(
+                                color: Theme.of(context).primaryColor,
+                              ),
+                            );
+                          } else if (stateCategory
+                              is RecreationCategoryLoaded) {
+                            return Column(
+                              children: [
+                                SizedBox(
+                                  width: double.infinity,
+                                  child: SingleChildScrollView(
+                                    scrollDirection: Axis.horizontal,
+                                    child: Row(
+                                      children: List.generate(
+                                          stateCategory.data.length, (index) {
+                                        return GestureDetector(
+                                          onTap: () {
+                                            model.onChangeIndexCategory(context,
+                                                stateCategory.data[index].id);
+                                          },
+                                          child: Container(
+                                            margin: EdgeInsets.only(
+                                                left: index == 0
+                                                    ? margin16
+                                                    : margin4,
+                                                right: index ==
+                                                        stateCategory
+                                                                .data.length -
+                                                            1
+                                                    ? margin16
+                                                    : 0),
+                                            padding: EdgeInsets.symmetric(
+                                                vertical: margin4,
+                                                horizontal: margin16),
+                                            decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(20),
+                                                color: stateCategory
+                                                            .data[index].id ==
+                                                        model.selectedCategory
+                                                    ? const Color(0xffFFEEF1)
+                                                    : Colors.transparent,
+                                                border: Border.all(
+                                                    color: stateCategory
+                                                                .data[index]
+                                                                .id ==
+                                                            model
+                                                                .selectedCategory
+                                                        ? Theme.of(context)
+                                                            .primaryColor
+                                                        : const Color(
+                                                            0xffA5A5A5))),
+                                            child: Text(
+                                              stateCategory.data[index].name,
+                                              style: mainBody4.copyWith(
                                                   color: stateCategory
                                                               .data[index].id ==
                                                           model.selectedCategory
                                                       ? Theme.of(context)
                                                           .primaryColor
                                                       : const Color(
-                                                          0xffA5A5A5))),
-                                          child: Text(
-                                            stateCategory.data[index].name,
-                                            style: mainBody4.copyWith(
-                                                color: stateCategory
-                                                            .data[index].id ==
-                                                        model.selectedCategory
-                                                    ? Theme.of(context)
-                                                        .primaryColor
-                                                    : const Color(0xffA5A5A5)),
-                                          ),
-                                        ),
-                                      );
-                                    }),
-                                  ),
-                                ),
-                              ),
-                              SizedBox(
-                                height: margin16,
-                              ),
-                              BlocBuilder<RecreationCubit, RecreationState>(
-                                  bloc: model.recreationPreviewCubit,
-                                  builder: (context, state) {
-                                    if (state is RecreationLoading) {
-                                      return Container(
-                                        margin: EdgeInsets.only(top: margin24),
-                                        alignment: Alignment.center,
-                                        child: CircularProgressIndicator(
-                                          color: Theme.of(context).primaryColor,
-                                        ),
-                                      );
-                                    } else if (state
-                                        is RecreationPreviewListLoaded) {
-                                      if (state.data.isEmpty) {
-                                        return const NoDataWidget();
-                                      }
-
-                                      return Column(
-                                        children: [
-                                          Container(
-                                            padding: EdgeInsets.symmetric(
-                                                horizontal: margin16),
-                                            width: double.infinity,
-                                            child: Wrap(
-                                              alignment:
-                                                  WrapAlignment.spaceBetween,
-                                              children: List.generate(
-                                                  state.data.length, (index) {
-                                                RecreationPreviewModel data =
-                                                    state.data[index];
-                                                return FractionallySizedBox(
-                                                  widthFactor: 0.49,
-                                                  child: GestureDetector(
-                                                    onTap: () {
-                                                      Navigator.push(
-                                                          context,
-                                                          MaterialPageRoute(
-                                                              builder: (_) =>
-                                                                  NewRekreasiDetailPage(
-                                                                    id: data.id
-                                                                        .toString(),
-                                                                  )
-                                                              // RekreasiDetailPage(
-                                                              //   id: data.id
-                                                              //       .toString(),
-                                                              // )
-                                                              ));
-                                                    },
-                                                    child: Card(
-                                                      shape:
-                                                          RoundedRectangleBorder(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          8)),
-                                                      child: Column(
-                                                        children: [
-                                                          AspectRatio(
-                                                            aspectRatio:
-                                                                167 / 100,
-                                                            child: ClipRRect(
-                                                              borderRadius: const BorderRadius
-                                                                  .only(
-                                                                  topLeft: Radius
-                                                                      .circular(
-                                                                          8),
-                                                                  topRight: Radius
-                                                                      .circular(
-                                                                          8)),
-                                                              child: SizedBox(
-                                                                width: double
-                                                                    .infinity,
-                                                                height: double
-                                                                    .infinity,
-                                                                child: Image
-                                                                    .network(
-                                                                  data.image,
-                                                                  fit: BoxFit
-                                                                      .cover,
-                                                                  errorBuilder:
-                                                                      (context,
-                                                                          error,
-                                                                          stackTrace) {
-                                                                    return const Center(
-                                                                      child:
-                                                                          Icon(
-                                                                        Icons
-                                                                            .broken_image,
-                                                                        size:
-                                                                            50,
-                                                                        color: Colors
-                                                                            .grey,
-                                                                      ),
-                                                                    );
-                                                                  },
-                                                                ),
-                                                              ),
-                                                            ),
-                                                            // Container(
-                                                            //   width: double
-                                                            //       .infinity,
-                                                            //   height: double
-                                                            //       .infinity,
-                                                            //   decoration: BoxDecoration(
-                                                            //       borderRadius: const BorderRadius
-                                                            //           .only(
-                                                            //           topLeft: Radius
-                                                            //               .circular(
-                                                            //                   8),
-                                                            //           topRight:
-                                                            //               Radius.circular(
-                                                            //                   8)),
-                                                            //       image: DecorationImage(
-                                                            //           fit: BoxFit
-                                                            //               .cover,
-                                                            //           image: NetworkImage(
-                                                            //               data.image))),
-                                                            // ),
-                                                          ),
-                                                          Container(
-                                                            color: Colors.white,
-                                                            padding:
-                                                                EdgeInsets.all(
-                                                                    margin24 /
-                                                                        2),
-                                                            child: Column(
-                                                              crossAxisAlignment:
-                                                                  CrossAxisAlignment
-                                                                      .start,
-                                                              children: [
-                                                                Text(
-                                                                  data.name,
-                                                                  maxLines: 2,
-                                                                  overflow:
-                                                                      TextOverflow
-                                                                          .ellipsis,
-                                                                  style: mainBody4.copyWith(
-                                                                      color: Colors
-                                                                          .black87,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .bold),
-                                                                ),
-                                                                Text(
-                                                                  data.location,
-                                                                  style: mainBody5
-                                                                      .copyWith(
-                                                                          color:
-                                                                              const Color(0xffa5a5a5)),
-                                                                ),
-                                                                SizedBox(
-                                                                  height:
-                                                                      margin8,
-                                                                ),
-                                                                Row(
-                                                                  children: [
-                                                                    Text(
-                                                                      'mulai dari ',
-                                                                      style: mainBody5.copyWith(
-                                                                          color:
-                                                                              const Color(0xffa5a5a5)),
-                                                                    ),
-                                                                  ],
-                                                                ),
-                                                                Text(
-                                                                  moneyChanger(
-                                                                      data.price),
-                                                                  style: mainBody4.copyWith(
-                                                                      color: Theme.of(
-                                                                              context)
-                                                                          .primaryColor,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .bold),
-                                                                ),
-                                                                SizedBox(
-                                                                    height:
-                                                                        margin8),
-                                                                Row(
-                                                                  children: [
-                                                                    Icon(
-                                                                      Icons
-                                                                          .star,
-                                                                      color: Theme.of(
-                                                                              context)
-                                                                          .primaryColor,
-                                                                    ),
-                                                                    SizedBox(
-                                                                      width:
-                                                                          margin4,
-                                                                    ),
-                                                                    Text(
-                                                                      '${data.avgRating} ',
-                                                                      style: mainBody4.copyWith(
-                                                                          color: Colors
-                                                                              .black87,
-                                                                          fontWeight:
-                                                                              FontWeight.bold),
-                                                                    ),
-                                                                    Text(
-                                                                      '(${data.ratingCount})',
-                                                                      style: mainBody5
-                                                                          .copyWith(
-                                                                        color: const Color(
-                                                                            0xffa5a5a5),
-                                                                      ),
-                                                                    )
-                                                                  ],
-                                                                )
-                                                              ],
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                  ),
-                                                );
-                                              }),
+                                                          0xffA5A5A5)),
                                             ),
                                           ),
-                                          // SizedBox(
-                                          //   height: margin16,
-                                          // ),
-                                          // Container(
-                                          //   padding: EdgeInsets.symmetric(
-                                          //       horizontal: margin16),
-                                          //   child: FormHelper.borderButton(
-                                          //       context,
-                                          //       onTap: () {},
-                                          //       title: 'Lihat Semua'),
-                                          // )
-                                        ],
-                                      );
-                                    } else {
-                                      return Container();
-                                    }
-                                  }),
-                            ],
-                          );
-                        } else {
-                          return Container();
-                        }
-                      }),
-                ],
+                                        );
+                                      }),
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: margin16,
+                                ),
+                                BlocBuilder<RecreationCubit, RecreationState>(
+                                    bloc: model.recreationPreviewCubit,
+                                    builder: (context, state) {
+                                      if (state is RecreationLoading) {
+                                        return Container(
+                                          margin:
+                                              EdgeInsets.only(top: margin24),
+                                          alignment: Alignment.center,
+                                          child: CircularProgressIndicator(
+                                            color:
+                                                Theme.of(context).primaryColor,
+                                          ),
+                                        );
+                                      } else if (state
+                                          is RecreationPreviewListLoaded) {
+                                        if (state.data.isEmpty) {
+                                          return const NoDataWidget();
+                                        }
+
+                                        return Column(
+                                          children: [
+                                            Container(
+                                              padding: EdgeInsets.symmetric(
+                                                  horizontal: margin16),
+                                              width: double.infinity,
+                                              child: Wrap(
+                                                alignment:
+                                                    WrapAlignment.spaceBetween,
+                                                children: List.generate(
+                                                    state.data.length, (index) {
+                                                  RecreationPreviewModel data =
+                                                      state.data[index];
+                                                  return FractionallySizedBox(
+                                                    widthFactor: 0.49,
+                                                    child: GestureDetector(
+                                                      onTap: () {
+                                                        Navigator.push(
+                                                            context,
+                                                            MaterialPageRoute(
+                                                                builder: (_) =>
+                                                                    NewRekreasiDetailPage(
+                                                                      id: data
+                                                                          .id
+                                                                          .toString(),
+                                                                    )
+                                                                // RekreasiDetailPage(
+                                                                //   id: data.id
+                                                                //       .toString(),
+                                                                // )
+                                                                ));
+                                                      },
+                                                      child: Card(
+                                                        shape:
+                                                            RoundedRectangleBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            8)),
+                                                        child: Column(
+                                                          children: [
+                                                            AspectRatio(
+                                                              aspectRatio:
+                                                                  167 / 100,
+                                                              child: ClipRRect(
+                                                                borderRadius: const BorderRadius
+                                                                    .only(
+                                                                    topLeft: Radius
+                                                                        .circular(
+                                                                            8),
+                                                                    topRight: Radius
+                                                                        .circular(
+                                                                            8)),
+                                                                child: SizedBox(
+                                                                  width: double
+                                                                      .infinity,
+                                                                  height: double
+                                                                      .infinity,
+                                                                  child: Image
+                                                                      .network(
+                                                                    data.image,
+                                                                    fit: BoxFit
+                                                                        .cover,
+                                                                    errorBuilder:
+                                                                        (context,
+                                                                            error,
+                                                                            stackTrace) {
+                                                                      return const Center(
+                                                                        child:
+                                                                            Icon(
+                                                                          Icons
+                                                                              .broken_image,
+                                                                          size:
+                                                                              50,
+                                                                          color:
+                                                                              Colors.grey,
+                                                                        ),
+                                                                      );
+                                                                    },
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                              // Container(
+                                                              //   width: double
+                                                              //       .infinity,
+                                                              //   height: double
+                                                              //       .infinity,
+                                                              //   decoration: BoxDecoration(
+                                                              //       borderRadius: const BorderRadius
+                                                              //           .only(
+                                                              //           topLeft: Radius
+                                                              //               .circular(
+                                                              //                   8),
+                                                              //           topRight:
+                                                              //               Radius.circular(
+                                                              //                   8)),
+                                                              //       image: DecorationImage(
+                                                              //           fit: BoxFit
+                                                              //               .cover,
+                                                              //           image: NetworkImage(
+                                                              //               data.image))),
+                                                              // ),
+                                                            ),
+                                                            Container(
+                                                              color:
+                                                                  Colors.white,
+                                                              padding:
+                                                                  EdgeInsets.all(
+                                                                      margin24 /
+                                                                          2),
+                                                              child: Column(
+                                                                crossAxisAlignment:
+                                                                    CrossAxisAlignment
+                                                                        .start,
+                                                                children: [
+                                                                  Text(
+                                                                    data.name,
+                                                                    maxLines: 2,
+                                                                    overflow:
+                                                                        TextOverflow
+                                                                            .ellipsis,
+                                                                    style: mainBody4.copyWith(
+                                                                        color: Colors
+                                                                            .black87,
+                                                                        fontWeight:
+                                                                            FontWeight.bold),
+                                                                  ),
+                                                                  Text(
+                                                                    data.location,
+                                                                    style: mainBody5
+                                                                        .copyWith(
+                                                                            color:
+                                                                                const Color(0xffa5a5a5)),
+                                                                  ),
+                                                                  SizedBox(
+                                                                    height:
+                                                                        margin8,
+                                                                  ),
+                                                                  Row(
+                                                                    children: [
+                                                                      Text(
+                                                                        'mulai dari ',
+                                                                        style: mainBody5.copyWith(
+                                                                            color:
+                                                                                const Color(0xffa5a5a5)),
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                  Text(
+                                                                    moneyChanger(
+                                                                        data.price),
+                                                                    style: mainBody4.copyWith(
+                                                                        color: Theme.of(context)
+                                                                            .primaryColor,
+                                                                        fontWeight:
+                                                                            FontWeight.bold),
+                                                                  ),
+                                                                  SizedBox(
+                                                                      height:
+                                                                          margin8),
+                                                                  Row(
+                                                                    children: [
+                                                                      Icon(
+                                                                        Icons
+                                                                            .star,
+                                                                        color: Theme.of(context)
+                                                                            .primaryColor,
+                                                                      ),
+                                                                      SizedBox(
+                                                                        width:
+                                                                            margin4,
+                                                                      ),
+                                                                      Text(
+                                                                        '${data.avgRating} ',
+                                                                        style: mainBody4.copyWith(
+                                                                            color:
+                                                                                Colors.black87,
+                                                                            fontWeight: FontWeight.bold),
+                                                                      ),
+                                                                      Text(
+                                                                        '(${data.ratingCount})',
+                                                                        style: mainBody5
+                                                                            .copyWith(
+                                                                          color:
+                                                                              const Color(0xffa5a5a5),
+                                                                        ),
+                                                                      )
+                                                                    ],
+                                                                  )
+                                                                ],
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  );
+                                                }),
+                                              ),
+                                            ),
+                                            // SizedBox(
+                                            //   height: margin16,
+                                            // ),
+                                            // Container(
+                                            //   padding: EdgeInsets.symmetric(
+                                            //       horizontal: margin16),
+                                            //   child: FormHelper.borderButton(
+                                            //       context,
+                                            //       onTap: () {},
+                                            //       title: 'Lihat Semua'),
+                                            // )
+                                          ],
+                                        );
+                                      } else {
+                                        return Container();
+                                      }
+                                    }),
+                              ],
+                            );
+                          } else {
+                            return Container();
+                          }
+                        }),
+                  ],
+                ),
               ),
-            ),
-            SizedBox(
-              height: margin32,
-            )
-          ],
+              SizedBox(
+                height: margin32,
+              )
+            ],
+          ),
         ),
       );
     });

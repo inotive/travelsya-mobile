@@ -22,41 +22,43 @@ class LoginPage extends StatelessWidget {
       model.onInit();
     }, builder: (context, model, child) {
       return StatusbarWidget(
-          child: Scaffold(
-        backgroundColor: Colors.white,
-        body: Column(
-          children: [
-            SizedBox(
-              height: MediaQuery.of(context).padding.top,
-            ),
-            Container(
-              padding: EdgeInsets.all(margin16),
-              alignment: Alignment.centerRight,
-              child: GestureDetector(
-                onTap: () {
-                  Navigator.pop(context);
-                },
-                child: Container(
-                  width: 40,
-                  height: 40,
-                  decoration: const BoxDecoration(
-                      shape: BoxShape.circle, color: Color(0xffFFEEF1)),
-                  alignment: Alignment.center,
-                  child: Icon(
-                    Icons.close,
-                    color: Theme.of(context).primaryColor,
+          child: SafeArea(
+        child: Scaffold(
+          backgroundColor: Colors.white,
+          body: Column(
+            children: [
+              SizedBox(
+                height: MediaQuery.of(context).padding.top,
+              ),
+              Container(
+                padding: EdgeInsets.all(margin16),
+                alignment: Alignment.centerRight,
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                  child: Container(
+                    width: 40,
+                    height: 40,
+                    decoration: const BoxDecoration(
+                        shape: BoxShape.circle, color: Color(0xffFFEEF1)),
+                    alignment: Alignment.center,
+                    child: Icon(
+                      Icons.close,
+                      color: Theme.of(context).primaryColor,
+                    ),
                   ),
                 ),
               ),
-            ),
-            Expanded(
-                child: _LoginPageFormSection(
-              model: model,
-            )),
-            _LoginActionSection(
-              model: model,
-            )
-          ],
+              Expanded(
+                  child: _LoginPageFormSection(
+                model: model,
+              )),
+              _LoginActionSection(
+                model: model,
+              )
+            ],
+          ),
         ),
       ));
     });

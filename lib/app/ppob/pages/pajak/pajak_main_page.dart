@@ -27,136 +27,136 @@ class PajakMainPage extends StatelessWidget {
       model.onInit(preloadNumber);
     }, builder: (context, model, child) {
       return StatusbarWidget(
-          child: Scaffold(
-              backgroundColor: Colors.white,
-              appBar: appbarWidget(
-                context,
-                title: 'Pajak',
-              ),
-              body: BlocBuilder<PPOBCubit, PPOBState>(
-                  bloc: BlocProvider.of<PPOBCubit>(context),
-                  builder: (context, state) {
-                    if (state is PPOBLoading) {
-                      return Center(
-                        child: CircularProgressIndicator(
-                            color: Theme.of(context).primaryColor),
+          child: SafeArea(
+        child: Scaffold(
+            backgroundColor: Colors.white,
+            appBar: appbarWidget(
+              context,
+              title: 'Pajak',
+            ),
+            body: BlocBuilder<PPOBCubit, PPOBState>(
+                bloc: BlocProvider.of<PPOBCubit>(context),
+                builder: (context, state) {
+                  if (state is PPOBLoading) {
+                    return Center(
+                      child: CircularProgressIndicator(
+                          color: Theme.of(context).primaryColor),
+                    );
+                  } else if (state is PPOBLoaded) {
+                    if (state.data.tvInternet.isEmpty) {
+                      return Container(
+                        margin: EdgeInsets.symmetric(horizontal: margin32),
+                        width: double.infinity,
+                        child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              SizedBox(
+                                width: 150,
+                                child: Image.asset(ConstHelper.logoIcon),
+                              ),
+                              SizedBox(
+                                height: margin16,
+                              ),
+                              Text(
+                                'Saat ini pembayaran Pajak sedang tidak tersedia, mohon coba lagi nanti',
+                                textAlign: TextAlign.center,
+                                style: mainBody4,
+                              )
+                            ]),
                       );
-                    } else if (state is PPOBLoaded) {
-                      if (state.data.tvInternet.isEmpty) {
-                        return Container(
-                          margin: EdgeInsets.symmetric(horizontal: margin32),
-                          width: double.infinity,
-                          child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                SizedBox(
-                                  width: 150,
-                                  child: Image.asset(ConstHelper.logoIcon),
-                                ),
-                                SizedBox(
-                                  height: margin16,
-                                ),
-                                Text(
-                                  'Saat ini pembayaran Pajak sedang tidak tersedia, mohon coba lagi nanti',
-                                  textAlign: TextAlign.center,
-                                  style: mainBody4,
-                                )
-                              ]),
-                        );
-                      } else {
-                        return ListView(
-                          padding: EdgeInsets.all(margin16),
-                          children: [
-                            GestureDetector(
-                              onTap: () {
-                                model.onChangeProduct(context);
-                              },
-                              child: Card(
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10)),
-                                child: Container(
-                                  padding: EdgeInsets.symmetric(
-                                      vertical: margin24 / 2,
-                                      horizontal: margin16),
-                                  child: Row(
-                                    children: [
-                                      SizedBox(
-                                        width: 25,
-                                        child: Image.asset(ConstHelper.taxIcon),
-                                      ),
-                                      SizedBox(
-                                        width: margin16,
-                                      ),
-                                      Expanded(
-                                          child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            'Penyedia Pajak',
-                                            style: mainBody4,
-                                          ),
-                                          Text(
-                                            model.selectedProvider == null
-                                                ? 'Mohon memilih Penyedia Pajak'
-                                                : model.selectedProvider!
-                                                    .description,
-                                            style: model.selectedProvider ==
-                                                    null
-                                                ? mainBody5.copyWith(
-                                                    color: Colors.orange,
-                                                    fontStyle: FontStyle.italic)
-                                                : mainBody4.copyWith(
-                                                    color: Colors.black87,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                          ),
-                                        ],
-                                      )),
-                                      SizedBox(
-                                        width: margin24 / 2,
-                                      ),
-                                      Text(
-                                        'Ubah',
-                                        style: mainBody5.copyWith(
-                                            color:
-                                                Theme.of(context).primaryColor),
-                                      )
-                                    ],
-                                  ),
+                    } else {
+                      return ListView(
+                        padding: EdgeInsets.all(margin16),
+                        children: [
+                          GestureDetector(
+                            onTap: () {
+                              model.onChangeProduct(context);
+                            },
+                            child: Card(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10)),
+                              child: Container(
+                                padding: EdgeInsets.symmetric(
+                                    vertical: margin24 / 2,
+                                    horizontal: margin16),
+                                child: Row(
+                                  children: [
+                                    SizedBox(
+                                      width: 25,
+                                      child: Image.asset(ConstHelper.taxIcon),
+                                    ),
+                                    SizedBox(
+                                      width: margin16,
+                                    ),
+                                    Expanded(
+                                        child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          'Penyedia Pajak',
+                                          style: mainBody4,
+                                        ),
+                                        Text(
+                                          model.selectedProvider == null
+                                              ? 'Mohon memilih Penyedia Pajak'
+                                              : model.selectedProvider!
+                                                  .description,
+                                          style: model.selectedProvider == null
+                                              ? mainBody5.copyWith(
+                                                  color: Colors.orange,
+                                                  fontStyle: FontStyle.italic)
+                                              : mainBody4.copyWith(
+                                                  color: Colors.black87,
+                                                  fontWeight: FontWeight.bold),
+                                        ),
+                                      ],
+                                    )),
+                                    SizedBox(
+                                      width: margin24 / 2,
+                                    ),
+                                    Text(
+                                      'Ubah',
+                                      style: mainBody5.copyWith(
+                                          color:
+                                              Theme.of(context).primaryColor),
+                                    )
+                                  ],
                                 ),
                               ),
                             ),
-                            SizedBox(
-                              height: margin24 / 2,
-                            ),
-                            TitleWithWidget(
-                              title: 'Nomor Tagihan',
-                              child: RoundedTextfield(
-                                  controller: model.controller,
-                                  hintText: 'Masukkan Nomor Tagihan'),
-                            ),
-                            SizedBox(
-                              height: margin32,
-                            ),
-                            ElevatedButtonWidget(
-                                enabled: model.selectedProvider != null,
-                                onTap: () {
-                                  model.onSubmit(context);
-                                },
-                                title: 'Cek Tagihan')
-                          ],
-                        );
-                      }
-                    } else {
-                      return FailedRequestWidget(
-                        onRetry: () {
-                          BlocProvider.of<PPOBCubit>(context)
-                              .fetchPPOBData(context);
-                        },
+                          ),
+                          SizedBox(
+                            height: margin24 / 2,
+                          ),
+                          TitleWithWidget(
+                            title: 'Nomor Tagihan',
+                            child: RoundedTextfield(
+                                controller: model.controller,
+                                hintText: 'Masukkan Nomor Tagihan'),
+                          ),
+                          SizedBox(
+                            height: margin32,
+                          ),
+                          ElevatedButtonWidget(
+                              enabled: model.selectedProvider != null,
+                              onTap: () {
+                                model.onSubmit(context);
+                              },
+                              title: 'Cek Tagihan')
+                        ],
                       );
                     }
-                  })));
+                  } else {
+                    return FailedRequestWidget(
+                      onRetry: () {
+                        BlocProvider.of<PPOBCubit>(context)
+                            .fetchPPOBData(context);
+                      },
+                    );
+                  }
+                })),
+      ));
     });
   }
 }

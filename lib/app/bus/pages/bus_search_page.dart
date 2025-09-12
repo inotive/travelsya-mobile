@@ -24,251 +24,259 @@ class BusSearchPage extends StatelessWidget {
     }, onViewModelReady: (model) {
       BlocProvider.of<BusFilterCubit>(context).onResetData();
     }, builder: (context, model, child) {
-      return Scaffold(
-          body: BlocBuilder<BusFilterCubit, BusFilterState>(
-              bloc: BlocProvider.of<BusFilterCubit>(context),
-              builder: (context, state) {
-                if (state is BusFilterLoaded) {
-                  return ListView(
-                    padding: EdgeInsets.zero,
-                    children: [
-                      Stack(
-                        children: [
-                          const BusSearchBackgroundSection(),
-                          Positioned(
-                            bottom: 0,
-                            left: 0,
-                            right: 0,
-                            child: Container(
-                              width: double.infinity,
-                              height: 20,
-                              decoration: const BoxDecoration(
-                                  borderRadius: BorderRadius.only(
-                                      topLeft: Radius.circular(20),
-                                      topRight: Radius.circular(20)),
-                                  color: Colors.white),
-                            ),
-                          )
-                        ],
-                      ),
-                      // SizedBox(
-                      //   height: margin16,
-                      // ),
-                      Container(
-                        padding: EdgeInsets.symmetric(horizontal: margin16),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+      return SafeArea(
+        child: Scaffold(
+            body: BlocBuilder<BusFilterCubit, BusFilterState>(
+                bloc: BlocProvider.of<BusFilterCubit>(context),
+                builder: (context, state) {
+                  if (state is BusFilterLoaded) {
+                    return ListView(
+                      padding: EdgeInsets.zero,
+                      children: [
+                        Stack(
                           children: [
-                            Text(
-                              'Stasiun Asal',
-                              style: mainBody4.copyWith(color: neutral50),
-                            ),
-                            SizedBox(
-                              height: margin8,
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                BlocProvider.of<BusFilterCubit>(context)
-                                    .onPickCity(context);
-                              },
-                              child: FormHelper.dropdownForm(context,
-                                  data: state.data.selectedCityOrigin,
-                                  hintText: 'Kota Asal'),
-                            ),
-                            SizedBox(
-                              height: margin24 / 2,
-                            ),
-                            Text(
-                              'Stasiun Tujuan',
-                              style: mainBody4.copyWith(color: neutral50),
-                            ),
-                            SizedBox(
-                              height: margin8,
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                BlocProvider.of<BusFilterCubit>(context)
-                                    .onPickCity(context, isOrigin: false);
-                              },
-                              child: FormHelper.dropdownForm(context,
-                                  data: state.data.selectedCityDestination,
-                                  hintText: 'Kota Tujuan'),
-                            ),
-                            SizedBox(
-                              height: margin24 / 2,
-                            ),
-                            Text(
-                              'Tanggal Keberangkatan',
-                              style: mainBody4.copyWith(color: neutral50),
-                            ),
-                            SizedBox(
-                              height: margin8,
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                BlocProvider.of<BusFilterCubit>(context)
-                                    .onPickDate(
-                                  context,
-                                );
-                              },
-                              child: FormHelper.dropdownForm(context,
-                                  customIcons: Icons.date_range,
-                                  data: dateToReadable(DateFormat('yyyy-MM-dd')
-                                      .format(state.data.selectedDateGo!)),
-                                  hintText: 'Tanggal Keberangkatan'),
-                            ),
-                            state.data.isWayBack
-                                ? Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      SizedBox(
-                                        height: margin24 / 2,
-                                      ),
-                                      Text(
-                                        'Tanggal Kepulangan',
-                                        style: mainBody4.copyWith(
-                                            color: neutral50),
-                                      ),
-                                      SizedBox(
-                                        height: margin8,
-                                      ),
-                                      GestureDetector(
-                                        onTap: () {
-                                          BlocProvider.of<BusFilterCubit>(
-                                                  context)
-                                              .onPickDate(context,
-                                                  isStartDate: false);
-                                        },
-                                        child: FormHelper.dropdownForm(context,
-                                            customIcons: Icons.date_range,
-                                            data: state.data.selectedDateBack ==
-                                                    null
-                                                ? null
-                                                : dateToReadable(DateFormat(
-                                                        'yyyy-MM-dd')
-                                                    .format(state.data
-                                                        .selectedDateBack!)),
-                                            hintText: 'Tanggal Kepulangan'),
-                                      ),
-                                    ],
-                                  )
-                                : Container(),
-                            SizedBox(
-                              height: margin24 / 2,
-                            ),
-                            Row(
-                              children: [
-                                Expanded(
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        'Jumlah Penumpang',
-                                        style: mainBody4.copyWith(
-                                            color: neutral50),
-                                      ),
-                                      SizedBox(
-                                        height: margin8,
-                                      ),
-                                      GestureDetector(
-                                        onTap: () {
-                                          BlocProvider.of<BusFilterCubit>(
-                                                  context)
-                                              .onPickPassanger(context);
-                                        },
-                                        child: FormHelper.dropdownForm(context,
-                                            data:
-                                                '${state.data.totalPassanger} Penumpang',
-                                            hintText: 'Jumlah Penumpang'),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: margin24 / 2,
-                                ),
-                                Row(
-                                  children: [
-                                    SizedBox(
-                                        width: 20,
-                                        height: 20,
-                                        child: Checkbox(
-                                            activeColor:
-                                                Theme.of(context).primaryColor,
-                                            shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(4)),
-                                            value: state.data.isWayBack,
-                                            onChanged: (value) {
-                                              BlocProvider.of<BusFilterCubit>(
-                                                      context)
-                                                  .onChangeWaybackStatus(
-                                                      value!);
-                                            })),
-                                    SizedBox(
-                                      width: margin4,
-                                    ),
-                                    Text(
-                                      'Pulang pergi?',
-                                      style:
-                                          mainBody4.copyWith(color: neutral100),
-                                    )
-                                  ],
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: margin16,
-                            ),
-                            ElevatedButtonWidget(
-                                enabled: true,
-                                onTap: () {
-                                  final busFilter = state.data;
-
-                                  if (busFilter.selectedCityOrigin == null) {
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(
-                                          backgroundColor: primaryColor,
-                                          content: const Text(
-                                              "Pilih kota asal terlebih dahulu")),
-                                    );
-                                    return;
-                                  }
-
-                                  if (busFilter.selectedCityDestination ==
-                                      null) {
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(
-                                          backgroundColor: primaryColor,
-                                          content: const Text(
-                                              "Pilih kota tujuan terlebih dahulu")),
-                                    );
-                                    return;
-                                  }
-                                  BlocProvider.of<BusFilterCubit>(context)
-                                      .onSearch(context, onSuccess: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (_) =>
-                                                const BusDetailPage()));
-                                  });
-                                },
-                                title: 'Cari Tiket')
+                            const BusSearchBackgroundSection(),
+                            Positioned(
+                              bottom: 0,
+                              left: 0,
+                              right: 0,
+                              child: Container(
+                                width: double.infinity,
+                                height: 20,
+                                decoration: const BoxDecoration(
+                                    borderRadius: BorderRadius.only(
+                                        topLeft: Radius.circular(20),
+                                        topRight: Radius.circular(20)),
+                                    color: Colors.white),
+                              ),
+                            )
                           ],
                         ),
-                      ),
-                      SizedBox(
-                        height: margin32,
-                      )
-                    ],
-                  );
-                }
+                        // SizedBox(
+                        //   height: margin16,
+                        // ),
+                        Container(
+                          padding: EdgeInsets.symmetric(horizontal: margin16),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Stasiun Asal',
+                                style: mainBody4.copyWith(color: neutral50),
+                              ),
+                              SizedBox(
+                                height: margin8,
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  BlocProvider.of<BusFilterCubit>(context)
+                                      .onPickCity(context);
+                                },
+                                child: FormHelper.dropdownForm(context,
+                                    data: state.data.selectedCityOrigin,
+                                    hintText: 'Kota Asal'),
+                              ),
+                              SizedBox(
+                                height: margin24 / 2,
+                              ),
+                              Text(
+                                'Stasiun Tujuan',
+                                style: mainBody4.copyWith(color: neutral50),
+                              ),
+                              SizedBox(
+                                height: margin8,
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  BlocProvider.of<BusFilterCubit>(context)
+                                      .onPickCity(context, isOrigin: false);
+                                },
+                                child: FormHelper.dropdownForm(context,
+                                    data: state.data.selectedCityDestination,
+                                    hintText: 'Kota Tujuan'),
+                              ),
+                              SizedBox(
+                                height: margin24 / 2,
+                              ),
+                              Text(
+                                'Tanggal Keberangkatan',
+                                style: mainBody4.copyWith(color: neutral50),
+                              ),
+                              SizedBox(
+                                height: margin8,
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  BlocProvider.of<BusFilterCubit>(context)
+                                      .onPickDate(
+                                    context,
+                                  );
+                                },
+                                child: FormHelper.dropdownForm(context,
+                                    customIcons: Icons.date_range,
+                                    data: dateToReadable(
+                                        DateFormat('yyyy-MM-dd').format(
+                                            state.data.selectedDateGo!)),
+                                    hintText: 'Tanggal Keberangkatan'),
+                              ),
+                              state.data.isWayBack
+                                  ? Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        SizedBox(
+                                          height: margin24 / 2,
+                                        ),
+                                        Text(
+                                          'Tanggal Kepulangan',
+                                          style: mainBody4.copyWith(
+                                              color: neutral50),
+                                        ),
+                                        SizedBox(
+                                          height: margin8,
+                                        ),
+                                        GestureDetector(
+                                          onTap: () {
+                                            BlocProvider.of<BusFilterCubit>(
+                                                    context)
+                                                .onPickDate(context,
+                                                    isStartDate: false);
+                                          },
+                                          child: FormHelper.dropdownForm(
+                                              context,
+                                              customIcons: Icons.date_range,
+                                              data: state.data
+                                                          .selectedDateBack ==
+                                                      null
+                                                  ? null
+                                                  : dateToReadable(DateFormat(
+                                                          'yyyy-MM-dd')
+                                                      .format(state.data
+                                                          .selectedDateBack!)),
+                                              hintText: 'Tanggal Kepulangan'),
+                                        ),
+                                      ],
+                                    )
+                                  : Container(),
+                              SizedBox(
+                                height: margin24 / 2,
+                              ),
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          'Jumlah Penumpang',
+                                          style: mainBody4.copyWith(
+                                              color: neutral50),
+                                        ),
+                                        SizedBox(
+                                          height: margin8,
+                                        ),
+                                        GestureDetector(
+                                          onTap: () {
+                                            BlocProvider.of<BusFilterCubit>(
+                                                    context)
+                                                .onPickPassanger(context);
+                                          },
+                                          child: FormHelper.dropdownForm(
+                                              context,
+                                              data:
+                                                  '${state.data.totalPassanger} Penumpang',
+                                              hintText: 'Jumlah Penumpang'),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: margin24 / 2,
+                                  ),
+                                  Row(
+                                    children: [
+                                      SizedBox(
+                                          width: 20,
+                                          height: 20,
+                                          child: Checkbox(
+                                              activeColor: Theme.of(context)
+                                                  .primaryColor,
+                                              shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(4)),
+                                              value: state.data.isWayBack,
+                                              onChanged: (value) {
+                                                BlocProvider.of<BusFilterCubit>(
+                                                        context)
+                                                    .onChangeWaybackStatus(
+                                                        value!);
+                                              })),
+                                      SizedBox(
+                                        width: margin4,
+                                      ),
+                                      Text(
+                                        'Pulang pergi?',
+                                        style: mainBody4.copyWith(
+                                            color: neutral100),
+                                      )
+                                    ],
+                                  ),
+                                ],
+                              ),
+                              SizedBox(
+                                height: margin16,
+                              ),
+                              ElevatedButtonWidget(
+                                  enabled: true,
+                                  onTap: () {
+                                    final busFilter = state.data;
 
-                return Container();
-              }));
+                                    if (busFilter.selectedCityOrigin == null) {
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(
+                                        SnackBar(
+                                            backgroundColor: primaryColor,
+                                            content: const Text(
+                                                "Pilih kota asal terlebih dahulu")),
+                                      );
+                                      return;
+                                    }
+
+                                    if (busFilter.selectedCityDestination ==
+                                        null) {
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(
+                                        SnackBar(
+                                            backgroundColor: primaryColor,
+                                            content: const Text(
+                                                "Pilih kota tujuan terlebih dahulu")),
+                                      );
+                                      return;
+                                    }
+                                    BlocProvider.of<BusFilterCubit>(context)
+                                        .onSearch(context, onSuccess: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (_) =>
+                                                  const BusDetailPage()));
+                                    });
+                                  },
+                                  title: 'Cari Tiket')
+                            ],
+                          ),
+                        ),
+                        SizedBox(
+                          height: margin32,
+                        )
+                      ],
+                    );
+                  }
+
+                  return Container();
+                })),
+      );
     });
   }
 }

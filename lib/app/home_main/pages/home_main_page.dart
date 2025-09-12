@@ -27,54 +27,56 @@ class _HomeMainPageState extends State<HomeMainPage> {
         builder: (context, model, child) {
           return StatusbarWidget(
             customBrightness: Brightness.light,
-            child: Scaffold(
-              body: Stack(
-                children: [
-                  BlocBuilder<MainIndexCubit, MainIndexState>(
-                      bloc: BlocProvider.of<MainIndexCubit>(context),
-                      builder: (context, state) {
-                        if (state is MainIndexLoaded) {
-                          return Column(
-                            children: [
-                              Expanded(child: model.dataScreen[state.data]),
-                              HomeBottomNavbar(
-                                selectedIndex: state.data,
-                                onTap: (value) {
-                                  model.onBottomNavBarTap(context, value);
-                                },
-                              ),
-                            ],
-                          );
-                        }
-
-                        return Container();
-                      }),
-                  Positioned(
-                    left: 0,
-                    right: 0,
-                    bottom: margin32,
-                    child: Center(
-                      child: GestureDetector(
-                        onTap: () {
-                          model.onQrisTap(context);
-                        },
-                        child: Container(
-                          width: 50,
-                          height: 50,
-                          decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: Theme.of(context).primaryColor),
-                          alignment: Alignment.center,
-                          child: SizedBox(
-                            width: 20,
-                            height: 20,
-                            child: Image.asset(ConstHelper.qrisIcon),
+            child: SafeArea(
+              child: Scaffold(
+                body: Stack(
+                  children: [
+                    BlocBuilder<MainIndexCubit, MainIndexState>(
+                        bloc: BlocProvider.of<MainIndexCubit>(context),
+                        builder: (context, state) {
+                          if (state is MainIndexLoaded) {
+                            return Column(
+                              children: [
+                                Expanded(child: model.dataScreen[state.data]),
+                                HomeBottomNavbar(
+                                  selectedIndex: state.data,
+                                  onTap: (value) {
+                                    model.onBottomNavBarTap(context, value);
+                                  },
+                                ),
+                              ],
+                            );
+                          }
+              
+                          return Container();
+                        }),
+                    Positioned(
+                      left: 0,
+                      right: 0,
+                      bottom: margin32,
+                      child: Center(
+                        child: GestureDetector(
+                          onTap: () {
+                            model.onQrisTap(context);
+                          },
+                          child: Container(
+                            width: 50,
+                            height: 50,
+                            decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: Theme.of(context).primaryColor),
+                            alignment: Alignment.center,
+                            child: SizedBox(
+                              width: 20,
+                              height: 20,
+                              child: Image.asset(ConstHelper.qrisIcon),
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                  )
-                ],
+                    )
+                  ],
+                ),
               ),
             ),
           );

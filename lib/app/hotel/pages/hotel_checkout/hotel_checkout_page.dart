@@ -47,41 +47,43 @@ class HotelCheckoutPage extends StatelessWidget {
       model.onInit(context, roomId: selectedRoom.id.toString());
     }, builder: (context, model, child) {
       return StatusbarWidget(
-        child: Scaffold(
-          appBar: appbarWidget(context, title: 'Ringkasan Pesanan'),
-          backgroundColor: Colors.white,
-          body: Column(
-            children: [
-              Expanded(
-                  child: ListView(
-                children: [
-                  _HotelCheckoutInfoSection(
-                    data: data,
-                    model: model,
-                    selectedRoom: selectedRoom,
-                  ),
-                  Container(
-                    width: double.infinity,
-                    height: 8,
-                    color: neutral30,
-                  ),
-                  _HotelCheckoutFormSection(
-                      data: data, selectedRoom: selectedRoom, model: model),
-                  Container(
-                    width: double.infinity,
-                    height: 8,
-                    color: neutral10Stroke,
-                  ),
-                  _HotelCheckoutInvoiceSection(
-                      data: data, selectedRoom: selectedRoom, model: model),
-                  SizedBox(
-                    height: margin32,
-                  )
-                ],
-              )),
-              _HotelCheckoutActionSection(
-                  data: data, selectedRoom: selectedRoom, model: model)
-            ],
+        child: SafeArea(
+          child: Scaffold(
+            appBar: appbarWidget(context, title: 'Ringkasan Pesanan'),
+            backgroundColor: Colors.white,
+            body: Column(
+              children: [
+                Expanded(
+                    child: ListView(
+                  children: [
+                    _HotelCheckoutInfoSection(
+                      data: data,
+                      model: model,
+                      selectedRoom: selectedRoom,
+                    ),
+                    Container(
+                      width: double.infinity,
+                      height: 8,
+                      color: neutral30,
+                    ),
+                    _HotelCheckoutFormSection(
+                        data: data, selectedRoom: selectedRoom, model: model),
+                    Container(
+                      width: double.infinity,
+                      height: 8,
+                      color: neutral10Stroke,
+                    ),
+                    _HotelCheckoutInvoiceSection(
+                        data: data, selectedRoom: selectedRoom, model: model),
+                    SizedBox(
+                      height: margin32,
+                    )
+                  ],
+                )),
+                _HotelCheckoutActionSection(
+                    data: data, selectedRoom: selectedRoom, model: model)
+              ],
+            ),
           ),
         ),
       );

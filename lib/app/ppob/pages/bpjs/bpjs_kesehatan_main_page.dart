@@ -26,68 +26,71 @@ class BPJSKesehatanMainPage extends StatelessWidget {
       model.onInit(preloadNumber);
     }, builder: (context, model, child) {
       return StatusbarWidget(
-          child: Scaffold(
-        backgroundColor: Colors.white,
-        appBar: appbarWidget(context, title: 'BPJS Kesehatan'),
-        body: BlocBuilder<PPOBCubit, PPOBState>(
-            bloc: BlocProvider.of<PPOBCubit>(context),
-            builder: (context, state) {
-              if (state is PPOBLoading) {
-                return Center(
-                  child: CircularProgressIndicator(
-                      color: Theme.of(context).primaryColor),
-                );
-              } else if (state is PPOBLoaded) {
-                if (model.bpjsModelData(state.data.allData) == null) {
-                  return Container(
-                    margin: EdgeInsets.symmetric(horizontal: margin32),
-                    width: double.infinity,
-                    child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          SizedBox(
-                            width: 150,
-                            child: Image.asset(ConstHelper.logoIcon),
-                          ),
-                          SizedBox(
-                            height: margin16,
-                          ),
-                          Text(
-                            'Saat ini pembayaran BPJS Kesehatan sedang tidak tersedia, mohon coba lagi nanti',
-                            textAlign: TextAlign.center,
-                            style: mainBody4,
-                          )
-                        ]),
+          child: SafeArea(
+        child: Scaffold(
+          backgroundColor: Colors.white,
+          appBar: appbarWidget(context, title: 'BPJS Kesehatan'),
+          body: BlocBuilder<PPOBCubit, PPOBState>(
+              bloc: BlocProvider.of<PPOBCubit>(context),
+              builder: (context, state) {
+                if (state is PPOBLoading) {
+                  return Center(
+                    child: CircularProgressIndicator(
+                        color: Theme.of(context).primaryColor),
                   );
+                } else if (state is PPOBLoaded) {
+                  if (model.bpjsModelData(state.data.allData) == null) {
+                    return Container(
+                      margin: EdgeInsets.symmetric(horizontal: margin32),
+                      width: double.infinity,
+                      child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SizedBox(
+                              width: 150,
+                              child: Image.asset(ConstHelper.logoIcon),
+                            ),
+                            SizedBox(
+                              height: margin16,
+                            ),
+                            Text(
+                              'Saat ini pembayaran BPJS Kesehatan sedang tidak tersedia, mohon coba lagi nanti',
+                              textAlign: TextAlign.center,
+                              style: mainBody4,
+                            )
+                          ]),
+                    );
+                  } else {
+                    return ListView(
+                      padding: EdgeInsets.all(margin16),
+                      children: [
+                        TitleWithWidget(
+                          title: 'Nomor Pelanggan',
+                          child: RoundedTextfield(
+                              controller: model.controller,
+                              keyboardType: TextInputType.number,
+                              hintText: 'Masukkan Nomor Pelanggan'),
+                        ),
+                        SizedBox(height: margin24),
+                        ElevatedButtonWidget(
+                            onTap: () {
+                              model.onSubmit(context,
+                                  dataPPOB: state.data.allData);
+                            },
+                            title: 'Cek Tagihan')
+                      ],
+                    );
+                  }
                 } else {
-                  return ListView(
-                    padding: EdgeInsets.all(margin16),
-                    children: [
-                      TitleWithWidget(
-                        title: 'Nomor Pelanggan',
-                        child: RoundedTextfield(
-                            controller: model.controller,
-                            keyboardType: TextInputType.number,
-                            hintText: 'Masukkan Nomor Pelanggan'),
-                      ),
-                      SizedBox(height: margin24),
-                      ElevatedButtonWidget(
-                          onTap: () {
-                            model.onSubmit(context,
-                                dataPPOB: state.data.allData);
-                          },
-                          title: 'Cek Tagihan')
-                    ],
+                  return FailedRequestWidget(
+                    onRetry: () {
+                      BlocProvider.of<PPOBCubit>(context)
+                          .fetchPPOBData(context);
+                    },
                   );
                 }
-              } else {
-                return FailedRequestWidget(
-                  onRetry: () {
-                    BlocProvider.of<PPOBCubit>(context).fetchPPOBData(context);
-                  },
-                );
-              }
-            }),
+              }),
+        ),
       ));
     });
   }

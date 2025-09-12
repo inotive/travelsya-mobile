@@ -42,147 +42,150 @@ class HotelDetailPage extends StatelessWidget {
     }, onViewModelReady: (model) {
       model.onInit(context, id: id);
     }, builder: (context, model, child) {
-      return Scaffold(
-          backgroundColor: Colors.white,
-          body: BlocBuilder<HotelCubit, HotelState>(
-              bloc: model.hotelCubit,
-              builder: (context, state) {
-                if (state is HotelDetailLoaded) {
-                  HotelDetailModel data = state.data;
+      return SafeArea(
+        child: Scaffold(
+            backgroundColor: Colors.white,
+            body: BlocBuilder<HotelCubit, HotelState>(
+                bloc: model.hotelCubit,
+                builder: (context, state) {
+                  if (state is HotelDetailLoaded) {
+                    HotelDetailModel data = state.data;
 
-                  return Stack(
-                    children: [
-                      ScrollablePositionedList.builder(
-                        itemScrollController: model.itemScrollController,
-                        itemPositionsListener: model.itemPositionsListener,
-                        scrollOffsetListener: model.scrollOffsetListener,
-                        itemCount: 6,
-                        itemBuilder: (context, index) {
-                          if (index == 0) {
-                            return _HotelDetailInfoSection(
-                              data: data,
-                              id: id,
-                              model: model,
-                            );
-                          } else if (index == 1) {
-                            return _HotelDetailGeneralInfoSection(data: data);
-                          } else if (index == 2) {
-                            return _HotelDetailFacilitySection(
-                              data: data,
-                            );
-                          } else if (index == 3) {
-                            return _HotelDetailLocationSection(
-                              data: data,
-                            );
-                          } else if (index == 4) {
-                            return _HotelDetailRoomSection(data: data);
-                          } else if (index == 5) {
-                            return _HotelDetailReviewSection(
-                              data: data,
-                              model: model,
-                            );
-                          }
+                    return Stack(
+                      children: [
+                        ScrollablePositionedList.builder(
+                          itemScrollController: model.itemScrollController,
+                          itemPositionsListener: model.itemPositionsListener,
+                          scrollOffsetListener: model.scrollOffsetListener,
+                          itemCount: 6,
+                          itemBuilder: (context, index) {
+                            if (index == 0) {
+                              return _HotelDetailInfoSection(
+                                data: data,
+                                id: id,
+                                model: model,
+                              );
+                            } else if (index == 1) {
+                              return _HotelDetailGeneralInfoSection(data: data);
+                            } else if (index == 2) {
+                              return _HotelDetailFacilitySection(
+                                data: data,
+                              );
+                            } else if (index == 3) {
+                              return _HotelDetailLocationSection(
+                                data: data,
+                              );
+                            } else if (index == 4) {
+                              return _HotelDetailRoomSection(data: data);
+                            } else if (index == 5) {
+                              return _HotelDetailReviewSection(
+                                data: data,
+                                model: model,
+                              );
+                            }
 
-                          return Container();
-                        },
-                      ),
-                      SafeArea(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            AnimatedContainer(
-                              duration: const Duration(milliseconds: 400),
-                              height: model.showAppbar ? 88 : 0,
-                              width: double.infinity,
-                              color: Colors.white,
-                              child: !model.showAppbar
-                                  ? Container()
-                                  : Column(
-                                      children: [
-                                        SizedBox(
-                                          height: margin4,
-                                        ),
-                                        Container(
-                                          padding: EdgeInsets.symmetric(
-                                              horizontal: margin16),
-                                          child: Row(
-                                            children: [
-                                              GestureDetector(
-                                                onTap: () {
-                                                  Navigator.pop(context);
-                                                },
-                                                child: Icon(
-                                                  Icons.arrow_back,
-                                                  color: Theme.of(context)
-                                                      .primaryColor,
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                width: margin24 / 2,
-                                              ),
-                                              Expanded(
-                                                  child: Text(
-                                                data.name,
-                                                style: mainFont.copyWith(
-                                                    fontSize: 15,
-                                                    color: Colors.black87,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              )),
-                                              SizedBox(
-                                                width: margin24 / 2,
-                                              ),
-                                              GestureDetector(
-                                                onTap: () {
-                                                  showSnackbar(context,
-                                                      data: 'Coming Soon',
-                                                      colors: Theme.of(context)
-                                                          .primaryColor);
-                                                },
-                                                child: Icon(
-                                                  Icons.share,
-                                                  color: Theme.of(context)
-                                                      .primaryColor,
-                                                ),
-                                              )
-                                            ],
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          height: margin24 / 2,
-                                        ),
-                                        SizedBox(
-                                            height: 25,
-                                            child: model.tabWidget()),
-                                      ],
-                                    ),
-                            ),
-                          ],
+                            return Container();
+                          },
                         ),
+                        SafeArea(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              AnimatedContainer(
+                                duration: const Duration(milliseconds: 400),
+                                height: model.showAppbar ? 88 : 0,
+                                width: double.infinity,
+                                color: Colors.white,
+                                child: !model.showAppbar
+                                    ? Container()
+                                    : Column(
+                                        children: [
+                                          SizedBox(
+                                            height: margin4,
+                                          ),
+                                          Container(
+                                            padding: EdgeInsets.symmetric(
+                                                horizontal: margin16),
+                                            child: Row(
+                                              children: [
+                                                GestureDetector(
+                                                  onTap: () {
+                                                    Navigator.pop(context);
+                                                  },
+                                                  child: Icon(
+                                                    Icons.arrow_back,
+                                                    color: Theme.of(context)
+                                                        .primaryColor,
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                  width: margin24 / 2,
+                                                ),
+                                                Expanded(
+                                                    child: Text(
+                                                  data.name,
+                                                  style: mainFont.copyWith(
+                                                      fontSize: 15,
+                                                      color: Colors.black87,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                )),
+                                                SizedBox(
+                                                  width: margin24 / 2,
+                                                ),
+                                                GestureDetector(
+                                                  onTap: () {
+                                                    showSnackbar(context,
+                                                        data: 'Coming Soon',
+                                                        colors:
+                                                            Theme.of(context)
+                                                                .primaryColor);
+                                                  },
+                                                  child: Icon(
+                                                    Icons.share,
+                                                    color: Theme.of(context)
+                                                        .primaryColor,
+                                                  ),
+                                                )
+                                              ],
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            height: margin24 / 2,
+                                          ),
+                                          SizedBox(
+                                              height: 25,
+                                              child: model.tabWidget()),
+                                        ],
+                                      ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    );
+                  } else if (state is HotelLoading) {
+                    return Center(
+                      child: CircularProgressIndicator(
+                        color: Theme.of(context).primaryColor,
                       ),
-                    ],
-                  );
-                } else if (state is HotelLoading) {
-                  return Center(
-                    child: CircularProgressIndicator(
-                      color: Theme.of(context).primaryColor,
-                    ),
-                  );
-                } else {
-                  return Container(
-                    margin: EdgeInsets.symmetric(horizontal: margin16),
-                    child: FailedRequestWidget(onRetry: () {
-                      model.fetchRoomData(context,
-                          id: id,
-                          startDate: DateFormat('yyyy-MM-dd').format(
-                              model.searchFilter.selectedTime.startDate!),
-                          endDate: DateFormat('yyyy-MM-dd').format(
-                              model.searchFilter.selectedTime.endDate!));
-                    }),
-                  );
-                }
-              }));
+                    );
+                  } else {
+                    return Container(
+                      margin: EdgeInsets.symmetric(horizontal: margin16),
+                      child: FailedRequestWidget(onRetry: () {
+                        model.fetchRoomData(context,
+                            id: id,
+                            startDate: DateFormat('yyyy-MM-dd').format(
+                                model.searchFilter.selectedTime.startDate!),
+                            endDate: DateFormat('yyyy-MM-dd').format(
+                                model.searchFilter.selectedTime.endDate!));
+                      }),
+                    );
+                  }
+                })),
+      );
     });
   }
 }

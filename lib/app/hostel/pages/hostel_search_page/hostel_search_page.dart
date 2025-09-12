@@ -30,40 +30,42 @@ class HostelSearchPage extends StatelessWidget {
     }, onViewModelReady: (model) {
       model.onInit(context);
     }, builder: (context, model, child) {
-      return Scaffold(
-        body: Stack(
-          children: [
-            const _HostelSearchBackgroundSection(),
-            Positioned(
-              bottom: 0,
-              top: 170,
-              left: 0,
-              right: 0,
-              child: Container(
-                width: double.infinity,
-                height: double.infinity,
-                decoration: const BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(24),
-                        topRight: Radius.circular(24))),
-                child: ListView(
-                  children: [
-                    _HostelSearchFilterSection(
-                      model: model,
-                    ),
-                    SizedBox(
-                      height: margin16,
-                    ),
-                    _HostelSearchPopularSection(model: model),
-                    SizedBox(
-                      height: margin32,
-                    ),
-                  ],
+      return SafeArea(
+        child: Scaffold(
+          body: Stack(
+            children: [
+              const _HostelSearchBackgroundSection(),
+              Positioned(
+                bottom: 0,
+                top: 170,
+                left: 0,
+                right: 0,
+                child: Container(
+                  width: double.infinity,
+                  height: double.infinity,
+                  decoration: const BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(24),
+                          topRight: Radius.circular(24))),
+                  child: ListView(
+                    children: [
+                      _HostelSearchFilterSection(
+                        model: model,
+                      ),
+                      SizedBox(
+                        height: margin16,
+                      ),
+                      _HostelSearchPopularSection(model: model),
+                      SizedBox(
+                        height: margin32,
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-            )
-          ],
+              )
+            ],
+          ),
         ),
       );
     });
