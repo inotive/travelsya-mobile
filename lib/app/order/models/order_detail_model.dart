@@ -326,38 +326,48 @@ class OrderDetailHostelModel {
   OrderDetailHostelModel.fromJson(Map<String, dynamic> jsonMap) {
     id = jsonMap['id'];
     noInv = jsonMap['no_inv'];
-    hostelId = jsonMap['hostel_id'] ?? 3;
-    hostelRoomId = jsonMap['hostel_room_id'] ?? 2;
+    hostelId = int.tryParse(jsonMap['hostel_id']?.toString() ?? '0') ?? 0;
+
+    hostelRoomId =
+        int.tryParse(jsonMap['hostel_room_id']?.toString() ?? '0') ?? 0;
+
     hostelName = jsonMap['hostel_name'];
     hostelRoomName = jsonMap['hotel_room_name'];
     bookinId = jsonMap['booking_id'];
-    guestName = jsonMap['guest_identity'][0]['name'] ?? '';
-    guestPhone = jsonMap['guest_identity'][0]['handphone'] ?? '';
-    guestEmail = jsonMap['guest_identity'][0]['email'] ?? '';
+
+    guestName = jsonMap['guest_identity']?[0]?['name'] ?? '';
+    guestPhone = jsonMap['guest_identity']?[0]?['handphone'] ?? '';
+    guestEmail = jsonMap['guest_identity']?[0]?['email'] ?? '';
+
     startDate = jsonMap['reservation_start'];
     endDate = jsonMap['reservation_end'];
-    guest = jsonMap['guest'];
-    room = jsonMap['room'];
+
+    guest = int.tryParse(jsonMap['guest']?.toString() ?? '0') ?? 0;
+    room = int.tryParse(jsonMap['room']?.toString() ?? '0') ?? 0;
+
     typeRent = jsonMap['type_rent'];
     reqId = jsonMap['req_id'];
     link = jsonMap['link'];
     service = jsonMap['service'];
+
     paymentMethod = jsonMap['payment_method'];
     paymentChannel = jsonMap['payment_channel'];
     status = jsonMap['status'];
-    adminFee = double.parse(
-        jsonMap['fee_admin'] == null ? '0' : jsonMap['fee_admin'].toString());
-    total = double.parse(jsonMap['total'].toString());
-    pointReceived = double.parse(jsonMap['point_received'] == null
-        ? '0'
-        : jsonMap['point_received'].toString());
-    pointUsed = double.parse(
-        jsonMap['used_point'] == null ? '0' : jsonMap['used_point'].toString());
+
+    adminFee = double.tryParse(jsonMap['fee_admin']?.toString() ?? '0') ?? 0;
+    total = double.tryParse(jsonMap['total']?.toString() ?? '0') ?? 0;
+    pointReceived =
+        double.tryParse(jsonMap['received_point']?.toString() ?? '0') ?? 0;
+    pointUsed = double.tryParse(jsonMap['used_point']?.toString() ?? '0') ?? 0;
+
     createdAt = jsonMap['created_at'];
+
     try {
-      review = jsonMap['review'] == null
-          ? null
-          : HostelReview.fromJson(jsonMap['review']);
+      if (jsonMap['review'] != null && jsonMap['review'] is Map) {
+        review = HostelReview.fromJson(jsonMap['review']);
+      } else {
+        review = null;
+      }
     } catch (e) {
       review = null;
     }
