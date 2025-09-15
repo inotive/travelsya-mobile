@@ -3,19 +3,27 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:travelsya/app/health/cubits/health_cubit.dart';
 import 'package:travelsya/app/health/cubits/health_state.dart';
 import 'package:travelsya/app/health/models/health_model.dart';
-import 'package:travelsya/app/health/pages/health_checkout_page.dart';
+// import 'package:travelsya/app/health/pages/health_checkout_page.dart';
+import 'package:travelsya/app/health/widgets/health_location_section.dart';
+import 'package:travelsya/app/health/widgets/health_package_section.dart';
 import 'package:travelsya/shared/function/date_to_readable_function.dart';
-import 'package:travelsya/shared/function/need_login_function.dart';
+// import 'package:travelsya/shared/function/need_login_function.dart';
+// import 'package:travelsya/shared/function/show_snackbar.dart';
 import 'package:travelsya/shared/helper/function_helper.dart';
 import 'package:travelsya/shared/styles/font_style.dart';
 import 'package:travelsya/shared/styles/size_styles.dart';
 import 'package:travelsya/shared/widgets/failed_request_widget.dart';
-import 'package:travelsya/shared/widgets/statusbar_widget.dart';
+// import 'package:url_launcher/url_launcher.dart';
 
 class HealthDetailPage extends StatefulWidget {
   final bool isHealth;
   final String id;
-  const HealthDetailPage({super.key, required this.isHealth, required this.id});
+
+  const HealthDetailPage({
+    super.key,
+    required this.isHealth,
+    required this.id,
+  });
 
   @override
   State<HealthDetailPage> createState() => _HealthDetailPageState();
@@ -47,10 +55,9 @@ class _HealthDetailPageState extends State<HealthDetailPage> {
 
   @override
   Widget build(BuildContext context) {
-    return StatusbarWidget(
-        child: SafeArea(
-      child: Scaffold(
-        body: BlocBuilder<HealthCubit, HealthState>(
+    return Scaffold(
+      body: SafeArea(
+        child: BlocBuilder<HealthCubit, HealthState>(
             bloc: clinicDetailCubit,
             builder: (context, state) {
               if (state is HealthLoading) {
@@ -60,6 +67,7 @@ class _HealthDetailPageState extends State<HealthDetailPage> {
                   ),
                 );
               } else if (state is HealthDetailLoaded) {
+                final data = state.data;
                 return Column(
                   children: [
                     Expanded(
@@ -311,253 +319,255 @@ class _HealthDetailPageState extends State<HealthDetailPage> {
                               ],
                             ),
                           ),
-                          Container(
-                            color: const Color(0xfff8f3f2),
-                            child: Column(
-                              children: [
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                                Container(
-                                  key: dataKey,
-                                  width: double.infinity,
-                                  color: Colors.white,
-                                  padding: EdgeInsets.all(margin16),
-                                  child: Text(
-                                    'Paket',
-                                    style: mainBody2.copyWith(
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ),
-                                Container(
-                                  padding: EdgeInsets.all(margin16),
-                                  child: Column(
-                                    children: List.generate(
-                                        state.data.packages.length, (index) {
-                                      HealthPackageModel data =
-                                          state.data.packages[index];
-                                      return Card(
-                                        color: Colors.white,
-                                        shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(8)),
-                                        child: Container(
-                                          padding: EdgeInsets.all(margin16),
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Row(
-                                                children: [
-                                                  Expanded(
-                                                      child: Text(
-                                                    data.name,
-                                                    style: mainBody4.copyWith(
-                                                        fontWeight:
-                                                            FontWeight.bold),
-                                                  )),
-                                                  // SizedBox(
-                                                  //   width: margin8,
-                                                  // ),
-                                                  // Text(
-                                                  //   'Detail',
-                                                  //   style: mainBody4.copyWith(
-                                                  //       color: Theme.of(context)
-                                                  //           .primaryColor),
-                                                  // )
-                                                ],
-                                              ),
-                                              SizedBox(
-                                                height: margin16,
-                                              ),
-                                              // Row(
-                                              //   children: [
-                                              //     SizedBox(
-                                              //       width: 20,
-                                              //       height: 20,
-                                              //       child: Image.asset(
-                                              //           'assets/new/money.png'),
-                                              //     ),
-                                              //     SizedBox(
-                                              //       width: margin8,
-                                              //     ),
-                                              //     Expanded(
-                                              //         child: Text(
-                                              //       'Tidak bisa refund',
+                          HealthPackageSection(data: data),
+                          // Container(
+                          //   color: Colors.blue,
+                          //   // color: const Color(0xfff8f3f2),
+                          //   child: Column(
+                          //     children: [
+                          //       const SizedBox(
+                          //         height: 10,
+                          //       ),
+                          //       Container(
+                          //         key: dataKey,
+                          //         width: double.infinity,
+                          //         color: Colors.white,
+                          //         padding: EdgeInsets.all(margin16),
+                          //         child: Text(
+                          //           'Paket',
+                          //           style: mainBody2.copyWith(
+                          //               fontWeight: FontWeight.bold),
+                          //         ),
+                          //       ),
+                          //       Container(
+                          //         padding: EdgeInsets.all(margin16),
+                          //         child: Column(
+                          //           children: List.generate(
+                          //               state.data.packages.length, (index) {
+                          //             HealthPackageModel data =
+                          //                 state.data.packages[index];
+                          //             return Card(
+                          //               color: Colors.white,
+                          //               shape: RoundedRectangleBorder(
+                          //                   borderRadius:
+                          //                       BorderRadius.circular(8)),
+                          //               child: Container(
+                          //                 padding: EdgeInsets.all(margin16),
+                          //                 child: Column(
+                          //                   crossAxisAlignment:
+                          //                       CrossAxisAlignment.start,
+                          //                   children: [
+                          //                     Row(
+                          //                       children: [
+                          //                         Expanded(
+                          //                             child: Text(
+                          //                           data.name,
+                          //                           style: mainBody4.copyWith(
+                          //                               fontWeight:
+                          //                                   FontWeight.bold),
+                          //                         )),
+                          //                         // SizedBox(
+                          //                         //   width: margin8,
+                          //                         // ),
+                          //                         // Text(
+                          //                         //   'Detail',
+                          //                         //   style: mainBody4.copyWith(
+                          //                         //       color: Theme.of(context)
+                          //                         //           .primaryColor),
+                          //                         // )
+                          //                       ],
+                          //                     ),
+                          //                     SizedBox(
+                          //                       height: margin16,
+                          //                     ),
+                          //                     // Row(
+                          //                     //   children: [
+                          //                     //     SizedBox(
+                          //                     //       width: 20,
+                          //                     //       height: 20,
+                          //                     //       child: Image.asset(
+                          //                     //           'assets/new/money.png'),
+                          //                     //     ),
+                          //                     //     SizedBox(
+                          //                     //       width: margin8,
+                          //                     //     ),
+                          //                     //     Expanded(
+                          //                     //         child: Text(
+                          //                     //       'Tidak bisa refund',
 
-                                              //       style: mainBody5,
-                                              //     ))
-                                              //   ],
-                                              // ),
-                                              // SizedBox(
-                                              //   height: margin8,
-                                              // ),
-                                              // Row(
-                                              //   children: [
-                                              //     SizedBox(
-                                              //       width: 20,
-                                              //       height: 20,
-                                              //       child: Image.asset(
-                                              //           'assets/new/date.png'),
-                                              //     ),
-                                              //     SizedBox(
-                                              //       width: margin8,
-                                              //     ),
-                                              //     Expanded(
-                                              //         child: Text(
-                                              //       'Pesan tiket untuk hari ini',
-                                              //       style: mainBody5,
-                                              //     ))
-                                              //   ],
-                                              // ),
-                                              // SizedBox(
-                                              //   height: margin8,
-                                              // ),
-                                              Row(
-                                                children: [
-                                                  SizedBox(
-                                                    width: 20,
-                                                    height: 20,
-                                                    child: Image.asset(
-                                                        'assets/new/clock.png'),
-                                                  ),
-                                                  SizedBox(
-                                                    width: margin8,
-                                                  ),
-                                                  Expanded(
-                                                      child: Text(
-                                                    'Berlaku hingga ${data.expiredDate} hari sejak dibeli',
-                                                    style: mainBody5,
-                                                  ))
-                                                ],
-                                              ),
-                                              // SizedBox(
-                                              //   height: margin8,
-                                              // ),
-                                              // Row(
-                                              //   children: [
-                                              //     SizedBox(
-                                              //       width: 20,
-                                              //       height: 20,
-                                              //       child: Image.asset(
-                                              //           'assets/new/clock.png'),
-                                              //     ),
-                                              //     SizedBox(
-                                              //       width: margin8,
-                                              //     ),
-                                              //     Expanded(
-                                              //         child: Text(
-                                              //       'Reservasi paling lambat 1 hari sebelumnya',
-                                              //       style: mainBody5,
-                                              //     ))
-                                              //   ],
-                                              // ),
-                                              SizedBox(
-                                                height: margin24,
-                                              ),
-                                              Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      Text(
-                                                        moneyChanger(
-                                                            data.unitPrice,
-                                                            customLabel:
-                                                                'IDR '),
-                                                        style: mainBody5.copyWith(
-                                                            color: const Color(
-                                                                0xffa5a5a5),
-                                                            decorationColor:
-                                                                const Color(
-                                                                    0xffa5a5a5),
-                                                            decoration:
-                                                                TextDecoration
-                                                                    .lineThrough),
-                                                      ),
-                                                      SizedBox(
-                                                        height: margin4,
-                                                      ),
-                                                      Text(
-                                                        moneyChanger(data.price,
-                                                            customLabel:
-                                                                'IDR '),
-                                                        style: mainBody4.copyWith(
-                                                            fontWeight:
-                                                                FontWeight.bold,
-                                                            color: Theme.of(
-                                                                    context)
-                                                                .primaryColor),
-                                                      )
-                                                    ],
-                                                  ),
-                                                  GestureDetector(
-                                                    onTap: () {
-                                                      needLoginFeature(context,
-                                                          () {
-                                                        Navigator.push(
-                                                            context,
-                                                            MaterialPageRoute(
-                                                                builder: (_) =>
-                                                                    HealthCheckoutPage(
-                                                                      dataPackage:
-                                                                          data,
-                                                                      dataDetail:
-                                                                          state
-                                                                              .data,
-                                                                      items: [
-                                                                        CheckoutItem(
-                                                                          package:
-                                                                              data,
-                                                                          quantity:
-                                                                              1,
-                                                                        )
-                                                                      ],
-                                                                    )));
-                                                      });
-                                                    },
-                                                    child: Container(
-                                                      padding:
-                                                          EdgeInsets.symmetric(
-                                                              vertical: margin8,
-                                                              horizontal:
-                                                                  margin16),
-                                                      decoration: BoxDecoration(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(8),
-                                                          color: Theme.of(
-                                                                  context)
-                                                              .primaryColor),
-                                                      child: Text(
-                                                        'Pilih Paket',
-                                                        style:
-                                                            mainBody4.copyWith(
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold,
-                                                                color: Colors
-                                                                    .white),
-                                                      ),
-                                                    ),
-                                                  )
-                                                ],
-                                              )
-                                            ],
-                                          ),
-                                        ),
-                                      );
-                                    }),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
+                          //                     //       style: mainBody5,
+                          //                     //     ))
+                          //                     //   ],
+                          //                     // ),
+                          //                     // SizedBox(
+                          //                     //   height: margin8,
+                          //                     // ),
+                          //                     // Row(
+                          //                     //   children: [
+                          //                     //     SizedBox(
+                          //                     //       width: 20,
+                          //                     //       height: 20,
+                          //                     //       child: Image.asset(
+                          //                     //           'assets/new/date.png'),
+                          //                     //     ),
+                          //                     //     SizedBox(
+                          //                     //       width: margin8,
+                          //                     //     ),
+                          //                     //     Expanded(
+                          //                     //         child: Text(
+                          //                     //       'Pesan tiket untuk hari ini',
+                          //                     //       style: mainBody5,
+                          //                     //     ))
+                          //                     //   ],
+                          //                     // ),
+                          //                     // SizedBox(
+                          //                     //   height: margin8,
+                          //                     // ),
+                          //                     Row(
+                          //                       children: [
+                          //                         SizedBox(
+                          //                           width: 20,
+                          //                           height: 20,
+                          //                           child: Image.asset(
+                          //                               'assets/new/clock.png'),
+                          //                         ),
+                          //                         SizedBox(
+                          //                           width: margin8,
+                          //                         ),
+                          //                         Expanded(
+                          //                             child: Text(
+                          //                           'Berlaku hingga ${data.expiredDate} hari sejak dibeli',
+                          //                           style: mainBody5,
+                          //                         ))
+                          //                       ],
+                          //                     ),
+                          //                     // SizedBox(
+                          //                     //   height: margin8,
+                          //                     // ),
+                          //                     // Row(
+                          //                     //   children: [
+                          //                     //     SizedBox(
+                          //                     //       width: 20,
+                          //                     //       height: 20,
+                          //                     //       child: Image.asset(
+                          //                     //           'assets/new/clock.png'),
+                          //                     //     ),
+                          //                     //     SizedBox(
+                          //                     //       width: margin8,
+                          //                     //     ),
+                          //                     //     Expanded(
+                          //                     //         child: Text(
+                          //                     //       'Reservasi paling lambat 1 hari sebelumnya',
+                          //                     //       style: mainBody5,
+                          //                     //     ))
+                          //                     //   ],
+                          //                     // ),
+                          //                     SizedBox(
+                          //                       height: margin24,
+                          //                     ),
+                          //                     Row(
+                          //                       mainAxisAlignment:
+                          //                           MainAxisAlignment
+                          //                               .spaceBetween,
+                          //                       children: [
+                          //                         Column(
+                          //                           crossAxisAlignment:
+                          //                               CrossAxisAlignment
+                          //                                   .start,
+                          //                           children: [
+                          //                             Text(
+                          //                               moneyChanger(
+                          //                                   data.unitPrice,
+                          //                                   customLabel:
+                          //                                       'IDR '),
+                          //                               style: mainBody5.copyWith(
+                          //                                   color: const Color(
+                          //                                       0xffa5a5a5),
+                          //                                   decorationColor:
+                          //                                       const Color(
+                          //                                           0xffa5a5a5),
+                          //                                   decoration:
+                          //                                       TextDecoration
+                          //                                           .lineThrough),
+                          //                             ),
+                          //                             SizedBox(
+                          //                               height: margin4,
+                          //                             ),
+                          //                             Text(
+                          //                               moneyChanger(data.price,
+                          //                                   customLabel:
+                          //                                       'IDR '),
+                          //                               style: mainBody4.copyWith(
+                          //                                   fontWeight:
+                          //                                       FontWeight.bold,
+                          //                                   color: Theme.of(
+                          //                                           context)
+                          //                                       .primaryColor),
+                          //                             )
+                          //                           ],
+                          //                         ),
+                          //                         GestureDetector(
+                          //                           onTap: () {
+                          //                             needLoginFeature(context,
+                          //                                 () {
+                          //                               Navigator.push(
+                          //                                   context,
+                          //                                   MaterialPageRoute(
+                          //                                       builder: (_) =>
+                          //                                           HealthCheckoutPage(
+                          //                                             dataPackage:
+                          //                                                 data,
+                          //                                             dataDetail:
+                          //                                                 state
+                          //                                                     .data,
+                          //                                             items: [
+                          //                                               CheckoutItem(
+                          //                                                 package:
+                          //                                                     data,
+                          //                                                 quantity:
+                          //                                                     1,
+                          //                                               )
+                          //                                             ],
+                          //                                           )));
+                          //                             });
+                          //                           },
+                          //                           child: Container(
+                          //                             padding:
+                          //                                 EdgeInsets.symmetric(
+                          //                                     vertical: margin8,
+                          //                                     horizontal:
+                          //                                         margin16),
+                          //                             decoration: BoxDecoration(
+                          //                                 borderRadius:
+                          //                                     BorderRadius
+                          //                                         .circular(8),
+                          //                                 color: Theme.of(
+                          //                                         context)
+                          //                                     .primaryColor),
+                          //                             child: Text(
+                          //                               'Pilih Paket',
+                          //                               style:
+                          //                                   mainBody4.copyWith(
+                          //                                       fontWeight:
+                          //                                           FontWeight
+                          //                                               .bold,
+                          //                                       color: Colors
+                          //                                           .white),
+                          //                             ),
+                          //                           ),
+                          //                         )
+                          //                       ],
+                          //                     )
+                          //                   ],
+                          //                 ),
+                          //               ),
+                          //             );
+                          //           }),
+                          //         ),
+                          //       ),
+                          //     ],
+                          //   ),
+                          // ),
                           Container(
                             padding: EdgeInsets.all(margin16),
                             child: Column(
@@ -724,158 +734,181 @@ class _HealthDetailPageState extends State<HealthDetailPage> {
                             width: double.infinity,
                             color: const Color(0xfff8f3f2),
                           ),
-                          Container(
-                            padding: EdgeInsets.all(margin16),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Lokasi',
-                                  style: mainBody3.copyWith(
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                SizedBox(
-                                  height: margin16,
-                                ),
-                                Container(
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(10),
-                                      border:
-                                          Border.all(color: Colors.black12)),
-                                  child: Column(
-                                    children: [
-                                      Container(
-                                        width: double.infinity,
-                                        height: 120,
-                                        decoration: const BoxDecoration(
-                                            borderRadius: BorderRadius.only(
-                                                topLeft: Radius.circular(10),
-                                                topRight: Radius.circular(10)),
-                                            image: DecorationImage(
-                                                image: AssetImage(
-                                                    'assets/new/maps_example.png'),
-                                                fit: BoxFit.cover)),
-                                      ),
-                                      Container(
-                                        padding: EdgeInsets.all(margin16),
-                                        child: Column(
-                                          children: [
-                                            Row(
-                                              children: [
-                                                SizedBox(
-                                                  width: 20,
-                                                  height: 20,
-                                                  child: Image.asset(
-                                                    'assets/new/location.png',
-                                                    color:
-                                                        const Color(0xffa5a5a5),
-                                                  ),
-                                                ),
-                                                SizedBox(
-                                                  width: margin16,
-                                                ),
-                                                Expanded(
-                                                    child: Text(
-                                                  state.data.address ?? '-',
-                                                  maxLines: 2,
-                                                  overflow:
-                                                      TextOverflow.ellipsis,
-                                                  style: mainBody5.copyWith(
-                                                      color: Colors.black87),
-                                                ))
-                                              ],
-                                            ),
-                                            SizedBox(
-                                              height: margin16,
-                                            ),
-                                            SizedBox(
-                                              width: double.infinity,
-                                              child: Wrap(
-                                                alignment: WrapAlignment.start,
-                                                children: [
-                                                  Column(
-                                                    children: [
-                                                      Container(
-                                                        width: 40,
-                                                        height: 40,
-                                                        decoration:
-                                                            const BoxDecoration(
-                                                                shape: BoxShape
-                                                                    .circle,
-                                                                color: Color(
-                                                                    0xffFFCFCF)),
-                                                        alignment:
-                                                            Alignment.center,
-                                                        child: SizedBox(
-                                                          width: 24,
-                                                          height: 24,
-                                                          child: Image.asset(
-                                                              'assets/new/maps.png'),
-                                                        ),
-                                                      ),
-                                                      SizedBox(
-                                                        height: margin8,
-                                                      ),
-                                                      Text(
-                                                        'Lihat Peta',
-                                                        style: mainBody5.copyWith(
-                                                            fontWeight:
-                                                                FontWeight.bold,
-                                                            color: Theme.of(
-                                                                    context)
-                                                                .primaryColor),
-                                                      )
-                                                    ],
-                                                  ),
-                                                  SizedBox(
-                                                    width: margin24,
-                                                  ),
-                                                  Column(
-                                                    children: [
-                                                      Container(
-                                                        width: 40,
-                                                        height: 40,
-                                                        decoration: BoxDecoration(
-                                                            shape:
-                                                                BoxShape.circle,
-                                                            border: Border.all(
-                                                                color: Colors
-                                                                    .black12)),
-                                                        alignment:
-                                                            Alignment.center,
-                                                        child: SizedBox(
-                                                          width: 24,
-                                                          height: 24,
-                                                          child: Image.asset(
-                                                              'assets/new/direction.png'),
-                                                        ),
-                                                      ),
-                                                      SizedBox(
-                                                        height: margin8,
-                                                      ),
-                                                      Text(
-                                                        'Panduan ke Lokasi',
-                                                        style: mainBody5.copyWith(
-                                                            fontWeight:
-                                                                FontWeight.bold,
-                                                            color: Theme.of(
-                                                                    context)
-                                                                .primaryColor),
-                                                      )
-                                                    ],
-                                                  )
-                                                ],
-                                              ),
-                                            )
-                                          ],
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
+                          HealthLocationSection(data: data),
+                          // Container(
+                          //   padding: EdgeInsets.all(margin16),
+                          //   child: Column(
+                          //     crossAxisAlignment: CrossAxisAlignment.start,
+                          //     children: [
+                          //       Text(
+                          //         'Lokasi',
+                          //         style: mainBody3.copyWith(
+                          //             fontWeight: FontWeight.bold),
+                          //       ),
+                          //       SizedBox(
+                          //         height: margin16,
+                          //       ),
+                          //       Container(
+                          //         decoration: BoxDecoration(
+                          //             borderRadius: BorderRadius.circular(10),
+                          //             border:
+                          //                 Border.all(color: Colors.black12)),
+                          //         child: Column(
+                          //           children: [
+                          //             Container(
+                          //               width: double.infinity,
+                          //               height: 120,
+                          //               decoration: const BoxDecoration(
+                          //                   borderRadius: BorderRadius.only(
+                          //                       topLeft: Radius.circular(10),
+                          //                       topRight: Radius.circular(10)),
+                          //                   image: DecorationImage(
+                          //                       image: AssetImage(
+                          //                           'assets/new/maps_example.png'),
+                          //                       fit: BoxFit.cover)),
+                          //             ),
+                          //             Container(
+                          //               padding: EdgeInsets.all(margin16),
+                          //               child: Column(
+                          //                 children: [
+                          //                   Row(
+                          //                     children: [
+                          //                       SizedBox(
+                          //                         width: 20,
+                          //                         height: 20,
+                          //                         child: Image.asset(
+                          //                           'assets/new/location.png',
+                          //                           color:
+                          //                               const Color(0xffa5a5a5),
+                          //                         ),
+                          //                       ),
+                          //                       SizedBox(
+                          //                         width: margin16,
+                          //                       ),
+                          //                       Expanded(
+                          //                           child: Text(
+                          //                         state.data.address ?? '-',
+                          //                         maxLines: 2,
+                          //                         overflow:
+                          //                             TextOverflow.ellipsis,
+                          //                         style: mainBody5.copyWith(
+                          //                             color: Colors.black87),
+                          //                       ))
+                          //                     ],
+                          //                   ),
+                          //                   SizedBox(
+                          //                     height: margin16,
+                          //                   ),
+                          //                   SizedBox(
+                          //                     width: double.infinity,
+                          //                     child: Wrap(
+                          //                       alignment: WrapAlignment.start,
+                          //                       children: [
+                          //                         GestureDetector(
+                          //                           onTap: () async {
+                          //                             final url =
+                          //                                 'https://www.google.com/maps/search/?api=1&query=$latitude,$longitude';
+                          //                             if (await canLaunchUrl(
+                          //                                 Uri.parse(url))) {
+                          //                               await launchUrl(
+                          //                                   Uri.parse(url),
+                          //                                   mode: LaunchMode
+                          //                                       .externalApplication);
+                          //                             } else {
+                          //                               if (context.mounted) {
+                          //                                 showSnackbar(context,
+                          //                                     data:
+                          //                                         'Tidak dapat membukan maps',
+                          //                                     colors: Colors
+                          //                                         .orange);
+                          //                               }
+                          //                             }
+                          //                           },
+                          //                           child: Column(
+                          //                             children: [
+                          //                               Container(
+                          //                                 width: 40,
+                          //                                 height: 40,
+                          //                                 decoration:
+                          //                                     const BoxDecoration(
+                          //                                         shape: BoxShape
+                          //                                             .circle,
+                          //                                         color: Color(
+                          //                                             0xffFFCFCF)),
+                          //                                 alignment:
+                          //                                     Alignment.center,
+                          //                                 child: SizedBox(
+                          //                                   width: 24,
+                          //                                   height: 24,
+                          //                                   child: Image.asset(
+                          //                                       'assets/new/maps.png'),
+                          //                                 ),
+                          //                               ),
+                          //                               SizedBox(
+                          //                                 height: margin8,
+                          //                               ),
+                          //                               Text(
+                          //                                 'Lihat Peta',
+                          //                                 style: mainBody5.copyWith(
+                          //                                     fontWeight:
+                          //                                         FontWeight
+                          //                                             .bold,
+                          //                                     color: Theme.of(
+                          //                                             context)
+                          //                                         .primaryColor),
+                          //                               )
+                          //                             ],
+                          //                           ),
+                          //                         ),
+                          //                         SizedBox(
+                          //                           width: margin24,
+                          //                         ),
+                          //                         Column(
+                          //                           children: [
+                          //                             Container(
+                          //                               width: 40,
+                          //                               height: 40,
+                          //                               decoration: BoxDecoration(
+                          //                                   shape:
+                          //                                       BoxShape.circle,
+                          //                                   border: Border.all(
+                          //                                       color: Colors
+                          //                                           .black12)),
+                          //                               alignment:
+                          //                                   Alignment.center,
+                          //                               child: SizedBox(
+                          //                                 width: 24,
+                          //                                 height: 24,
+                          //                                 child: Image.asset(
+                          //                                     'assets/new/direction.png'),
+                          //                               ),
+                          //                             ),
+                          //                             SizedBox(
+                          //                               height: margin8,
+                          //                             ),
+                          //                             Text(
+                          //                               'Panduan ke Lokasi',
+                          //                               style: mainBody5.copyWith(
+                          //                                   fontWeight:
+                          //                                       FontWeight.bold,
+                          //                                   color: Theme.of(
+                          //                                           context)
+                          //                                       .primaryColor),
+                          //                             )
+                          //                           ],
+                          //                         )
+                          //                       ],
+                          //                     ),
+                          //                   )
+                          //                 ],
+                          //               ),
+                          //             )
+                          //           ],
+                          //         ),
+                          //       )
+                          //     ],
+                          //   ),
+                          // ),
                           SizedBox(
                             height: margin16,
                           ),
@@ -1188,58 +1221,58 @@ class _HealthDetailPageState extends State<HealthDetailPage> {
                         ],
                       ),
                     ),
-                    // Container(
-                    //   padding: EdgeInsets.all(margin16),
-                    //   decoration: const BoxDecoration(
-                    //     color: Colors.white,
-                    //     boxShadow: [
-                    //       BoxShadow(
-                    //         color: Colors.grey,
-                    //         offset: Offset(0.0, 1.0), //(x,y)
-                    //         blurRadius: 6.0,
-                    //       ),
-                    //     ],
-                    //   ),
-                    //   child: Row(
-                    //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    //     children: [
-                    //       Column(
-                    //         crossAxisAlignment: CrossAxisAlignment.start,
-                    //         children: [
-                    //           Text(
-                    //             'Mulai dari',
-                    //             style: mainBody5.copyWith(
-                    //                 color: const Color(0xffa5a5a5)),
-                    //           ),
-                    //           Text(
-                    //             moneyChanger(getLowestData(state.data.package),
-                    //                 customLabel: 'IDR '),
-                    //             style: mainBody4.copyWith(
-                    //                 color: Theme.of(context).primaryColor),
-                    //           )
-                    //         ],
-                    //       ),
-                    //       GestureDetector(
-                    //         onTap: () {
-                    //           // Scrollable.ensureVisible(dataKey.currentContext!);
-                    //         },
-                    //         child: Container(
-                    //           padding: EdgeInsets.symmetric(
-                    //               vertical: margin8, horizontal: margin16),
-                    //           decoration: BoxDecoration(
-                    //               borderRadius: BorderRadius.circular(8),
-                    //               color: Theme.of(context).primaryColor),
-                    //           child: Text(
-                    //             'Pilih Paket1',
-                    //             style: mainBody4.copyWith(
-                    //                 fontWeight: FontWeight.bold,
-                    //                 color: Colors.white),
-                    //           ),
-                    //         ),
-                    //       )
-                    //     ],
-                    //   ),
-                    // )
+                    Container(
+                      padding: EdgeInsets.all(margin16),
+                      decoration: const BoxDecoration(
+                        color: Colors.white,
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey,
+                            offset: Offset(0.0, 1.0), //(x,y)
+                            blurRadius: 6.0,
+                          ),
+                        ],
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Mulai dari',
+                                style: mainBody5.copyWith(
+                                    color: const Color(0xffa5a5a5)),
+                              ),
+                              Text(
+                                moneyChanger(getLowestData(state.data.packages),
+                                    customLabel: 'IDR '),
+                                style: mainBody4.copyWith(
+                                    color: Theme.of(context).primaryColor),
+                              )
+                            ],
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              // Scrollable.ensureVisible(dataKey.currentContext!);
+                            },
+                            child: Container(
+                              padding: EdgeInsets.symmetric(
+                                  vertical: margin8, horizontal: margin16),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(8),
+                                  color: Theme.of(context).primaryColor),
+                              child: Text(
+                                'Pilih Paket1',
+                                style: mainBody4.copyWith(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white),
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    )
                   ],
                 );
               } else {
@@ -1252,6 +1285,6 @@ class _HealthDetailPageState extends State<HealthDetailPage> {
               }
             }),
       ),
-    ));
+    );
   }
 }

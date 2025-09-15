@@ -85,24 +85,28 @@ class HealthCheckoutPage extends StatelessWidget {
                   child: ListView(
                 children: [
                   Container(
-                    padding: EdgeInsets.all(margin16),
+                    // padding: EdgeInsets.all(margin16),
                     color: neutral10,
                     child: Column(
                       children: [
                         HealthCheckoutDetailCard(
                             dataDetail: dataDetail, dataPackage: dataPackage),
-                        SizedBox(
-                          height: margin16,
+                        Container(
+                          width: double.infinity,
+                          height: 8,
+                          color: const Color(0xfff4f4f4),
                         ),
                         const HealthCheckoutOrderUserCard(),
-                        SizedBox(
-                          height: margin16,
+                        Container(
+                          width: double.infinity,
+                          height: 8,
+                          color: const Color(0xfff4f4f4),
                         ),
                         HealthCheckoutBillDetailCard(
                           items: items
                               .map((e) => HealthBillItem(
                                     title: e.package.name,
-                                    subtitle: "${e.package.duration}",
+                                    // subtitle: "${e.package.duration}",
                                     price: e.package.price,
                                     quantity: e.quantity,
                                   ))
@@ -113,9 +117,6 @@ class HealthCheckoutPage extends StatelessWidget {
                       ],
                     ),
                   ),
-                  SizedBox(
-                    height: margin32,
-                  )
                 ],
               )),
               Container(

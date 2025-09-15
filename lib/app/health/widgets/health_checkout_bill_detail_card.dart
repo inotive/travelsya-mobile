@@ -29,7 +29,7 @@ class HealthCheckoutBillDetailCard extends StatelessWidget {
       decimalDigits: 0,
     );
     return Container(
-      // padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.all(16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -40,7 +40,8 @@ class HealthCheckoutBillDetailCard extends StatelessWidget {
           SizedBox(height: margin16),
           ...items.map((item) => _billCard(
               title: item.title,
-              subtitle: '${item.quantity} x ${item.subtitle}',
+              // subtitle: '${item.quantity} x ${item.subtitle}',
+              subtitle: '${item.quantity} x ',
               price: item.price * item.quantity,
               format: currencyFormat)),
           const SizedBox(height: 10),
@@ -110,13 +111,13 @@ class HealthCheckoutBillDetailCard extends StatelessWidget {
 
 class HealthBillItem {
   final String title;
-  final String subtitle;
+  // final String subtitle;
   final double price;
   final int quantity;
 
   HealthBillItem({
     required this.title,
-    required this.subtitle,
+    // required this.subtitle,
     required this.price,
     required this.quantity,
   });

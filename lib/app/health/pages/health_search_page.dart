@@ -664,7 +664,7 @@ class _HealthSearchPageState extends State<HealthSearchPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
-                    padding: EdgeInsets.symmetric(horizontal: margin16),
+                    padding: EdgeInsets.all(margin16),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
