@@ -9,6 +9,7 @@ import 'package:travelsya/shared/helper/function_helper.dart';
 import 'package:travelsya/shared/styles/font_style.dart';
 import 'package:travelsya/shared/styles/size_styles.dart';
 import 'package:travelsya/shared/widgets/failed_request_widget.dart';
+import 'package:travelsya/shared/widgets/no_data_widget.dart';
 import 'package:travelsya/shared/widgets/statusbar_widget.dart';
 
 class RekreasiSearchResultPage extends StatefulWidget {
@@ -156,6 +157,9 @@ class _RekreasiSearchResultPageState extends State<RekreasiSearchResultPage> {
                           ),
                         );
                       } else if (state is RecreationPreviewListLoaded) {
+                        if (state.data.isEmpty) {
+                          return const NoDataWidget();
+                        }
                         return ListView(
                           padding: EdgeInsets.symmetric(horizontal: margin16),
                           children: [

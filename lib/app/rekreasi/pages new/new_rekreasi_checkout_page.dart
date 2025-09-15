@@ -256,8 +256,12 @@ class NewRekreasiCheckoutPage extends StatelessWidget {
                     ElevatedButtonWidget(
                         enabled: true,
                         onTap: () {
-                          model.onSubmit(context,
-                              packageId: items.first.package.id);
+                          model.onSubmit(
+                            context,
+                            packageId: items.first.package.id,
+                            recreationId: data.id,
+                            total: getTotalTagihan(items).toInt(),
+                          );
                           // model.onSubmit(
                           //   context,
                           //   items: items,

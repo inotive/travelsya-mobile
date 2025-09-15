@@ -65,43 +65,108 @@ class RecreationCheckoutVM extends BaseViewModel {
       notifyListeners();
     }
   }
-  //ONSUBMIT YG SEBELUMNYA
+
+  //tes
   onSubmit(
     BuildContext context, {
     required int packageId,
-  }) {
+    required int recreationId, // tambahkan recreationId biar ga error
+    required int total, // total dari perhitungan tagihan
+  }) async {
     showLoading(context);
-    RecreationService.checkoutRecreation(context, data: {
-      "service": "recreation",
-      "payment": "xendit",
-      "package_id": packageId.toString(),
-      "point": usePoint ? '1' : '0',
-      "total_ticket": '1'
-    }).then((value) async {
+
+    try {
+      final value = await RecreationService.checkoutRecreation(
+        context,
+        data: {
+          "service": "recreation",
+          "payment": "xendit",
+          "package_id": packageId.toString(),
+          "total_ticket": "1",
+          "point": usePoint ? '1' : '0',
+          "guest_identity": [], // nanti bisa diisi sesuai kebutuhan
+          "recreation_id": recreationId.toString(),
+          "total": total.toString(),
+        },
+      );
+
       if (context.mounted) {
-        Navigator.pop(context);
+        Navigator.pop(context); // tutup loading
+
         if (value.status == RequestStatus.successRequest) {
           BlocProvider.of<MainIndexCubit>(context).changeIndex(1);
 
           Navigator.pushAndRemoveUntil(
-              context,
-              MaterialPageRoute(builder: (_) => const HomeMainPage()),
-              (route) => false);
+            context,
+            MaterialPageRoute(builder: (_) => const HomeMainPage()),
+            (route) => false,
+          );
 
           Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (_) => UserPaymentWebview(
-                        url: value.data,
-                      )));
+            context,
+            MaterialPageRoute(
+              builder: (_) => UserPaymentWebview(
+                url: value.data,
+              ),
+            ),
+          );
         } else {
-          showSnackbar(context,
-              data: value.data ?? 'Gagal membuat link pembayaran',
-              colors: Colors.orange);
+          showSnackbar(
+            context,
+            data: value.data ?? 'Gagal membuat link pembayaran',
+            colors: Colors.orange,
+          );
         }
       }
-    });
+    } catch (e) {
+      if (context.mounted) {
+        Navigator.pop(context);
+        showSnackbar(
+          context,
+          data: 'Terjadi kesalahan: $e',
+          colors: Colors.orange,
+        );
+      }
+    }
   }
+
+  //ONSUBMIT YG SEBELUMNYA
+  // onSubmit(
+  //   BuildContext context, {
+  //   required int packageId,
+  // }) {
+  //   showLoading(context);
+  //   RecreationService.checkoutRecreation(context, data: {
+  //     "service": "recreation",
+  //     "payment": "xendit",
+  //     "package_id": packageId.toString(),
+  //     "point": usePoint ? '1' : '0',
+  //     "total_ticket": '1'
+  //   }).then((value) async {
+  //     if (context.mounted) {
+  //       Navigator.pop(context);
+  //       if (value.status == RequestStatus.successRequest) {
+  //         BlocProvider.of<MainIndexCubit>(context).changeIndex(1);
+
+  //         Navigator.pushAndRemoveUntil(
+  //             context,
+  //             MaterialPageRoute(builder: (_) => const HomeMainPage()),
+  //             (route) => false);
+
+  //         Navigator.push(
+  //             context,
+  //             MaterialPageRoute(
+  //                 builder: (_) => UserPaymentWebview(
+  //                       url: value.data,
+  //                     )));
+  //       } else {
+  //         showSnackbar(context,
+  //             data: value.data ?? 'Gagal membuat link pembayaran',
+  //             colors: Colors.orange);
+  //       }
+  //     }
+  //   });
+  // }
 
 //PAYMENT PAKET LEBIH DARI 1
   // onSubmit(

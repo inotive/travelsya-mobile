@@ -107,10 +107,10 @@ class RekreasiReviewSection extends StatelessWidget {
                         right:
                             index == data.comments.length - 1 ? margin16 : 0),
                     child: Card(
+                      color: Colors.white,
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(6)),
                       child: Container(
-                        color: Colors.white,
                         constraints: const BoxConstraints(maxWidth: 200),
                         padding: EdgeInsets.all(margin24 / 2),
                         height: double.infinity,
