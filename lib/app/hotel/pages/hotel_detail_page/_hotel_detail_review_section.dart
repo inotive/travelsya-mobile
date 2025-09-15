@@ -53,7 +53,9 @@ class _HotelDetailReviewSection extends StatelessWidget {
                     padding: EdgeInsets.all(margin24 / 2),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(4),
-                        color: neutral30),
+                        color: const Color(0XFFF4F4F4)
+                        // color: neutral30
+                        ),
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
@@ -118,6 +120,7 @@ class _HotelDetailReviewSection extends StatelessWidget {
                         left: index == 0 ? margin16 : 0,
                         right: index == data.reviews.length - 1 ? margin16 : 0),
                     child: Card(
+                      color: Colors.white,
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(6)),
                       child: Container(
