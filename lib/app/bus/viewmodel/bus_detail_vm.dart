@@ -6,7 +6,7 @@ import 'package:travelsya/app/bus/cubits/bus_filter_cubit.dart';
 import 'package:travelsya/app/bus/cubits/bus_filter_state.dart';
 import 'package:travelsya/app/bus/models/bus_model.dart';
 import 'package:travelsya/app/bus/pages/bus_checkout_page.dart';
-import 'package:travelsya/app/bus/pages/bus_seat_page.dart';
+// import 'package:travelsya/app/bus/pages/bus_seat_page.dart';
 import 'package:travelsya/shared/function/need_login_function.dart';
 
 class BusDetailVM extends BaseViewModel {
