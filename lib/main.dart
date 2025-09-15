@@ -40,6 +40,7 @@ Future<void> main() async {
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
   ]);
+  SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
 
   Intl.defaultLocale = 'id_ID';
   await initializeDateFormatting('id_ID', null);
@@ -104,6 +105,25 @@ class _MyAppState extends State<MyApp> {
       title: 'Travelsya',
       theme: mainTheme,
       home: const SplashScreenPage(),
+      builder: (context, child) {
+        final isDark = Theme.of(context).brightness == Brightness.light;
+
+        SystemChrome.setSystemUIOverlayStyle(
+          isDark
+              ? SystemUiOverlayStyle.light.copyWith(
+                  statusBarColor: Colors.transparent,
+                )
+              : SystemUiOverlayStyle.dark.copyWith(
+                  statusBarColor: Colors.transparent,
+                ),
+        );
+
+        return SafeArea(
+          top: true,
+          bottom: true,
+          child: child ?? const SizedBox(),
+        );
+      },
     );
   }
 }
