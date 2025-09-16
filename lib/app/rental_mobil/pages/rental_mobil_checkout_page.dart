@@ -1,3 +1,4 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -17,6 +18,7 @@ import 'package:travelsya/shared/styles/theme_style.dart';
 import 'package:travelsya/shared/widgets/form_helper/elevated_button_widget.dart';
 import 'package:travelsya/shared/widgets/form_helper/rounded_texfield_widget.dart';
 import 'package:travelsya/shared/widgets/form_helper/title_with_widget.dart';
+import 'package:travelsya/shared/widgets/photo_view_list_page.dart';
 
 class RentalCheckoutPage extends StatelessWidget {
   final RentalMobilModel dataRental;
@@ -295,6 +297,144 @@ class RentalCheckoutPage extends StatelessWidget {
                                             CrossAxisAlignment.start,
                                         children: [
                                           Text(
+                                            'Detail Mobil',
+                                            style: mainBody4.copyWith(
+                                                color: neutral100,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          Container(
+                                            margin: EdgeInsets.symmetric(
+                                                vertical: margin24 / 2),
+                                            width: double.infinity,
+                                            height: 1,
+                                            color: neutral50.withOpacity(0.3),
+                                          ),
+                                          AspectRatio(
+                                            aspectRatio: 2 / 1,
+                                            child: (dataRental.image.isEmpty)
+                                                ? const Center(
+                                                    child: Icon(
+                                                      Icons.broken_image,
+                                                      size: 48,
+                                                      color: Colors.grey,
+                                                    ),
+                                                  )
+                                                : CarouselSlider(
+                                                    items: List.generate(
+                                                      dataRental.image.length,
+                                                      (index) {
+                                                        final imgUrl =
+                                                            dataRental
+                                                                .image[index];
+
+                                                        return GestureDetector(
+                                                          onTap: () {
+                                                            Navigator.push(
+                                                              context,
+                                                              MaterialPageRoute(
+                                                                builder: (_) =>
+                                                                    PhotoViewListPage(
+                                                                  images: [
+                                                                    dataRental
+                                                                        .image
+                                                                  ],
+                                                                ),
+                                                              ),
+                                                            );
+                                                          },
+                                                          child: Container(
+                                                            margin: EdgeInsets
+                                                                .symmetric(
+                                                                    horizontal:
+                                                                        margin4),
+                                                            width:
+                                                                double.infinity,
+                                                            height:
+                                                                double.infinity,
+                                                            child: (imgUrl
+                                                                    .isEmpty)
+                                                                ? const Center(
+                                                                    child: Icon(
+                                                                      Icons
+                                                                          .broken_image,
+                                                                      size: 48,
+                                                                      color: Colors
+                                                                          .grey,
+                                                                    ),
+                                                                  )
+                                                                : Image.network(
+                                                                    imgUrl,
+                                                                    fit: BoxFit
+                                                                        .cover,
+                                                                    errorBuilder: (context,
+                                                                            error,
+                                                                            stackTrace) =>
+                                                                        const Center(
+                                                                      child:
+                                                                          Icon(
+                                                                        Icons
+                                                                            .broken_image,
+                                                                        size:
+                                                                            48,
+                                                                        color: Colors
+                                                                            .grey,
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                          ),
+                                                        );
+                                                      },
+                                                    ),
+                                                    options: CarouselOptions(
+                                                      viewportFraction: 0.8,
+                                                      height: double.infinity,
+                                                    ),
+                                                  ),
+                                          )
+                                        ],
+                                      ),
+                                    )
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: margin16,
+                                ),
+                                Stack(
+                                  children: [
+                                    Positioned(
+                                      top: 0,
+                                      bottom: 0,
+                                      left: 0,
+                                      right: 0,
+                                      child: Container(
+                                        width: double.infinity,
+                                        height: double.infinity,
+                                        decoration: BoxDecoration(
+                                            border: Border.all(
+                                                color:
+                                                    neutral50.withOpacity(0.3)),
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                            color: Colors.white),
+                                        alignment: Alignment.topRight,
+                                        child: SizedBox(
+                                          width: 45,
+                                          height: 45,
+                                          child: Image.asset(
+                                            'assets/icons/group_23.png',
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    Container(
+                                      padding: EdgeInsets.all(margin16),
+                                      width: double.infinity,
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
                                             'Waktu Sewa',
                                             style: mainBody4.copyWith(
                                                 color: neutral100,
@@ -387,33 +527,6 @@ class RentalCheckoutPage extends StatelessWidget {
                                               ),
                                             ],
                                           ),
-                                          // Container(
-                                          //   margin: EdgeInsets.symmetric(
-                                          //       vertical: margin24 / 2),
-                                          //   width: double.infinity,
-                                          //   height: 1,
-                                          //   color: neutral50.withOpacity(0.3),
-                                          // ),
-                                          // Row(
-                                          //   children: [
-                                          //     Expanded(
-                                          //         child: Text(
-                                          //       'Bisa refund, reschedule dan overtime',
-                                          //       style: mainBody5.copyWith(
-                                          //           fontWeight: FontWeight.bold,
-                                          //           color: Theme.of(context)
-                                          //               .primaryColor),
-                                          //     )),
-                                          //     SizedBox(
-                                          //       width: margin24 / 2,
-                                          //     ),
-                                          //     Icon(
-                                          //       Icons.arrow_forward_ios_rounded,
-                                          //       color: neutral100,
-                                          //       size: 15,
-                                          //     )
-                                          //   ],
-                                          // )
                                         ],
                                       ),
                                     )
