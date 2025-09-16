@@ -43,7 +43,12 @@ class RentalMobilService {
 
     var request = http.MultipartRequest('POST', Uri.parse(carFindUrl));
 
-    request.fields['location'] = filter.selectedLocation ?? '';
+    // request.fields['location'] = filter.selectedLocation ?? '';
+    if (filter.selectedLocation != null &&
+        filter.selectedLocation!.isNotEmpty &&
+        filter.selectedLocation != "Semua Lokasi") {
+      request.fields['location'] = filter.selectedLocation!;
+    }
     request.fields['date'] =
         DateFormat('yyyy-MM-dd').format(filter.selectedDate);
     request.fields['jam'] = filter.selectedTime.hour.toString();

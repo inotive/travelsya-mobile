@@ -201,10 +201,13 @@ class _RentalDetailPageState extends State<RentalDetailPage> {
                                       },
                                       child: Container(
                                         margin: EdgeInsets.only(
-                                            bottom: index == 4 ? margin32 : 0,
-                                            top: index == 0
-                                                ? margin16
-                                                : margin24 / 2),
+                                            bottom: margin8,
+                                            // bottom: index == 4 ? margin32 : 0,
+                                            top: margin8
+                                            // top: index == 0
+                                            // ? margin16
+                                            // : margin8
+                                            ),
                                         padding: EdgeInsets.all(margin16),
                                         decoration: BoxDecoration(
                                             color: Colors.white,

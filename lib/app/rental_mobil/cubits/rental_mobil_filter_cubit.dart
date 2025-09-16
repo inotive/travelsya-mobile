@@ -37,6 +37,64 @@ class RentalMobilFilterCubit extends Cubit<RentalMobilFilterState> {
   //   }
   // }
 
+  // Future<void> onPickCity(
+  //   BuildContext context,
+  // ) async {
+  //   final stateFilter = state;
+  //   if (stateFilter is RentalMobilFilterLoaded) {
+  //     final dataFinal = stateFilter.data;
+
+  //     final selectedCity = await showCityPicker<RentalMobilCityModel,
+  //         RentalMobilCityCubit, RentalMobilCityState>(
+  //       context,
+  //       cubit: BlocProvider.of<RentalMobilCityCubit>(context),
+  //       fetchFunction: (cubit, ctx) async {
+  //         await cubit.fetchCities(ctx);
+  //       },
+  //       isLoading: (state) => state is RentalMobilCityLoading,
+  //       getCities: (state) =>
+  //           state is RentalMobilCityLoaded ? state.cities : [],
+  //       displayName: (item) => item.name,
+  //     );
+
+  //     if (selectedCity != null) {
+  //       dataFinal.selectedLocation = selectedCity.name;
+  //       onLoadDataFilter(dataFinal);
+  //     }
+  //   }
+  // }
+
+  // Future<void> onPickCity(
+  //   BuildContext context,
+  // ) async {
+  //   final stateFilter = state;
+  //   if (stateFilter is RentalMobilFilterLoaded) {
+  //     final dataFinal = stateFilter.data;
+
+  //     final selectedCity = await showSearchCityPicker<RentalMobilCityModel,
+  //         RentalMobilCityCubit, RentalMobilCityState>(
+  //       context,
+  //       cubit: BlocProvider.of<RentalMobilCityCubit>(context),
+  //       fetchFunction: (cubit, ctx) async {
+  //         await cubit.fetchCities(ctx);
+  //       },
+  //       isLoading: (state) => state is RentalMobilCityLoading,
+  //       getCities: (state) =>
+  //           state is RentalMobilCityLoaded ? state.cities : [],
+  //       displayName: (item) => item.name,
+  //       allLocationLabel: "Semua Lokasi",
+  //     );
+
+  //     if (selectedCity == null) {
+  //       dataFinal.selectedLocation = "Semua Lokasi";
+  //       onLoadDataFilter(dataFinal);
+  //     } else {
+  //       dataFinal.selectedLocation = selectedCity.name;
+  //       onLoadDataFilter(dataFinal);
+  //     }
+  //   }
+  // }
+
   Future<void> onPickCity(
     BuildContext context,
   ) async {
@@ -44,7 +102,7 @@ class RentalMobilFilterCubit extends Cubit<RentalMobilFilterState> {
     if (stateFilter is RentalMobilFilterLoaded) {
       final dataFinal = stateFilter.data;
 
-      final selectedCity = await showCityPicker<RentalMobilCityModel,
+      final selectedCity = await showSearchCityPicker<RentalMobilCityModel,
           RentalMobilCityCubit, RentalMobilCityState>(
         context,
         cubit: BlocProvider.of<RentalMobilCityCubit>(context),
@@ -55,10 +113,22 @@ class RentalMobilFilterCubit extends Cubit<RentalMobilFilterState> {
         getCities: (state) =>
             state is RentalMobilCityLoaded ? state.cities : [],
         displayName: (item) => item.name,
+        allLocationLabel: "Semua Lokasi",
       );
 
-      if (selectedCity != null) {
+      if (selectedCity == null) {
+        /// kalau pilih "Semua Lokasi"
+        final cityCubit = BlocProvider.of<RentalMobilCityCubit>(context);
+        final cityState = cityCubit.state;
+        if (cityState is RentalMobilCityLoaded) {
+          /// simpan semua kota yg ada di API
+          dataFinal.selectedLocation = "Semua Lokasi";
+          dataFinal.allCities = cityState.cities; // <-- tambahkan ke model
+        }
+        onLoadDataFilter(dataFinal);
+      } else {
         dataFinal.selectedLocation = selectedCity.name;
+        dataFinal.allCities = [selectedCity]; // hanya satu kota
         onLoadDataFilter(dataFinal);
       }
     }

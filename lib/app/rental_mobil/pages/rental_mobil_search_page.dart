@@ -83,19 +83,21 @@ class RentalSearchPage extends StatelessWidget {
                                 Flexible(
                                   flex: 1,
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         'Tanggal Rental',
-                                        style:
-                                            mainBody4.copyWith(color: neutral50),
+                                        style: mainBody4.copyWith(
+                                            color: neutral50),
                                       ),
                                       SizedBox(
                                         height: margin8,
                                       ),
                                       GestureDetector(
                                         onTap: () {
-                                          BlocProvider.of<RentalMobilFilterCubit>(
+                                          BlocProvider.of<
+                                                      RentalMobilFilterCubit>(
                                                   context)
                                               .onPickDate(context);
                                         },
@@ -115,19 +117,21 @@ class RentalSearchPage extends StatelessWidget {
                                 Flexible(
                                   flex: 1,
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         'Jam Pengambilan',
-                                        style:
-                                            mainBody4.copyWith(color: neutral50),
+                                        style: mainBody4.copyWith(
+                                            color: neutral50),
                                       ),
                                       SizedBox(
                                         height: margin8,
                                       ),
                                       GestureDetector(
                                         onTap: () {
-                                          BlocProvider.of<RentalMobilFilterCubit>(
+                                          BlocProvider.of<
+                                                      RentalMobilFilterCubit>(
                                                   context)
                                               .onPickHour(context);
                                         },
@@ -151,19 +155,21 @@ class RentalSearchPage extends StatelessWidget {
                               children: [
                                 Expanded(
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         'Durasi Rental',
-                                        style:
-                                            mainBody4.copyWith(color: neutral50),
+                                        style: mainBody4.copyWith(
+                                            color: neutral50),
                                       ),
                                       SizedBox(
                                         height: margin8,
                                       ),
                                       GestureDetector(
                                         onTap: () {
-                                          BlocProvider.of<RentalMobilFilterCubit>(
+                                          BlocProvider.of<
+                                                      RentalMobilFilterCubit>(
                                                   context)
                                               .onPickDuration(context);
                                         },
@@ -216,19 +222,19 @@ class RentalSearchPage extends StatelessWidget {
                                   final filterCubit =
                                       BlocProvider.of<RentalMobilFilterCubit>(
                                           context);
-                                  final selectedLocation =
-                                      filterCubit.state is RentalMobilFilterLoaded
-                                          ? (filterCubit.state
-                                                  as RentalMobilFilterLoaded)
-                                              .data
-                                              .selectedLocation
-                                          : null;
-        
+                                  final selectedLocation = filterCubit.state
+                                          is RentalMobilFilterLoaded
+                                      ? (filterCubit.state
+                                              as RentalMobilFilterLoaded)
+                                          .data
+                                          .selectedLocation
+                                      : null;
                                   if (selectedLocation == null ||
                                       selectedLocation.isEmpty) {
                                     ScaffoldMessenger.of(context)
                                         .showSnackBar(SnackBar(
-                                      content: const Text('Area Rental wajib diisi'),
+                                      content:
+                                          const Text('Area Rental wajib diisi'),
                                       backgroundColor: primaryColor,
                                     ));
                                     return;
@@ -249,7 +255,7 @@ class RentalSearchPage extends StatelessWidget {
                     ],
                   );
                 }
-        
+
                 return Container();
               }),
         ),
