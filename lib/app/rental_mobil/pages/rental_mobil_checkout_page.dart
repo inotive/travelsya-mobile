@@ -549,6 +549,69 @@ class RentalCheckoutPage extends StatelessWidget {
                                             CrossAxisAlignment.start,
                                         children: [
                                           Text(
+                                            'Titik Pengambilan',
+                                            style: mainBody4.copyWith(
+                                                color: neutral100,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          Container(
+                                            margin: EdgeInsets.symmetric(
+                                                vertical: margin24 / 2),
+                                            width: double.infinity,
+                                            height: 1,
+                                            color: neutral50.withOpacity(0.3),
+                                          ),
+                                          Text(
+                                            state.data.selectedLocation ??
+                                                'Kota tidak tersedia',
+                                            style: mainBody4.copyWith(
+                                                color: neutral100,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                        ],
+                                      ),
+                                    )
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: margin16,
+                                ),
+                                Stack(
+                                  children: [
+                                    Positioned(
+                                      top: 0,
+                                      bottom: 0,
+                                      left: 0,
+                                      right: 0,
+                                      child: Container(
+                                        width: double.infinity,
+                                        height: double.infinity,
+                                        decoration: BoxDecoration(
+                                            border: Border.all(
+                                                color:
+                                                    neutral50.withOpacity(0.3)),
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                            color: Colors.white),
+                                        alignment: Alignment.topRight,
+                                        child: SizedBox(
+                                          width: 45,
+                                          height: 45,
+                                          child: Image.asset(
+                                            'assets/icons/group_23.png',
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    Container(
+                                      padding: EdgeInsets.all(margin16),
+                                      width: double.infinity,
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
                                             'Deskripsi',
                                             style: mainBody4.copyWith(
                                                 color: neutral100,
