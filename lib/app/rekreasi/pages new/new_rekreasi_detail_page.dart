@@ -130,10 +130,12 @@ class _NewRekreasiDetailPageState extends State<NewRekreasiDetailPage> {
                         controller: scrollController,
                         slivers: [
                           // HEADER
+                          // HEADER
                           SliverToBoxAdapter(
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
+                                // Gambar utama (gambar pertama)
                                 AspectRatio(
                                   aspectRatio: 375 / 264,
                                   child: (data.images.isNotEmpty)
@@ -150,61 +152,71 @@ class _NewRekreasiDetailPageState extends State<NewRekreasiDetailPage> {
                                           ),
                                         ),
                                 ),
-                                const SizedBox(
-                                  height: 3,
-                                ),
-                                if (data.images.length > 1)
+
+                                const SizedBox(height: 3),
+
+                                // Jika jumlah gambar > 2, tampilkan baris gambar kecil
+                                if (data.images.length > 2)
                                   Row(
                                     children: [
-                                      // Gambar kedua
-                                      Expanded(
-                                        child: Image.network(
-                                          "$baseAPIImageUrl${data.images[1]}",
-                                          fit: BoxFit.cover,
-                                          height: 74,
+                                      // Gambar ke-2
+                                      if (data.images.length > 1)
+                                        Expanded(
+                                          child: Image.network(
+                                            "$baseAPIImageUrl${data.images[1]}",
+                                            fit: BoxFit.cover,
+                                            height: 74,
+                                          ),
                                         ),
-                                      ),
-                                      const SizedBox(width: 3),
-                                      // Gambar ketiga
-                                      Expanded(
-                                        child: Image.network(
-                                          "$baseAPIImageUrl${data.images[2]}",
-                                          fit: BoxFit.cover,
-                                          height: 74,
-                                        ),
-                                      ),
-                                      const SizedBox(width: 3),
 
-                                      Expanded(
-                                        child: Stack(
-                                          children: [
-                                            Image.network(
-                                              "$baseAPIImageUrl${data.images[3]}",
-                                              fit: BoxFit.cover,
-                                              width: double.infinity,
-                                              height: 74,
-                                            ),
-                                            if (data.images.length > 4)
-                                              Container(
+                                      // Gambar ke-3
+                                      if (data.images.length > 2) ...[
+                                        const SizedBox(width: 3),
+                                        Expanded(
+                                          child: Image.network(
+                                            "$baseAPIImageUrl${data.images[2]}",
+                                            fit: BoxFit.cover,
+                                            height: 74,
+                                          ),
+                                        ),
+                                      ],
+
+                                      // Gambar ke-4 (dengan overlay kalau masih ada sisa)
+                                      if (data.images.length > 3) ...[
+                                        const SizedBox(width: 3),
+                                        Expanded(
+                                          child: Stack(
+                                            children: [
+                                              Image.network(
+                                                "$baseAPIImageUrl${data.images[3]}",
+                                                fit: BoxFit.cover,
+                                                width: double.infinity,
                                                 height: 74,
-                                                color: Colors.black45,
-                                                child: Center(
-                                                  child: Text(
-                                                    '+${data.images.length - 3} lainnya',
-                                                    style:
-                                                        secondaryBody4.copyWith(
-                                                      color: Colors.white,
-                                                      fontWeight:
-                                                          FontWeight.w600,
+                                              ),
+                                              if (data.images.length > 4)
+                                                Container(
+                                                  height: 74,
+                                                  color: Colors.black45,
+                                                  child: Center(
+                                                    child: Text(
+                                                      '+${data.images.length - 4} lainnya',
+                                                      style: secondaryBody4
+                                                          .copyWith(
+                                                        color: Colors.white,
+                                                        fontWeight:
+                                                            FontWeight.w600,
+                                                      ),
                                                     ),
                                                   ),
                                                 ),
-                                              )
-                                          ],
+                                            ],
+                                          ),
                                         ),
-                                      ),
+                                      ],
                                     ],
                                   ),
+
+                                // Tombol back
                                 Padding(
                                   padding: EdgeInsets.all(margin16),
                                   child: Row(
@@ -228,6 +240,8 @@ class _NewRekreasiDetailPageState extends State<NewRekreasiDetailPage> {
                                     ],
                                   ),
                                 ),
+
+                                // Informasi dasar (kategori, nama, rating, lokasi)
                                 Padding(
                                   padding: EdgeInsets.symmetric(
                                       horizontal: margin16),
@@ -262,14 +276,14 @@ class _NewRekreasiDetailPageState extends State<NewRekreasiDetailPage> {
                                           Text(' (${data.ratingCount})'),
                                           SizedBox(width: margin4),
                                           Text(
-                                            'Kota ${data.city}',
+                                            data.city,
                                             style: mainBody4.copyWith(
                                               color: Theme.of(context)
                                                   .primaryColor,
                                               decoration:
                                                   TextDecoration.underline,
                                             ),
-                                          )
+                                          ),
                                         ],
                                       ),
                                       SizedBox(height: margin16),
@@ -279,6 +293,7 @@ class _NewRekreasiDetailPageState extends State<NewRekreasiDetailPage> {
                               ],
                             ),
                           ),
+
                           SliverToBoxAdapter(
                             child: Container(
                               width: double.infinity,
