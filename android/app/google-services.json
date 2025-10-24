@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "412698617759",
-    "project_id": "travelsya-43d29",
-    "storage_bucket": "travelsya-43d29.firebasestorage.app"
+    "project_number": "995676039801",
+    "project_id": "travelsya---phase-2",
+    "storage_bucket": "travelsya---phase-2.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:412698617759:android:ad24de160c39fb107f3faa",
+        "mobilesdk_app_id": "1:995676039801:android:362135c591a514f89442a8",
         "android_client_info": {
           "package_name": "com.travelsya.app"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyAg75T_IEKNNebRasaPF2pdGQlU4Gxur9M"
+          "current_key": "AIzaSyDwkv2BYabjI5UA2ou6Zava6z7--gzUo-g"
         }
       ],
       "services": {
