@@ -160,11 +160,11 @@ class HotelRoom {
   late double sellingPrice;
   //facilites
   late String bedType;
-  late String roomSize;
-  late String maxExtBed;
-  late String totalRoom;
+  late int roomSize;
+  late int maxExtBed;
+  late int totalRoom;
   late int roomLeft;
-  late String guest;
+  late int guest;
   List<String> images = [];
   late bool isActive;
 
