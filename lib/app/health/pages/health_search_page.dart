@@ -954,22 +954,22 @@ Widget buildSpecialDeals(
                         //           image: NetworkImage(
                         //               data.image))),
                         // ),
-                        Positioned(
-                          left: margin8,
-                          bottom: margin8,
-                          child: Container(
-                            padding: EdgeInsets.symmetric(
-                                vertical: margin4, horizontal: margin24 / 2),
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(20),
-                                color: const Color(0xffFFCFCF)),
-                            child: Text(
-                              'Big Deals',
-                              style: mainBody5.copyWith(
-                                  color: Theme.of(context).primaryColor),
-                            ),
-                          ),
-                        )
+                        // Positioned(
+                        //   left: margin8,
+                        //   bottom: margin8,
+                        //   child: Container(
+                        //     padding: EdgeInsets.symmetric(
+                        //         vertical: margin4, horizontal: margin24 / 2),
+                        //     decoration: BoxDecoration(
+                        //         borderRadius: BorderRadius.circular(20),
+                        //         color: const Color(0xffFFCFCF)),
+                        //     child: Text(
+                        //       'Big Deals',
+                        //       style: mainBody5.copyWith(
+                        //           color: Theme.of(context).primaryColor),
+                        //     ),
+                        //   ),
+                        // )
                       ],
                     ),
                     Container(
