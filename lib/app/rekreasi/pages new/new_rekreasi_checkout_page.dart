@@ -259,8 +259,8 @@ class NewRekreasiCheckoutPage extends StatelessWidget {
                           model.onSubmit(
                             context,
                             packageId: items.first.package.id,
-                            recreationId: data.id,
-                            total: getTotalTagihan(items).toInt(),
+                            // recreationId: data.id,
+                            // total: getTotalTagihan(items).toInt(),
                           );
                           // model.onSubmit(
                           //   context,
