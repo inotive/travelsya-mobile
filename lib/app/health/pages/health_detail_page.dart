@@ -394,7 +394,6 @@ class _HealthDetailPageState extends State<HealthDetailPage> {
                           //                     //     Expanded(
                           //                     //         child: Text(
                           //                     //       'Tidak bisa refund',
-
                           //                     //       style: mainBody5,
                           //                     //     ))
                           //                     //   ],
@@ -930,11 +929,11 @@ class _HealthDetailPageState extends State<HealthDetailPage> {
                                 SizedBox(
                                   height: margin16,
                                 ),
-                                Text(
-                                  state.data.description ?? '-',
-                                  style: mainBody5.copyWith(
-                                      color: const Color(0xffa5a5a5)),
-                                ),
+                                Text(state.data.description ?? '-',
+                                    style: mainBody4
+                                    // style: mainBody4.copyWith(
+                                    //     color: const Color(0xffa5a5a5)),
+                                    ),
                               ],
                             ),
                           ),
@@ -1040,33 +1039,33 @@ class _HealthDetailPageState extends State<HealthDetailPage> {
                                                             ),
                                                           ),
                                                         ),
-                                                        Positioned(
-                                                          left: margin8,
-                                                          bottom: margin8,
-                                                          child: Container(
-                                                            padding: EdgeInsets
-                                                                .symmetric(
-                                                                    vertical:
-                                                                        margin4,
-                                                                    horizontal:
-                                                                        margin24 /
-                                                                            2),
-                                                            decoration: BoxDecoration(
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            20),
-                                                                color: const Color(
-                                                                    0xffFFCFCF)),
-                                                            child: Text(
-                                                              'Big Deals',
-                                                              style: mainBody5.copyWith(
-                                                                  color: Theme.of(
-                                                                          context)
-                                                                      .primaryColor),
-                                                            ),
-                                                          ),
-                                                        )
+                                                        // Positioned(
+                                                        //   left: margin8,
+                                                        //   bottom: margin8,
+                                                        //   child: Container(
+                                                        //     padding: EdgeInsets
+                                                        //         .symmetric(
+                                                        //             vertical:
+                                                        //                 margin4,
+                                                        //             horizontal:
+                                                        //                 margin24 /
+                                                        //                     2),
+                                                        //     decoration: BoxDecoration(
+                                                        //         borderRadius:
+                                                        //             BorderRadius
+                                                        //                 .circular(
+                                                        //                     20),
+                                                        //         color: const Color(
+                                                        //             0xffFFCFCF)),
+                                                        //     child: Text(
+                                                        //       'Big Deals',
+                                                        //       style: mainBody5.copyWith(
+                                                        //           color: Theme.of(
+                                                        //                   context)
+                                                        //               .primaryColor),
+                                                        //     ),
+                                                        //   ),
+                                                        // )
                                                       ],
                                                     ),
                                                     Container(
@@ -1263,7 +1262,7 @@ class _HealthDetailPageState extends State<HealthDetailPage> {
                                   borderRadius: BorderRadius.circular(8),
                                   color: Theme.of(context).primaryColor),
                               child: Text(
-                                'Pilih Paket1',
+                                'Pesan',
                                 style: mainBody4.copyWith(
                                     fontWeight: FontWeight.bold,
                                     color: Colors.white),
