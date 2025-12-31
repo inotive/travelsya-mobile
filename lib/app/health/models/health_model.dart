@@ -1,10 +1,39 @@
+// class HealthCategoryModel {
+//   final int id;
+//   final String name;
+
+//   HealthCategoryModel.fromJson(Map<String, dynamic> jsonMap)
+//       : id = jsonMap['id'] ?? 0,
+//         name = jsonMap['name'] ?? '';
+// }
+
 class HealthCategoryModel {
   final int id;
   final String name;
 
-  HealthCategoryModel.fromJson(Map<String, dynamic> jsonMap)
-      : id = jsonMap['id'] ?? 0,
-        name = jsonMap['name'] ?? '';
+  HealthCategoryModel({
+    required this.id,
+    required this.name,
+  });
+
+  factory HealthCategoryModel.fromJson(dynamic json) {
+    if (json is String) {
+      return HealthCategoryModel(
+        id: 0,
+        name: json,
+      );
+    }
+
+    if (json is Map<String, dynamic>) {
+      return HealthCategoryModel(
+        id: json['id'] ?? 0,
+        name: json['name'] ?? '',
+      );
+    }
+
+    // fallback aman
+    return HealthCategoryModel(id: 0, name: '');
+  }
 }
 
 class HealthPreviewModel {
