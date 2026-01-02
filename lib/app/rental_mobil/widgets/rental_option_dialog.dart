@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:travelsya/app/rental_mobil/models/rental_mobil_model.dart';
 import 'package:travelsya/app/rental_mobil/pages/rental_mobil_checkout_page.dart';
+import 'package:travelsya/app/rental_mobil/services/rental_mobil_service.dart';
+import 'package:travelsya/shared/api/api_return_value.dart';
 import 'package:travelsya/shared/function/need_login_function.dart';
+import 'package:travelsya/shared/function/show_loading.dart';
+import 'package:travelsya/shared/function/show_snackbar.dart';
 import 'package:travelsya/shared/helper/function_helper.dart';
 import 'package:travelsya/shared/styles/font_style.dart';
 import 'package:travelsya/shared/styles/size_styles.dart';
@@ -150,17 +154,53 @@ class RentalOptionDialog extends StatelessWidget {
                   padding: EdgeInsets.symmetric(horizontal: margin24 / 2),
                   children: List.generate(data.data.length, (index) {
                     return GestureDetector(
+                      // onTap: () {
+                      //   needLoginFeature(context, () {
+                      //     Navigator.push(
+                      //         context,
+                      //         MaterialPageRoute(
+                      //             builder: (_) => RentalCheckoutPage(
+                      //                   dataRental: data,
+                      //                   dataVendor: data.data[index],
+                      //                   dataDetail: ,
+                      //                 )));
+                      //   });
+                      // },
                       onTap: () {
-                        needLoginFeature(context, () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
+                        needLoginFeature(context, () async {
+                          showLoading(context);
+
+                          final result = await RentalMobilService.getDetailCar(
+                            context,
+                            carId: data.data[index].idCar,
+                          );
+
+                          if (context.mounted) {
+                            Navigator.pop(context);
+
+                            if (result.status == RequestStatus.successRequest) {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
                                   builder: (_) => RentalCheckoutPage(
-                                        dataRental: data,
-                                        dataVendor: data.data[index],
-                                      )));
+                                    dataRental: data,
+                                    dataVendor: data.data[index],
+                                    dataDetail: result.data,
+                                  ),
+                                ),
+                              );
+                            } else {
+                              showSnackbar(
+                                context,
+                                data:
+                                    result.data ?? 'Gagal memuat detail mobil',
+                                colors: Colors.orange,
+                              );
+                            }
+                          }
                         });
                       },
+
                       child: Container(
                         margin: EdgeInsets.only(
                             top: index == 0 ? margin16 : margin24 / 2),

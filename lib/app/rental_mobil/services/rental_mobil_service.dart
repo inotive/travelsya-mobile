@@ -152,4 +152,33 @@ class RentalMobilService {
 
     return returnValue;
   }
+
+  static Future<ApiReturnValue> getDetailCar(BuildContext context,
+      {required int carId}) async {
+    ApiReturnValue returnValue;
+
+    var request =
+        http.MultipartRequest('GET', Uri.parse('$carDetailUrl/$carId'));
+
+    ApiReturnValue<dynamic>? response = await ApiReturnValue.httpRequest(
+        context,
+        request: request,
+        exceptionStatusCode: [200, 201],
+        auth: true);
+
+    if (response!.status == RequestStatus.successRequest) {
+      returnValue = ApiReturnValue(
+          data: VendorRentalDetailModel.fromJson(response.data['data']),
+          status: RequestStatus.successRequest);
+    } else {
+      String? messages;
+      try {
+        messages = response.data['meta']['message'];
+      } catch (_) {
+        messages = null;
+      }
+      returnValue = ApiReturnValue(data: messages, status: response.status);
+    }
+    return returnValue;
+  }
 }

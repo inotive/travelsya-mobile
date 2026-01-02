@@ -23,8 +23,12 @@ import 'package:travelsya/shared/widgets/photo_view_list_page.dart';
 class RentalCheckoutPage extends StatelessWidget {
   final RentalMobilModel dataRental;
   final VendorRentalModel dataVendor;
+  final VendorRentalDetailModel dataDetail;
   const RentalCheckoutPage(
-      {super.key, required this.dataRental, required this.dataVendor});
+      {super.key,
+      required this.dataRental,
+      required this.dataVendor,
+      required this.dataDetail});
 
   @override
   Widget build(BuildContext context) {
@@ -311,86 +315,45 @@ class RentalCheckoutPage extends StatelessWidget {
                                           ),
                                           AspectRatio(
                                             aspectRatio: 2 / 1,
-                                            child: (dataRental.image.isEmpty)
+                                            child: dataDetail.images.isEmpty
                                                 ? const Center(
                                                     child: Icon(
-                                                      Icons.broken_image,
-                                                      size: 48,
-                                                      color: Colors.grey,
-                                                    ),
+                                                        Icons.broken_image,
+                                                        size: 48),
                                                   )
                                                 : CarouselSlider(
-                                                    items: List.generate(
-                                                      dataRental.image.length,
-                                                      (index) {
-                                                        final imgUrl =
-                                                            dataRental
-                                                                .image[index];
-
-                                                        return GestureDetector(
-                                                          onTap: () {
-                                                            Navigator.push(
-                                                              context,
-                                                              MaterialPageRoute(
-                                                                builder: (_) =>
-                                                                    PhotoViewListPage(
-                                                                  images: [
-                                                                    dataRental
-                                                                        .image
-                                                                  ],
-                                                                ),
+                                                    items: dataDetail.images
+                                                        .map((imgUrl) {
+                                                      return GestureDetector(
+                                                        onTap: () {
+                                                          Navigator.push(
+                                                            context,
+                                                            MaterialPageRoute(
+                                                              builder: (_) =>
+                                                                  PhotoViewListPage(
+                                                                images:
+                                                                    dataDetail
+                                                                        .images,
                                                               ),
-                                                            );
-                                                          },
-                                                          child: Container(
-                                                            margin: EdgeInsets
-                                                                .symmetric(
-                                                                    horizontal:
-                                                                        margin4),
-                                                            width:
-                                                                double.infinity,
-                                                            height:
-                                                                double.infinity,
-                                                            child: (imgUrl
-                                                                    .isEmpty)
-                                                                ? const Center(
-                                                                    child: Icon(
-                                                                      Icons
-                                                                          .broken_image,
-                                                                      size: 48,
-                                                                      color: Colors
-                                                                          .grey,
-                                                                    ),
-                                                                  )
-                                                                : Image.network(
-                                                                    imgUrl,
-                                                                    fit: BoxFit
-                                                                        .cover,
-                                                                    errorBuilder: (context,
-                                                                            error,
-                                                                            stackTrace) =>
-                                                                        const Center(
-                                                                      child:
-                                                                          Icon(
-                                                                        Icons
-                                                                            .broken_image,
-                                                                        size:
-                                                                            48,
-                                                                        color: Colors
-                                                                            .grey,
-                                                                      ),
-                                                                    ),
-                                                                  ),
-                                                          ),
-                                                        );
-                                                      },
-                                                    ),
+                                                            ),
+                                                          );
+                                                        },
+                                                        child: Image.network(
+                                                          imgUrl,
+                                                          fit: BoxFit.cover,
+                                                          errorBuilder: (_, __,
+                                                                  ___) =>
+                                                              const Icon(Icons
+                                                                  .broken_image),
+                                                        ),
+                                                      );
+                                                    }).toList(),
                                                     options: CarouselOptions(
-                                                      viewportFraction: 0.8,
-                                                      height: double.infinity,
+                                                      viewportFraction: 0.85,
+                                                      enlargeCenterPage: true,
                                                     ),
                                                   ),
-                                          )
+                                          ),
                                         ],
                                       ),
                                     )
@@ -675,8 +638,9 @@ class RentalCheckoutPage extends StatelessWidget {
                                             color: neutral50.withOpacity(0.3),
                                           ),
                                           Text(
-                                            state.data.selectedLocation ??
-                                                'Kota tidak tersedia',
+                                            dataDetail.pickupLocation.isNotEmpty
+                                                ? dataDetail.pickupLocation
+                                                : 'Titik pengambilan tidak tersedia',
                                             style: mainBody4.copyWith(
                                                 color: neutral100,
                                                 fontWeight: FontWeight.bold),
@@ -800,7 +764,12 @@ class RentalCheckoutPage extends StatelessWidget {
                                             color: neutral50.withOpacity(0.3),
                                           ),
                                           Text(
-                                            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+                                            dataDetail.rentalPolicy
+                                                        ?.isNotEmpty ==
+                                                    true
+                                                ? dataDetail.rentalPolicy!
+                                                : 'Peraturan sewa tidak tersedia',
+                                            // 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
                                             style: mainBody4.copyWith(
                                               color: neutral100,
                                             ),
