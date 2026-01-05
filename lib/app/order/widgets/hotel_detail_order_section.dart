@@ -175,8 +175,8 @@ class _HotelDetailOrderSectionState extends State<HotelDetailOrderSection> {
           color: neutral10Stroke.withOpacity(0.3),
         ),
         Container(
-          padding:
-              EdgeInsets.symmetric(vertical: margin24, horizontal: margin16),
+          padding: EdgeInsets.all(margin16),
+          // EdgeInsets.symmetric(vertical: margin24, horizontal: margin16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -220,7 +220,7 @@ class _HotelDetailOrderSectionState extends State<HotelDetailOrderSection> {
                 return Column(
                   children: [
                     Container(
-                      padding: EdgeInsets.symmetric(vertical: margin24),
+                      padding: EdgeInsets.symmetric(vertical: margin16),
                       child: Column(
                         children: [
                           Container(
@@ -353,17 +353,14 @@ class _HotelDetailOrderSectionState extends State<HotelDetailOrderSection> {
               return Container();
             }),
         Container(
-          padding:
-              EdgeInsets.symmetric(vertical: margin24, horizontal: margin16),
+          padding: EdgeInsets.all(margin16),
+          // EdgeInsets.symmetric(vertical: margin24, horizontal: margin16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 'Rincian Pembayaran',
                 style: mainBody3.copyWith(fontWeight: FontWeight.bold),
-              ),
-              SizedBox(
-                height: margin16,
               ),
               SizedBox(
                 height: margin16,
@@ -388,8 +385,10 @@ class _HotelDetailOrderSectionState extends State<HotelDetailOrderSection> {
               ),
               DetailOrderSplitDataWidget(
                 title: 'Metode Pembayaran',
-                data:
-                    "${widget.data.paymentMethod ?? '-'} ${widget.data.paymentChannel == null ? '' : '- ${widget.data.paymentChannel}'}",
+                data: widget.data.paymentChannel?.isNotEmpty == true
+                    ? widget.data.paymentChannel!
+                    : '-',
+                // "${widget.data.paymentMethod ?? '-'} ${widget.data.paymentChannel == null ? '' : '- ${widget.data.paymentChannel}'}",
               ),
               SizedBox(
                 height: margin4,
@@ -412,37 +411,8 @@ class _HotelDetailOrderSectionState extends State<HotelDetailOrderSection> {
                 title: 'Total Bayar',
                 data: moneyChanger(widget.data.total),
               ),
-            ],
-          ),
-        ),
-        Center(
-          child: _getActionButton(context, widget.data),
-        ),
-        Container(
-          width: double.infinity,
-          height: margin8,
-          color: neutral10Stroke.withOpacity(0.3),
-        ),
-        Container(
-          padding:
-              EdgeInsets.symmetric(horizontal: margin16, vertical: margin24),
-          child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'Total Biaya',
-                    style: mainBody4,
-                  ),
-                  Text(
-                    moneyChanger(widget.data.total, customLabel: 'IDR'),
-                    style: mainBody4.copyWith(fontWeight: FontWeight.bold),
-                  )
-                ],
-              ),
               SizedBox(
-                height: margin16,
+                height: margin4,
               ),
               widget.data.status.toLowerCase() == 'paid'
                   ? Column(
@@ -500,6 +470,7 @@ class _HotelDetailOrderSectionState extends State<HotelDetailOrderSection> {
                                           fontWeight: FontWeight.bold),
                                     ),
                                     Card(
+                                      color: Colors.white,
                                       shape: RoundedRectangleBorder(
                                           borderRadius:
                                               BorderRadius.circular(10)),
@@ -553,9 +524,147 @@ class _HotelDetailOrderSectionState extends State<HotelDetailOrderSection> {
             ],
           ),
         ),
-        SizedBox(
-          height: margin72,
-        )
+        Center(
+          child: _getActionButton(context, widget.data),
+        ),
+
+        // Container(
+        //   width: double.infinity,
+        //   height: margin8,
+        //   color: neutral10Stroke.withOpacity(0.3),
+        // ),
+        // Container(
+        //   padding:
+        //       EdgeInsets.symmetric(horizontal: margin16, vertical: margin24),
+        //   child: Column(
+        //     children: [
+        //       Row(
+        //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        //         children: [
+        //           Text(
+        //             'Total Biaya',
+        //             style: mainBody4,
+        //           ),
+        //           Text(
+        //             moneyChanger(widget.data.total, customLabel: 'IDR'),
+        //             style: mainBody4.copyWith(fontWeight: FontWeight.bold),
+        //           )
+        //         ],
+        //       ),
+        //       SizedBox(
+        //         height: margin16,
+        //       ),
+        //       widget.data.status.toLowerCase() == 'paid'
+        //           ? Column(
+        //               children: [
+        //                 Container(
+        //                   width: double.infinity,
+        //                   padding: EdgeInsets.symmetric(
+        //                       vertical: margin8, horizontal: margin16),
+        //                   decoration: BoxDecoration(
+        //                       borderRadius: BorderRadius.circular(10),
+        //                       color: const Color(0xffDCF9DC).withOpacity(0.5)),
+        //                   child: RichText(
+        //                       textAlign: TextAlign.center,
+        //                       text: TextSpan(
+        //                           style:
+        //                               mainBody5.copyWith(color: Colors.black87),
+        //                           children: [
+        //                             const TextSpan(text: 'Kamu dapat '),
+        //                             TextSpan(
+        //                                 text:
+        //                                     '${moneyChanger(widget.data.pointReceived, customLabel: '')} Poin ',
+        //                                 style: const TextStyle(
+        //                                     fontWeight: FontWeight.bold)),
+        //                             const TextSpan(text: 'dari transaksi ini.'),
+        //                           ])),
+        //                 ),
+        //                 SizedBox(
+        //                   height: margin16,
+        //                 ),
+        //                 widget.data.review == null
+        //                     ? FormHelper.borderButton(context, onTap: () async {
+        //                         bool? result = await Navigator.push(
+        //                             context,
+        //                             MaterialPageRoute(
+        //                                 builder: (_) => ReviewHunianPage(
+        //                                       isHotel: true,
+        //                                       transactionId:
+        //                                           widget.data.id.toString(),
+        //                                       hunianId: widget.data.hotelId,
+        //                                       roomId: widget.data.hotelRoomId,
+        //                                     )));
+        //                         if (result != null) {
+        //                           widget.onRefresh();
+        //                         }
+        //                       }, title: 'Berikan Review')
+        //                     : SizedBox(
+        //                         width: double.infinity,
+        //                         child: Column(
+        //                           crossAxisAlignment: CrossAxisAlignment.start,
+        //                           children: [
+        //                             Text(
+        //                               'Review Anda',
+        //                               style: mainBody4.copyWith(
+        //                                   fontWeight: FontWeight.bold),
+        //                             ),
+        //                             Card(
+        //                               shape: RoundedRectangleBorder(
+        //                                   borderRadius:
+        //                                       BorderRadius.circular(10)),
+        //                               child: Container(
+        //                                 padding: EdgeInsets.all(margin16),
+        //                                 child: Column(
+        //                                   crossAxisAlignment:
+        //                                       CrossAxisAlignment.start,
+        //                                   children: [
+        //                                     Row(
+        //                                       mainAxisAlignment:
+        //                                           MainAxisAlignment
+        //                                               .spaceBetween,
+        //                                       children: [
+        //                                         Row(
+        //                                           children:
+        //                                               List.generate(5, (index) {
+        //                                             return Icon(
+        //                                               Icons.star,
+        //                                               color: index >=
+        //                                                       widget.data
+        //                                                           .review!.rate
+        //                                                   ? Colors.grey
+        //                                                   : Colors.amber,
+        //                                             );
+        //                                           }),
+        //                                         ),
+        //                                         Text(
+        //                                           '${widget.data.review!.createdAt!.substring(0, 10)} ${widget.data.review!.createdAt!.substring(11, 16)}',
+        //                                           style: mainBody5,
+        //                                         )
+        //                                       ],
+        //                                     ),
+        //                                     SizedBox(
+        //                                       height: margin4,
+        //                                     ),
+        //                                     Text(
+        //                                       widget.data.review!.comment,
+        //                                       style: mainBody4,
+        //                                     )
+        //                                   ],
+        //                                 ),
+        //                               ),
+        //                             )
+        //                           ],
+        //                         ),
+        //                       )
+        //               ],
+        //             )
+        //           : Container(),
+        //     ],
+        //   ),
+        // ),
+        // SizedBox(
+        //   height: margin72,
+        // )
       ],
     );
   }
@@ -567,7 +676,7 @@ class _HotelDetailOrderSectionState extends State<HotelDetailOrderSection> {
         onTap: () {
           Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (_) => HotelSearchPage()),
+            MaterialPageRoute(builder: (_) => const HotelSearchPage()),
           );
         },
         child: Container(

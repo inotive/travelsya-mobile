@@ -177,7 +177,7 @@ class HotelRoom {
     //facilities
     bedType = jsonMap['bed_type'] ?? '-';
     roomSize = jsonMap['roomsize'];
-    maxExtBed = jsonMap['maxextrabed'] ?? "0";
+    maxExtBed = jsonMap['maxextrabed'] ?? 0;
     totalRoom = jsonMap['totalroom'];
     roomLeft = int.parse(jsonMap['room_left'].toString());
     guest = jsonMap['guest'];
