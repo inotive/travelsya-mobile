@@ -13,10 +13,12 @@ import 'package:travelsya/shared/cubits/point/point_cubit.dart';
 import 'package:travelsya/shared/cubits/point/point_state.dart';
 import 'package:travelsya/shared/function/show_loading.dart';
 import 'package:travelsya/shared/function/show_snackbar.dart';
+import 'package:travelsya/shared/helper/function_helper.dart';
 
 class HealthCheckoutVM extends BaseViewModel {
   bool usePoint = false;
   double pointUsed = 0;
+  String uniqueCode = randomNumber();
 
   TextEditingController nameController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
