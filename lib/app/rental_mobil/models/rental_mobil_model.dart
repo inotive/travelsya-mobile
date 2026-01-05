@@ -52,6 +52,7 @@ class VendorRentalDetailModel {
   final List<String> images;
   final double price;
   final String pickupLocation;
+  final String description;
   final String? rentalPolicy;
 
   VendorRentalDetailModel.fromJson(Map<String, dynamic> json)
@@ -66,6 +67,7 @@ class VendorRentalDetailModel {
             json['images'] != null ? List<String>.from(json['images']) : [],
         price = double.parse(json['price'].toString()),
         pickupLocation = json['pickup_location'] ?? '',
+        description = json['description'] ?? '',
         rentalPolicy = json['rental_policy'];
 }
 
