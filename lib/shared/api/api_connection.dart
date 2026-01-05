@@ -51,6 +51,7 @@ String healthSearchUrl = '$baseAPIUrl/health_search';
 String beautyHomeUrl = '$baseAPIUrl/beauty_home';
 String beautySearchUrl = '$baseAPIUrl/beauty_search';
 String spaHomeUrl = '$baseAPIUrl/spa_home';
+String spaSearchUrl = '$baseAPIUrl/spa_search';
 String clinicDetailUrl = '$baseAPIUrl/clinic_detail';
 String clinicOrderUrl = '$baseAPIUrl/clinic/transaction/request';
 String healthBeautyReviewUrl = '$baseAPIUrl/clinic/rating';

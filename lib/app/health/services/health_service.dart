@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:travelsya/app/health/models/health_model.dart';
+import 'package:travelsya/app/health/models/health_search_type.dart';
 import 'package:travelsya/shared/api/api_connection.dart';
 import 'package:travelsya/shared/api/api_return_value.dart';
 import 'package:http/http.dart' as http;
@@ -73,37 +74,57 @@ class HealthService {
     return returnValue;
   }
 
-  static Future<ApiReturnValue> healthSearch(BuildContext context,
-      {String? city, bool isHealth = true, bool isSpa = false}) async {
+  static Future<ApiReturnValue> healthSearch(
+    BuildContext context, {
+    String? city,
+    required HealthSearchType type,
+  }) async {
     ApiReturnValue returnValue;
 
-    var request = http.MultipartRequest(
+    late String url;
+
+    switch (type) {
+      case HealthSearchType.health:
+        url = healthSearchUrl;
+        break;
+      case HealthSearchType.beauty:
+        url = beautySearchUrl;
+        break;
+      case HealthSearchType.spa:
+        url = spaSearchUrl;
+        break;
+    }
+
+    final request = http.MultipartRequest(
       'GET',
-      Uri.parse(
-          '${isHealth ? healthSearchUrl : beautySearchUrl}?location=${city ?? ''}'),
+      Uri.parse('$url?location=${city ?? ''}'),
     );
-    print("DEBUG => healthSearch city param: $city");
+
+    print("DEBUG => search type: $type | city: $city");
 
     ApiReturnValue<dynamic>? response = await ApiReturnValue.httpRequest(
-        context,
-        request: request,
-        exceptionStatusCode: [201],
-        auth: false);
+      context,
+      request: request,
+      exceptionStatusCode: [201],
+      auth: false,
+    );
 
     if (response!.status == RequestStatus.successRequest) {
       List<HealthPreviewModel> dataFinal = [];
 
-      for (var i = 0; i < response.data['data']['clinic'].length; i++) {
-        dataFinal.add(
-            HealthPreviewModel.fromJson(response.data['data']['clinic'][i]));
+      for (var item in response.data['data']['clinic']) {
+        dataFinal.add(HealthPreviewModel.fromJson(item));
       }
 
-      returnValue =
-          ApiReturnValue(data: dataFinal, status: RequestStatus.successRequest);
+      returnValue = ApiReturnValue(
+        data: dataFinal,
+        status: RequestStatus.successRequest,
+      );
     } else {
       String? messages;
       try {
-        Map<String, dynamic> datamessages = response.data['data']['response'];
+        final Map<String, dynamic> datamessages =
+            response.data['data']['response'];
 
         datamessages.forEach((key, value) {
           messages = value[0];
@@ -111,6 +132,7 @@ class HealthService {
       } catch (e) {
         messages = null;
       }
+
       returnValue = ApiReturnValue(data: messages, status: response.status);
     }
 

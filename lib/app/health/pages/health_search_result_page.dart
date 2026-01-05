@@ -1,8 +1,11 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:travelsya/app/health/cubits/health_cubit.dart';
 import 'package:travelsya/app/health/cubits/health_state.dart';
 import 'package:travelsya/app/health/models/health_model.dart';
+import 'package:travelsya/app/health/models/health_search_type.dart';
 import 'package:travelsya/app/health/pages/health_detail_page.dart';
 import 'package:travelsya/shared/helper/function_helper.dart';
 import 'package:travelsya/shared/styles/font_style.dart';
@@ -11,9 +14,14 @@ import 'package:travelsya/shared/widgets/failed_request_widget.dart';
 import 'package:travelsya/shared/widgets/no_data_widget.dart';
 
 class HealthSearchResultPage extends StatefulWidget {
-  final bool isHealth;
   final String? city;
-  const HealthSearchResultPage({super.key, required this.isHealth, this.city});
+  final HealthSearchType searchType;
+
+  const HealthSearchResultPage({
+    super.key,
+    this.city,
+    required this.searchType,
+  });
 
   @override
   State<HealthSearchResultPage> createState() => _HealthSearchResultPageState();
@@ -31,9 +39,12 @@ class _HealthSearchResultPageState extends State<HealthSearchResultPage> {
 
   @override
   void initState() {
-    searchCubit.searchClinic(context,
-        isHealth: widget.isHealth, city: widget.city);
     super.initState();
+    searchCubit.searchClinic(
+      context,
+      type: widget.searchType,
+      city: widget.city,
+    );
   }
 
   void applyFilter() {
@@ -119,6 +130,20 @@ class _HealthSearchResultPageState extends State<HealthSearchResultPage> {
 
   @override
   Widget build(BuildContext context) {
+    String title;
+
+    switch (widget.searchType) {
+      case HealthSearchType.health:
+        title = 'Health';
+        break;
+      case HealthSearchType.beauty:
+        title = 'Beauty';
+        break;
+      case HealthSearchType.spa:
+        title = 'Spa';
+        break;
+    }
+
     return SafeArea(
       child: Scaffold(
         body: Column(
@@ -238,7 +263,8 @@ class _HealthSearchResultPageState extends State<HealthSearchResultPage> {
                               height: margin24 / 2,
                             ),
                             Text(
-                              widget.isHealth ? 'Health' : 'Beauty',
+                              title,
+                              // widget.isHealth ? 'Health' : 'Beauty',
                               style: mainBody2.copyWith(
                                   fontWeight: FontWeight.bold),
                             ),
@@ -364,7 +390,8 @@ class _HealthSearchResultPageState extends State<HealthSearchResultPage> {
                                           context,
                                           MaterialPageRoute(
                                               builder: (_) => HealthDetailPage(
-                                                    isHealth: widget.isHealth,
+                                                    searchType:
+                                                        widget.searchType,
                                                     id: data.id.toString(),
                                                   )));
                                     },
@@ -608,8 +635,11 @@ class _HealthSearchResultPageState extends State<HealthSearchResultPage> {
                         return Container(
                           margin: EdgeInsets.symmetric(horizontal: margin16),
                           child: FailedRequestWidget(onRetry: () {
-                            searchCubit.searchClinic(context,
-                                isHealth: widget.isHealth, city: widget.city);
+                            searchCubit.searchClinic(
+                              context,
+                              type: widget.searchType,
+                              city: widget.city,
+                            );
                           }),
                         );
                       }

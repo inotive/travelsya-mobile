@@ -5,6 +5,7 @@ import 'package:travelsya/app/health/cubits/health_city_cubit.dart';
 import 'package:travelsya/app/health/cubits/health_cubit.dart';
 import 'package:travelsya/app/health/cubits/health_state.dart';
 import 'package:travelsya/app/health/models/health_model.dart';
+import 'package:travelsya/app/health/models/health_search_type.dart';
 import 'package:travelsya/app/health/pages/health_detail_page.dart';
 import 'package:travelsya/app/health/pages/health_search_result_page.dart';
 import 'package:travelsya/shared/helper/function_helper.dart';
@@ -44,6 +45,9 @@ class _HealthSearchPageState extends State<HealthSearchPage> {
 
   @override
   Widget build(BuildContext context) {
+    HealthSearchType searchType =
+        selectedIndex == 0 ? HealthSearchType.health : HealthSearchType.beauty;
+
     return BlocProvider(
       create: (_) => HealthCityCubit(),
       child: SafeArea(
@@ -322,8 +326,13 @@ class _HealthSearchPageState extends State<HealthSearchPage> {
                           context,
                           MaterialPageRoute(
                               builder: (_) => HealthSearchResultPage(
-                                    isHealth: selectedIndex == 0,
+                                    // isHealth: selectedIndex == 0,
                                     city: selectedCity?.name,
+                                    searchType: selectedIndex == 0
+                                        ? HealthSearchType.health
+                                        : selectedIndex == 1
+                                            ? HealthSearchType.beauty
+                                            : HealthSearchType.spa,
                                   )));
                     },
                     title: 'Cari Sekarang',
@@ -714,7 +723,7 @@ class _HealthSearchPageState extends State<HealthSearchPage> {
                                         context,
                                         MaterialPageRoute(
                                             builder: (_) => HealthDetailPage(
-                                                  isHealth: selectedIndex == 0,
+                                                  searchType: searchType,
                                                   id: dataFinal[index]
                                                       .id
                                                       .toString(),
@@ -861,6 +870,9 @@ Widget buildSpecialDeals(
   List<HealthPreviewModel> deals,
   int selectedIndex,
 ) {
+  HealthSearchType searchType =
+      selectedIndex == 0 ? HealthSearchType.health : HealthSearchType.beauty;
+
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
@@ -910,8 +922,7 @@ Widget buildSpecialDeals(
                     context,
                     MaterialPageRoute(
                         builder: (_) => HealthDetailPage(
-                            isHealth: selectedIndex == 0,
-                            id: data.id.toString())));
+                            searchType: searchType, id: data.id.toString())));
               },
               child: Container(
                 margin: EdgeInsets.only(left: margin16),

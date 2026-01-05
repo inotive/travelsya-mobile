@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:travelsya/app/health/cubits/health_state.dart';
+import 'package:travelsya/app/health/models/health_search_type.dart';
 import 'package:travelsya/app/health/services/health_service.dart';
 import 'package:travelsya/shared/api/api_return_value.dart';
 
@@ -10,14 +11,14 @@ class HealthCubit extends Cubit<HealthState> {
   Future<void> searchClinic(
     BuildContext context, {
     String? city,
-    bool isHealth = true,
+    required HealthSearchType type,
   }) async {
     emit(HealthLoading());
 
     final value = await HealthService.healthSearch(
       context,
       city: city,
-      isHealth: isHealth,
+      type: type,
     );
 
     if (value.status == RequestStatus.successRequest) {

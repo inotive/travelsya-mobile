@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:travelsya/app/health/cubits/health_cubit.dart';
 import 'package:travelsya/app/health/cubits/health_state.dart';
 import 'package:travelsya/app/health/models/health_model.dart';
+import 'package:travelsya/app/health/models/health_search_type.dart';
 // import 'package:travelsya/app/health/pages/health_checkout_page.dart';
 import 'package:travelsya/app/health/widgets/health_location_section.dart';
 import 'package:travelsya/app/health/widgets/health_package_section.dart';
@@ -16,12 +17,12 @@ import 'package:travelsya/shared/widgets/failed_request_widget.dart';
 // import 'package:url_launcher/url_launcher.dart';
 
 class HealthDetailPage extends StatefulWidget {
-  final bool isHealth;
+  final HealthSearchType searchType;
   final String id;
 
   const HealthDetailPage({
     super.key,
-    required this.isHealth,
+    required this.searchType,
     required this.id,
   });
 
@@ -55,6 +56,17 @@ class _HealthDetailPageState extends State<HealthDetailPage> {
 
   @override
   Widget build(BuildContext context) {
+    HealthSearchType mapCategoryToType(String category) {
+      switch (category.toLowerCase()) {
+        case 'kecantikan':
+          return HealthSearchType.beauty;
+        case 'spa':
+          return HealthSearchType.spa;
+        default:
+          return HealthSearchType.health;
+      }
+    }
+
     return Scaffold(
       body: SafeArea(
         child: BlocBuilder<HealthCubit, HealthState>(
@@ -979,10 +991,10 @@ class _HealthDetailPageState extends State<HealthDetailPage> {
                                                     context,
                                                     MaterialPageRoute(
                                                         builder: (_) => HealthDetailPage(
-                                                            isHealth: data
-                                                                    .category
-                                                                    .toLowerCase() !=
-                                                                'kecantikan',
+                                                            searchType:
+                                                                mapCategoryToType(
+                                                                    data
+                                                                        .category),
                                                             id: data.id
                                                                 .toString())));
                                               },
