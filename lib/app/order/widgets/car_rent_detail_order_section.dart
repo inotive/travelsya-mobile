@@ -19,8 +19,8 @@ class CarRentDetailOrderSection extends StatelessWidget {
       padding: EdgeInsets.zero,
       children: [
         Container(
-          padding:
-              EdgeInsets.symmetric(vertical: margin24, horizontal: margin16),
+          padding: EdgeInsets.all(margin16),
+          // EdgeInsets.symmetric(vertical: margin24, horizontal: margin16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -58,8 +58,8 @@ class CarRentDetailOrderSection extends StatelessWidget {
           color: neutral10Stroke.withOpacity(0.3),
         ),
         Container(
-          padding:
-              EdgeInsets.symmetric(vertical: margin24, horizontal: margin16),
+          padding: EdgeInsets.all(margin16),
+          // EdgeInsets.symmetric(vertical: margin24, horizontal: margin16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -109,7 +109,8 @@ class CarRentDetailOrderSection extends StatelessWidget {
                     ? '-'
                     : "-${moneyChanger(data.poinUsed, customLabel: '')}",
                 customDataStyle: mainBody5.copyWith(
-                    fontWeight: FontWeight.bold, color: Colors.red),
+                  fontWeight: FontWeight.bold,
+                ),
               ),
               SizedBox(
                 height: margin4,
@@ -124,66 +125,66 @@ class CarRentDetailOrderSection extends StatelessWidget {
         Center(
           child: _getActionButton(context, data),
         ),
-        Container(
-          width: double.infinity,
-          height: margin8,
-          color: neutral10Stroke.withOpacity(0.3),
-        ),
-        Container(
-          padding:
-              EdgeInsets.symmetric(horizontal: margin16, vertical: margin24),
-          child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'Total Biaya',
-                    style: mainBody4,
-                  ),
-                  Text(
-                    moneyChanger(data.total, customLabel: 'IDR'),
-                    style: mainBody4.copyWith(fontWeight: FontWeight.bold),
-                  )
-                ],
-              ),
-              SizedBox(
-                height: margin16,
-              ),
-              data.status.toLowerCase() == 'paid'
-                  ? Column(
-                      children: [
-                        Container(
-                          width: double.infinity,
-                          padding: EdgeInsets.symmetric(
-                              vertical: margin8, horizontal: margin16),
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: const Color(0xffDCF9DC).withOpacity(0.5)),
-                          child: RichText(
-                              textAlign: TextAlign.center,
-                              text: TextSpan(
-                                  style:
-                                      mainBody5.copyWith(color: Colors.black87),
-                                  children: [
-                                    const TextSpan(text: 'Kamu dapat '),
-                                    TextSpan(
-                                        text:
-                                            '${moneyChanger(data.poinReceived, customLabel: '')} Poin ',
-                                        style: const TextStyle(
-                                            fontWeight: FontWeight.bold)),
-                                    const TextSpan(text: 'dari transaksi ini.'),
-                                  ])),
-                        ),
-                      ],
-                    )
-                  : Container(),
-            ],
-          ),
-        ),
-        SizedBox(
-          height: margin72,
-        )
+        // Container(
+        //   width: double.infinity,
+        //   height: margin8,
+        //   color: neutral10Stroke.withOpacity(0.3),
+        // ),
+        // Container(
+        //   padding:
+        //       EdgeInsets.symmetric(horizontal: margin16, vertical: margin24),
+        //   child: Column(
+        //     children: [
+        //       Row(
+        //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        //         children: [
+        //           Text(
+        //             'Total Biaya',
+        //             style: mainBody4,
+        //           ),
+        //           Text(
+        //             moneyChanger(data.total, customLabel: 'Rp'),
+        //             style: mainBody4.copyWith(fontWeight: FontWeight.bold),
+        //           )
+        //         ],
+        //       ),
+        //       SizedBox(
+        //         height: margin16,
+        //       ),
+        //       data.status.toLowerCase() == 'paid'
+        //           ? Column(
+        //               children: [
+        //                 Container(
+        //                   width: double.infinity,
+        //                   padding: EdgeInsets.symmetric(
+        //                       vertical: margin8, horizontal: margin16),
+        //                   decoration: BoxDecoration(
+        //                       borderRadius: BorderRadius.circular(10),
+        //                       color: const Color(0xffDCF9DC).withOpacity(0.5)),
+        //                   child: RichText(
+        //                       textAlign: TextAlign.center,
+        //                       text: TextSpan(
+        //                           style:
+        //                               mainBody5.copyWith(color: Colors.black87),
+        //                           children: [
+        //                             const TextSpan(text: 'Kamu dapat '),
+        //                             TextSpan(
+        //                                 text:
+        //                                     '${moneyChanger(data.poinReceived, customLabel: '')} Poin ',
+        //                                 style: const TextStyle(
+        //                                     fontWeight: FontWeight.bold)),
+        //                             const TextSpan(text: 'dari transaksi ini.'),
+        //                           ])),
+        //                 ),
+        //               ],
+        //             )
+        //           : Container(),
+        //     ],
+        //   ),
+        // ),
+        // SizedBox(
+        //   height: margin72,
+        // )
       ],
     );
   }

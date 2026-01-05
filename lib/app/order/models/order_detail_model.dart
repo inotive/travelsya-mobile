@@ -42,9 +42,9 @@ class BusDetailOrderModel {
         : double.parse(jsonMap['total'].toString());
     adminFee = double.parse(
         jsonMap['fee_admin'] == null ? '0' : jsonMap['fee_admin'].toString());
-    poinReceived = double.parse(jsonMap['point_received'] == null
+    poinReceived = double.parse(jsonMap['received_point'] == null
         ? '0'
-        : jsonMap['point_received'].toString());
+        : jsonMap['received_point'].toString());
     poinUsed = double.parse(
         jsonMap['point_used'] == null ? '0' : jsonMap['point_used'].toString());
 
@@ -93,9 +93,9 @@ class ClinicOrderDetailModel {
         : double.parse(jsonMap['total'].toString());
     adminFee = double.parse(
         jsonMap['fee_admin'] == null ? '0' : jsonMap['fee_admin'].toString());
-    poinReceived = double.parse(jsonMap['point_received'] == null
+    poinReceived = double.parse(jsonMap['received_point'] == null
         ? '0'
-        : jsonMap['point_received'].toString());
+        : jsonMap['received_point'].toString());
     poinUsed = double.parse(
         jsonMap['point_used'] == null ? '0' : jsonMap['point_used'].toString());
 
@@ -144,9 +144,9 @@ class CarRentOrderDetailModel {
         : double.parse(jsonMap['total'].toString());
     adminFee = double.parse(
         jsonMap['fee_admin'] == null ? '0' : jsonMap['fee_admin'].toString());
-    poinReceived = double.parse(jsonMap['point_received'] == null
+    poinReceived = double.parse(jsonMap['received_point'] == null
         ? '0'
-        : jsonMap['point_received'].toString());
+        : jsonMap['received_point'].toString());
     poinUsed = double.parse(
         jsonMap['point_used'] == null ? '0' : jsonMap['point_used'].toString());
 
@@ -195,9 +195,9 @@ class RecreationOrderDetailModel {
         : double.parse(jsonMap['total'].toString());
     adminFee = double.parse(
         jsonMap['fee_admin'] == null ? '0' : jsonMap['fee_admin'].toString());
-    poinReceived = double.parse(jsonMap['point_received'] == null
+    poinReceived = double.parse(jsonMap['received_point'] == null
         ? '0'
-        : jsonMap['point_received'].toString());
+        : jsonMap['received_point'].toString());
     poinUsed = double.parse(
         jsonMap['point_used'] == null ? '0' : jsonMap['point_used'].toString());
 
