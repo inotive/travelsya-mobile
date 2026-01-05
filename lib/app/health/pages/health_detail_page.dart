@@ -1170,24 +1170,24 @@ class _HealthDetailPageState extends State<HealthDetailPage> {
                                                           SizedBox(
                                                             height: margin24,
                                                           ),
-                                                          Text(
-                                                            moneyChanger(
-                                                                data.unitPrice,
-                                                                customLabel:
-                                                                    'IDR '),
-                                                            style: mainBody5.copyWith(
-                                                                color: const Color(
-                                                                    0xffa5a5a5),
-                                                                decorationColor:
-                                                                    const Color(
-                                                                        0xffa5a5a5),
-                                                                decoration:
-                                                                    TextDecoration
-                                                                        .lineThrough),
-                                                          ),
-                                                          SizedBox(
-                                                            height: margin4,
-                                                          ),
+                                                          // Text(
+                                                          //   moneyChanger(
+                                                          //       data.unitPrice,
+                                                          //       customLabel:
+                                                          //           'IDR '),
+                                                          //   style: mainBody5.copyWith(
+                                                          //       color: const Color(
+                                                          //           0xffa5a5a5),
+                                                          //       decorationColor:
+                                                          //           const Color(
+                                                          //               0xffa5a5a5),
+                                                          //       decoration:
+                                                          //           TextDecoration
+                                                          //               .lineThrough),
+                                                          // ),
+                                                          // SizedBox(
+                                                          //   height: margin4,
+                                                          // ),
                                                           Text(
                                                             moneyChanger(
                                                                 data.price,
