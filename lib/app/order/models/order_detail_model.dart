@@ -75,10 +75,10 @@ class ClinicOrderDetailModel {
   List<dynamic> reviewData = [];
 
   ClinicOrderDetailModel.fromJson(Map<String, dynamic> jsonMap) {
-    id = int.parse(jsonMap['id']);
+    id = jsonMap['id'];
     noInv = jsonMap['no_inv'];
-    clinicId = int.parse(jsonMap['clinic_id']);
-    packageId = int.parse(jsonMap['package_id']);
+    clinicId = jsonMap['clinic_id'];
+    packageId = jsonMap['package_id'];
     clinicName = jsonMap['clinic_name'] ?? '';
     packageName = jsonMap['package_name'];
     bookingId = jsonMap['booking_id'];
