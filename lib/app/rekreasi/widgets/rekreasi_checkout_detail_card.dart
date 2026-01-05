@@ -117,7 +117,9 @@ class RekreasiCheckoutDetailCard extends StatelessWidget {
                         height: 1,
                         color: neutral50.withOpacity(0.3),
                       ),
-                      const RekreasiRulesCheckoutSection()
+                      RekreasiRulesCheckoutSection(
+                        package: package,
+                      )
                     ],
                   ),
                 ),
