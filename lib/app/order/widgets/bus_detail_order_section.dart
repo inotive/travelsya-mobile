@@ -90,8 +90,10 @@ class BusDetailOrderSection extends StatelessWidget {
               ),
               DetailOrderSplitDataWidget(
                 title: 'Metode Pembayaran',
-                data:
-                    "${data.paymentMethod ?? '-'} ${data.paymentChannel == null ? '' : '- ${data.paymentChannel}'}",
+                data: data.paymentChannel?.isNotEmpty == true
+                    ? data.paymentChannel!
+                    : '-',
+                // "${data.paymentMethod ?? '-'} ${data.paymentChannel == null ? '' : '- ${data.paymentChannel}'}",
               ),
               SizedBox(
                 height: margin4,
