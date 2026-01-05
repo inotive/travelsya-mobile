@@ -29,14 +29,6 @@ class NewRekreasiCheckoutPage extends StatelessWidget {
   const NewRekreasiCheckoutPage(
       {super.key, required this.data, required this.items});
 
-  double getTotalTagihan(List<CheckoutItem> items,
-      {double admin = 1.0, double unitCode = 1000}) {
-    final totalItems =
-        items.fold(0.0, (sum, e) => sum + (e.package.price * e.quantity));
-    final adminFee = totalItems * (admin / 100);
-    return totalItems + adminFee + unitCode;
-  }
-
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<RecreationCheckoutVM>.reactive(
@@ -105,8 +97,11 @@ class NewRekreasiCheckoutPage extends StatelessWidget {
                               quantity: e.quantity,
                             ))
                         .toList(),
-                    adminFeePercent: 1.0,
-                    unikCode: 1000,
+                    adminFee: model.getAdminValue(
+                      context,
+                      model.getTotalItemPrice(items),
+                    ),
+                    unikCode: double.parse(model.uniqueCode),
                   )
                 ],
               )),
@@ -243,8 +238,10 @@ class NewRekreasiCheckoutPage extends StatelessWidget {
                           style: mainBody5.copyWith(color: neutral100),
                         ),
                         Text(
-                          moneyChanger(getTotalTagihan(items),
-                              customLabel: 'IDR '),
+                          moneyChanger(
+                            model.getGrandTotal(context, items),
+                            customLabel: 'IDR ',
+                          ),
                           style: mainBody4.copyWith(
                               color: neutral100, fontWeight: FontWeight.bold),
                         )
