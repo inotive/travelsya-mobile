@@ -117,23 +117,29 @@ class _RekreasiSearchResultPageState extends State<RekreasiSearchResultPage> {
                           Container(
                             padding:
                                 EdgeInsets.symmetric(vertical: margin24 / 2),
-                            child: Row(
-                              children: [
-                                SizedBox(
-                                  width: 18,
-                                  height: 18,
-                                  child: Image.asset('assets/new/location.png'),
-                                ),
-                                SizedBox(
-                                  width: margin4,
-                                ),
-                                Text(
-                                  widget.city ?? 'Semua Lokasi',
-                                  style: mainBody5.copyWith(
-                                      fontWeight: FontWeight.bold,
-                                      color: Theme.of(context).primaryColor),
-                                )
-                              ],
+                            child: GestureDetector(
+                              onTap: () {
+                                Navigator.pop(context);
+                              },
+                              child: Row(
+                                children: [
+                                  SizedBox(
+                                    width: 18,
+                                    height: 18,
+                                    child:
+                                        Image.asset('assets/new/location.png'),
+                                  ),
+                                  SizedBox(
+                                    width: margin4,
+                                  ),
+                                  Text(
+                                    widget.city ?? 'Semua Lokasi',
+                                    style: mainBody5.copyWith(
+                                        fontWeight: FontWeight.bold,
+                                        color: Theme.of(context).primaryColor),
+                                  )
+                                ],
+                              ),
                             ),
                           ),
                           SizedBox(
@@ -257,6 +263,7 @@ class _RekreasiSearchResultPageState extends State<RekreasiSearchResultPage> {
                                                   )));
                                     },
                                     child: Card(
+                                      color: Colors.white,
                                       shape: RoundedRectangleBorder(
                                           borderRadius:
                                               BorderRadius.circular(12)),
