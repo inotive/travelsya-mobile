@@ -3,11 +3,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stacked/stacked.dart';
 import 'package:travelsya/app/auth/cubits/auth_cubit.dart';
 import 'package:travelsya/app/auth/cubits/auth_state.dart';
+import 'package:travelsya/app/health/pages/health_checkout_page.dart';
 import 'package:travelsya/app/health/services/health_service.dart';
 import 'package:travelsya/app/home_main/pages/home_main_page.dart';
 import 'package:travelsya/app/payment/pages/payment_webview_page.dart';
 import 'package:travelsya/shared/api/api_return_value.dart';
+import 'package:travelsya/shared/cubits/fee_admin/fee_admin_cubit.dart';
 import 'package:travelsya/shared/cubits/fee_admin/fee_admin_model.dart';
+import 'package:travelsya/shared/cubits/fee_admin/fee_admin_state.dart';
 import 'package:travelsya/shared/cubits/main_index_cubit.dart';
 import 'package:travelsya/shared/cubits/point/point_cubit.dart';
 import 'package:travelsya/shared/cubits/point/point_state.dart';
@@ -20,6 +23,7 @@ class HealthCheckoutVM extends BaseViewModel {
   double pointUsed = 0;
   String uniqueCode = randomNumber();
 
+  double adminFeePercent = 0;
   TextEditingController nameController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
   TextEditingController emailController = TextEditingController();
@@ -32,6 +36,21 @@ class HealthCheckoutVM extends BaseViewModel {
     }
 
     return null;
+  }
+
+  double getAdminValue(BuildContext context, double totalItem) {
+    double finalData = 0;
+
+    FeeAdminState state = BlocProvider.of<FeeAdminCubit>(context).state;
+    if (state is FeeAdminLoaded) {
+      for (var i = 0; i < state.data.length; i++) {
+        if (state.data[i].serviceName.toLowerCase() == 'health-beauty') {
+          finalData = getAdminFeeHelper(state.data[i], totalItem);
+        }
+      }
+    }
+
+    return finalData;
   }
 
   onChangePointUsed(BuildContext context) {
@@ -62,6 +81,24 @@ class HealthCheckoutVM extends BaseViewModel {
     }
   }
 
+  double getTotalItemPrice(List<CheckoutItem> items) {
+    return items.fold(
+      0.0,
+      (sum, e) => sum + (e.package.price * e.quantity),
+    );
+  }
+
+  double getGrandTotal(
+    BuildContext context,
+    List<CheckoutItem> items,
+  ) {
+    final totalItem = getTotalItemPrice(items);
+    final admin = getAdminValue(context, totalItem);
+    final unique = double.parse(uniqueCode);
+
+    return totalItem + admin + unique;
+  }
+
   onSubmit(
     BuildContext context, {
     required int packageId,
@@ -72,7 +109,8 @@ class HealthCheckoutVM extends BaseViewModel {
       "payment": "xendit",
       "package_id": packageId.toString(),
       "point": usePoint ? '1' : '0',
-      "total_ticket": '1'
+      "total_ticket": '1',
+      "kode_unik": uniqueCode,
     }).then((value) async {
       if (context.mounted) {
         Navigator.pop(context);

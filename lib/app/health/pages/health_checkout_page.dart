@@ -1,4 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -35,14 +34,6 @@ class HealthCheckoutPage extends StatelessWidget {
     required this.dataPackage,
     required this.dataDetail,
   });
-
-  double getTotalTagihan(List<CheckoutItem> items,
-      {double admin = 1.0, double unitCode = 1000}) {
-    final totalItems =
-        items.fold(0.0, (sum, e) => sum + (e.package.price * e.quantity));
-    final adminFee = totalItems * (admin / 100);
-    return totalItems + adminFee + unitCode;
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -106,13 +97,15 @@ class HealthCheckoutPage extends StatelessWidget {
                           items: items
                               .map((e) => HealthBillItem(
                                     title: e.package.name,
-                                    // subtitle: "${e.package.duration}",
                                     price: e.package.price,
                                     quantity: e.quantity,
                                   ))
                               .toList(),
-                          adminFeePercent: 1.0,
-                          unikCode: 1000,
+                          adminFee: model.getAdminValue(
+                            context,
+                            model.getTotalItemPrice(items),
+                          ),
+                          unikCode: double.parse(model.uniqueCode),
                         )
                       ],
                     ),
@@ -252,8 +245,10 @@ class HealthCheckoutPage extends StatelessWidget {
                           style: mainBody5.copyWith(color: neutral100),
                         ),
                         Text(
-                          moneyChanger(getTotalTagihan(items),
-                              customLabel: 'IDR '),
+                          moneyChanger(
+                            model.getGrandTotal(context, items),
+                            customLabel: 'Rp',
+                          ),
                           // moneyChanger(dataPackage.price, customLabel: 'IDR '),
                           style: mainBody4.copyWith(
                               color: neutral100, fontWeight: FontWeight.bold),

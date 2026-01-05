@@ -6,22 +6,21 @@ import 'package:intl/intl.dart';
 
 class HealthCheckoutBillDetailCard extends StatelessWidget {
   final List<HealthBillItem> items;
-  final double adminFeePercent;
-  final double unikCode;
+  final double adminFee;
+  final double? unikCode;
 
   const HealthCheckoutBillDetailCard({
     super.key,
     required this.items,
-    this.adminFeePercent = 1.0,
-    this.unikCode = 1000,
+    required this.adminFee,
+    this.unikCode,
   });
 
   @override
   Widget build(BuildContext context) {
     double totalItemPrice =
         items.fold(0, (sum, item) => sum + (item.price * item.quantity));
-    double adminFee = totalItemPrice * (adminFeePercent / 100);
-    double total = totalItemPrice + adminFee + unikCode;
+    double total = totalItemPrice + adminFee + unikCode!;
 
     final currencyFormat = NumberFormat.currency(
       locale: 'id_ID',
@@ -46,13 +45,14 @@ class HealthCheckoutBillDetailCard extends StatelessWidget {
               format: currencyFormat)),
           const SizedBox(height: 10),
           _summaryRow(
-              label: 'Admin ($adminFeePercent%)',
-              price: adminFee,
-              format: currencyFormat),
+            label: 'Admin',
+            price: adminFee,
+            format: currencyFormat,
+          ),
           const SizedBox(height: 10),
           _summaryRow(
               label: 'Kode Unik',
-              price: unikCode.toDouble(),
+              price: unikCode!.toDouble(),
               format: currencyFormat),
           const SizedBox(height: 10),
           _summaryRow(label: 'Total', price: total, format: currencyFormat),
